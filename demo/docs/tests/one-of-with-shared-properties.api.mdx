@@ -1,0 +1,213 @@
+---
+id: one-of-with-shared-properties
+title: "oneOf with Shared Properties"
+description: "Schema:"
+sidebar_label: "oneOf with Shared Properties"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVE2P0zAQ/SvWnN0POPpWBEKcttIClzZSHXfaeEls43EKUZT/jsbusv3Yy4orvsSZPL95M/OcEZI+EqgNeIcPB6gk7JFMtCFZ70DBo2mw02rrdrvdoLt269IQUAlfP6FJWxeiDxiTRVJbJwQ1OuJ+HX3Ir0IUNKVo3ZEjOc26HBrOmBw774WYiesM4rxuMj0vCmjswRrmXF19uU/+j/QfXqV3fVdjzA3aOpAQkYJ3hARqhPfLJT9uetobg0SHvhXPYJBgvEvoEsN1CK01muGLJ+IzI1AeBO84LSgoBYCEF+UZ93cCF9jSApgkXPWfEWXuanPLO8m7SDWVJaHD1Pg9KDhiVqBTAwoW3qE/zIqC2YUsCdYdfNZjU8uUD5xVfNfR5ipJrNZf4NZ7H7HzjlLUCUmcdLS+p2IWUbohjO9q6wrFHCScMFI5+26+nC+54OApdTq30Okul5MZftnUiMcsVawvpV5pGF/G8v8qvPkqnP2T8HdahFZbxwPpY8t9LZ7J/51XPVNJaDwlhoxjrQm/xXaaOPyzxziA2lQS2BS6ZkdtqklCg3qPMZv5Bw6gYGUMBnboSbc9S7m7WVN14ebPn77CNP0BMuqulw==
+sidebar_class_name: "get api-method"
+info_path: tests/oneof-variations-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"oneOf with Shared Properties"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/oneof-shared-properties"}
+>
+  
+</MethodEndpoint>
+
+
+
+Schema:
+```yaml
+type: object
+properties:
+  sharedProp:
+    type: string
+  oneOfProperty:
+    oneOf:
+      - type: object
+        properties:
+          specificPropA:
+            type: string
+      - type: object
+        properties:
+          specificPropB:
+            type: number
+```
+
+
+<div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          Successful response
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"sharedProp"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                oneOfProperty
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <div>
+                              <span
+                                className={"badge badge--info"}
+                                style={{"marginBottom":"1rem"}}
+                              >
+                                oneOf
+                              </span><SchemaTabs>
+                                <TabItem
+                                  label={"MOD1"}
+                                  value={"0-item-properties"}
+                                >
+                                  <SchemaItem
+                                    collapsible={false}
+                                    name={"specificPropA"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem>
+                                </TabItem><TabItem
+                                  label={"MOD2"}
+                                  value={"1-item-properties"}
+                                >
+                                  <SchemaItem
+                                    collapsible={false}
+                                    name={"specificPropB"}
+                                    required={false}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem>
+                                </TabItem>
+                              </SchemaTabs>
+                            </div>
+                          </div>
+                        </details>
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"sharedProp\": \"string\",\n  \"oneOfProperty\": {}\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

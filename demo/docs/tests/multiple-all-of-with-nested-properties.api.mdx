@@ -1,0 +1,216 @@
+---
+id: multiple-all-of-with-nested-properties
+title: "Multiple allOf with Nested Properties"
+description: "Schema:"
+sidebar_label: "Multiple allOf with Nested Properties"
+hide_title: true
+hide_table_of_contents: true
+api: eJztU02P0zAQ/SvWnN2P7dG3lUCIA0slPi5ppDrptPHi2MaeFKoo/x2NU0jVLQgWjvgSZfxm5vnNmx5IHxKoArS1b/dQSthhqqMJZLwDBe/qBlutNm673Z50azcuA9XGCTETdAqohK8esSaOCBGiDxjJYFJjQAjfEcZ19OHuR0jcyPxJNh/j3NMKU5VE0bjDcxit/prR6iYj17UVxizaxoGEiCl4lzCB6mG1XPLnSueurjGlfWfFdzBIqL0jdMRwHYI1tWb44jFxTg8pDyff5umpogcmAArGd4CE6QGMm2bBf7/GTqpfYEetYeAjf7vb6g+6XWJHHcdu5dgTWqTG70DBAXMVTQ0oWLSdJRMszrS1fj9zmAh3IMG4vc8VDVkuec9KiY86mqxlEvfr13Dt+hfYepcoasIkjjoa3yWRNRaj5qL2bWXcWGIOEo4Y05h7N1/OlzBICD5Rq/OgnG6595szx3OpL4Ya8ZCJivUkxhWZfnLB/238J9t4NhfhV1oEq43jaXXRstajnQq4badSQuMTMaDvK53wQ7TDwOHPHcYTqKKUwH7RFZutKAcJDeodxrybn/DEDqxrDGzdo7YdE3my2kN5YfNXL9/DMHwDFlrbrQ==
+sidebar_class_name: "get api-method"
+info_path: tests/allof-variations-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Multiple allOf with Nested Properties"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/multiple-allof-nested"}
+>
+  
+</MethodEndpoint>
+
+
+
+Schema:
+```yaml
+allOf:
+  - type: object
+    properties:
+      outerProp1:
+        type: object
+        properties:
+          innerProp1:
+            type: string
+  - type: object
+    properties:
+      outerProp2:
+        type: object
+        properties:
+          innerProp2:
+            type: number
+```
+
+
+<div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          Successful response
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                outerProp1
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"innerProp1"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                outerProp2
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"innerProp2"}
+                              required={false}
+                              schemaName={"number"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"number"}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"outerProp1\": {\n    \"innerProp1\": \"string\"\n  },\n  \"outerProp2\": {\n    \"innerProp2\": 0\n  }\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

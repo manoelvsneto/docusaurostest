@@ -1,0 +1,521 @@
+---
+id: request-payment
+title: "Request a payment"
+description: "Request a payment transaction"
+sidebar_label: "Request a payment"
+hide_title: true
+hide_table_of_contents: true
+api: eJytV21vozgQ/itoPtMEaNMEpNNdr6pO/dBrtN2VeooqZGBI2APba5s0UcR/Pw0mbdJkQ653/hIw8+aZ8TNPNpChTlUhTSE4RPAFf9SojcMcydYVcuMYxbhmafvdBSFRMXq+zyACZaWnVhTc7cbvIltDtGlfC4UZREbV6EIquCHBaANMyrJIW1PD75p8b0CnC6wYPZm1RIhAJN8xJbtSkWNToKavlchwR0obVfA5uIArVsmStvK6LKHZCfe0eBc2aXTH7g+CVaLmJjbCsPK09fH15cAPyXhKKmp9WvzhuRWtlUKeruO097APz3+C+6GOt536oCvKexUaF7BiRU/MEoUs8TcSHKSioogqVOmCcRN3KeqPzP+wgsYFzqqe4/xRa8OWwpkzlRZspyYx6ZyRD7FaCcnW0DSNCwU3OLc9EP+NPam/OVxkpTWkUEvBtS1+4Hn0s5/zpzpNUeu8Lp2tMPxvPX92Xy6YXvT04xj9kefnwfX1JJ14Wca8NPfCMEvGo8zP8nw0ChEznIRBOg7D/OzOrVaf7JPgcjTxLwP/8mo0moR0b1WGKuZ1laA6psrrsmQJ6VpgeTNFHxoXtGGm1qejnd7Bm2ScMXM0xj5HQiL/qfK7r8ALvAtvchGEju9HV5PoamyzyvNCVZ/23mJzjurTBjoQS44m+RiCdQq4Mv9SoxD5aQ1v4Hn7HuIOlgm5zsTXLWiq3or4A8+zDt+Ueg9FQNu4kNV4dsnDC8+HFoa0YSVdh56u9P8L4LmwFHW6QBXXqgfgF8ZIHQ2HUhXcDDBhfEVAb9+HnZkhrjCtDf5KoPILa5dF8iBo41QYMymVWO7VKBGiRMZ3/eWs1DR6UiZNTVpLVnSd+YlLZ88bJ0ydgy1Xo+twPAn9FsbPQYanb7e3d09PHfS3kGYWggiPFLpFXGYWEMHwVQ+zQlkU1qiWqDREsw202X9LsWY8S8TKJlmydTtQPw7sB1Zw52Z671g70Ly4QDPiyzujutsGuGVAlubssZw3KrPHZPa5yvbC7KA6kY4DztERi44tHFCCnyL9wdjfTv2Po/1oo+9288HwPj6hSTAXbU0LY7G9I6830/uDTFOSc6EcqQSN64LPt1xXOxfO4/Pz4/TmL6dNCBXUKvkDb9CiBXVAxdrR3R3qgDJ/9Lh55wC9/LprSoMrM5QlKzj57C6z7boZvGryYPvuxYUF9WQ0g80mYRq/qbJpaPtHjVTZ2YsLS6YKe59mL40LC2QZjdXZBmxSb214F1/JOYmXNQVxQFcad6txk6YozUnZl51rM318+gouJN3fgq57FXsldspeIYK2i0m7vZrt3gZKxuc1m5OstUnrH0ExTBc=
+sidebar_class_name: "post api-method"
+info_path: pay/payment-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Request a payment"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/ws/direct"}
+>
+  
+</MethodEndpoint>
+
+
+
+Request a payment transaction
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={false}
+          name={"mode"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","example":"full"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"operation"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","example":"request"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={true}
+          className={"schemaItem"}
+        >
+          <details
+            style={{}}
+            className={"openapi-markdown__details"}
+          >
+            <summary
+              style={{}}
+            >
+              <span
+                className={"openapi-schema__container"}
+              >
+                <strong
+                  className={"openapi-schema__property"}
+                >
+                  payment
+                </strong><span
+                  className={"openapi-schema__name"}
+                >
+                   object
+                </span>
+              </span>
+            </summary><div
+              style={{"marginLeft":"1rem"}}
+            >
+              <SchemaItem
+                collapsible={false}
+                name={"amount_total"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","example":"763.19"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"country"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","example":"MX"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"currency_code"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","example":"MXN","description":"Currency.","required":true}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"email"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","example":"people@mail.com"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"merchant_payment_code"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","example":11111111111111112}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"name"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","example":"Gustavo garcia"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"payment_type_code"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","example":"oxxopay"}}
+              >
+                
+              </SchemaItem>
+            </div>
+          </details>
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"integration_key"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","example":"AAAAAAAAAAAAAAAAAAA"}}
+        >
+          
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          Successful response
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                payment
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"hash"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"77e1501f2668c80dda0cf099db75d1dff559eede892c799f"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"country"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"mx"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"merchant_payment_code"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":123581321345589}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"order_number"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","nullable":true,"example":null}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"status"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"PE"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"status_date"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","nullable":true,"example":null}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"open_date"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"2020-08-29 11:48:47"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"confirm_date"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","nullable":true,"example":null}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"transfer_date"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","nullable":true,"example":null}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"amount_br"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"763.19"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"amount_ext"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"763.19"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"amount_iof"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"0.00"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"amount_ext_requested"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"763.19"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"currency_rate"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"1.0000"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"currency_ext"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"MXN"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"due_date"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"2020-09-01"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"instalments"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"1"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"payment_type_code"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"oxxopay"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"voucher_url"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"https://print.ebanx.com/print/voucher/execute?hash=aaaaaa11111222"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"pre_approved"}
+                              required={false}
+                              schemaName={"boolean"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"boolean","example":false}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"capture_available"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","nullable":true,"example":null}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"oxxopay_barcode"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":12345697891}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"status"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","example":"SUCCESS"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"payment\": {\n    \"hash\": \"77e1501f2668c80dda0cf099db75d1dff559eede892c799f\",\n    \"country\": \"mx\",\n    \"merchant_payment_code\": 123581321345589,\n    \"order_number\": null,\n    \"status\": \"PE\",\n    \"status_date\": null,\n    \"open_date\": \"2020-08-29 11:48:47\",\n    \"confirm_date\": null,\n    \"transfer_date\": null,\n    \"amount_br\": \"763.19\",\n    \"amount_ext\": \"763.19\",\n    \"amount_iof\": \"0.00\",\n    \"amount_ext_requested\": \"763.19\",\n    \"currency_rate\": \"1.0000\",\n    \"currency_ext\": \"MXN\",\n    \"due_date\": \"2020-09-01\",\n    \"instalments\": \"1\",\n    \"payment_type_code\": \"oxxopay\",\n    \"voucher_url\": \"https://print.ebanx.com/print/voucher/execute?hash=aaaaaa11111222\",\n    \"pre_approved\": false,\n    \"capture_available\": null,\n    \"oxxopay_barcode\": 12345697891\n  },\n  \"status\": \"SUCCESS\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

@@ -1,0 +1,95 @@
+---
+id: baserequired
+title: "BaseRequired"
+description: ""
+sidebar_label: "BaseRequired"
+hide_title: true
+schema: true
+custom_edit_url: null
+---
+
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"BaseRequired"}
+>
+</Heading>
+
+
+
+
+
+<ul>
+  <div>
+    <span
+      className={"badge badge--info"}
+      style={{"marginBottom":"1rem"}}
+    >
+      oneOf
+    </span><SchemaTabs>
+      <TabItem
+        label={"TypeA"}
+        value={"0-item-properties"}
+      >
+        <SchemaItem
+          collapsible={false}
+          name={"type"}
+          required={true}
+          schemaName={"string"}
+          qualifierMessage={"**Possible values:** [`typeA`]"}
+          schema={{"type":"string","enum":["typeA"]}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"propA"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem>
+      </TabItem><TabItem
+        label={"TypeB"}
+        value={"1-item-properties"}
+      >
+        <SchemaItem
+          collapsible={false}
+          name={"type"}
+          required={true}
+          schemaName={"string"}
+          qualifierMessage={"**Possible values:** [`typeB`]"}
+          schema={{"type":"string","enum":["typeB"]}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"propB"}
+          required={false}
+          schemaName={"number"}
+          qualifierMessage={undefined}
+          schema={{"type":"number"}}
+        >
+          
+        </SchemaItem>
+      </TabItem>
+    </SchemaTabs>
+  </div><SchemaItem
+    collapsible={false}
+    name={"type"}
+    required={false}
+    schemaName={""}
+    qualifierMessage={undefined}
+    schema={"string"}
+  >
+    
+  </SchemaItem>
+</ul>
+            

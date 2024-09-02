@@ -1,0 +1,142 @@
+---
+id: generating-an-iam-token
+title: "Generating an IAM token"
+description: "Generate an IBM Cloud® Identity and Access Management (IAM) token by using either your [IAM API key](https://cloud.ibm.com/docs/iam?topic=iam-userapikey#userapikey) or a [service ID's API key](https://cloud.ibm.com/docs/iam?topic=iam-serviceidapikeys#serviceidapikeys) IBM Cloud APIs can be accessed only by users who are authorized by an assigned IAM role."
+sidebar_label: "Generating an IAM token"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVkuP2zYQ/ivE5JAsID826YlAUXjTB/awSIAkh8JrFLQ0lhhLHC2HXK9r6C/1R/SXFUNqbW8StEVvBfZEUprnN88DBFMz6CUsYmjQBVuaYMnBqoAKufS2T08Nv6BDbwIq49T11Y1621Ks/vxDXVfCFfbKuEotyhKZ1Y1xpsYOXVCvrhc3FyrQFp1a71Vk62qFNjTo1Z6iV8vrxY1avL9WW9yvXjUh9Kxns1KkT+26m5bUzSoqeWZN90Og3pbfW9NNIqM3vd3i/sXpeqHIK6OWjP7elqiuf3zJ/0H2yG6rLJVffPnh4oSAiGdVGqfWqExyHytFrt1nd9Gz2jWkjEdlYmjI29+xkn/GKcNsa4eVEgw8tTi9dT+Zskl8ic2K7LYV0EKDyZcuclC9YValxwS+aVltyB8pAiVVYzRF6K37lWKysj4P4+Lm7yLzxEeBMKP7LXCnt+7jqFzoLCujevSdcZIDJztVaEx4RMtjFKzsRtSpitzLoFpiPPohou5NG1EUV9hiePrPuvQ0ZUnRhWSDZdV7SkkoRrRM6lyJRKHCe2ypF28lBH3fjjmfjXOIFQuEO/JbtbOhUZQwOcExIsDTDGsKSGR8gs3RyECqxpBU5eLIiAcSCCSMWMkDJey0SQ59U9Ot01o7CnjrFl/ISnAH7Hryxu+/ghsfeuuRldkE9OpSNRT99NYt0jMDeBetT3aIuJG+SIgl505JoxzuTh6U5IJ1EY85erKc/BEMqZAitYf9mIQ9+g35LpeJKQV8zramMmlb2uUaSXnYSsAEm2O5jN5LcKwT+sccEKC01lCAx7uIHK6o2oM+gFiKLsj1LOKzh8lut5uILZPoW3QlVVgJEZcNdkZuYd8jaKD1ZywDFNB76tEHiyx/a29c+C3THGk5eOtqKABd7KS3Ru+0XXe6N950rEmqUyfWibDo3FZgNRQwXr8SNgzZJ4mTiDxTfGRaFRBsaIVLuvnP5DsYnjIGH3EogLGM3oY96OUBZjPQy9WwEjruyXF27fV8LsfTKUDbZEmHoaEKNPTECRQTGtAws+MwmKUUAVHk79Fz0hN9CxoeuzC/mR481pbcME0deZIhnnAgb2qcmr6vqDPW5d9QwL3x1qzbbF7mldsRZRbIY8IDCog8YYqhyVc0yVCMk3qdzyohFye8F9mf+0mgrXzpeP4GCigbnF9CAc22nr8GcfkhvTvb5pNcOonzuzc+nfy5nH8np6H8xvF0dToDCV0arxsT2wBaDB8Gwf8xLB8k+7KbV2g8egnnWU4IhiIykYGGdSKCoYArw7b8J2qhSWG0bkOJcMyaXLrvUhzUhxwHwR095/BfTufTS9Ejce9Mgt+ZJHXcD8a2ehwt8MUecVaKzyvF80rxvFI8rxT/l5VibKcBH8Ksb4110gjTUDuMA3AJjwMwNXppf6sCGpmRegmHw9owfvLtMMjnu4heBvDqNNjSHC6gQVOhTzMz7QLwNrfMycc87lMCg/4Xm4wMleOsfv/uw0coYD2uRB1VIuSMujh/iCnD8BcHVeyi
+sidebar_class_name: "post api-method"
+info_path: cos/cloud-object-storage
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Generating an IAM token"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/identity/token"}
+>
+  
+</MethodEndpoint>
+
+
+
+Generate an IBM Cloud® Identity and Access Management (IAM) token by using either your [IAM API key](https://cloud.ibm.com/docs/iam?topic=iam-userapikey#userapikey) or a [service ID's API key](https://cloud.ibm.com/docs/iam?topic=iam-serviceidapikeys#serviceidapikeys) IBM Cloud APIs can be accessed only by users who are authorized by an assigned IAM role.
+Each user who is calling the API must pass credentials for the API to authenticate.
+
+You can generate an IAM token by using either your IBM Cloud API key or a service ID's API key.
+The API key is a permanent credential that can be reused if you don't lose the API key value or delete the API key in the account.
+This process is also used if you are developing an application that needs to work with other IBM Cloud services.
+You must use a service ID API key to get an access token to be passed to each of the IBM Cloud services.
+
+:::note
+An access token is a temporary credential that expires after 1 hour.
+After the acquired token expires, you must generate a new token to continue calling IBM Cloud or service APIs, and you can perform only actions that are allowed by your level of assigned access within all accounts.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/x-www-form-urlencoded"}
+    value={"application/x-www-form-urlencoded-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={false}
+          name={"grant_type"}
+          required={true}
+          schemaName={"string"}
+          qualifierMessage={"**Possible values:** [`urn:ibm:params:oauth:grant-type:apikey`]"}
+          schema={{"type":"string","enum":["urn:ibm:params:oauth:grant-type:apikey"]}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"apikey"}
+          required={true}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          ok
+          
+          
+        </div><div>
+          
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

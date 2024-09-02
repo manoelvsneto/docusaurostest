@@ -1,0 +1,207 @@
+---
+id: discriminator-with-shared-properties-without-mapping
+title: "Discriminator with Shared Properties without Mapping"
+description: "Schema:"
+sidebar_label: "Discriminator with Shared Properties without Mapping"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlVE1v2zAM/SsCNyAXNc521C1Fi2GHbQHa7RIHiGIzsTpbUkU5m2H4vw+U03y1h+08XyyQT8/k46N7iHpHoJZQGiqCaYzV0QVYSSiRAz4aZ0HBQ1Fho1Vu1+t1p5s6t7HzqITbPGERc3txXYncCuGD8xhi91U3qATDc3uIGSTFkMTBh8NRUAzG7jhClQ5YLoLzbwKcxW/blLkR7wNulZi8ywrXeGfRRsoo1UvZY+dxPvk73O0ktZdbkBCQvLOEBKqHj7MZv64UaYsCibZtLV7AIKFwNqKNDNfe16bQDM+eiO/0MH6OT9wOKBj1A3mlv+rhXD5QI36QcFLwxHJkG9Vh2Em+N9KDhKQfqOXrQgI+tyZgyaZIuZWEaGLNoKQmDPLfb93CcBa51YQPqUIY+JHQYKxcCQp2yHRexwoUZBeq3IxNgQRjty71deC7O4eJHzqYJDuJ+eIzXFv5DhtnKQYdkcReB+NaEhcfEuOYROGaDUcS1S8TK6FtmQ6ujaLR3hu7oylI2GOgkf3DdDadpUE5io1OU7fjCC+rTHyjCGJxHOqR/cvIfl19f3LYf7eTB89F/B0zX2tjWeY21GlbkmGufmMvhllJqBxFzvf9RhN+D/UwcPi5xdCBWq4ksBP0hu20XA0SKtQlhrQhP7EDBfOiQM/e3Ou65Tpe7Tc7/OjjT/ePMAx/ALWq4k0=
+sidebar_class_name: "get api-method"
+info_path: tests/discriminator-variations-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Discriminator with Shared Properties without Mapping"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/discriminator-shared"}
+>
+  
+</MethodEndpoint>
+
+
+
+Schema:
+```yaml
+type: object
+discriminator: 
+  propertyName: type
+properties:
+  type:
+    type: string
+  sharedProp:
+    type: string
+oneOf:
+  - $ref: '#/components/schemas/TypeA'
+  - $ref: '#/components/schemas/TypeB'
+```
+
+
+<div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          Successful response
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <div>
+                        <span
+                          className={"badge badge--info"}
+                          style={{"marginBottom":"1rem"}}
+                        >
+                          oneOf
+                        </span><SchemaTabs>
+                          <TabItem
+                            label={"TypeA"}
+                            value={"0-item-properties"}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"type"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={"**Possible values:** [`typeA`]"}
+                              schema={{"type":"string","enum":["typeA"]}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"propA"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem>
+                          </TabItem><TabItem
+                            label={"TypeB"}
+                            value={"1-item-properties"}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"type"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={"**Possible values:** [`typeB`]"}
+                              schema={{"type":"string","enum":["typeB"]}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"propB"}
+                              required={false}
+                              schemaName={"number"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"number"}}
+                            >
+                              
+                            </SchemaItem>
+                          </TabItem>
+                        </SchemaTabs>
+                      </div><SchemaItem
+                        collapsible={false}
+                        name={"type"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"sharedProp"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"type\": \"string\",\n  \"sharedProp\": \"string\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      
