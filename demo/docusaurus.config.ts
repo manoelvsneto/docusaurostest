@@ -75,20 +75,13 @@ const config: Config = {
               label: "Tests",
               to: "/category/tests",
             },
+            {
+              label: "Pay",
+              to: "/category/pay",
+            },
           ],
         },
-        {
-          href: "https://medium.com/palo-alto-networks-developer-blog",
-          position: "right",
-          className: "header-medium-link",
-          "aria-label": "Palo Alto Networks Developer Blog",
-        },
-        {
-          href: "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs",
-          position: "right",
-          className: "header-github-link",
-          "aria-label": "GitHub repository",
-        },
+
       ],
     },
     footer: {
@@ -213,66 +206,6 @@ const config: Config = {
         id: "openapi",
         docsPluginId: "classic",
         config: {
-          petstore_versioned: {
-            specPath: "examples/petstore.yaml",
-            outputDir: "docs/petstore_versioned", // No trailing slash
-            sidebarOptions: {
-              groupPathsBy: "tag",
-              categoryLinkSource: "tag",
-            },
-            version: "2.0.0", // Current version
-            label: "v2.0.0", // Current version label
-            baseUrl: "/petstore_versioned/swagger-petstore-yaml", // Leading slash is important
-            downloadUrl:
-              "https://raw.githubusercontent.com/PaloAltoNetworks/docusaurus-openapi-docs/main/demo/examples/petstore.yaml",
-            versions: {
-              "1.0.0": {
-                specPath: "examples/petstore-1.0.0.yaml",
-                outputDir: "docs/petstore_versioned/1.0.0", // No trailing slash
-                label: "v1.0.0",
-                baseUrl: "/petstore_versioned/1.0.0/swagger-petstore-yaml", // Leading slash is important
-                downloadUrl:
-                  "https://redocly.com/_spec/docs/openapi/petstore.json",
-              },
-            },
-            
-          } satisfies OpenApiPlugin.Options,
-          petstore: {
-            specPath: "examples/petstore.yaml",
-            proxy: "https://cors.pan.dev",
-            outputDir: "docs/petstore",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-              categoryLinkSource: "tag",
-            },
-            template: "api.mustache", // Customize API MDX with mustache template
-            downloadUrl: "/petstore.yaml",
-            hideSendButton: false,
-            showSchemas: true,
-          } satisfies OpenApiPlugin.Options,
-          cos: {
-            specPath: "examples/openapi-cos.json",
-            outputDir: "docs/cos",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-            },
-          } satisfies OpenApiPlugin.Options,
-          burgers: {
-            specPath: "examples/food/burgers/openapi.yaml",
-            outputDir: "docs/food/burgers",
-          } satisfies OpenApiPlugin.Options,
-          yogurt: {
-            specPath: "examples/food/yogurtstore/openapi.yaml",
-            outputDir: "docs/food/yogurtstore",
-          } satisfies OpenApiPlugin.Options,
-          restaurant: {
-            specPath: "examples/food/restaurant/openapi.yaml",
-            outputDir: "docs/restaurant",
-            sidebarOptions: {
-              groupPathsBy: "tagGroup",
-            },
-            showSchemas: true,
-          } satisfies OpenApiPlugin.Options,
           directoxxopaymx: {
             specPath: "examples/pay/direct-oxxopay-mx.yaml",
             outputDir: "docs/pay",
@@ -282,17 +215,7 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
-          tests: {
-            specPath: "examples/tests",
-            outputDir: "docs/tests",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-              categoryLinkSource: "info",
-            },
-            hideSendButton: true,
-            showSchemas: true,
-          } satisfies OpenApiPlugin.Options,
-          
+        
         } satisfies Plugin.PluginOptions,
       },
     ],
