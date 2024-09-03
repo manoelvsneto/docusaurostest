@@ -5,33 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  * ========================================================================== */
 
-import React from "react";
+import React from 'react'
 
-import CodeBlock from "@theme/CodeBlock";
-import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
+import CodeBlock from '@theme/CodeBlock'
+import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 
 function Markdown({ children }) {
-  return (
-    <div>
-      <ReactMarkdown
-        children={children}
-        rehypePlugins={[rehypeRaw]}
-        components={{
-          pre: "div",
-          code({ node, inline, className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || "");
-            if (inline) return <code>{children}</code>;
-            return !inline && match ? (
-              <CodeBlock className={className}>{children}</CodeBlock>
-            ) : (
-              <CodeBlock>{children}</CodeBlock>
-            );
-          },
-        }}
-      />
-    </div>
-  );
+    return (
+        <div>
+            <ReactMarkdown
+                children={children}
+                rehypePlugins={[rehypeRaw]}
+                components={{
+                    pre: 'div',
+                    code({ node, inline, className, children, ...props }) {
+                        const match = /language-(\w+)/.exec(className || '')
+                        if (inline) return <code>{children}</code>
+                        return !inline && match ? (
+                            <CodeBlock className={className}>
+                                {children}
+                            </CodeBlock>
+                        ) : (
+                            <CodeBlock>{children}</CodeBlock>
+                        )
+                    },
+                }}
+            />
+        </div>
+    )
 }
 
-export default Markdown;
+export default Markdown
