@@ -1,4 +1,4 @@
-ool:
+pool:
   name: Arm64
   vmImage: 'ubuntu-20.04'
 
