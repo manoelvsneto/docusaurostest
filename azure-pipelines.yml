@@ -26,5 +26,5 @@ steps:
     azure_static_web_apps_api_token: $(deployment_token)
     app_location: '/'
     api_location: 'api'  # Se você tiver uma API
-    output_location: 'build'
+    output_location: '/dist'
   displayName: 'Deploy to Azure Static Web App'
