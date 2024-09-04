@@ -62,6 +62,10 @@ const config: Config = {
               to: "/pay/direct/pix/process-a-payment",
             },
             {
+              label: "PIX BR With Error",
+              to: "/pay/direct/pix/process-a-payment-with-error",
+            },
+            {
               label: "PSE CO",
               to: "/pay/direct/pse/process-a-payment",
             },
@@ -206,6 +210,15 @@ const config: Config = {
           } satisfies OpenApiPlugin.Options,
           directpixbr: {
             specPath: "examples/pay/direct/pix/direct-pix-br.yaml",
+            outputDir: "docs/pay/direct/pix",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+          directpixbrwitherror: {
+            specPath: "examples/pay/direct/pix/direct-pix-br-error.yaml",
             outputDir: "docs/pay/direct/pix",
             sidebarOptions: {
               groupPathsBy: "tag",

@@ -22,18 +22,18 @@ import payDirectPseCo from "./docs/pay/direct/pse/sidebar";
 
 const sidebars: SidebarsConfig = {
   pay: [
-    {
+  /*  {
       type: "category",
       label: "Pay",
       link: {
         type: "generated-index",
-        title: "Pay API",
+        title: "Pay API - Direct PIX BR",
         description:
           "This is a server Pay.",
-        slug: "/category/aaaa-api",
+        slug: "/pay/direct/pix/process-a-payment",
       },
       items: payDirectOxxoMx,
-    },
+    },*/
   ],
 };
 

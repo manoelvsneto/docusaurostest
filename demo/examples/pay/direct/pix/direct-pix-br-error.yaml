@@ -1,0 +1,187 @@
+openapi: 3.0.3
+info:
+  title: Payment API for PIX BR with error
+  description: API for processing payments PIX in Brazil with error
+  version: 1.0.0
+servers:
+  - url: https://cccccc.aaaaaaa.com
+    description: Main API server
+paths:
+  /ws/direct:
+    post:
+      summary: Process a payment with error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  example: 'your-integration-key-here'
+                metadata:
+                  type: object
+                  properties:
+                    risk:
+                      type: object
+                      properties:
+                        customer_account_create_date:
+                          type: string
+                          format: date
+                          example: '2018-12-12'
+                        customer_account_create_type:
+                          type: string
+                          example: 'facebook'
+                        seller_information:
+                          type: object
+                        shipping_info:
+                          type: object
+                          properties:
+                            shipping_amount:
+                              type: number
+                              format: float
+                              example: 0.00
+                            type:
+                              type: string
+                              example: 'Minimum Shipping Fee'
+                  required:
+                    - risk
+                operation:
+                  type: string
+                  example: 'request'
+                payment:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                      example: '123 Main Street, Apartment 101'
+                    amount_total:
+                      type: number
+                      format: float
+                      example: 211.28
+                    city:
+                      type: string
+                      example: 'Cascavel'
+                    country:
+                      type: string
+                      example: 'BR'
+                    currency_code:
+                      type: string
+                      example: 'BRL'
+                    document:
+                      type: string
+                      example: '123.456.789-00'
+                    email:
+                      type: string
+                      example: 'example@example.com'
+                    expiration_time_in_seconds:
+                      type: integer
+                      example: 86400
+                    items:
+                      type: object
+                      additionalProperties:
+                        type: object
+                        properties:
+                          description:
+                            type: string
+                            example: 'SHEGLAM Pink Primer Facial, Hydrating Primer, Invisible Pore Corrector, Rose Essential Oil, For Daily Skincare'
+                          name:
+                            type: string
+                            example: 'SHEGLAM Pink Primer Facial, Hydrating Primer, Invisible Pore Corrector, Rose Essential Oil, For Daily Skincare'
+                          quantity:
+                            type: integer
+                            example: 1
+                          seller_id:
+                            type: string
+                            example: 'SELLER123'
+                          sku:
+                            type: string
+                            example: 'sku123456'
+                          store_id:
+                            type: string
+                            example: 'store1'
+                          unit_price:
+                            type: number
+                            format: float
+                            example: 211.28
+                    merchant_payment_code:
+                      type: string
+                      example: 'MERCHANTCODE123456'
+                    name:
+                      type: string
+                      example: 'John Doe'
+                    order_number:
+                      type: string
+                      example: 'ORDER123456'
+                    payment_type_code:
+                      type: string
+                      example: 'pix'
+                    phone_number:
+                      type: string
+                      example: '1234567890'
+                    single_transaction:
+                      type: object
+                      properties:
+                        amount_crossborder:
+                          type: number
+                          format: float
+                          example: 211.28
+                        amount_local:
+                          type: number
+                          format: float
+                          example: 0.00
+                    state:
+                      type: string
+                      example: 'PR'
+                    street_number:
+                      type: string
+                      example: '123 Main Street'
+                    zipcode:
+                      type: string
+                      example: '12345-678'
+                  required:
+                    - address
+                    - amount_total
+                    - city
+                    - country
+                    - currency_code
+                    - document
+                    - email
+                    - expiration_time_in_seconds
+                    - items
+                    - merchant_payment_code
+                    - name
+                    - order_number
+                    - payment_type_code
+                    - phone_number
+                    - single_transaction
+                    - state
+                    - street_number
+                    - zipcode
+              required:
+                - integration_key
+                - metadata
+                - operation
+                - payment
+      responses:
+        '200':
+          description: Bad request, invalid input data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'ERROR'
+                  status_code:
+                    type: string
+                    example: 'BP-DR-23'
+                  status_message:
+                    type: string
+                    example: 'Field payment.document must be a valid CPF'
+                required:
+                  - status
+                  - status_code
+                  - status_message
