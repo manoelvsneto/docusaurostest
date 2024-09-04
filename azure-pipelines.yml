@@ -8,8 +8,8 @@ pool:
 
 steps:
 - task: UseNode@1
-  inputs:
-    versionSpec: '20.16.0'  # Substitua pela versão do Node.js que você está usando
+#  inputs:
+#    versionSpec: '20.16.0'  # Substitua pela versão do Node.js que você está usando
   displayName: 'Install Node.js'
 
 - script: |
