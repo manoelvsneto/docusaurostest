@@ -1,26 +1,31 @@
 trigger:
-- main
+  branches:
+    include:
+      - main  # Substitua por sua branch principal
 
 pool:
-  vmImage: ubuntu-latest
-  
-resources:
-  - repo: self
-variables:
-  imagePullSecret: 'regcred'
+  vmImage: 'ubuntu-latest'
 
-stages:
-- stage: Build
-  displayName: Build stage
-  jobs:
-  - job: Build
-    displayName: Build
-    steps:
- 
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'DockerConnection'
-        repository: 'manoelvsneto/docusaurostest'
-        command: 'buildAndPush'
-        tags: '$(Build.BuildId)'
-        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+steps:
+- task: UseNode@1
+  inputs:
+    versionSpec: '20'  # Substitua pela versão do Node.js que você está usando
+  displayName: 'Install Node.js'
+
+- script: |
+    yarn install
+    yarn build
+  displayName: 'Install dependencies and build'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+  displayName: 'Publish Artifacts'
+- task: AzureStaticWebApp@0
+  inputs:
+    azure_static_web_apps_api_token: $(deployment_token)
+    app_location: '/'
+    api_location: 'api'  # Se você tiver uma API
+    output_location: 'build'
+  displayName: 'Deploy to Azure Static Web App'
