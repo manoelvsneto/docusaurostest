@@ -281,7 +281,7 @@ const config: Config = {
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
           directpseco: {
-            specPath: "examples/pay/direct-pse-co.yaml",
+            specPath: "examples/pay/direct-pse-co.yml",
             outputDir: "docs/pay",
             sidebarOptions: {
               groupPathsBy: "tag",
