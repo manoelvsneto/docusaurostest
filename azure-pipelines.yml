@@ -9,13 +9,11 @@ pool:
 steps:
 - task: UseNode@1
   inputs:
-    versionSpec: 'v12.14'  # Substitua pela versão do Node.js que você está usando
+    versionSpec: '20'  # Substitua pela versão do Node.js que você está usando
   displayName: 'Install Node.js'
-
 - script: |
-    yarn
-    yarn build-packages 
-    yarn build
+    npm
+    npm build
   displayName: 'Install dependencies and build'
 
 - task: PublishBuildArtifacts@1
