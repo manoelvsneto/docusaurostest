@@ -280,6 +280,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          directpseco: {
+            specPath: "examples/pay/direct-pse-co.yaml",
+            outputDir: "docs/pay",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
           tests: {
             specPath: "examples/tests",
             outputDir: "docs/tests",

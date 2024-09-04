@@ -33,4 +33,4 @@ CMD ["nginx", "-g", "daemon off;"]
 
 
 ##docker build -t sampleapp:v1 .
-##docker run -p 3000:3000 sampleapp:v1
+##docker run -p 80:80 sampleapp:v1

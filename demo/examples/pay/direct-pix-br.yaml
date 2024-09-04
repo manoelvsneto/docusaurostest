@@ -4,7 +4,7 @@ info:
   description: API for processing payments PIX in Brazil
   version: 1.0.0
 servers:
-  - url: https://sandbox.aaaaaaa.com
+  - url: https://cccccc.aaaaaaa.com
     description: Main API server
 paths:
   /ws/direct:
@@ -242,7 +242,7 @@ paths:
                         properties:
                           qr_code_value:
                             type: string
-                            example: '00020101021226740014br.gov.bcb.pix2552pix.ebanx.com/qr/v2/qr-code-placeholder'
+                            example: 'aaaaaaaaaa.gov.bcb.bbbbbb.ccccccc.com/qr/v2/qr-code-placeholder'
                       single_transaction:
                         type: object
                         properties:
