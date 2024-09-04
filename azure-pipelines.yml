@@ -11,9 +11,10 @@ steps:
   inputs:
     versionSpec: '20'  # Substitua pela versão do Node.js que você está usando
   displayName: 'Install Node.js'
+
 - script: |
-    npm
-    npm build
+    npm install
+    npm run build  # Corrigido para o comando correto de build
   displayName: 'Install dependencies and build'
 
 - task: PublishBuildArtifacts@1
@@ -21,10 +22,11 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
   displayName: 'Publish Artifacts'
+
 - task: AzureStaticWebApp@0
   inputs:
     azure_static_web_apps_api_token: $(deployment_token)
-    app_location: '/'
-    api_location: 'api'  # Se você tiver uma API
-    output_location: '/dist'
+    app_location: '/'  # Certifique-se de que este é o local correto para o seu aplicativo
+    api_location: 'api'  # Se você tiver uma API; caso contrário, remova ou defina como ''
+    output_location: 'dist'  # Remova a barra inicial para corresponder à estrutura de diretórios
   displayName: 'Deploy to Azure Static Web App'
