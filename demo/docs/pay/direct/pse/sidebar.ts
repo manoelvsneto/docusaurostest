@@ -12,8 +12,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "pay/direct/pse/process-a-payment-request",
-          label: "Process a payment request",
+          id: "pay/direct/pse/process-a-payment",
+          label: "Process a payment",
           className: "api-method post",
         },
       ],

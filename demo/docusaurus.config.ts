@@ -63,7 +63,7 @@ const config: Config = {
             },
             {
               label: "PSE CO",
-              to: "/pay/direct/pse/process-a-payment-request",
+              to: "/pay/direct/pse/process-a-payment",
             },
             {
               label: "OXXOPAY MX",
