@@ -1,5 +1,9 @@
 trigger:
-  - main
+- main
+
+pool:
+  vmImage: ubuntu-latest
+  
 resources:
   - repo: self
 variables:
