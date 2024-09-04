@@ -14,7 +14,7 @@ steps:
 
 - script: |
     npm install
-    npm run build  # Corrigido para o comando correto de build
+    npm run build
   displayName: 'Install dependencies and build'
 
 - task: PublishBuildArtifacts@1
