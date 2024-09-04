@@ -18,6 +18,7 @@ COPY . .
 
 # Build the project
 RUN yarn build
+RUN yarn workspace demo gen-api-docs all
 
 # Stage 2: Serve the application with Nginx
 FROM nginx:alpine
