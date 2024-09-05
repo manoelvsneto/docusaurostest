@@ -20,9 +20,9 @@ steps:
 
 - task: AzureStaticWebApp@0
   inputs:
+    app_location: '/'
+    api_location: 'api'
+    output_location: '/dist'
     azure_static_web_apps_api_token: $(deployment_token)
-    app_location: '/'  # Localização do aplicativo dentro do repositório
-    api_location: ''  # Se você tiver uma API, forneça o caminho aqui. Caso contrário, deixe vazio.
-    output_location: 'dist'  # Localização dos arquivos estáticos após o build. Ajuste conforme o seu projeto
     deployment_environment: 'production'  # Substitua pelo nome do ambiente de produção configurado no Azure
   displayName: 'Deploy to Azure Static Web App'
