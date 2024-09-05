@@ -9,7 +9,7 @@ pool:
 steps:
 - task: UseNode@1
   inputs:
-    versionSpec: '14.17.0' 
+    versionSpec: '18.0.0' 
   displayName: 'Install Node.js'
 
 - task: PublishBuildArtifacts@1
