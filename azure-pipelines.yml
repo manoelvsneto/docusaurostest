@@ -9,14 +9,9 @@ pool:
 steps:
 - task: UseNode@1
   inputs:
-    versionSpec: '14.8.0'  # Substitua pela versão do Node.js que você está usando
+    versionSpec: '14.8.0' 
   displayName: 'Install Node.js'
-- task: YarnInstaller@3
-  inputs:
-     versionSpec: '1.x'
-- task: Yarn@3
-  inputs:
-    productionMode: true
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
