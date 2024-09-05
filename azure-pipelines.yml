@@ -23,5 +23,5 @@ steps:
     azure_static_web_apps_api_token: $(deployment_token)
     app_location: '/'  # Certifique-se de que este é o local correto para o seu aplicativo
     api_location: 'api'  # Se você tiver uma API; caso contrário, remova ou defina como ''
-    output_location: 'dist'  # Remova a barra inicial para corresponder à estrutura de diretórios
-  displayName: 'Deploy to Azure Static Web App'
+    output_location: 'build'  # Remova a barra inicial para corresponder à estrutura de diretórios
+  displayName: 'Deploy to Azure Static Web App' 
