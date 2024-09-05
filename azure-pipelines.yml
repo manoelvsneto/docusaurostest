@@ -14,7 +14,7 @@ steps:
 
 - script: |
     npm install --global yarn
-    yarn
+    yarn install --ignore-engines
     yarn build-packages
   displayName: 'Install dependencies and build'
 
