@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  title: Cancellation API
+  version: 1.0.0
+paths:
+  /ws/cancel/execute:
+    post:
+      summary: Execute Cancellation
+      description: Endpoint to execute a payment cancellation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hash:
+                  type: string
+                  example: "213123213123123123123DSASDSDSADAS"
+                integration_key:
+                  type: string
+                  example: DASDASDSA2312312312312312"
+              required:
+                - hash
+                - integration_key
+      responses:
+        '200':
+          description: Cancellation executed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payment:
+                    type: object
+                    properties:
+                      hash:
+                        type: string
+                        example: "sadsad2312dasd213"
+                      country:
+                        type: string
+                        example: "mx"
+                      merchant_payment_code:
+                        type: string
+                        example: "21212121212121"
+                      order_number:
+                        type: string
+                        nullable: true
+                        example: null
+                      status:
+                        type: string
+                        example: "CA"
+                      status_date:
+                        type: string
+                        format: date-time
+                        example: "2024-09-05T16:37:16Z"
+                      open_date:
+                        type: string
+                        format: date-time
+                        example: "2024-09-04T18:54:15Z"
+                      confirm_date:
+                        type: string
+                        nullable: true
+                        format: date-time
+                        example: null
+                      transfer_date:
+                        type: string
+                        nullable: true
+                        format: date-time
+                        example: null
+                      amount_br:
+                        type: string
+                        example: "1502.65"
+                      amount_ext:
+                        type: string
+                        example: "1502.65"
+                      amount_iof:
+                        type: string
+                        example: "0.00"
+                      amount_ext_requested:
+                        type: string
+                        example: "1502.65"
+                      currency_rate:
+                        type: string
+                        example: "1.0000"
+                      currency_ext:
+                        type: string
+                        example: "MXN"
+                      due_date:
+                        type: string
+                        format: date
+                        example: "2024-09-07"
+                      instalments:
+                        type: string
+                        example: "1"
+                      payment_type_code:
+                        type: string
+                        example: "oxxopay"
+                      voucher_url:
+                        type: string
+                        example: "https://print.aaaaaa.com/print/voucher/execute?hash=aaaa111222333bbb"
+                      pre_approved:
+                        type: boolean
+                        example: false
+                  operation:
+                    type: string
+                    example: "cancel"
+                  status:
+                    type: string
+                    example: "SUCCESS"

@@ -73,6 +73,10 @@ const config: Config = {
               label: "OXXOPAY MX",
               to: "/pay/direct/oxxo/request-payment",
             },
+            {
+              label: "CANCEL PAYMENT",
+              to: "/pay/cancel/execute-cancellation",
+            },
           ],
         },
       ],
@@ -229,6 +233,15 @@ const config: Config = {
           directpseco: {
             specPath: "examples/pay/direct/pse/direct-pse-co.yml",
             outputDir: "docs/pay/direct/pse",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+          cancelpayment: {
+            specPath: "examples/pay/cancel/cancel-payment.yaml",
+            outputDir: "docs/pay/cancel",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",
