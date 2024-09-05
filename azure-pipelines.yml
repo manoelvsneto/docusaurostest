@@ -13,8 +13,9 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install
-    npm run build
+    npm install --global yarn
+    yarn
+    yarn build-packages
   displayName: 'Install dependencies and build'
 
 - task: PublishBuildArtifacts@1
