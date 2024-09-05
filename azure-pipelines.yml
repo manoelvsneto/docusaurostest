@@ -11,14 +11,12 @@ steps:
   inputs:
     versionSpec: '14.8.0'  # Substitua pela versão do Node.js que você está usando
   displayName: 'Install Node.js'
-
-- script: |
-    npm install --global yarn
-    yarn install --ignore-engines
-    yarn config set ignore-engines true
-    yarn build-packages
-  displayName: 'Install dependencies and build'
-
+- task: YarnInstaller@3
+  inputs:
+     versionSpec: '1.x'
+- task: Yarn@3
+  inputs:
+    productionMode: true
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
