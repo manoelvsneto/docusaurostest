@@ -22,7 +22,7 @@ steps:
   inputs:
     app_location: '/'
     api_location: 'api'
-    output_location: '/dist'
+    output_location: 'demo/build'
     azure_static_web_apps_api_token: $(deployment_token)
     deployment_environment: 'production'  # Substitua pelo nome do ambiente de produção configurado no Azure
   displayName: 'Deploy to Azure Static Web App'
