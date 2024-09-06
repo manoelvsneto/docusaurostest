@@ -1,7 +1,8 @@
 openapi: 3.0.3
 info:
   title: Payment API for PIX BR
-  description: API for processing payments PIX in Brazil
+  description: API for processing payments PIX in Brazil. This method allows you to create a payment using EBANX Payment Page, where the customer is redirected to EBANX’s website to enter his data.
+
   version: 1.0.0
 servers:
   - url: https://cccccc.aaaaaaa.com
@@ -165,6 +166,26 @@ paths:
                 - operation
                 - payment
       responses:
+        '200E':
+          description: Bad request, invalid input data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'ERROR'
+                  status_code:
+                    type: string
+                    example: 'BP-DR-23'
+                  status_message:
+                    type: string
+                    example: 'Field payment.document must be a valid CPF'
+                required:
+                  - status
+                  - status_code
+                  - status_message
         '200':
           description: Payment processed successfully
           content:
