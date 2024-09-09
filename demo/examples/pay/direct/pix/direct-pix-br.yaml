@@ -2,8 +2,8 @@ openapi: 3.0.3
 info:
   title: Payment API for PIX BR
   description: API for processing payments PIX in Brazil. This method allows you to create a payment using EBANX Payment Page, where the customer is redirected to EBANX’s website to enter his data.
-
   version: 1.0.0
+
 servers:
   - url: https://cccccc.aaaaaaa.com
     description: Main API server
@@ -20,6 +20,7 @@ paths:
               properties:
                 integration_key:
                   type: string
+                  title: 1 Your unique and secret integration key.
                   description: Your unique and secret integration key.
                   example: 'your-integration-key-here'
                   required: true
