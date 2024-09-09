@@ -4,12 +4,12 @@ info:
   description: API for processing payments - OXXOPAY MX
   version: 1.0.0
 servers:
-  - url: https://sandbox.aaaaaaa.com
+  - url: https://sandbox.empresa.com
     description: Main API server
 paths:
   /ws/direct:
     post:
-      summary: Process a payment
+      summary: Process a payment OXXO MX
       description: Request a payment transaction
       operationId: requestPayment
       requestBody:

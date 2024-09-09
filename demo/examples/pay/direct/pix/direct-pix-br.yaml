@@ -3,15 +3,14 @@ info:
   title: Payment API for PIX BR
   description: API for processing payments PIX in Brazil. This method allows you to create a payment using EBANX Payment Page, where the customer is redirected to EBANX’s website to enter his data.
   version: 1.0.0
-
 servers:
-  - url: https://cccccc.aaaaaaa.com
+  - url: https://sandbox.empresa.com
     description: Main API server
 paths:
   /ws/direct:
     post:
-      summary: Process a payment
-      description: 
+      summary: Process a payment PIX BR
+      description: Process a payment PIX BR
       requestBody:
         #required: true
         content:
