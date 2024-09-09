@@ -71,7 +71,7 @@ const config: Config = {
             },
             {
               label: "OXXOPAY MX",
-              to: "/pay/direct/pse/process-a-payment-oxxopay-mx",
+              to: "/pay/direct/oxxo/request-payment",
             },
             {
               label: "CANCEL PAYMENT",
