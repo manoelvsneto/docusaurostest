@@ -171,7 +171,7 @@ paths:
                 - operation
                 - payment
       responses:
-        '400':
+        '200E':
           description: Bad request, invalid input data
           content:
             application/json:

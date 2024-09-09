@@ -6,6 +6,7 @@ info:
 servers:
   - url: https://sandbox.empresa.com
     description: Main API server
+    
 paths:
   /ws/direct:
     post:
