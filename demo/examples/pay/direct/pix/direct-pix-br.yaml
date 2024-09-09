@@ -12,7 +12,7 @@ paths:
     post:
       summary: Process a payment
       requestBody:
-        required: true
+        #required: true
         content:
           application/json:
             schema:
