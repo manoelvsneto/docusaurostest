@@ -20,7 +20,11 @@ paths:
               properties:
                 integration_key:
                   type: string
+                  description: Your unique and secret integration key.
                   example: 'your-integration-key-here'
+                  requeried: true
+                  minLength: 1    
+                  maxLength: 100
                 metadata:
                   type: object
                   properties:
