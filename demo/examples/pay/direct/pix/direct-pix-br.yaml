@@ -11,6 +11,7 @@ paths:
   /ws/direct:
     post:
       summary: Process a payment
+      description: 
       requestBody:
         #required: true
         content:
@@ -171,7 +172,7 @@ paths:
                 - operation
                 - payment
       responses:
-        '200E':
+        '400':
           description: Bad request, invalid input data
           content:
             application/json:
