@@ -59,19 +59,19 @@ const config: Config = {
           items: [
             {
               label: "PIX BR",
-              to: "/pay/direct/pix/process-a-payment",
+              to: "/pay/direct/pix/process-a-payment-for-pix-br",
             },
             {
               label: "PIX BR With Error",
-              to: "/pay/direct/pix/process-a-payment-with-error",
+              to: "/pay/direct/pix/process-a-payment-for-pix-br-with-error",
             },
             {
               label: "PSE CO",
-              to: "/pay/direct/pse/process-a-payment",
+              to: "/pay/direct/pse/process-a-payment-pse-co",
             },
             {
               label: "OXXOPAY MX",
-              to: "/pay/direct/oxxo/request-payment",
+              to: "/pay/direct/pse/process-a-payment-oxxopay-mx",
             },
             {
               label: "CANCEL PAYMENT",
