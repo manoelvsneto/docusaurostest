@@ -9,7 +9,7 @@ servers:
 paths:
   /ws/direct:
     post:
-      summary: Process a payment with error
+      summary: Process a payment with error PIX BR
       requestBody:
         required: true
         content:
