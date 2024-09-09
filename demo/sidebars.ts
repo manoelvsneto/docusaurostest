@@ -15,9 +15,9 @@ import {
   versionSelector,
 } from "docusaurus-plugin-openapi-docs/lib/sidebars/utils";
 
-import payDirectOxxoMx from "./docs/pay/direct/oxxo/sidebar";
-import payDirectPixBr from "./docs/pay/direct/pix/sidebar";
-import payDirectPseCo from "./docs/pay/direct/pse/sidebar";
+//import payDirectOxxoMx from "./docs/pay/direct/oxxo/sidebar";
+//import payDirectPixBr from "./docs/pay/direct/pix/sidebar";
+//import payDirectPseCo from "./docs/pay/direct/pse/sidebar";
 
 
 const sidebars: SidebarsConfig = {
