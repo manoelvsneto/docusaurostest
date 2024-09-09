@@ -59,11 +59,11 @@ const config: Config = {
           items: [
             {
               label: "PIX BR",
-              to: "/pay/direct/pix/process-a-payment-for-pix-br",
+              to: "/pay/direct/pix/process-a-payment-pix-br",
             },
             {
               label: "PIX BR With Error",
-              to: "/pay/direct/pix/process-a-payment-for-pix-br-with-error",
+              to: "/pay/direct/pix/process-a-payment-pix-br-with-error",
             },
             {
               label: "PSE CO",
