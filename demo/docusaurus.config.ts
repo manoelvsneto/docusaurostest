@@ -217,15 +217,6 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
-          directpixbrwitherror: {
-            specPath: "examples/pay/direct/pix/direct-pix-br-error.yaml",
-            outputDir: "docs/pay/direct/pix",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-              categoryLinkSource: "tag",
-            },
-            showSchemas: true,
-          } satisfies OpenApiPlugin.Options,
           directpseco: {
             specPath: "examples/pay/direct/pse/direct-pse-co.yml",
             outputDir: "docs/pay/direct/pse",
