@@ -12,7 +12,7 @@ paths:
   /ws/direct:
     post:
       summary: Process a payment PIX BR
-      description: Process a payment PIX BR
+      description: Process a payment PIX BR if (200E) means that you receive a HTTP 200 status code with error message.
       requestBody:
         #required: true
         content:
