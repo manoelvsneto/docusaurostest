@@ -176,7 +176,6 @@ paths:
                 - metadata
                 - operation
                 - payment
-           
       responses:
         '200':
           description: Payment processed successfully
