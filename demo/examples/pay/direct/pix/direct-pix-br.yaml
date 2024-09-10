@@ -14,6 +14,7 @@ paths:
       summary: Process a payment PIX BR
       description: Process a payment PIX BR
       requestBody:
+        #required: true
         content:
           application/json:
             schema:
@@ -21,7 +22,7 @@ paths:
               properties:
                 integration_key:
                   type: string
-                  title: Your unique and secret integration key.
+                  title: 1 Your unique and secret integration key.
                   description: Your unique and secret integration key.
                   example: 'your-integration-key-here'
                   required: true
@@ -62,7 +63,6 @@ paths:
                   example: 'request'
                   required: true
                 payment:
-                  required: true
                   type: object
                   properties:
                     address:
