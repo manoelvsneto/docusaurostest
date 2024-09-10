@@ -12,7 +12,7 @@ paths:
   /ws/direct:
     post:
       summary: Process a payment PIX BR
-      description: Process a payment PIX BR if (200E) means that you receive a HTTP 200 status code with error message.
+      description: Process a payment PIX BR
       requestBody:
         #required: true
         content:
@@ -284,7 +284,7 @@ paths:
                   - status
                   - redirect_url
         '200E':
-          description: Bad request, invalid input data
+          description: Bad request, invalid input data, if (200E) means that you receive a HTTP 200 status code with error message.
           content:
             application/json:
               schema:
