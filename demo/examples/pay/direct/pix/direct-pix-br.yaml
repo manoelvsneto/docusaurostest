@@ -171,18 +171,6 @@ paths:
                     - state
                     - street_number
                     - zipcode
-               examples:
-              pixbr:
-                summary: a
-                value:
-                  message: a
-              pse_co:
-                 summary: b
-                 value:
-                   message: b
-              oxxo_mx:
-                  summary: c
-                  value: c
               required:
                 - integration_key
                 - metadata
