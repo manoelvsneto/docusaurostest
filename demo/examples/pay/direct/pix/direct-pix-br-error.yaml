@@ -4,12 +4,13 @@ info:
   description: API for processing payments PIX in Brazil with error
   version: 1.0.0
 servers:
-  - url: https://cccccc.aaaaaaa.com
+  - url: https://sandbox.empresa.com
     description: Main API server
 paths:
   /ws/direct:
     post:
-      summary: Process a payment with error PIX BR
+      summary: Process a payment PIX BR with ERROR
+      description: Process a payment PIX BR with ERROR
       requestBody:
         required: true
         content:
