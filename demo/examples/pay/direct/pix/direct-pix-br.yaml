@@ -173,26 +173,6 @@ paths:
                 - operation
                 - payment
       responses:
-        '200E':
-          description: Bad request, invalid input data
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: 'ERROR'
-                  status_code:
-                    type: string
-                    example: 'BP-DR-23'
-                  status_message:
-                    type: string
-                    example: 'Field payment.document must be a valid CPF'
-                required:
-                  - status
-                  - status_code
-                  - status_message
         '200':
           description: Payment processed successfully
           content:
@@ -303,3 +283,23 @@ paths:
                   - payment
                   - status
                   - redirect_url
+        '200E':
+          description: Bad request, invalid input data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'ERROR'
+                  status_code:
+                    type: string
+                    example: 'BP-DR-23'
+                  status_message:
+                    type: string
+                    example: 'Field payment.document must be a valid CPF'
+                required:
+                  - status
+                  - status_code
+                  - status_message
