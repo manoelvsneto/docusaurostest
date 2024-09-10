@@ -57,7 +57,11 @@ paths:
                     - risk
                 operation:
                   type: string
+                  description: Must be request
+                  minLength: 7
+                  maxLength: 7
                   example: 'request'
+                  required: true
                 payment:
                   type: object
                   properties:
