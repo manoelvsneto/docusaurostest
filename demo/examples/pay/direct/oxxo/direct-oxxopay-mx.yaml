@@ -4,7 +4,6 @@ info:
   description: API for processing payments - OXXOPAY MX
   version: 1.0.0
 servers:
-servers:
   - url: https://sandbox.empresa.com
     description: Sandbox API Server
   - url: https://prod.empresa.com
