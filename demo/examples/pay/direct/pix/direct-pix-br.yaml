@@ -83,6 +83,7 @@ paths:
                       maxLength: 80
                     country:
                       type: string
+                      description: string 3 characters. Enum "BRL" "EUR" "MXN" "PEN" "USD" "CLP" "COP" "ARS" "BOB" "UYU" Three-letter code of the payment currency.
                       example: 'BR'
                     currency_code:
                       type: string
