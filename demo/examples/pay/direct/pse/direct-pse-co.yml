@@ -5,7 +5,9 @@ info:
   version: 1.0.0
 servers:
   - url: https://sandbox.empresa.com
-    description: Main API server
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
 paths:
   /ws/direct:
     post:

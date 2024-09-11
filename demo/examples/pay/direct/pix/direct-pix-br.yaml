@@ -288,7 +288,7 @@ paths:
                   - status
                   - redirect_url
         '200E':
-          description: Bad request, invalid input data, if (200E) means that you receive a HTTP 200 status code with error message.
+          description: Bad request, invalid input data. (200E) means that you receive a HTTP 200 status code with error message.
           content:
             application/json:
               schema:

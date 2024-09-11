@@ -3,8 +3,11 @@ info:
   title: Cancellation API
   version: 1.0.0
 servers:
+servers:
   - url: https://sandbox.empresa.com
-    description: Main API server
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
 paths:
   /ws/cancel/execute:
     post:
