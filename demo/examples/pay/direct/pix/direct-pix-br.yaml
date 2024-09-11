@@ -77,7 +77,10 @@ paths:
                       example: 211.28
                     city:
                       type: string
+                      description: Customer city.
                       example: 'Cascavel'
+                      minLength: 1    
+                      maxLength: 80
                     country:
                       type: string
                       example: 'BR'
@@ -157,7 +160,10 @@ paths:
                       example: 'PR'
                     street_number:
                       type: string
+                      description: Customer street number.
                       example: '123 Main Street'
+                      minLength: 1    
+                      maxLength: 30
                     zipcode:
                       type: string
                       example: '12345-678'
