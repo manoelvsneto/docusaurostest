@@ -83,7 +83,7 @@ paths:
                       example: 'BRL'
                     document:
                       type: string
-                      description: Customers document. Brazil requires a valid CPF (natural person taxpayer ID) or CNPJ (business taxpayer ID). Chile requires a valid RUT (Registro Único Tributario). Colombia requires a valid NIT / CC (Número de Identificación Tributaria). Argentina requires a valid CUIT / CUIL / CDI (Clave Única de Identificación Tríbutaria).
+                      description: Customers document. Brazil requires a valid CPF (natural person taxpayer ID) or CNPJ (business taxpayer ID). 
                       example: '123.456.789-00'
                     email:
                       type: string
@@ -123,6 +123,7 @@ paths:
                       example: 'MERCHANTCODE123456'
                     name:
                       type: string
+                      description: Customer name.
                       example: 'John Doe'
                     order_number:
                       type: string
