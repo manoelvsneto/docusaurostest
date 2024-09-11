@@ -96,6 +96,8 @@ paths:
                       type: string
                       description: Customer email address.
                       example: 'example@example.com'
+                      minLength: 1    
+                      maxLength: 100
                     expiration_time_in_seconds:
                       type: integer
                       example: 86400
