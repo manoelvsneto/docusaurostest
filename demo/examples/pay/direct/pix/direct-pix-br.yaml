@@ -67,7 +67,10 @@ paths:
                   properties:
                     address:
                       type: string
+                      description: Customer address (street name).
                       example: '123 Main Street, Apartment 101'
+                      minLength: 1    
+                      maxLength: 100
                     amount_total:
                       type: number
                       format: float
@@ -84,9 +87,11 @@ paths:
                     document:
                       type: string
                       description: Customers document. Brazil requires a valid CPF (natural person taxpayer ID) or CNPJ (business taxpayer ID). 
-                      example: '123.456.789-00'
+                      example: '123.456.789-00'   
+                      maxLength: 32
                     email:
                       type: string
+                      description: Customer email address.
                       example: 'example@example.com'
                     expiration_time_in_seconds:
                       type: integer
@@ -125,6 +130,8 @@ paths:
                       type: string
                       description: Customer name.
                       example: 'John Doe'
+                      minLength: 1    
+                      maxLength: 100
                     order_number:
                       type: string
                       example: 'ORDER123456'
