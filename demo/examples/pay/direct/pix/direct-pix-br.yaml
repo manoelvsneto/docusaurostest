@@ -304,14 +304,14 @@ components:
               type: string
               description: Indicates if capture is available
               example: null
-            status:
-              type: string
-              description: Response status
-              example: "SUCCESS"
             redirect_url:
               type: string
               description: URL to redirect for further action
-              example: "https://api.aaaaaa.com/ws/redirect/execute?hash=abbb1111aaaaaaaa"                   
+              example: "https://api.aaaaaa.com/ws/redirect/execute?hash=abbb1111aaaaaaaa"       
+          status:
+            type: string
+            description: Response status
+            example: "SUCCESS"                
     PIXBRSuccessResponse:
       type: object
       properties:
