@@ -205,8 +205,8 @@ paths:
               schema:
                 type: object
                 oneOf:
-                  - $ref: '#/components/schemas/PIXBRSuccessResponse'
                   - $ref: '#/components/schemas/PSECOSuccessResponse'
+                  - $ref: '#/components/schemas/PIXBRSuccessResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
@@ -312,7 +312,7 @@ components:
               type: string
               description: URL to redirect for further action
               example: "https://api.aaaaaa.com/ws/redirect/execute?hash=abbb1111aaaaaaaa"                   
-    PixBRSuccessResponse:
+    PIXBRSuccessResponse:
       type: object
       properties:
         payment:
