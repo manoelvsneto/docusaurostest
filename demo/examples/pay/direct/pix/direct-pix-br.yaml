@@ -325,14 +325,18 @@ components:
             status:
               type: string
               example: 'ERROR'
+              description: ERROR
             status_code:
               type: string
               example: 'BP-DR-23'
+              description: Code of error.
             status_message:
               type: string
-              xample: 'Field payment.document must be a valid CPF'
+              example: 'Field payment.document must be a valid CPF'
+              description: Message about error.
           required:
-            - code
-            - message
+            - status
+            - status_code
+            - status_message
       required:
         - error
