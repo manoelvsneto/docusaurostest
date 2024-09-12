@@ -14,7 +14,6 @@ paths:
       summary: Process a payment PIX BR
       description: Process a payment PIX BR
       requestBody:
-        #required: true
         content:
           application/json:
             schema:
@@ -200,132 +199,137 @@ paths:
                 - payment
       responses:
         '200':
-          description: Payment processed successfully
+          description: Successful response (either success or error with HTTP 200)
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  payment:
-                    type: object
-                    properties:
-                      hash:
-                        type: string
-                        example: 'hash-value-placeholder'
-                      country:
-                        type: string
-                        example: 'br'
-                      merchant_payment_code:
-                        type: string
-                        example: 'MERCHANTCODE123456'
-                      order_number:
-                        type: string
-                        example: 'ORDER123456'
-                      status:
-                        type: string
-                        example: 'PE'
-                      open_date:
-                        type: string
-                        format: date-time
-                        example: '2024-09-03T10:49:40Z'
-                      confirm_date:
-                        type: string
-                        format: date-time
-                        example: 'null'
-                      transfer_date:
-                        type: string
-                        format: date-time
-                        example: 'null'
-                      amount_br:
-                        type: string
-                        example: '212.08'
-                      amount_ext:
-                        type: string
-                        example: '211.28'
-                      amount_iof:
-                        type: string
-                        example: '0.80'
-                      currency_rate:
-                        type: string
-                        example: '1.0000'
-                      currency_ext:
-                        type: string
-                        example: 'BRL'
-                      due_date:
-                        type: string
-                        format: date
-                        example: '2024-09-04'
-                      instalments:
-                        type: string
-                        example: '1'
-                      payment_type_code:
-                        type: string
-                        example: 'pix'
-                      redirect_url:
-                        type: string
-                        format: uri
-                        example: 'https://example.com/pix/checkout?hash=hash-value-placeholder'
-                      pre_approved:
-                        type: boolean
-                        example: false
-                      capture_available:
-                        type: string
-                        example: 'null'
-                      pix:
-                        type: object
-                        properties:
-                          qr_code_value:
-                            type: string
-                            example: 'aaaaaaaaaa.gov.bcb.bbbbbb.ccccccc.com/qr/v2/qr-code-placeholder'
-                      single_transaction:
-                        type: object
-                        properties:
-                          amount_local:
-                            type: string
-                            example: '0.00'
-                          amount_crossborder:
-                            type: string
-                            example: '212.08'
-                    required:
-                      - hash
-                      - country
-                      - merchant_payment_code
-                      - order_number
-                      - status
-                      - open_date
-                      - amount_br
-                      - amount_ext
-                      - amount_iof
-                      - currency_rate
-                      - currency_ext
-                      - due_date
-                      - instalments
-                      - payment_type_code
-                      - redirect_url
-                      - pre_approved
-                      - pix
-                      - single_transaction
-                required:
-                  - payment
-                  - status
-                  - redirect_url
-        '200E':
-          description: Bad request, invalid input data. (200E) means that you receive a HTTP 200 status code with error message.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: 'ERROR'
-                  status_code:
-                    type: string
-                    example: 'BP-DR-23'
-                  status_message:
-                    type: string
-                    example: 'Field payment.document must be a valid CPF'
-                required:
-                  - status
-                  - status_code
-                  - status_message
+                oneOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
+        # If you need to specify the actual response code, use a different code.
+        # '400': # Example of using HTTP 400 for errors if applicable
+        #   description: Bad request, invalid input data.
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        payment:
+          type: object
+          properties:
+            hash:
+              type: string
+              example: 'hash-value-placeholder'
+            country:
+              type: string
+              example: 'br'
+            merchant_payment_code:
+              type: string
+              example: 'MERCHANTCODE123456'
+            order_number:
+              type: string
+              example: 'ORDER123456'
+            status:
+              type: string
+              example: 'PE'
+            open_date:
+              type: string
+              format: date-time
+              example: '2024-09-03T10:49:40Z'
+            confirm_date:
+              type: string
+              format: date-time
+              example: 'null'
+            transfer_date:
+              type: string
+              format: date-time
+              example: 'null'
+            amount_br:
+              type: string
+              example: '212.08'
+            amount_ext:
+              type: string
+              example: '211.28'
+            amount_iof:
+              type: string
+              example: '0.80'
+            currency_rate:
+              type: string
+              example: '1.0000'
+            currency_ext:
+              type: string
+              example: 'BRL'
+            due_date:
+              type: string
+              format: date
+              example: '2024-09-04'
+            instalments:
+              type: string
+              example: '1'
+            payment_type_code:
+              type: string
+              example: 'pix'
+            redirect_url:
+              type: string
+              format: uri
+              example: 'https://example.com/pix/checkout?hash=hash-value-placeholder'
+            pre_approved:
+              type: boolean
+              example: false
+            capture_available:
+              type: string
+              example: 'null'
+            pix:
+              type: object
+              properties:
+                qr_code_value:
+                  type: string
+                  example: 'aaaaaaaaaa.gov.bcb.bbbbbb.ccccccc.com/qr/v2/qr-code-placeholder'
+            single_transaction:
+              type: object
+              properties:
+                amount_local:
+                  type: string
+                  example: '0.00'
+                amount_crossborder:
+                  type: string
+                  example: '212.08'
+          required:
+            - hash
+            - country
+            - merchant_payment_code
+            - order_number
+            - status
+            - open_date
+            - amount_br
+            - amount_ext
+            - amount_iof
+            - currency_rate
+            - currency_ext
+            - due_date
+            - instalments
+            - payment_type_code
+            - redirect_url
+            - pre_approved
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: 'ERROR_CODE'
+            message:
+              type: string
+              example: 'Detailed error message explaining what went wrong.'
+          required:
+            - code
+            - message
+      required:
+        - error
