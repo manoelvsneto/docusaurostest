@@ -230,7 +230,7 @@ components:
               example: "aa"
             order_number:
               type: string
-               description: Order number
+              description: Order number
               example: "2121212121CCC"
             status:
               type: string
