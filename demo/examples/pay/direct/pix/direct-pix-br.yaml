@@ -207,123 +207,114 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/PIXBRSuccessResponse'
                   - $ref: '#/components/schemas/PSECOSuccessResponse'
-                  
                   - $ref: '#/components/schemas/ErrorResponse'
-        # If you need to specify the actual response code, use a different code.
-        # '400': # Example of using HTTP 400 for errors if applicable
-        #   description: Bad request, invalid input data.
-        #   content:
-        #     application/json:
-        #       schema:
-        #         $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
     PSECOSuccessResponse:
       type: object
       properties:
         payment:
-            type: object
-            properties:
+          type: object
+          properties:
                hash:
-                        type: string
-                        description: Payment hash for verification
-                        example: "aaaa222aaassasbbb333333"
-                      country:
-                        type: string
-                        description: Country of the payment
-                        example: "co"
-                      merchant_payment_code:
-                        type: string
-                        description: Merchant payment code
-                        example: "aa"
-                      order_number:
-                        type: string
-                        description: Order number
-                        example: "2121212121CCC"
-                      status:
-                        type: string
-                        description: Payment status
-                        example: "PE"
-                      status_date:
-                        type: string
-                        format: date-time
-                        description: Date when the status was set
-                        example: null
-                      open_date:
-                        type: string
-                        format: date-time
-                        description: Date when the payment was opened
-                        example: "2024-09-04 12:15:21"
-                      confirm_date:
-                        type: string
-                        format: date-time
-                        description: Date when the payment was confirmed
-                        example: null
-                      transfer_date:
-                        type: string
-                        format: date-time
-                        description: Date when the payment was transferred
-                        example: null
-                      amount_br:
-                        type: number
-                        format: float
-                        description: Amount in local currency
-                        example: 204958.00
-                      amount_ext:
-                        type: number
-                        format: float
-                        description: Amount in external currency
-                        example: 204958.00
-                      amount_iof:
-                        type: number
-                        format: float
-                        description: Amount of IOF (Tax)
-                        example: 0.00
-                      currency_rate:
-                        type: string
-                        description: Currency rate used
-                        example: "1.0000"
-                      currency_ext:
-                        type: string
-                        description: External currency code
-                        example: "COP"
-                      due_date:
-                        type: string
-                        format: date-time
-                        description: Due date for the payment
-                        example: "2024-09-05 12:15:21"
-                      instalments:
-                        type: string
-                        description: Number of instalments
-                        example: "1"
-                      payment_type_code:
-                        type: string
-                        description: Payment type code
-                        example: "eft"
-                      redirect_url:
-                        type: string
-                        description: URL to redirect after payment
-                        example: "https://api.aaaaaa.com/ws/redirect/execute?hash=6aaa12121212121"
-                      pre_approved:
-                        type: boolean
-                        description: Indicates if the payment was pre-approved
-                        example: false
-                      capture_available:
-                        type: string
-                        description: Indicates if capture is available
-                        example: null
-                  status:
-                    type: string
-                    description: Response status
-                    example: "SUCCESS"
-                  redirect_url:
-                    type: string
-                    description: URL to redirect for further action
-                    example: "https://api.aaaaaa.com/ws/redirect/execute?hash=abbb1111aaaaaaaa"                   
+                  type: string
+                  description: Payment hash for verification
+                  example: "aaaa222aaassasbbb333333"
+                country:
+                  type: string
+                  description: Country of the payment
+                  example: "co"
+                merchant_payment_code:
+                  type: string
+                  description: Merchant payment code
+                  example: "aa"
+                order_number:
+                  type: string
+                   description: Order number
+                  example: "2121212121CCC"
+                status:
+                  type: string
+                  description: Payment status
+                  example: "PE"
+                status_date:
+                  type: string
+                  format: date-time
+                  description: Date when the status was set
+                  example: null
+                open_date:
+                  type: string
+                  format: date-time
+                  description: Date when the payment was opened
+                  example: "2024-09-04 12:15:21"
+                confirm_date:
+                  type: string
+                  format: date-time
+                  description: Date when the payment was confirmed
+                  example: null
+                transfer_date:
+                  type: string
+                  format: date-time
+                  description: Date when the payment was transferred
+                  example: null
+                amount_br:
+                  type: number
+                  format: float
+                  description: Amount in local currency
+                  example: 204958.00
+                amount_ext:
+                  type: number
+                  format: float
+                  description: Amount in external currency
+                  example: 204958.00
+                amount_iof:
+                  type: number
+                  format: float
+                  description: Amount of IOF (Tax)
+                  example: 0.00
+                currency_rate:
+                  type: string
+                  description: Currency rate used
+                  example: "1.0000"
+                currency_ext:
+                  type: string
+                  description: External currency code
+                  example: "COP"
+                due_date:
+                  type: string
+                  format: date-time
+                  description: Due date for the payment
+                  example: "2024-09-05 12:15:21"
+                instalments:
+                  type: string
+                  description: Number of instalments
+                  example: "1"
+                payment_type_code:
+                  type: string
+                  description: Payment type code
+                  example: "eft"
+                redirect_url:
+                  type: string
+                  description: URL to redirect after payment
+                  example: "https://api.aaaaaa.com/ws/redirect/execute?hash=6aaa12121212121"
+                pre_approved:
+                  type: boolean
+                  description: Indicates if the payment was pre-approved
+                  example: false
+                capture_available:
+                  type: string
+                  description: Indicates if capture is available
+                  example: null
+                status:
+                  type: string
+                  description: Response status
+                  example: "SUCCESS"
+                redirect_url:
+                  type: string
+                  description: URL to redirect for further action
+                  example: "https://api.aaaaaa.com/ws/redirect/execute?hash=abbb1111aaaaaaaa"                   
     PixBRSuccessResponse:
       type: object
       properties:
-
         payment:
           type: object
           properties:
