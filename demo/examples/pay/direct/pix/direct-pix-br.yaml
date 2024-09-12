@@ -322,12 +322,15 @@ components:
         error:
           type: object
           properties:
-            code:
+            status:
               type: string
-              example: 'ERROR_CODE'
-            message:
+              example: 'ERROR'
+            status_code:
               type: string
-              example: 'Detailed error message explaining what went wrong.'
+              example: 'BP-DR-23'
+            status_message:
+              type: string
+              xample: 'Field payment.document must be a valid CPF'
           required:
             - code
             - message
