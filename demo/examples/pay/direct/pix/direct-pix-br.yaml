@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Payment API for PIX BR and PSE CO
+  title: Payment API (Direct Pay).
   description: API for processing payments. This method allows you to create a payment using Empresa Payment Page, where the customer is redirected to Empresa website to enter his data.
    PSECOSuccessResponse body is HTTP response to PSE Colombia. PIXBRSuccessResponse body is HTTP response to PIX Brazil.
   version: 1.0.0
@@ -15,7 +15,29 @@ paths:
       summary: Process a payment
       description: Process a payment
       requestBody:
+      requestBody:
         content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/PIXPRRequestBody'
+       
+      responses:
+        '200':
+          description: Successful response (either success or error with HTTP 200)
+          content:
+            application/json:
+              schema:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/PSECOSuccessResponse'
+                  - $ref: '#/components/schemas/PIXBRSuccessResponse'
+                  - $ref: '#/components/schemas/OXXOMXSuccessResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    PIXPRRequestBody:
+     content:
           application/json:
             schema:
               type: object
@@ -198,20 +220,6 @@ paths:
                 - metadata
                 - operation
                 - payment
-      responses:
-        '200':
-          description: Successful response (either success or error with HTTP 200)
-          content:
-            application/json:
-              schema:
-                type: object
-                oneOf:
-                  - $ref: '#/components/schemas/PSECOSuccessResponse'
-                  - $ref: '#/components/schemas/PIXBRSuccessResponse'
-                  - $ref: '#/components/schemas/OXXOMXSuccessResponse'
-                  - $ref: '#/components/schemas/ErrorResponse'
-components:
-  schemas:
     PSECOSuccessResponse:
       type: object
       properties:
@@ -505,7 +513,7 @@ components:
               example: 'BP-DR-23'
               description: Code of error.
             status_message:
-              type: string
+                type: string
               example: 'Field payment.document must be a valid CPF'
               description: Message about error.
           required:
