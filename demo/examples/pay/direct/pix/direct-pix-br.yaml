@@ -303,11 +303,7 @@ components:
             capture_available:
               type: string
               description: Indicates if capture is available
-              example: null
-            redirect_url:
-              type: string
-              description: URL to redirect for further action
-              example: "https://api.aaaaaa.com/ws/redirect/execute?hash=abbb1111aaaaaaaa"       
+              example: null      
           status:
             type: string
             description: Response status
