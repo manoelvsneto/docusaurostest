@@ -200,7 +200,7 @@ const config: Config = {
         docsPluginId: "classic",
         config: {
           direct: {
-            specPath: "examples/pay/direct/pix/direct.yaml",
+            specPath: "examples/pay/direct/direct.yaml",
             outputDir: "docs/pay/direct",
             sidebarOptions: {
               groupPathsBy: "tag",
