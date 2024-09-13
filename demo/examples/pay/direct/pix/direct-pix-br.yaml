@@ -15,13 +15,11 @@ paths:
       summary: Process a payment
       description: Process a payment
       requestBody:
-      requestBody:
         content:
           application/json:
             schema:
               oneOf:
                 - $ref: '#/components/schemas/PIXPRRequestBody'
-       
       responses:
         '200':
           description: Successful response (either success or error with HTTP 200)
