@@ -58,16 +58,8 @@ const config: Config = {
           position: "left",
           items: [
             {
-              label: "PIX BR",
-              to: "/pay/direct/pix/process-a-payment-pix-br",
-            },
-            {
-              label: "PSE CO",
-              to: "/pay/direct/pse/process-a-payment-pse-co",
-            },
-            {
-              label: "OXXOPAY MX",
-              to: "/pay/direct/oxxo/request-payment",
+              label: "Direct Pay (PIX,PSE,OXXO)",
+              to: "/pay/direct/process-a-payment",
             },
             {
               label: "CANCEL PAYMENT",
