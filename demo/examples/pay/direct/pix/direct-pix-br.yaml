@@ -1,7 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Payment API for PIX BR
-  description: API for processing payments PIX in Brazil. This method allows you to create a payment using Empresa Payment Page, where the customer is redirected to Empresa website to enter his data.
+  title: Payment API for PIX BR and PSE CO
+  description: API for processing payments. This method allows you to create a payment using Empresa Payment Page, where the customer is redirected to Empresa website to enter his data.
+   PSECOSuccessResponse body is HTTP response to PSE Colombia. PIXBRSuccessResponse body is HTTP response to PIX Brazil.
   version: 1.0.0
 servers:
   - url: https://sandbox.empresa.com
@@ -11,8 +12,8 @@ servers:
 paths:
   /ws/direct:
     post:
-      summary: Process a payment PIX BR
-      description: Process a payment PIX BR
+      summary: Process a payment
+      description: Process a payment
       requestBody:
         content:
           application/json:
@@ -207,6 +208,7 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/PSECOSuccessResponse'
                   - $ref: '#/components/schemas/PIXBRSuccessResponse'
+                  - $ref: '#/components/schemas/OXXOMXSuccessResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
@@ -408,6 +410,86 @@ components:
             - payment_type_code
             - redirect_url
             - pre_approved
+    OXXOMXSuccessResponse:
+      type: object
+      properties:
+        payment:
+          type: object
+          properties:
+            hash:
+              type: string
+              example: 77e1501f2668c80dda0cf099db75d1dff559eede892c799f
+            country:
+              type: string
+              example: mx
+            merchant_payment_code:
+              type: string
+              example: 123581321345589
+            order_number:
+              type: string
+              nullable: true
+              example: null
+            status:
+              type: string
+              example: PE
+            status_date:
+              type: string
+              nullable: true
+              example: null
+            open_date:
+              type: string
+              example: 2020-08-29 11:48:47
+            confirm_date:
+              type: string
+              nullable: true
+              example: null
+            transfer_date:
+              type: string
+              nullable: true
+              example: null
+            amount_br:
+              type: string
+              example: "763.19"
+            amount_ext:
+              type: string
+              example: "763.19"
+            amount_iof:
+              ype: string
+              example: "0.00"
+            amount_ext_requested:
+              type: string
+              example: "763.19"
+            currency_rate:
+              type: string
+              example: "1.0000"
+            currency_ext:
+              type: string
+              xample: MXN
+            due_date:
+              type: string
+              example: 2020-09-01
+            instalments:
+              type: string
+              example: "1"
+            payment_type_code:
+              type: string
+              example: oxxopay
+            voucher_url:
+              type: string
+              example: https://print.aaaaaa.com/print/voucher/execute?hash=aaaaaa11111222
+            pre_approved:
+              type: boolean
+              example: false
+            capture_available:
+              type: string
+              nullable: true
+              example: null
+            oxxopay_barcode:
+              type: string
+              example: 12345697891
+        status:
+          type: string
+          example: SUCCESS
     ErrorResponse:
       type: object
       properties:
