@@ -199,27 +199,9 @@ const config: Config = {
         id: "openapi",
         docsPluginId: "classic",
         config: {
-          directoxxopaymx: {
-            specPath: "examples/pay/direct/oxxo/direct-oxxopay-mx.yaml",
-            outputDir: "docs/pay/direct/oxxo",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-              categoryLinkSource: "tag",
-            },
-            showSchemas: true,
-          } satisfies OpenApiPlugin.Options,
-          directpixbr: {
-            specPath: "examples/pay/direct/pix/direct-pix-br.yaml",
-            outputDir: "docs/pay/direct/pix",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-              categoryLinkSource: "tag",
-            },
-            showSchemas: true,
-          } satisfies OpenApiPlugin.Options,
-          directpseco: {
-            specPath: "examples/pay/direct/pse/direct-pse-co.yml",
-            outputDir: "docs/pay/direct/pse",
+          direct: {
+            specPath: "examples/pay/direct/pix/direct.yaml",
+            outputDir: "docs/pay/direct",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",
