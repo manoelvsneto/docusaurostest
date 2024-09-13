@@ -191,7 +191,7 @@ const config: Config = {
         id: "openapi",
         docsPluginId: "classic",
         config: {
-          direct: {
+          /*direct: {
             specPath: "examples/pay/direct/direct.yaml",
             outputDir: "docs/pay/direct",
             sidebarOptions: {
@@ -199,7 +199,7 @@ const config: Config = {
               categoryLinkSource: "tag",
             },
             showSchemas: true,
-          } satisfies OpenApiPlugin.Options,
+          } satisfies OpenApiPlugin.Options,*/
           cancelpayment: {
             specPath: "examples/pay/cancel/cancel-payment.yaml",
             outputDir: "docs/pay/cancel",
