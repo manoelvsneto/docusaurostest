@@ -511,7 +511,7 @@ components:
               example: 'BP-DR-23'
               description: Code of error.
             status_message:
-                type: string
+              type: string
               example: 'Field payment.document must be a valid CPF'
               description: Message about error.
           required:
