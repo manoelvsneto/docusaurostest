@@ -33,6 +33,10 @@ paths:
                 - integration_key
                 - currency_code
                 - currency_base_code
+            example:
+              integration_key: "abc123xyz7PwkZg"
+              currency_code: "USD"
+              currency_base_code: "BRL"
         required: true
       responses:
         '200':
@@ -70,6 +74,13 @@ paths:
                     required:
                       - currency_rate
                       - status
+                    example:
+                      currency_rate:
+                        code: USD
+                        base_code: BRL
+                        name: US Dollar to Real
+                        rate: 5.9278
+                      status: SUCCESS
                 - schema:
                     type: object
                     properties:
@@ -89,3 +100,7 @@ paths:
                       - status
                       - status_code
                       - status_message
+                    example:
+                      status: ERROR
+                      status_code: BP-SA-3
+                      status_message: Merchant account is not active
