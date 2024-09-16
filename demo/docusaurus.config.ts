@@ -222,6 +222,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          fxtoken: {
+            specPath: "examples/pay/exchange/fxtoken.yaml",
+            outputDir: "docs/pay/fxtoken",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
         } satisfies Plugin.PluginOptions,
         
       },
