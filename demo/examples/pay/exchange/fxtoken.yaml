@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  title: FX Token API
+  version: 1.0.0
+  description: API to retrieve a foreign exchange (FX) token and currency rates.
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
+paths:
+  /ws/fxtoken/get:
+    post:
+      summary: Get FX Token
+      description: Retrieves a foreign exchange token along with the current exchange rate and related details.
+      requestBody:
+        description: Request body for retrieving the FX token and currency rate.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country:
+                  type: string
+                  nullable: true
+                  description: Optional country code for regional settings.
+                integration_key:
+                  type: string
+                  description: Integration key for authentication.
+                currency_from:
+                  type: string
+                  description: Currency code to convert from (e.g., USD).
+                currency_to:
+                  type: string
+                  description: Currency code to convert to (e.g., PEN).
+              required:
+                - integration_key
+                - currency_from
+                - currency_to
+              example:
+                country: null
+                integration_key: "12345678910ABCDED945464"
+                currency_from: "USD"
+                currency_to: "PEN"
+        required: true
+      responses:
+        '200':
+          description: Successful response with FX token and currency rate.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fx_token:
+                    type: string
+                    description: Token for foreign exchange request.
+                  currency_rate:
+                    type: string
+                    description: Exchange rate between the provided currencies.
+                  currency_from:
+                    type: string
+                    description: Currency code from which the conversion is made.
+                  currency_to:
+                    type: string
+                    description: Currency code to which the conversion is made.
+                  expire_date:
+                    type: string
+                    format: date-time
+                    description: The date and time when the FX token expires.
+                  new_currency_rate_available_at:
+                    type: string
+                    format: date-time
+                    description: The date and time when a new currency rate will be available.
+                example:
+                  fx_token: "66e77536521b31b59678d8bcb48c0d0bde18d4490ad52ac656"
+                  currency_rate: "3.7833"
+                  currency_from: "USD"
+                  currency_to: "PEN"
+                  expire_date: "2024-09-16T13:59:59+00:00"
+                  new_currency_rate_available_at: "2024-09-16T13:44:59+00:00"
