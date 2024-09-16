@@ -1,0 +1,249 @@
+openapi: 3.0.3
+info:
+  title: Payment Capture API
+  description: API for capturing credit card payments and pre-auth transactions.
+  version: 1.0.0
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
+paths:
+  /ws/capture:
+    post:
+      summary: Capture a payment
+      description: |
+        This endpoint is used by merchants to capture credit card payments or pre-authorized transactions.
+        If the auto_capture flag is set to false in Direct Operation, this server-to-server HTTP POST can be used.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+                  example: 'your_integration_key'
+                hash:
+                  type: string
+                  description: The payment hash (EBANX unique identifier). Required if merchant_payment_code is not provided.
+                  maxLength: 48
+                  example: 'payment_hash_48_chars_long'
+                merchant_payment_code:
+                  type: string
+                  description: The payment hash Merchant Payment Code (unique merchant ID). Required if hash is not provided.
+                  minLength: 1
+                  maxLength: 40
+                  example: 'merchant_payment_code'
+                merchant_capture_code:
+                  type: string
+                  description: Optional identifier for the payment capture.
+                  minLength: 1
+                  maxLength: 200
+                  example: 'capture_code'
+                amount:
+                  type: number
+                  format: float
+                  description: The amount of the partial capture. This feature is only available in Brazil. Contact our Integration Team to enable it.
+                  example: 11.90
+              required:
+                - integration_key
+                - hash
+                - merchant_payment_code
+      responses:
+        '200':
+          description: Successful capture response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: The status of the request (SUCCESS or ERROR).
+                    enum:
+                      - SUCCESS
+                      - ERROR
+                    minLength: 5
+                    maxLength: 7
+                    example: 'SUCCESS'
+                  payment:
+                    type: object
+                    properties:
+                      hash:
+                        type: string
+                        description: The payment hash (EBANX unique identifier).
+                        maxLength: 48
+                        example: 'payment_hash_48_chars_long'
+                      country:
+                        type: string
+                        description: The country of the payment.
+                        minLength: 2
+                        maxLength: 2
+                        example: 'BR'
+                      merchant_payment_code:
+                        type: string
+                        description: The payment hash Merchant Payment Code (unique merchant ID).
+                        minLength: 1
+                        maxLength: 40
+                        example: 'merchant_payment_code'
+                      order_number:
+                        type: string
+                        description: The order number, an optional identifier set by the merchant.
+                        minLength: 1
+                        maxLength: 40
+                        example: 'P2kF1B41E4'
+                      status:
+                        type: string
+                        description: The payment status. Available statuses are OP (pending details), PE (pending confirmation), CO (confirmed), CA (cancelled).
+                        enum:
+                          - OP
+                          - PE
+                          - CO
+                          - CA
+                        minLength: 2
+                        maxLength: 2
+                        example: 'CO'
+                      status_date:
+                        type: string
+                        format: date-time
+                        description: The date and time of the last status change.
+                        example: '2024-09-16T14:16:08Z'
+                      open_date:
+                        type: string
+                        format: date-time
+                        description: The date and time when the payment was created.
+                        example: '2024-09-16T14:16:02Z'
+                      confirm_date:
+                        type: string
+                        format: date-time
+                        description: The date and time when the payment was confirmed.
+                        example: '2024-09-16T14:16:08Z'
+                      transfer_date:
+                        type: string
+                        format: date-time
+                        description: The date and time when the payment was settled.
+                        example: '2024-09-16T14:16:08Z'
+                      amount_br:
+                        type: number
+                        format: float
+                        description: The amount in local currency.
+                        example: 11.90
+                      amount_ext:
+                        type: number
+                        format: float
+                        description: The amount in the original currency.
+                        example: 11.85
+                      amount_iof:
+                        type: number
+                        format: float
+                        description: The tax amount in local currency (varies between countries).
+                        example: 0.05
+                      amount_ext_requested:
+                        type: number
+                        format: float
+                        description: The amount requested in the original currency.
+                        example: 11.90
+                      currency_rate:
+                        type: number
+                        format: float
+                        description: The exchange rate used in the payment.
+                        example: 1.0000
+                      currency_ext:
+                        type: string
+                        description: ISO 4217 three-letter code of the original currency.
+                        minLength: 3
+                        maxLength: 3
+                        example: 'BRL'
+                      due_date:
+                        type: string
+                        description: Expiry date of the payment (not applicable to all payment methods). Format dd/mm/yyyy
+                        pattern: '^\d{2}/\d{2}/\d{4}$'
+                        example: '19/09/2024'
+                      instalments:
+                        type: integer
+                        description: Number of instalments for the payment. Default value is 1.
+                        example: 1
+                      payment_type_code:
+                        type: string
+                        description: The code of the payment method.
+                        enum:
+                          - amex
+                          - bancodobrasil
+                          - banrisul
+                          - banktransfer
+                          - boleto
+                          - bradesco
+                          - carnet
+                          - credimas
+                          - cupon
+                          - diners
+                          - discover
+                          - ebanxaccount
+                          - eft
+                          - elo
+                          - hipercard
+                          - itau
+                          - mastercard
+                          - multicaja
+                          - naranja
+                          - oxxo
+                          - pagoefectivo
+                          - pagosnet
+                          - rapipago
+                          - safetypay
+                          - safetypay-cash
+                          - safetypay-online
+                          - sencillito
+                          - servipag
+                          - spei
+                          - visa
+                          - webpay
+                        maxLength: 32
+                        example: 'mastercard'
+                      details:
+                        type: object
+                        properties:
+                          billing_descriptor:
+                            type: string
+                            description: Billing descriptor for the payment.
+                            maxLength: 50
+                            example: 'EBN*SPOTIFY'
+                      transaction_status:
+                        type: object
+                        properties:
+                          acquirer:
+                            type: string
+                            description: The acquiring bank or service provider.
+                            maxLength: 50
+                            example: 'EREDEADQUIRENCIA_SDK'
+                          code:
+                            type: string
+                            description: The transaction status code.
+                            maxLength: 10
+                            example: 'OK'
+                          description:
+                            type: string
+                            description: Description of the transaction status.
+                            maxLength: 100
+                            example: 'Accepted'
+                          authcode:
+                            type: string
+                            description: Authorization code for the transaction.
+                            maxLength: 6
+                            minLength: 6
+                            example: '876389'
+                      pre_approved:
+                        type: boolean
+                        description: Indicates if a payment is pre-approved by the credit card acquirer.
+                        example: true
+                      capture_available:
+                        type: boolean
+                        description: Indicates if the payment is ready to be captured. Applies only to credit cards when auto_capture is set to false.
+                        example: false
+                required:
+                  - status
+                  - payment

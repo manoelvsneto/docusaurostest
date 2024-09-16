@@ -221,6 +221,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          capture: {
+            specPath: "examples/pay/direct/capture.yaml",
+            outputDir: "docs/pay/direct",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
           exchange: {
             specPath: "examples/pay/exchange/exchange.yaml",
             outputDir: "docs/pay/exchange",
