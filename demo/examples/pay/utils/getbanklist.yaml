@@ -1,0 +1,155 @@
+openapi: 3.0.3
+info:
+  title: Bank List API
+  description: API to retrieve a list of banks available for processing payments.
+  version: 1.0.0
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server  
+paths:
+  /ws/getBankList:
+    post:
+      summary: Get the list of banks available for processing payments
+      description: |
+        The `getBankList` operation is a server-to-server HTTP POST request used to query the server for the list of banks available for processing payments.
+      requestBody:
+        description: Request body to retrieve the list of banks.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - integration_key
+                - country_code
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  example: ab9kAJLg1
+                country_code:
+                  type: string
+                  description: The two-letter country code for the customer country. The available codes are br (Brazil), co (Colombia), cl (Chile).
+                  example: co
+      responses:
+        '200':
+          description: Successfully retrieved the list of banks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      description: The code of the bank.
+                      example: bancolombia
+                    name:
+                      type: string
+                      description: The name of the bank.
+                      example: BANCOLOMBIA
+              examples:
+                example1:
+                  summary: Example response with a list of banks
+                  value:
+                    - code: alianza_fiduciaria
+                      name: ALIANZA FIDUCIARIA
+                    - code: ban100
+                      name: BAN100
+                    - code: bancamia_s.a.
+                      name: BANCAMIA S.A.
+                    - code: banco_agrario
+                      name: BANCO AGRARIO
+                    - code: banco_av_villas
+                      name: BANCO AV VILLAS
+                    - code: banco_bbva_colombia_s.a.
+                      name: BANCO BBVA COLOMBIA S.A.
+                    - code: banco_caja_social
+                      name: BANCO CAJA SOCIAL
+                    - code: banco_cooperativo_coopcentral
+                      name: BANCO COOPERATIVO COOPCENTRAL
+                    - code: banco_davivienda
+                      name: BANCO DAVIVIENDA
+                    - code: banco_de_bogota
+                      name: BANCO DE BOGOTA
+                    - code: banco_de_occidente
+                      name: BANCO DE OCCIDENTE
+                    - code: banco_falabella_
+                      name: BANCO FALABELLA
+                    - code: banco_finandina_s.a._bic
+                      name: BANCO FINANDINA S.A. BIC
+                    - code: banco_gnb_sudameris
+                      name: BANCO GNB SUDAMERIS
+                    - code: banco_itau
+                      name: BANCO ITAU
+                    - code: banco_j.p._morgan_colombia_s.a.
+                      name: BANCO J.P. MORGAN COLOMBIA S.A.
+                    - code: banco_mundo_mujer_s.a.
+                      name: BANCO MUNDO MUJER S.A.
+                    - code: banco_pichincha_s.a.
+                      name: BANCO PICHINCHA S.A.
+                    - code: banco_popular
+                      name: BANCO POPULAR
+                    - code: banco_santander_colombia
+                      name: BANCO SANTANDER COLOMBIA
+                    - code: banco_serfinanza
+                      name: BANCO SERFINANZA
+                    - code: banco_union_antes_giros
+                      name: BANCO UNION antes GIROS
+                    - code: bancolombia
+                      name: BANCOLOMBIA
+                    - code: bancoomeva_s.a.
+                      name: BANCOOMEVA S.A.
+                    - code: cfa_cooperativa_financiera
+                      name: CFA COOPERATIVA FINANCIERA
+                    - code: citibank_
+                      name: CITIBANK
+                    - code: coltefinanciera
+                      name: COLTEFINANCIERA
+                    - code: confiar_cooperativa_financiera
+                      name: CONFIAR COOPERATIVA FINANCIERA
+                    - code: cotrafa
+                      name: COTRAFA
+                    - code: crezcamos
+                      name: CREZCAMOS
+                    - code: dale
+                      name: DALE
+                    - code: daviplata
+                      name: DAVIPLATA
+                    - code: iris
+                      name: IRIS
+                    - code: jfk_cooperativa_financiera
+                      name: JFK COOPERATIVA FINANCIERA
+                    - code: lulo_bank
+                      name: LULO BANK
+                    - code: movii_s.a.
+                      name: MOVII S.A.
+                    - code: nequi
+                      name: NEQUI
+                    - code: nu
+                      name: NU
+                    - code: rappipay
+                      name: RAPPIPAY
+                    - code: scotiabank_colpatria
+                      name: SCOTIABANK COLPATRIA
+                    - code: ualÁ
+                      name: UALÁ
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status of the request. Should be "SUCCESS" or "ERROR".
+          example: SUCCESS
+        code:
+          type: string
+          description: The code of the bank.
+          example: bancolombia
+        name:
+          type: string
+          description: The name of the bank.
+          example: BANCOLOMBIA

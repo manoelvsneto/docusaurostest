@@ -274,6 +274,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          getbanklist: {
+            specPath: "examples/pay/utils/getbanklist.yaml",
+            outputDir: "docs/pay/utils",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
         } satisfies Plugin.PluginOptions,
         
       },
