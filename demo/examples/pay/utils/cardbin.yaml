@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Empresa BIN List API
-  description: The API provides a list of valid card BINs accepted by EBANX, allowing merchants to update their BIN tables.
+  description: The API provides a list of valid card BINs accepted by Empresa, allowing merchants to update their BIN tables.
   version: 1.0.0
 servers:
   - url: https://sandbox.empresa.com
@@ -12,7 +12,7 @@ paths:
   /ws/cardbin:
     get:
       summary: Returns a list of valid card BINs.
-      description: This endpoint returns a list of card BINs accepted by EBANX, allowing merchants to update their BIN tables.
+      description: This endpoint returns a list of card BINs accepted by Empresa, allowing merchants to update their BIN tables.
       parameters:
         - name: integration_key
           in: query

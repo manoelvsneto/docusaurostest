@@ -81,6 +81,10 @@ const config: Config = {
               label: "Capture a payment",
               to: "/pay/direct/capture-a-payment",
             },
+            {
+              label: "Empresa BIN List",
+              to: "/pay/utils/returns-a-list-of-valid-card-bi-ns",
+            },
           ],
         },
       ],
