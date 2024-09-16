@@ -11,7 +11,7 @@ paths:
   /ws/cancel:
     post:
       summary: Execute Cancellation
-      description: Endpoint to execute a payment cancellation.
+      description: Endpoint to execute a payment cancellation. This operation allows you to cancel a payment if its status is open (OP) or pending (PE). Confirmed payments (CO) cannot be cancelled.
       requestBody:
         required: true
         content:
@@ -21,10 +21,12 @@ paths:
               properties:
                 hash:
                   type: string
+                  description: The payment hash (Empresa unique identifier). This value is required for identifying the payment to be cancelled.
                   example: "213123213123123123123DSASDSDSADAS"
                 integration_key:
                   type: string
-                  example: DASDASDSA2312312312312312"
+                  description: Your unique and secret integration key. This value is required for authenticating the request.
+                  example: "DASDASDSA2312312312312312"
               required:
                 - hash
                 - integration_key
@@ -38,78 +40,101 @@ paths:
                 properties:
                   payment:
                     type: object
+                    description: A JSON object that represents the details of the payment after cancellation.
                     properties:
                       hash:
                         type: string
+                        description: The payment hash used to identify the cancelled payment.
                         example: "sadsad2312dasd213"
                       country:
                         type: string
+                        description: The country code where the payment was processed.
                         example: "mx"
                       merchant_payment_code:
                         type: string
+                        description: The unique code assigned by the merchant to the payment.
                         example: "21212121212121"
                       order_number:
                         type: string
                         nullable: true
+                        description: The order number associated with the payment, if applicable. This field can be null if not assigned.
                         example: null
                       status:
                         type: string
+                        description: The status of the payment after cancellation.
                         example: "CA"
                       status_date:
                         type: string
                         format: date-time
+                        description: The date and time when the payment status was last updated.
                         example: "2024-09-05T16:37:16Z"
                       open_date:
                         type: string
                         format: date-time
+                        description: The date and time when the payment was initially opened.
                         example: "2024-09-04T18:54:15Z"
                       confirm_date:
                         type: string
                         nullable: true
                         format: date-time
+                        description: The date and time when the payment was confirmed, if applicable. This field can be null if not confirmed.
                         example: null
                       transfer_date:
                         type: string
                         nullable: true
                         format: date-time
+                        description: The date and time when the funds were transferred, if applicable. This field can be null if not transferred.
                         example: null
                       amount_br:
                         type: string
+                        description: The amount of the payment in Brazilian currency.
                         example: "1502.65"
                       amount_ext:
                         type: string
+                        description: The amount of the payment in the external currency.
                         example: "1502.65"
                       amount_iof:
                         type: string
+                        description: The amount of tax (IOF) applied to the payment.
                         example: "0.00"
                       amount_ext_requested:
                         type: string
+                        description: The amount requested in the external currency.
                         example: "1502.65"
                       currency_rate:
                         type: string
+                        description: The currency exchange rate applied to the payment.
                         example: "1.0000"
                       currency_ext:
                         type: string
+                        description: The code of the external currency used in the payment.
                         example: "MXN"
                       due_date:
                         type: string
                         format: date
+                        description: The due date for the payment.
                         example: "2024-09-07"
                       instalments:
                         type: string
+                        description: The number of instalments for the payment.
                         example: "1"
                       payment_type_code:
                         type: string
+                        description: The code representing the type of payment.
                         example: "oxxopay"
                       voucher_url:
                         type: string
+                        description: A URL to the voucher associated with the payment.
                         example: "https://print.aaaaaa.com/print/voucher/execute?hash=aaaa111222333bbb"
                       pre_approved:
                         type: boolean
+                        description: Indicates whether the payment was pre-approved.
                         example: false
                   operation:
                     type: string
+                    description: The type of operation performed.
                     example: "cancel"
                   status:
                     type: string
+                    description: The status of the cancellation request.
                     example: "SUCCESS"
