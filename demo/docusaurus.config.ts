@@ -261,6 +261,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          binlist: {
+            specPath: "examples/pay/utils/cardbin.yaml",
+            outputDir: "docs/pay/utils",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
         } satisfies Plugin.PluginOptions,
         
       },

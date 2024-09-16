@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: Empresa BIN List API
+  description: The API provides a list of valid card BINs accepted by EBANX, allowing merchants to update their BIN tables.
+  version: 1.0.0
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server  
+paths:
+  /ws/cardbin:
+    get:
+      summary: Returns a list of valid card BINs.
+      description: This endpoint returns a list of card BINs accepted by EBANX, allowing merchants to update their BIN tables.
+      parameters:
+        - name: integration_key
+          in: query
+          description: Your unique and secret integration key.
+          required: true
+          schema:
+            type: string
+            maxLength: 100
+          example: your_test_integration_key
+        - name: country
+          in: query
+          description: If provided, returns only the BINs for the specified country.
+          required: false
+          schema:
+            type: string
+            enum: ["BR", "MX", "CO", "CL", "AR", "PE"]
+            minLength: 2
+            maxLength: 2
+          example: BR
+        - name: bank_info
+          in: query
+          description: If set to true, returns the issuer bank or financial institution. This information will be returned only when available.
+          required: false
+          schema:
+            type: boolean
+          example: true
+      responses:
+        '200':
+          description: Successful response with either an error message or a list of BINs.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+                  - $ref: '#/components/schemas/SuccessResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ERROR
+        status_code:
+          type: string
+          example: BP-SA-1
+        status_message:
+          type: string
+          example: Parameter integration_key not informed
+    SuccessResponse:
+      type: object
+      properties:
+        numberOfBins:
+          type: integer
+          description: Number of bins returned by the request.
+        binList:
+          type: array
+          items:
+            type: object
+            properties:
+              bin:
+                type: string
+                description: BIN code (6 characters).
+                example: 477239
+              extension:
+                type: string
+                description: BIN extension (6 characters). This information can be returned for some specific BINs in Mexico (when country=MX).
+                example: '000000'
+              cardBrand:
+                type: string
+                description: Card brand (1 to 128 characters) such as VISA or MASTERCARD.
+                example: VISA
+              isoCountryA2:
+                type: string
+                description: Two-letter ISO-3166 country code.
+                example: BR
+              cardType:
+                type: string
+                description: When available, describes if the card is DEBIT or CREDIT.
+                example: DEBIT
+              fullBankName:
+                type: string
+                description: When available, describes the issuer's bank name.
+                example: Banco do Brasil
