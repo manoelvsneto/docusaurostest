@@ -65,7 +65,10 @@ const config: Config = {
               label: "Cancel Payment",
               to: "/pay/cancel/execute-cancellation",
             },
-          
+            {
+              label: "Get FX rate",
+              to: "/pay/exchange/currency-exchange-conversion",
+            },
           ],
         },
       ],
