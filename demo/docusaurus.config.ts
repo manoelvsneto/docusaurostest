@@ -77,6 +77,10 @@ const config: Config = {
               label: "Get available e-wallets",
               to: "/pay/ewallet/get-available-e-wallets",
             },
+            {
+              label: "Capture a payment",
+              to: "/pay/direct/capture-a-payment",
+            },
           ],
         },
       ],
