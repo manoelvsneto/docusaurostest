@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+  title: E-Wallets API
+  description: API for retrieving available e-wallets per country.
+  version: 1.0.0
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
+paths:
+  /ws/ewallet-availableEWallets:
+    post:
+      summary: Get Available E-Wallets
+      description: Retrieve a list of available e-wallets based on the provided country and integration key. This is a server-to-server HTTP POST used by merchants to get the e-wallet codes available in their countries for use with payment_type_code = ewallet in the Direct API.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country:
+                  type: string
+                  description: The two-letter country code for the customer's country.
+                  enum:
+                    - bo
+                    - br
+                    - cl
+                    - co
+                    - mx
+                    - pe
+                    - ar
+                    - ec
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+              required:
+                - country
+                - integration_key
+            examples:
+              example1:
+                summary: Example Request
+                value:
+                  country: "br"
+                  integration_key: "************************K2Q9dA"
+      responses:
+        '200':
+          description: Successful response with a list of available e-wallets.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      description: The code representing the e-wallet.
+                    name:
+                      type: string
+                      description: The name of the e-wallet.
+                    icon_url:
+                      type: string
+                      description: URL to the e-wallet's icon image.
+                    promotional_text:
+                      type: string
+                      description: Promotional text associated with the e-wallet.
+                  example:
+                    code: "nequi"
+                    name: "Nequi"
+                    icon_url: "https://s3-sa-east-1.amazonaws.com/assets.empresa.com/gateway/nequi/icon.png"
+                    promotional_text: "¡Texto promocional de prueba!"
