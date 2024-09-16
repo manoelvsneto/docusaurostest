@@ -8,7 +8,7 @@ servers:
   - url: https://prod.empresa.com
     description: Production API Server
 paths:
-  /ws/cancel/execute:
+  /ws/cancel:
     post:
       summary: Execute Cancellation
       description: Endpoint to execute a payment cancellation.

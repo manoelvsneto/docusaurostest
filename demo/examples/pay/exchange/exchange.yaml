@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  title: Exchange Rate API
+  description: API for executing currency exchange conversions.
+  version: 1.0.0
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
+paths:
+  /ws/exchange:
+    post:
+      summary: Execute a currency exchange conversion.
+      description: This endpoint allows you to execute a currency exchange conversion between two specified currencies.
+      requestBody:
+        description: Data required for the currency exchange conversion.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  description: Integration key provided for authentication.
+                currency_code:
+                  type: string
+                  description: Code of the currency to which you want to convert.
+                currency_base_code:
+                  type: string
+                  description: Code of the base currency for the conversion.
+              required:
+                - integration_key
+                - currency_code
+                - currency_base_code
+        required: true
+      responses:
+        '200':
+          description: Successful response with the currency exchange rate or an error message.
+          content:
+            application/json:
+              oneOf:
+                - schema:
+                    type: object
+                    properties:
+                      currency_rate:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                            description: Target currency code.
+                          base_code:
+                            type: string
+                            description: Base currency code.
+                          name:
+                            type: string
+                            description: Full name of the currency conversion.
+                          rate:
+                            type: string
+                            description: Exchange rate between the base currency and the target currency.
+                        required:
+                          - code
+                          - base_code
+                          - name
+                          - rate
+                      status:
+                        type: string
+                        description: Status of the response.
+                        example: SUCCESS
+                    required:
+                      - currency_rate
+                      - status
+                - schema:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        description: Status of the response.
+                        example: ERROR
+                      status_code:
+                        type: string
+                        description: Error code.
+                        example: BP-SA-3
+                      status_message:
+                        type: string
+                        description: Detailed message about the error.
+                        example: Merchant account is not active
+                    required:
+                      - status
+                      - status_code
+                      - status_message

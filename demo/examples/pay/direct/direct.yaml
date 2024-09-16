@@ -9,7 +9,7 @@ servers:
   - url: https://prod.empresa.com
     description: Production API Server
 paths:
-  /ws/direct/execute:
+  /ws/direct:
     post:
       summary: Process a payment
       description: Processes payment requests and returns the corresponding responses for Pix, PSE, and OXXO payment methods.
