@@ -21,10 +21,10 @@ paths:
                   description: Integration key provided for authentication.
                 currency_code:
                   type: string
-                  description: Code of the currency to which you want to convert.
+                  description: Code of the currency to which you want to convert. (ISO 4217 3 letter code).
                 currency_base_code:
                   type: string
-                  description: Code of the base currency for the conversion.
+                  description: Code of the base currency for the conversion. (ISO 4217 3 letter code).
               required:
                 - integration_key
                 - currency_code
