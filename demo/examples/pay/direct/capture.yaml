@@ -211,7 +211,7 @@ paths:
                             type: string
                             description: Billing descriptor for the payment.
                             maxLength: 50
-                            example: 'EBN*SPOTIFY'
+                            example: 'EMP*PRODC'
                       transaction_status:
                         type: object
                         properties:
@@ -219,7 +219,7 @@ paths:
                             type: string
                             description: The acquiring bank or service provider.
                             maxLength: 50
-                            example: 'EREDEADQUIRENCIA_SDK'
+                            example: 'AAAABBB_SDK'
                           code:
                             type: string
                             description: The transaction status code.
