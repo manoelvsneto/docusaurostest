@@ -63,7 +63,7 @@ const config: Config = {
             },
             {
               label: "Cancel Payment",
-              to: "/pay/cancel/execute-cancellation",
+              to: "/pay/direct/execute-cancellation",
             },
             {
               label: "Get FX rate",
@@ -213,8 +213,8 @@ const config: Config = {
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
           cancelpayment: {
-            specPath: "examples/pay/cancel/cancel-payment.yaml",
-            outputDir: "docs/pay/cancel",
+            specPath: "examples/pay/direct/cancel-payment.yaml",
+            outputDir: "docs/pay/direct",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",
