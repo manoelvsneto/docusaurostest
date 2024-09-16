@@ -3,6 +3,11 @@ info:
   title: Payment Processing API
   description: This API handles various types of payment requests and responses including Pix, PSE, and OXXO payment methods.
   version: 1.0.0
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
 paths:
   /ws/direct/execute:
     post:
