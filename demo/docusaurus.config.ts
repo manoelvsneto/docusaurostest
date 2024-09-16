@@ -85,6 +85,11 @@ const config: Config = {
               label: "Empresa BIN List",
               to: "/pay/utils/returns-a-list-of-valid-card-bi-ns",
             },
+            {
+              label: "Get bank list",
+              to: "/pay/utils/get-the-list-of-banks-available-for-processing-payments",
+            },
+           
           ],
         },
       ],
