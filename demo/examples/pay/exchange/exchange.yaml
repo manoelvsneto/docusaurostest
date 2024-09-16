@@ -11,7 +11,7 @@ servers:
 paths:
   /ws/exchange:
     post:
-      summary: Execute a currency exchange conversion.
+      summary: Currency exchange conversion.
       description: This endpoint allows you to execute a currency exchange conversion between two specified currencies.
       requestBody:
         description: Data required for the currency exchange conversion.
