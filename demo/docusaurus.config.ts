@@ -73,6 +73,10 @@ const config: Config = {
               label: "Get an FX Token",
               to: "/pay/fxtoken/get-fx-token",
             },
+            {
+              label: "Get available e-wallets",
+              to: "/pay/ewallet/get-available-e-wallets",
+            },
           ],
         },
       ],
