@@ -235,6 +235,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          getavailablewallets: {
+            specPath: "examples/pay/ewallet/get-available-wallets.yaml",
+            outputDir: "docs/pay/ewallet",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
         } satisfies Plugin.PluginOptions,
         
       },
