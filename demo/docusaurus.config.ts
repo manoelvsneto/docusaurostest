@@ -69,6 +69,10 @@ const config: Config = {
               label: "Get FX rate",
               to: "/pay/exchange/currency-exchange-conversion",
             },
+            {
+              label: "Get an FX Token",
+              to: "/pay/fxtoken/get-fx-token",
+            },
           ],
         },
       ],
