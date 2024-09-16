@@ -1,0 +1,331 @@
+openapi: 3.0.3
+info:
+  title: Payment Query API
+  description: API to query information about a specific payment.
+  version: 1.0.0
+paths:
+  /ws/query:
+    post:
+      summary: Payment Query
+      description: Queries information about a specific payment using either query string parameters or request body.
+      parameters:
+        - name: integration_key
+          in: query
+          description: Your unique and secret integration key.
+          required: true
+          schema:
+            type: string
+            maxLength: 100
+        - name: hash
+          in: query
+          description: The payment hash (Empresa unique identifier). Required if `merchant_payment_code` is not provided.
+          schema:
+            type: string
+            minLength: 48
+            maxLength: 48
+        - name: merchant_payment_code
+          in: query
+          description: The payment hash Merchant Payment Code (unique merchant ID). Required if `hash` is not provided.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 40
+      requestBody:
+        description: The data required to query a payment, provided in the request body.
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+                hash:
+                  type: string
+                  description: The payment hash (Empresa unique identifier). Required if `merchant_payment_code` is not provided.
+                  minLength: 48
+                  maxLength: 48
+                merchant_payment_code:
+                  type: string
+                  description: The payment hash Merchant Payment Code (unique merchant ID). Required if `hash` is not provided.
+                  minLength: 1
+                  maxLength: 40
+              required:
+                - integration_key
+                - (hash or merchant_payment_code)
+            examples:
+              Example1:
+                value:
+                  integration_key: "aaaa11119be555"
+                  merchant_payment_code: "121212121"
+              Example2:
+                value:
+                  integration_key: "your_test_integration_key"
+                  hash: "aaaa1111"
+                  merchant_payment_code: "21212121"
+      responses:
+        '200':
+          description: Successful response with payment information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: The status of the request (SUCCESS or ERROR).
+                    minLength: 5
+                    maxLength: 7
+                  payment:
+                    type: object
+                    properties:
+                      hash:
+                        type: string
+                        description: The payment hash (Empresa unique identifier).
+                        minLength: 48
+                        maxLength: 48
+                      country:
+                        type: string
+                        description: The country of the payment.
+                        minLength: 2
+                        maxLength: 2
+                      merchant_payment_code:
+                        type: string
+                        description: The payment hash Merchant Payment Code (unique merchant ID).
+                        minLength: 1
+                        maxLength: 40
+                      order_number:
+                        type: string
+                        description: The order number, an optional identifier set by the merchant.
+                        minLength: 1
+                        maxLength: 40
+                      status:
+                        type: string
+                        description: The payment status.
+                        minLength: 2
+                        maxLength: 2
+                        enum:
+                          - OP
+                          - PE
+                          - CO
+                          - CA
+                      status_date:
+                        type: string
+                        description: The date and time of the last status change.
+                        pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$'
+                      open_date:
+                        type: string
+                        description: The date and time when the payment was created.
+                        pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$'
+                      confirm_date:
+                        type: string
+                        description: The date and time when the payment was confirmed.
+                        pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$'
+                      transfer_date:
+                        type: string
+                        description: The date and time when the payment was settled.
+                        pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$'
+                      amount_br:
+                        type: string
+                        description: The amount in local currency.
+                      amount_iof:
+                        type: string
+                        description: The tax amount in local currency.
+                      amount_ext:
+                        type: string
+                        description: The amount in the original currency.
+                      currency_rate:
+                        type: string
+                        description: The exchange rate used in the payment.
+                      currency_ext:
+                        type: string
+                        description: The original currency code (ISO 4217).
+                        minLength: 3
+                        maxLength: 3
+                      due_date:
+                        type: string
+                        description: The expiry date of the payment (not applicable to all payment methods).
+                        pattern: '^\\d{4}-\\d{2}-\\d{2}$'
+                      instalments:
+                        type: string
+                        description: The number of instalments for the payment.
+                        default: '1'
+                      payment_type_code:
+                        type: string
+                        description: The code of the payment method.
+                        enum:
+                          - amex
+                          - bancodobrasil
+                          - banrisul
+                          - banktransfer
+                          - boleto
+                          - bradesco
+                          - carnet
+                          - credimas
+                          - cupon
+                          - diners
+                          - discover
+                          - ebanxaccount
+                          - eft
+                          - elo
+                          - hipercard
+                          - itau
+                          - mastercard
+                          - multicaja
+                          - naranja
+                          - oxxo
+                          - pagoefectivo
+                          - pagosnet
+                          - rapipago
+                          - safetypay
+                          - safetypay-cash
+                          - safetypay-online
+                          - sencillito
+                          - servipag
+                          - spei
+                          - visa
+                          - webpay
+                      redirect_url:
+                        type: string
+                        description: The URL to which the customer should be redirected.
+                      pre_approved:
+                        type: boolean
+                        description: Indicates if the payment was pre-approved by the credit card acquirer.
+                      capture_available:
+                        type: boolean
+                        description: Indicates if the payment is ready to be captured.
+                      refunds:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: The ID of the refund on Empresa.
+                            merchant_refund_code:
+                              type: string
+                              description: The ID of the refund in the merchant's system (optional).
+                              minLength: 1
+                              maxLength: 20
+                            status:
+                              type: string
+                              description: The status of the refund.
+                              minLength: 2
+                              maxLength: 2
+                              enum:
+                                - RE
+                                - PE
+                                - CO
+                                - CA
+                            request_date:
+                              type: string
+                              description: The date and time when the refund was created.
+                              pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$'
+                            pending_date:
+                              type: string
+                              description: The date and time when the customer data was received.
+                              pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$'
+                            confirm_date:
+                              type: string
+                              description: The date and time when the money was transferred to the customer.
+                              pattern: '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$'
+                            amount_ext:
+                              type: string
+                              description: The refunded amount in the original currency.
+                            description:
+                              type: string
+                              description: Description of the refund reason.
+                              minLength: 1
+                              maxLength: 1500
+                            settlement:
+                              type: object
+                              properties:
+                                transfer_date:
+                                  type: string
+                                  description: The date of the refund transfer.
+                                  pattern: '^\\d{4}-\\d{2}-\\d{2}$'
+                                amount:
+                                  type: integer
+                                  description: The amount of the refund.
+                            refund_status_details:
+                              type: object
+                              properties:
+                                cancellation_reason:
+                                  type: string
+                                  description: The reason for cancellation.
+                                cancellation_reason_code:
+                                  type: string
+                                  description: The code for the cancellation reason.
+                                can_have_settlement:
+                                  type: boolean
+                                  description: Indicates if the refund can have a settlement.
+                                can_be_cancelled:
+                                  type: boolean
+                                  description: Indicates if the refund can be cancelled.
+              examples:
+                Example1:
+                  value:
+                    status: "SUCCESS"
+                    payment:
+                      hash: "66e875d77609e6d1359060263781b755257d215fe1ff2262"
+                      country: "cl"
+                      merchant_payment_code: "18129633454509024662"
+                      order_number: null
+                      status: "PE"
+                      status_date: null
+                      open_date: "2024-09-16 18:15:51"
+                      confirm_date: null
+                      transfer_date: null
+                      amount_br: "40316.00"
+                      amount_ext: "40316.00"
+                      amount_iof: "0.00"
+                      currency_rate: "1.0000"
+                      currency_ext: "CLP"
+                      due_date: "2024-09-19"
+                      instalments: "1"
+                      payment_type_code: "webpay"
+                      redirect_url: "https://api.empresa.com/ws/redirect/execute?hash=aaaaaa11111"
+                      pre_approved: false
+                      capture_available: null
+                      refunds: []
+                Example2:
+                  value:
+                    status: "SUCCESS"
+                    payment:
+                      hash: "aaaa1111"
+                      merchant_payment_code: "121212121"
+                      order_number: null
+                      status: "CO"
+                      status_date: "2014-11-24 16:35:43"
+                      open_date: "2014-11-24 16:35:34"
+                      confirm_date: "2014-11-24 16:35:43"
+                      transfer_date: null
+                      amount_br: "352.50"
+                      amount_ext: "150.00"
+                      amount_iof: "0.00"
+                      currency_rate: "2.3500"
+                      currency_ext: "USD"
+                      due_date: "2014-12-01"
+                      instalments: "1"
+                      payment_type_code: "bradesco"
+                      pre_approved: false
+                      capture_available: null
+                      refunds:
+                        - id: "12345"
+                          merchant_refund_code: null
+                          status: "RE"
+                          request_date: "2014-11-26 17:56:52"
+                          pending_date: null
+                          confirm_date: null
+                          amount_ext: "100.00"
+                          description: "Order did not arrive"
+                          settlement:
+                            transfer_date: "2014-12-01"
+                            amount: 100
+                          refund_status_details:
+                            cancellation_reason: "Not Paid: refund payment period has been exceeded"
+                            cancellation_reason_code: "RSD-01"
+                            can_have_settlement: true
+                            can_be_cancelled: false

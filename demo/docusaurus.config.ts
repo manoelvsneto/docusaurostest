@@ -89,7 +89,10 @@ const config: Config = {
               label: "Get bank list",
               to: "/pay/utils/get-the-list-of-banks-available-for-processing-payments",
             },
-           
+            {
+              label: "Query",
+              to: "/pay/utils/payment-query",
+            },
           ],
         },
       ],
@@ -281,6 +284,15 @@ const config: Config = {
           } satisfies OpenApiPlugin.Options,
           getbanklist: {
             specPath: "examples/pay/utils/getbanklist.yaml",
+            outputDir: "docs/pay/utils",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+          query: {
+            specPath: "examples/pay/utils/query.yaml",
             outputDir: "docs/pay/utils",
             sidebarOptions: {
               groupPathsBy: "tag",
