@@ -3,11 +3,7 @@ info:
   title: Exchange Rate API
   description: API for executing currency exchange conversions.
   version: 1.0.0
-servers:
-  - url: https://sandbox.empresa.com
-    description: Sandbox API Server
-  - url: https://prod.empresa.com
-    description: Production API Server
+
 paths:
   /ws/exchange:
     post:
@@ -43,64 +39,76 @@ paths:
           description: Successful response with the currency exchange rate or an error message.
           content:
             application/json:
-              oneOf:
-                - schema:
-                    type: object
-                    properties:
-                      currency_rate:
-                        type: object
-                        properties:
-                          code:
-                            type: string
-                            description: Target currency code.
-                          base_code:
-                            type: string
-                            description: Base currency code.
-                          name:
-                            type: string
-                            description: Full name of the currency conversion.
-                          rate:
-                            type: string
-                            description: Exchange rate between the base currency and the target currency.
-                        required:
-                          - code
-                          - base_code
-                          - name
-                          - rate
-                      status:
-                        type: string
-                        description: Status of the response.
-                        example: SUCCESS
-                    required:
-                      - currency_rate
-                      - status
-                    example:
-                      currency_rate:
-                        code: USD
-                        base_code: BRL
-                        name: US Dollar to Real
-                        rate: 5.9278
-                      status: SUCCESS
-                - schema:
-                    type: object
-                    properties:
-                      status:
-                        type: string
-                        description: Status of the response.
-                        example: ERROR
-                      status_code:
-                        type: string
-                        description: Error code.
-                        example: BP-SA-3
-                      status_message:
-                        type: string
-                        description: Detailed message about the error.
-                        example: Merchant account is not active
-                    required:
-                      - status
-                      - status_code
-                      - status_message
-                    example:
-                      status: ERROR
-                      status_code: BP-SA-3
-                      status_message: Merchant account is not active
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                SuccessResponse:
+                  summary: A successful response with currency rate
+                  value:
+                    currency_rate:
+                      code: USD
+                      base_code: BRL
+                      name: US Dollar to Real
+                      rate: 5.9278
+                    status: SUCCESS
+                ErrorResponse:
+                  summary: An error response indicating an issue
+                  value:
+                    status: ERROR
+                    status_code: BP-SA-3
+                    status_message: Merchant account is not active
+
+components:
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        currency_rate:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Target currency code.
+            base_code:
+              type: string
+              description: Base currency code.
+            name:
+              type: string
+              description: Full name of the currency conversion.
+            rate:
+              type: string
+              description: Exchange rate between the base currency and the target currency.
+          required:
+            - code
+            - base_code
+            - name
+            - rate
+        status:
+          type: string
+          description: Status of the response.
+          example: SUCCESS
+      required:
+        - currency_rate
+        - status
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the response.
+          example: ERROR
+        status_code:
+          type: string
+          description: Error code.
+          example: BP-SA-3
+        status_message:
+          type: string
+          description: Detailed message about the error.
+          example: Merchant account is not active
+      required:
+        - status
+        - status_code
+        - status_message
