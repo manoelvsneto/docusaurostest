@@ -210,16 +210,17 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          exchange: {
+            specPath: "examples/pay/exchange/exchange.yaml",
+            outputDir: "docs/pay/exchange",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
         } satisfies Plugin.PluginOptions,
-        exchange: {
-          specPath: "examples/pay/exchange/exchange.yaml",
-          outputDir: "docs/pay/exchange",
-          sidebarOptions: {
-            groupPathsBy: "tag",
-            categoryLinkSource: "tag",
-          },
-          showSchemas: true,
-        } satisfies OpenApiPlugin.Options,
+        
       },
     ],
   ],
