@@ -1,0 +1,326 @@
+---
+id: pse-payment-request
+title: "PSE Payment Request"
+description: "Request payload to initiate a PSE payment."
+sidebar_label: "PSE Payment Request"
+hide_title: true
+schema: true
+custom_edit_url: null
+---
+
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"PSE Payment Request"}
+>
+</Heading>
+
+
+
+Request payload to initiate a PSE payment.
+
+<ul>
+  <SchemaItem
+    collapsible={false}
+    name={"integration_key"}
+    required={false}
+    schemaName={"string"}
+    qualifierMessage={undefined}
+    schema={{"type":"string","description":"Unique key for integration with the payment provider.","example":"dummy_integration_key_67890"}}
+  >
+    
+  </SchemaItem><SchemaItem
+    collapsible={false}
+    name={"operation"}
+    required={false}
+    schemaName={"string"}
+    qualifierMessage={undefined}
+    schema={{"type":"string","description":"Type of operation, e.g., 'request'.","example":"request"}}
+  >
+    
+  </SchemaItem><SchemaItem
+    collapsible={true}
+    className={"schemaItem"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details"}
+    >
+      <summary
+        style={{}}
+      >
+        <span
+          className={"openapi-schema__container"}
+        >
+          <strong
+            className={"openapi-schema__property"}
+          >
+            payment
+          </strong><span
+            className={"openapi-schema__name"}
+          >
+             object
+          </span>
+        </span>
+      </summary><div
+        style={{"marginLeft":"1rem"}}
+      >
+        <div
+          style={{"marginTop":".5rem","marginBottom":".5rem"}}
+        >
+          
+          
+          Payment details.
+          
+          
+        </div><SchemaItem
+          collapsible={false}
+          name={"address"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Street address of the payer.","example":"456 Maple Avenue"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"amount_total"}
+          required={false}
+          schemaName={"number"}
+          qualifierMessage={undefined}
+          schema={{"type":"number","description":"Total amount for the payment.","example":150000}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"city"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"City of the payer's address.","example":"Bogotá"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"country"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Country code of the payer's address.","example":"CO"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"currency_code"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Currency code, e.g., 'COP'.","example":"COP"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"eft_code"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"EFT payment method code, e.g., 'nequi'.","example":"nequi"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"email"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Email address of the payer.","example":"jane.doe@example.com"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={true}
+          className={"schemaItem"}
+        >
+          <details
+            style={{}}
+            className={"openapi-markdown__details"}
+          >
+            <summary
+              style={{}}
+            >
+              <span
+                className={"openapi-schema__container"}
+              >
+                <strong
+                  className={"openapi-schema__property"}
+                >
+                  items
+                </strong><span
+                  className={"openapi-schema__name"}
+                >
+                   object[]
+                </span>
+              </span>
+            </summary><div
+              style={{"marginLeft":"1rem"}}
+            >
+              <div
+                style={{"marginTop":".5rem","marginBottom":".5rem"}}
+              >
+                
+                
+                List of items for the payment.
+                
+                
+              </div><li>
+                <div
+                  style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
+                >
+                  Array [
+                </div>
+              </li><SchemaItem
+                collapsible={false}
+                name={"description"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","description":"Description of the item.","example":"Product Description"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"name"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","description":"Name of the item.","example":"Product Name"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"quantity"}
+                required={false}
+                schemaName={"integer"}
+                qualifierMessage={undefined}
+                schema={{"type":"integer","description":"Quantity of the item.","example":1}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"sku"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","description":"Stock Keeping Unit (SKU) for the item.","example":"SKU123456"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"unit_price"}
+                required={false}
+                schemaName={"number"}
+                qualifierMessage={undefined}
+                schema={{"type":"number","description":"Unit price of the item.","example":150000}}
+              >
+                
+              </SchemaItem><li>
+                <div
+                  style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
+                >
+                  ]
+                </div>
+              </li>
+            </div>
+          </details>
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"merchant_payment_code"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Merchant's unique payment code.","example":"PAYMENT123456"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"name"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Full name of the payer.","example":"Jane Doe"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"order_number"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Order number associated with the payment.","example":"ORDER123456"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"payment_type_code"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Payment method code, e.g., 'eft'.","example":"eft"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"phone_number"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Phone number of the payer.","example":"3001234567"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"redirect_url"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"URL to redirect the user after payment.","example":"https://example.com/redirect"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"state"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"State of the payer's address.","example":"Cundinamarca"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"street_number"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Street number of the payer's address.","example":"456"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"zipcode"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"ZIP code of the payer's address.","example":"110111"}}
+        >
+          
+        </SchemaItem>
+      </div>
+    </details>
+  </SchemaItem>
+</ul>
+            

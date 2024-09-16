@@ -1,0 +1,287 @@
+---
+id: oxxo-payment-request
+title: "OXXO Payment Request"
+description: "Request payload to initiate an OXXO payment."
+sidebar_label: "OXXO Payment Request"
+hide_title: true
+schema: true
+custom_edit_url: null
+---
+
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"OXXO Payment Request"}
+>
+</Heading>
+
+
+
+Request payload to initiate an OXXO payment.
+
+<ul>
+  <SchemaItem
+    collapsible={false}
+    name={"integration_key"}
+    required={false}
+    schemaName={"string"}
+    qualifierMessage={undefined}
+    schema={{"type":"string","description":"Unique key for integration with the payment provider.","example":"dummy_integration_key_54321"}}
+  >
+    
+  </SchemaItem><SchemaItem
+    collapsible={false}
+    name={"operation"}
+    required={false}
+    schemaName={"string"}
+    qualifierMessage={undefined}
+    schema={{"type":"string","description":"Type of operation, e.g., 'request'.","example":"request"}}
+  >
+    
+  </SchemaItem><SchemaItem
+    collapsible={false}
+    name={"mode"}
+    required={false}
+    schemaName={"string"}
+    qualifierMessage={undefined}
+    schema={{"type":"string","description":"Mode of the request, e.g., 'full'.","example":"full"}}
+  >
+    
+  </SchemaItem><SchemaItem
+    collapsible={true}
+    className={"schemaItem"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details"}
+    >
+      <summary
+        style={{}}
+      >
+        <span
+          className={"openapi-schema__container"}
+        >
+          <strong
+            className={"openapi-schema__property"}
+          >
+            payment
+          </strong><span
+            className={"openapi-schema__name"}
+          >
+             object
+          </span>
+        </span>
+      </summary><div
+        style={{"marginLeft":"1rem"}}
+      >
+        <div
+          style={{"marginTop":".5rem","marginBottom":".5rem"}}
+        >
+          
+          
+          Payment details.
+          
+          
+        </div><SchemaItem
+          collapsible={true}
+          className={"schemaItem"}
+        >
+          <details
+            style={{}}
+            className={"openapi-markdown__details"}
+          >
+            <summary
+              style={{}}
+            >
+              <span
+                className={"openapi-schema__container"}
+              >
+                <strong
+                  className={"openapi-schema__property"}
+                >
+                  sub_account
+                </strong><span
+                  className={"openapi-schema__name"}
+                >
+                   object
+                </span>
+              </span>
+            </summary><div
+              style={{"marginLeft":"1rem"}}
+            >
+              <div
+                style={{"marginTop":".5rem","marginBottom":".5rem"}}
+              >
+                
+                
+                Details of the sub-account associated with the payment.
+                
+                
+              </div><SchemaItem
+                collapsible={false}
+                name={"name"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","description":"Name of the sub-account.","example":"Sub Account Name"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"image_url"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","description":"Image URL for the sub-account.","example":"https://example.com/image.jpg"}}
+              >
+                
+              </SchemaItem>
+            </div>
+          </details>
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"name"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Full name of the payer.","example":"Alex Smith"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"email"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Email address of the payer.","example":"alex.smith@example.com"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"currency_code"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Currency code, e.g., 'MXN'.","example":"MXN"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"amount_total"}
+          required={false}
+          schemaName={"number"}
+          qualifierMessage={undefined}
+          schema={{"type":"number","description":"Total amount for the payment.","example":5000}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"merchant_payment_code"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Merchant's unique payment code.","example":"MERCHANT123456"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"payment_type_code"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Payment method code, e.g., 'oxxo'.","example":"oxxo"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"customer_ip"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"IP address of the payer.","example":"192.168.1.1"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"country"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Country code of the payer's address.","example":"MX"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"phone_number"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Phone number of the payer.","example":"5551234567"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"due_date"}
+          required={false}
+          schemaName={"date"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","format":"date","description":"Due date for the payment.","example":"2024-09-19"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"create_token"}
+          required={false}
+          schemaName={"boolean"}
+          qualifierMessage={undefined}
+          schema={{"type":"boolean","description":"Indicates if a payment token should be created.","example":false}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"instalments"}
+          required={false}
+          schemaName={"integer"}
+          qualifierMessage={undefined}
+          schema={{"type":"integer","description":"Number of payment instalments.","example":1}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"device_id"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Device ID used for the payment.","example":"device12345"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"bypass_boleto_screen"}
+          required={false}
+          schemaName={"boolean"}
+          qualifierMessage={undefined}
+          schema={{"type":"boolean","description":"Indicates if the boleto screen should be bypassed.","example":false}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"fx_token"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Token for fraud prevention.","example":"dummy_fx_token"}}
+        >
+          
+        </SchemaItem>
+      </div>
+    </details>
+  </SchemaItem>
+</ul>
+            

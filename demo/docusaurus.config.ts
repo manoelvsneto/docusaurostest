@@ -57,10 +57,10 @@ const config: Config = {
           label: "API's",
           position: "left",
           items: [
-            {
+          /*  {
               label: "Direct Pay",
-              to: "/pay/direct/process-a-payment-pay",
-            },
+              to: "/payment-api-direct-pay",
+            },*/
             {
               label: "Cancel Payment",
               to: "/pay/cancel/execute-cancellation",

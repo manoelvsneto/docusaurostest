@@ -1,0 +1,267 @@
+---
+id: oxxo-payment-response
+title: "OXXO Payment Response"
+description: "Response payload for an OXXO payment request."
+sidebar_label: "OXXO Payment Response"
+hide_title: true
+schema: true
+custom_edit_url: null
+---
+
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Heading from "@theme/Heading";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"OXXO Payment Response"}
+>
+</Heading>
+
+
+
+Response payload for an OXXO payment request.
+
+<ul>
+  <SchemaItem
+    collapsible={true}
+    className={"schemaItem"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details"}
+    >
+      <summary
+        style={{}}
+      >
+        <span
+          className={"openapi-schema__container"}
+        >
+          <strong
+            className={"openapi-schema__property"}
+          >
+            payment
+          </strong><span
+            className={"openapi-schema__name"}
+          >
+             object
+          </span>
+        </span>
+      </summary><div
+        style={{"marginLeft":"1rem"}}
+      >
+        <div
+          style={{"marginTop":".5rem","marginBottom":".5rem"}}
+        >
+          
+          
+          Details of the processed payment.
+          
+          
+        </div><SchemaItem
+          collapsible={false}
+          name={"hash"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Unique identifier for the payment.","example":"dummy_hash_654321"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"country"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Country code of the payment.","example":"mx"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"merchant_payment_code"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Merchant's unique payment code.","example":"MERCHANT123456"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"order_number"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Order number associated with the payment.","example":"ORDER654321"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"status"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Payment status, e.g., 'PE' (Pending).","example":"PE"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"status_date"}
+          required={false}
+          schemaName={"date-time"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","format":"date-time","description":"Date and time of the payment status.","example":"2024-09-16T10:19:16Z"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"open_date"}
+          required={false}
+          schemaName={"date-time"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","format":"date-time","description":"Date and time when the payment was opened.","example":"2024-09-16T10:19:16Z"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"confirm_date"}
+          required={false}
+          schemaName={"date-time"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","format":"date-time","description":"Date and time when the payment was confirmed.","example":null}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"transfer_date"}
+          required={false}
+          schemaName={"date-time"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","format":"date-time","description":"Date and time when the payment was transferred.","example":null}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"amount_br"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Amount in the local currency (MXN).","example":"5000.00"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"amount_ext"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Amount in the external currency.","example":"5000.00"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"amount_iof"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Amount of IOF (tax) applied to the payment.","example":"0.00"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"currency_rate"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Currency exchange rate used.","example":"1.0000"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"currency_ext"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"External currency code.","example":"MXN"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"due_date"}
+          required={false}
+          schemaName={"date"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","format":"date","description":"Due date for the payment.","example":"2024-09-19"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"instalments"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Number of payment instalments.","example":"1"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"payment_type_code"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Payment method code, e.g., 'oxxo'.","example":"oxxo"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"oxxo_url"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"URL to print the OXXO payment slip.","example":"https://example.com/oxxo/print?hash=dummy_hash_654321"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"oxxo_barcode"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Barcode for the OXXO payment slip.","example":"29000000000123456789012345678901"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"pre_approved"}
+          required={false}
+          schemaName={"boolean"}
+          qualifierMessage={undefined}
+          schema={{"type":"boolean","description":"Indicates if the payment is pre-approved.","example":false}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"capture_available"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string","description":"Indicates if the payment can be captured.","example":null}}
+        >
+          
+        </SchemaItem>
+      </div>
+    </details>
+  </SchemaItem><SchemaItem
+    collapsible={false}
+    name={"status"}
+    required={false}
+    schemaName={"string"}
+    qualifierMessage={undefined}
+    schema={{"type":"string","description":"Overall status of the payment request.","example":"SUCCESS"}}
+  >
+    
+  </SchemaItem>
+</ul>
+            
