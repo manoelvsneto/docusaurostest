@@ -66,6 +66,10 @@ const config: Config = {
               to: "/pay/direct/execute-cancellation",
             },
             {
+              label: "Refund",
+              to: "/pay/direct/request-or-cancel-a-refund",
+            },
+            {
               label: "Get FX rate",
               to: "/pay/exchange/currency-exchange-conversion",
             },
