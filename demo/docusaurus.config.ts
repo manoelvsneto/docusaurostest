@@ -71,7 +71,7 @@ const config: Config = {
             },
             {
               label: "Refund or Cancel",
-              to: "/pay/direct/request-or-cancel-a-refund",
+              to: "/pay/direct/refund-orcancel",
             },
             {
               label: "Get FX rate",
