@@ -152,7 +152,8 @@ paths:
                         maxLength: 3
                       due_date:
                         type: string
-                        description: Expiry date of the payment (not applicable to all payment methods). Format: dd/mm/yyyy
+                        description: | 
+                              Expiry date of the payment (not applicable to all payment methods). Format: dd/mm/yyyy
                         example: "2024-09-20"
                         minLength: 10
                         maxLength: 10
