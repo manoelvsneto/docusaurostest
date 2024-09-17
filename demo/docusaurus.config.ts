@@ -70,6 +70,10 @@ const config: Config = {
               to: "/pay/direct/request-or-cancel-a-refund",
             },
             {
+              label: "Refund or Cancel",
+              to: "/pay/direct/request-or-cancel-a-refund",
+            },
+            {
               label: "Get FX rate",
               to: "/pay/exchange/currency-exchange-conversion",
             },
@@ -251,7 +255,7 @@ const config: Config = {
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
           refundOrCancel: {
-            specPath: "examples/pay/direct/reundOrCancel.yaml",
+            specPath: "examples/pay/direct/refundOrCancel.yaml",
             outputDir: "docs/pay/direct",
             sidebarOptions: {
               groupPathsBy: "tag",
