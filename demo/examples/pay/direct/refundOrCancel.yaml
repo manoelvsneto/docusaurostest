@@ -165,36 +165,36 @@ paths:
                         type: string
                         description: |
                               Enum: "amex" "bancodobrasil" "banrisul" "banktransfer" "boleto" "bradesco" "carnet" "credimas" "cupon" "diners" "discover" "ebanxaccount" "eft" "elo" "hipercard" "itau" "mastercard" "multicaja" "naranja" "oxxo" "pagoefectivo" "pagofacil" "pagosnet" "rapipago" "safetypay" "safetypay-cash" "safetypay-online" "sencillito" "servipag" "spei" "visa" "webpay"
-                            The code of the payment method. The supported codes are:
-                            
-                            amex: American Express credit card (Brazil, Mexico, Colombia).
-                            bancodobrasil: Banco do Brasil bank transfer (Brazil).
-                            banrisul: Banrisul bank transfer (Brazil).
-                            banktransfer: Bank transfer (Brazil).
-                            boleto: Boleto bancário (Brazil).
-                            bradesco: Bradesco bank transfer (Brazil).
-                            carnet: CARNET credit card (Mexico).
-                            diners: Diners credit card (Brazil, Colombia).
-                            discover: Discover credit card (Brazil).
-                            ebanxaccount: EBANX Account (Brazil).
-                            eft: Bank Transfer (Colombia).
-                            elo: Elo credit card (Brazil).
-                            hipercard: Hipercard credit card (Brazil).
-                            itau: Itaú bank transfer (Brazil).
-                            mastercard: MasterCard credit card (Brazil, Mexico, Colombia).
-                            multicaja: Multicaja (Chile).
-                            oxxo: OXXO (Mexico).
-                            pagoefectivo: PagoEfectivo (Peru).
-                            pagosnet: PagosNet (Bolivia).
-                            paynet: Paynet (Mexico).
-                            safetypay: SafetyPay (Peru, Ecuador, Checkout only).
-                            safetypay-cash: SafetyPay Cash (Peru, Ecuador).
-                            safetypay-online: SafetyPay Online (Peru, Ecuador).
-                            sencillito: Sencillito (Chile).
-                            servipag: Servipag (Chile).
-                            spei: SPEI bank transfer method (Mexico).
-                            visa: Visa credit card (Brazil, Mexico, Colombia).
-                            webpay: Webpay (Chile).
+                              The code of the payment method. The supported codes are:
+                              
+                              amex: American Express credit card (Brazil, Mexico, Colombia).
+                              bancodobrasil: Banco do Brasil bank transfer (Brazil).
+                              banrisul: Banrisul bank transfer (Brazil).
+                              banktransfer: Bank transfer (Brazil).
+                              boleto: Boleto bancário (Brazil).
+                              bradesco: Bradesco bank transfer (Brazil).
+                              carnet: CARNET credit card (Mexico).
+                              diners: Diners credit card (Brazil, Colombia).
+                              discover: Discover credit card (Brazil).
+                              ebanxaccount: EBANX Account (Brazil).
+                              eft: Bank Transfer (Colombia).
+                              elo: Elo credit card (Brazil).
+                              hipercard: Hipercard credit card (Brazil).
+                              itau: Itaú bank transfer (Brazil).
+                              mastercard: MasterCard credit card (Brazil, Mexico, Colombia).
+                              multicaja: Multicaja (Chile).
+                              oxxo: OXXO (Mexico).
+                              pagoefectivo: PagoEfectivo (Peru).
+                              pagosnet: PagosNet (Bolivia).
+                              paynet: Paynet (Mexico).
+                              safetypay: SafetyPay (Peru, Ecuador, Checkout only).
+                              safetypay-cash: SafetyPay Cash (Peru, Ecuador).
+                              safetypay-online: SafetyPay Online (Peru, Ecuador).
+                              sencillito: Sencillito (Chile).
+                              servipag: Servipag (Chile).
+                              spei: SPEI bank transfer method (Mexico).
+                              visa: Visa credit card (Brazil, Mexico, Colombia).
+                              webpay: Webpay (Chile).
                         example: "visa"
                       details:
                         type: object
