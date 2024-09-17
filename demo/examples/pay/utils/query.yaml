@@ -3,6 +3,11 @@ info:
   title: Payment Query API
   description: API to query information about a specific payment.
   version: 1.0.0
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
 paths:
   /ws/query:
     post:
@@ -167,7 +172,6 @@ paths:
                           - cupon
                           - diners
                           - discover
-                          - ebanxaccount
                           - eft
                           - elo
                           - hipercard

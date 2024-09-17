@@ -237,6 +237,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          refund: {
+            specPath: "examples/pay/direct/refund.yaml",
+            outputDir: "docs/pay/direct",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
           capture: {
             specPath: "examples/pay/direct/capture.yaml",
             outputDir: "docs/pay/direct",

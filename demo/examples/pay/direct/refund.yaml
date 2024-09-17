@@ -1,0 +1,450 @@
+openapi: 3.0.3
+info:
+  title: Refund API
+  description: This API handles payment refunds through various operations such as refund requests and cancellations.
+  version: 1.0.0
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
+paths:
+  /ws/refund:
+    post:
+      summary: Request or cancel a refund
+      description: This endpoint allows you to request or cancel a refund for a payment.
+      requestBody:
+        description: Request payload for refund operations.
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/RefundRequestJWT'
+                - $ref: '#/components/schemas/RefundRequest'
+              
+      responses:
+        '200':
+          description: Successful refund operation
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/RefundResponse'
+
+components:
+  schemas:
+    RefundRequestJWT:
+      type: string
+      description: |
+        A JWT (JSON Web Token) containing the details for the refund operation. The JWT encapsulates data such as amount, refund description, merchant refund code, and operation type. Details JWT: {
+              "amount": 11.11,
+              "integration_key_encrypted_jwe": "abcdefghijklment",
+              "description": "Order needs to be refunded",
+              "operation": "request",
+              "merchant_refund_code": "a1b2c3d4",
+              "hash": "11235813213455A"
+            }
+      example: >
+        eyJhbGciOiJIUzI1NiJ9.eyJhbW91bnQiOjExLjExLCJpbnRlZ3JhdGlvbl9rZXlfZW5jcnlwdGVkX2p3ZSI6ImFiY2RlZmdoaWprbG1lbnQiLCJkZXNjcmlwdGlvbiI6Ik9yZGVyIG5lZWRzIHRvIGJlIHJlZnVuZGVkIiwib3BlcmF0aW9uIjoicmVxdWVzdCIsIm1lcmNoYW50X3JlZnVuZF9jb2RlIjoiYTFiMmMzZDQiLCJoYXNoIjoiMTEyMzU4MTMyMTM0NTVBIn0.dJrcPN_6vPf6eCUNIt11kXCtIg3RhiJ31jS6dsRtFdc
+
+
+    RefundRequest:
+      type: object
+      description: Request schema for refund including bank information.
+      properties:
+        integration_key:
+          type: string
+          description: The unique and secret integration key for the merchant.
+          example: "your_test_integration_key"
+        operation:
+          type: string
+          enum: [request, cancel]
+          description: The operation to be performed, either requesting or canceling a refund.
+          example: request
+        hash:
+          type: string
+          maxLength: 48
+          description: The unique identifier for the payment payment hash.
+          example: "5ad9028b30eb8de099f9fe72b9763283c7cf4d35b6430221"
+        amount:
+          type: number
+          description: The amount to be refunded in the original payment currency.
+          example: 100
+        description:
+          type: string
+          maxLength: 500
+          description: Description of the refund reason.
+          example: "Order did not arrive"
+        merchant_refund_code:
+          type: string
+          maxLength: 40
+          description: The unique identifier for the refund on the merchant's system.
+          example: "787653"
+        refund_id:
+          type: integer
+          description: The ID of the refund to be cancelled. Required for cancel operations.
+          example: 3784756
+        single_transaction:
+            type: object
+            description: Details of the single transaction for cross-border and local amounts.
+            properties:
+              amount_crossborder:
+                type: number
+                description: The amount for the cross-border transaction.
+                example: 26.01
+              amount_local:
+                type: number
+                description: The amount for the local transaction.
+                example: 0.00
+        bank_info:
+          type: object
+          description: |
+            Brazil - Bank Transfer (object) or Brazil - Pix (object) or Chile (object) or Colombia (object) or Mexico (object) Object that holds bank information for the refund. Although this object is not mandatory, if you choose to use it, all it's elements are required to be provided.
+              Brazil - Bank Transfer: (bank_name,bank_branch,bank_branch,account_type,bank_details,bank_account_holder_document,bank_account_holder_name)
+              Brazil - Pix: (bank_account_holder_name,bank_account_holder_document,pix_key)
+              Chile: (bank_name,bank_account,bank_account_holder_document,bank_account_holder_name)
+              Colombia: (bank_name,bank_account,bank_account_holder_document,bank_account_holder_name)
+              Mexico: (clabe,bank_account_holder_name)
+          properties:
+            bank_name:
+              type: string
+              description: | 
+                The name of the banking institution.<br>
+                Brazil - Bank Transfer<br>
+                
+                Available for Savings Accounts:<br>
+
+                001 Banco do Brasil<br>
+                237 Bradesco<br>
+                341 Itaú<br>
+                104 Caixa Econômica<br>
+                033 Santander<br>
+                
+                Available for Checking Accounts:<br>
+                
+                104 Caixa Econômica<br>
+                001 Banco do Brasil<br>
+                341 Itaú<br>
+                237 Bradesco<br>
+                033 Santander<br>
+                212 Banco Original S.A.<br>
+                290 PagSeguro Internet S/A<br>
+                318 Banco BMG S.A.<br>
+                336 Banco C6 S.A.<br>
+                655 Neon / Banco Votorantim S.A.<br>
+                756 Bancoob<br>
+                021 Banestes<br>
+                077 Inter<br>
+                041 Banrisul<br>
+                748 Banco Cooperativo Sicredi S.A.<br>
+                745 Banco Citibank S.A.<br>
+                260 Nu Pagamentos S.A.<br>
+                422 Banco Safra S.A.<br>
+                082 Topazio S.A.<br>
+                003 Banco da Amazônia S.A.<br>
+                004 Banco do Nordeste<br>
+                010 Credicoamo Crédito Rural Cooperativa<br>
+                012 Banco Inbursa S.A.<br>
+                024 Bandepe S.A.<br>
+                025 Banco Alfa S.A.<br>
+                037 Banpara<br>
+                040 Banco Cargill S.A.<br>
+                047 Banese<br>
+                063 Banco Bradescard S.A.<br>
+                064 Goldman Sachs do Brasil Banco Múltiplo S. A.<br>
+                065 Banco AndBank (Brasil) S.A.<br>
+                066 Banco Morgan Stanley S. A.<br>
+                069 Banco Crefisa S.A.<br>
+                070 BRB - Banco de Brasília S.A.<br>
+                074 Banco J. Safra S.A.<br>
+                084 Unicred Norte do Paraná<br>
+                085 Cooperativa Central de Crédito Urbano (CECRED)<br>
+                089 Cooperativa de Crédito Rural da Região da Mogiana<br>
+                091 Unicred Central do Rio Grande do Sul<br>
+                093 Pólocred Sociedade de Crédito ao Microempreendedor e à Empresa de Pequeno Porte <br>
+                094 Banco Finaxis S.A. <br>
+                096 Banco B3 S.A.<br>
+                097 Credisis - Central de Cooperativas de Crédito Ltda.<br>
+                098 Credialiança Cooperativa de Crédito Rural<br>
+                099 Uniprime Central – Central Interestadual de Cooperativas de Crédito Ltda.
+                107 Banco Bocom BBM S.A.<br>
+                108 PortoCred S.A. Crédito, Financiamento e Investimento<br>
+                120 Banco Rodobens SA<br>
+                121 Banco Agibank S.A.<br>
+                124 Banco Woori Bank do Brasil S.A.<br>
+                125 Plural S.A. Banco Múltiplo<br>
+                130 Caruana S.A. Sociedade de Crédito Financiamento e Investimento<br>
+                132 ICBC do Brasil Banco Múltiplo S.A.<br>
+                133 Cresol<br>
+                136 Confederação Nacional das Cooperativas Centrais Unicred Ltda – Unicred do Brasil<br>
+                139 Intesa Sanpaolo Brasil S.A. - Banco Múltiplo<br>
+                163 Commerzbank Brasil S.A. - Banco Múltiplo<br>
+                174 Pernambucanas Financiadora S.A. Crédito Financiamento e Investimento<br>
+                197 Stone Pagamentos S.A.<br>
+                208 Banco BTG Pactual S.A.<br>
+                218 Banco BS2 S.A.<br>
+                224 Banco Fibra S.A.<br>
+                233 Banco Cifra S.A.<br>
+                241 Banco Clássico S.A.<br>
+                243 Banco Máxima S.A.<br>
+                246 Banco ABC Brasil S.A.<br>
+                249 Banco Investcred Unibanco S.A.<br>
+                250 BCV - Banco de Crédito e Varejo S/A<br>
+                254 Parana Banco S. A.<br>
+                265 Banco Fator S.A.<br>
+                266 Banco Cédula S.A.<br>
+                279 Cooperativa de Crédito Rural de Primavera do Leste<br>
+                280 Avista S.A. Crédito Financiamento e Investimento<br>
+                281 Cooperativa de Crédito Rural Coopavel<br>
+                299 Sorocred - Crédito Financiamento e Investimento S/A<br>
+                301 BPP Instituição de Pagamento S.A.<br>
+                320 Banco Industrial e Comercial S.A. (BICBANCO)<br>
+                322 Cooperativa de Crédito Rural de Abelardo Luz - Sulcredi/Crediluz<br>
+                323 MercadoPago.com Representações Ltda.<br>
+                340 Super Pagamentos e Administração de Meios Eletrônicos S.A.<br>
+                366 Banco Société Générale Brasil S.A.<br>
+                370 Banco Mizuho do Brasil S.A.<br>
+                376 Banco J. P. Morgan S. A.<br>
+                389 Banco Mercantil do Brasil S.A.<br>
+                399 Kirton Bank S.A. - Banco Múltiplo<br>
+                477 Citibank N.A.<br>
+                487 Deutsche Bank S.A. - Banco Alemão<br>
+                488 JPMorgan Chase Bank National Associatio<br>
+                623 Banco Pan S.A.<br>
+                633 Banco Rendimento S.A<br>
+                634 Banco Triângulo S.A.<br>
+                637 Banco Sofisa S. A.<br>
+                654 Banco A.J. Renner S.A<br>
+                707 Banco Daycoval S.A.<br>
+                739 Banco Cetelem S.A.<br>
+                743 Banco Semear S.A.<br>
+                746 Banco Modal S.A.<br>
+                751 Scotiabank Brasil S.A. Banco Múltiplo<br>
+                753 Novo Banco Continental S.A. - Banco Múltiplo<br>
+                754 Banco Sistema S.A.<br>
+                
+                ---------------------------<br>
+                If Chile,<br>
+                
+                001 BANCO DE CHILE<br>
+                001 BANCO EDWARDS | CITI<br>
+                001 BANCO ATLAS S.A.<br>
+                001 BANCO CREDICHILE<br>
+                009 BANCO INTERNACIONAL<br>
+                012 BANCO DEL ESTADO DE CHILE<br>
+                014 SCOTIABANK CHILE<br>
+                016 BANCO DE CREDITO E INVERSIONES<br>
+                017 BANCO DO BRASIL S.A<br>
+                028 BANCO BICE<br>
+                031 HSBC BANK (CHILE)<br>
+                037 BANCO SANTANDER-CHILE<br>
+                039 ITAÚ CORPBANCA<br>
+                041 JP MORGAN CHASE BANK N. A.<br>
+                043 BANCO DE LA NACION ARGENTINA<br>
+                045 MUFG Bank Ltd.<br>
+                049 BANCO SECURITY<br>
+                051 BANCO FALABELLA<br>
+                053 BANCO RIPLEY<br>
+                055 BANCO CONSORCIO<br>
+                059 BANCO BTG PACTUAL CHILE<br>
+                060 CHINA CONSTRUCTION BANK AGENCIA EN CHILE<br>
+                061 BANK OF CHINA AGENCIA EN CHILE<br>
+                504 SCOTIABANK AZUL (BBVA)<br>
+                730 Tenpo<br>
+                
+                ------------------<br>
+                If Colombia,<br>
+                
+                1040 Banco Agrario<br>
+                1052 Banco AV Villas<br>
+                1032 Banco Caja Social BCSC SA<br>
+                1019 Banco Colpatria<br>
+                1066 Banco Cooperativo Coopcentral<br>
+                1006 Banco Corpbanca Colombia S.A<br>
+                1051 Banco Davivienda SA<br>
+                1001 Banco de Bogotá<br>
+                1023 Banco de Occidente<br>
+                1062 Banco Falabella S.A<br>
+                1063 Banco Finandina S.A<br>
+                1012 Banco GNB Sudameris<br>
+                1064 Banco Multibank S.A<br>
+                1060 Banco Pichincha<br>
+                1002 Banco Popular<br>
+                1058 Banco Procredit Colombia<br>
+                1065 Banco Santander de Negocios Colombia S.A.<br>
+                1007 Bancolombia<br>
+                1061 Bancoomeva<br>
+                1013 BBVA Colombia<br>
+                1009 Citibank<br>
+                1370 Coltefinanciera S.A<br>
+                1292 Confiar Cooperativa Financiera<br>
+                1283 Cooperativa Financiera de Antioquia<br>
+                1289 Cootrafa Cooperativa Financiera<br>
+                1121 Financiera Juriscoop Compañía de Financiamiento<br>
+                1014 Helm Bank S.A<br>
+                1059 Bancamia S.A.<br>
+                1558 Banco Credifinanciera S.A.<br>
+                1071 Banco J.P. Morgan Colombia S.A.<br>
+                1047 Banco Mundo Mujer<br>
+                1069 Banco Serfinanza S.A.<br>
+                1053 Banco W S.A.<br>
+                1031 Bancoldex S.A.<br>
+                1291 Coofinep Cooperativa Financier<br>
+                1551 Daviplata<br>
+                1303 Giros y Finanzas CF<br>
+                1637 Iris<br>
+                1070 Lulo Bank S.A.<br>
+                1067 Mibanco S.A.<br>
+                1801 Movii<br>
+                1507 Nequi<br>
+                1151 Rappipay<br>
+              example: "104 Caixa Econômica"
+            clabe:
+              type: string
+              maxLength: 18
+              description: |
+                If Mexico,<br>
+                Clabe. The first 3 digits must represent a valid bank code. See the complete list below:<br>
+                
+                001 => BANCO - BANXICO<br>
+                002 => BANAM - BANAMEX<br>
+                006 => BCEXT - BANCOMEXT<br>
+                009 => BOBRA - BANOBRAS<br>
+                012 => BACOM - BBVA BANCOMER<br>
+                014 => BANME - BANCO SANTANDER<br>
+                019 => BEJER - BANJERCITO<br>
+                021 => BITAL - HSBC<br>
+                030 => BAJIO - BAJIO<br>
+                032 => BAIXE - IXE<br>
+                036 => BINBU - INBURSA<br>
+                037 => BINTE - INTERACCIONES<br>
+                042 => MIFEL - MIFEL<br>
+                044 => COMER - SCOTIA BANK INVERLAT<br>
+                058 => BANRE - BANREGIO<br>
+                059 => BINVE - INVEX<br>
+                060 => BANSI - BANSI<br>
+                062 => BAFIR - AFIRME<br>
+                072 => BBANO - BANORTE / IXE<br>
+                102 => ABNBA - ROYAL BANK OF SCOTLAND<br>
+                103 => AMEX - AMERICAN EXPRESS<br>
+                106 => BAMSA - BANK OF AMERICA<br>
+                108 => TOKYO - TOKYO<br>
+                110 => CHASE - JP MORGAN<br>
+                112 => CMCA - BANCO MONEX<br>
+                113 => DRESD - VE POR MAS<br>
+                116 => INGBA - ING<br>
+                124 => DEUTB - DEUTSCHE<br>
+                126 => CRESU - CREDIT SUISSE<br>
+                127 => BAZTE - AZTECA<br>
+                128 => BAUTO - BANCO AUTOFIN<br>
+                129 => BARCL - BARCLAYS BANK<br>
+                130 => BCOMP - BANCO COMPARTAMOS<br>
+                131 => FAMSA - BANCO DE AHORRO FAMSA<br>
+                132 => MULTI - BANCO MULTIVA<br>
+                133 => PRUDE - ACTINVER BANK<br>
+                134 => BWALL - BANCO WAL MART<br>
+                135 => NAFIN - NACIONAL FINANCIERAv
+                136 => REGIO - BANCO REGIONAL SA
+                137 => COPEL - BANCOPPEL<br>
+                138 => AMIGO - BANCO AMIGO<br>
+                139 => UBSBA - UBS BANK MEXICO<br>
+                140 => FACIL - BANCO FACIL<br>
+                141 => VOLKS - VOLKSWAGEN BANK<br>
+                143 => CONSU - BANCO CONSULTORIA<br>
+                145 => BBASE - BANCO BASE<br>
+                147 => AGROF - BANKAOOL<br>
+                166 => BANSE - BANSEFI<br>
+                168 => HIFED - HIPOTECARIA FEDERAL<br>
+                646 => 90646 - STP<br>
+              
+            pix_key: 
+              type: string
+              description: |
+                If Brazil, Pix key information - This field accepts one of:<br>
+                EMAIL: Email address for Pix transactions. Example: "josesilva@email.com"<br>
+                CPF: CPF number for Pix transactions. Example: "123.456.789-01"<br>
+                CNPJ: CNPJ number for Pix transactions. Example: "12.345.678/0001-90"<br>
+                PHONE: Phone number for Pix transactions. Example: "+554191457164"<br>
+                RANDOM: Random Pix key for transactions. Example: "5b5432e5-aa6d-40b0-9ff7-0226f5a0186f"<br>
+            bank_branch:
+              type: string
+              description: Bank branch, including a digit if necessary (separated by a hyphen).
+              example: "00001-2"
+            bank_account:
+              type: string
+              description: Account number, including digit if necessary (separated by a hyphen).
+              example: "08251777-6"
+            account_type:
+              type: string
+              description: Account type. "C" for checking accounts, "S" for savings accounts.
+              example: "C"
+            bank_details:
+              type: string
+              description: | 
+                  Additional details for certain banks, required when the bank is Caixa Econômica (104).
+                  If Brazil: Only necessary when the bank is 104 Caixa Econômica Valid values are: '001', '002', '003', '006', '007', '013', '022', '023', '028', '043', '131', '1288'
+              example: 1
+            bank_account_holder_document:
+              type: string
+              description: If Brazil, Bank account holder document (CPF or CNPJ).
+              example: "85351346893"
+            bank_account_holder_name:
+              type: string
+              description: Full name of the bank account holder.
+              example: "José Silva"
+  
+    RefundResponse:
+      type: object
+      description: Unified response schema for a successful refund operation, including payment and refund details.
+      properties:
+        status:
+          type: string
+          description: The status of the refund operation.
+          example: SUCCESS
+        payment:
+          type: object
+          description: Object containing payment information.
+          properties:
+            hash:
+              type: string
+              description: The unique identifier for the payment hash.
+              example: "66e94f0e399841215abec7f19ed9d783609e8d762fcb3e04"
+            refunds:
+              type: array
+              description: List of refund details associated with the payment.
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The unique identifier for the refund.
+                    example: "2301066381703"
+                  status:
+                    type: string
+                    description: The status of the refund request.
+                    example: RE
+                  amount_ext:
+                    type: number
+                    description: The refunded amount in the original currency.
+                    example: 28.12
+                  description:
+                    type: string
+                    description: Reason for the refund.
+                    example: Order needs to be refunded
+        refund:
+          type: object
+          description: Object containing details of the refund (when applicable).
+          properties:
+            id:
+              type: integer
+              description: The unique identifier for the refund.
+              example: 1954814017204
+            status:
+              type: string
+              description: The status of the refund request.
+              example: PE
+            amount_ext:
+              type: number
+              description: The refunded amount in the original currency.
+              example: 28.12
