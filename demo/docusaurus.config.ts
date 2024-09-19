@@ -44,16 +44,16 @@ const config: Config = {
         // Plugin Options for loading OpenAPI files
         specs: [
           // Pass it a path to a local OpenAPI YAML file
-          {
+         /* {
             // Redocusaurus will automatically bundle your spec into a single file during the build
             spec: 'examples/pay/direct/direct.yaml',
             route: '/api/',
-          },
-          // You can also pass it a OpenAPI spec URL
-          /*{
-            spec: 'https://redocly.github.io/redoc/openapi.yaml',
-            route: '/pay/',
           },*/
+          // You can also pass it a OpenAPI spec URL
+          {
+            spec: 'https://redocly.github.io/redoc/openapi.yaml',
+            route: '/examples/direct/pay/',
+          },
         ],
         // Theme Options for modifying how redoc renders them
         theme: {
