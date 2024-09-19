@@ -52,7 +52,7 @@ const config: Config = {
           // You can also pass it a OpenAPI spec URL
           {
             spec: 'https://redocly.github.io/redoc/openapi.yaml',
-            route: '/examples/direct/pay/',
+            route: '../examples/direct/pay/',
           },
         ],
         // Theme Options for modifying how redoc renders them
