@@ -353,7 +353,7 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
-          petstore: {
+          /*petstore: {
             specPath: "https://redocly.github.io/redoc/openapi.yaml",
             outputDir: "docs/petstore",
             sidebarOptions: {
@@ -361,7 +361,7 @@ const config: Config = {
               categoryLinkSource: "tag",
             },
             showSchemas: true,
-          } satisfies OpenApiPlugin.Options,
+          } satisfies OpenApiPlugin.Options,*/
 
 
 
