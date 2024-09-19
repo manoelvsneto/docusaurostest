@@ -38,14 +38,6 @@ const config: Config = {
         },
       } satisfies Preset.Options,
     ],
-    [
-      '@docusaurus/preset-classic',
-       {
-         googleAnalytics: {
-           trackingID: 'XXXXXX',
-         },
-       } satisfies Preset.Options,
-     ],
      [
       'redocusaurus',
       {
