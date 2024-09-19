@@ -33,7 +33,7 @@ const config: Config = {
           customCss: "./src/css/custom.css",
         },
         gtag: {
-          trackingID: "GTM-THVM29S",
+          trackingID: "AAAAAA",
           anonymizeIP: false,
         },
       } satisfies Preset.Options,
@@ -52,7 +52,7 @@ const config: Config = {
           // You can also pass it a OpenAPI spec URL
           {
             spec: 'https://redocly.github.io/redoc/openapi.yaml',
-            route: '/openapi/',
+            route: '/',
           },
         ],
         // Theme Options for modifying how redoc renders them
