@@ -50,10 +50,10 @@ const config: Config = {
             route: '/api/',
           },*/
           // You can also pass it a OpenAPI spec URL
-          {
+         /* {
             spec: 'https://redocly.github.io/redoc/openapi.yaml',
             //route: './examples/direct/pay/',
-          },
+          },*/
         ],
         // Theme Options for modifying how redoc renders them
         theme: {
@@ -127,6 +127,7 @@ const config: Config = {
               label: "Query",
               to: "/pay/utils/payment-query",
             },
+
           ],
         },
       ],
@@ -352,6 +353,19 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          petstore: {
+            specPath: "https://redocly.github.io/redoc/openapi.yaml",
+            outputDir: "docs/petstore",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+
+
+
+
         } satisfies Plugin.PluginOptions,
         
       },
