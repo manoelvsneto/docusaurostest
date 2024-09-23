@@ -353,6 +353,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          payout_create: {
+            specPath: "examples/pay/payout/create.yaml",
+            outputDir: "docs/pay/payout",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
           /*petstore: {
             specPath: "https://redocly.github.io/redoc/openapi.yaml",
             outputDir: "docs/petstore",
