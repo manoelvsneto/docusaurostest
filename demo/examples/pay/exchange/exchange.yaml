@@ -3,7 +3,11 @@ info:
   title: Exchange Rate API
   description: API for executing currency exchange conversions.
   version: 1.0.0
-
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
 paths:
   /ws/exchange:
     post:
