@@ -1,0 +1,390 @@
+openapi: 3.0.3
+info:
+  title: Payout API
+  description: | 
+    API for initiating payments integration.
+    
+    The Empresa Payout Reference describes the parameters and returns values of each available operation.
+
+    This API indicates the success or failure of a request using the conventional HTTP response codes. The 200 code indicates success, the 4xx range indicates an error with the parameters of the request, and the 500 code indicates an error with Empresa’s servers.
+  version: 1.0.0
+servers:
+  - url: https://sandbox.empresa.com
+    description: Sandbox API Server
+  - url: https://prod.empresa.com
+    description: Production API Server
+paths:
+  /ws/payout/create:
+    post:
+      summary: Create a payout request
+      description: Submits a request to process a payout based on the provided information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/PayoutRequest'
+
+      responses:
+        200:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/PayoutResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    PayoutRequest:
+      type: object
+      properties:
+        integration_key:
+          type: string
+          description: The unique key for integration.
+          example: "your_test_integration_key"
+          maxLength: 100
+        external_reference:
+          type: string
+          description: External reference for the payout.The unique payout ID provided by you.
+          example: "abcdefghijklmnopqrstuvxz1234567890"
+          minLength: 6
+          maxLength: 60
+        transaction_type:
+          type: string
+          minLength: 3
+          maxLength: 3
+          example: B2B
+          description: | 
+                The indication if transaction is B2B or B2C.
+                Required for the following countries 
+                
+                Bolivia
+                Costa Rica
+                Dominican Republic
+                Ecuador
+                Egypt
+                India
+                Indonesia
+                Kenya
+                Morocco
+                Nigeria
+                Paraguay
+                Peru
+                South Africa
+                Uruguay
+        country:
+          type: string
+          description: | 
+            Country code of the payout request.
+            Enum: "ar" "br" "co" "cl" "mx" "bo" "cr" "ec" "py" "pe" "uy" "do" "ke" "ng" "za" "ma" "eg" "in" "id"
+            
+            The two-letter country code for the customer country. The available codes are:
+            
+            ar: Argentina.
+            br: Brazil.
+            co: Colombia.
+            cl: Chile.
+            mx: Mexico.
+            bo: Bolivia.
+            cr: Costa Rica.
+            ec: Ecuador.
+            py: Paraguay.
+            pe: Peru.
+            uy: Uruguay.
+            do: Dominican Republic.
+            ke: Kenya.
+            ng: Nigeria.
+            za: South Africa.
+            ma: Morocco.
+            eg: Egypt.
+            in: India.
+            id: Indonesia.
+            
+          example: "BR"
+          minLength: 2
+          maxLength: 2
+        amount:
+          type: number
+          description: The amount in the specified currency (currency_code). E.g. 100.50.
+          example: 5
+        currency_code:
+          type: string
+          minLength: 3
+          maxLength: 3
+          description: |
+            Currency code (ISO 4217 format).
+            Enum: "ARS" "BRL" "CLP" "COP" "MXN" "BOB" "CRC" "PYG" "PEN" "UYU" "DOP" "KES" "ZAR" "MAD" "EGP" "INR" "IDR" "NGN" "USD"
+            Three-letter code of the payout currency. Supported currencies:
+
+            Argentina: ARS, USD.
+            Brazil: BRL, USD.
+            Colombia: COP, USD.
+            Chile: CLP, USD.
+            Mexico: MXN, USD.
+            Bolivia: BOB, USD.
+            Costa Rica: CRC, USD.
+            Ecuador: USD.
+            Paraguay: PYG, USD.
+            Peru: PEN, USD.
+            Uruguay: UYU, USD.
+            Dominican Republic: DOP, USD.
+            Kenya: KES, USD.
+            Nigeria: NGN, USD.
+            South Africa: ZAR, USD.
+            Morocco: MAD, USD.
+            Egypt: EGP, USD.
+            India: INR, USD.
+            Indonesia: IDR, USD.
+          example: "BRL"
+        target:
+          type: string
+          description: |
+              Enum: "bank_account" "ewallet_nequi" "mercadopago" "pix_key" "billet" "cashpak" "mpesa" "smartcash" "dana" "gopay" "imkas" "linkaja" "shopeepay" "ovo" "astrapay"
+              Name of payment provider name offered for each country, default value is bank_account.
+            
+              bank_account: All countries
+              mercadopago: Argentina, Brazil, Mexico
+              ewallet_nequi: Colombia
+              pix_key: Brazil
+              billet: Dominican Republic
+              cashpak: Costa Rica
+              mpesa: Kenya
+              smartcash: Nigeria
+              dana: India
+              gopay: India
+              imkas: India
+              linkaja: India
+              shopeepay: India
+              ovo: India
+              astrapay: India
+            
+          example: "pix_key"
+        target_account:
+          type: string
+          description: |
+              Account associated with the target.
+              Account information is required for the following targets:
+
+              mercadopago
+              ewallet_nequi
+              pix_key
+              billet
+              cashpak
+              mpesa
+              smartcash
+              dana
+              gopay
+              imkas
+              linkaja
+              shopeepay
+              ovo
+              astrapay
+            
+          example: "123456789"
+        order_number:
+          type: string
+          description: The unique order number.A string generated by the merchant for external control.
+          minLength: 6
+          maxLength: 32
+          example: "12345aaa"
+        payee:
+          oneOf:
+            - type: object
+              description: (Brazil) Information about the payee.
+              properties:
+                name:
+                  type: string
+                  description: Name of the payee.
+                  example: "John Doe"
+                email:
+                  type: string
+                  description: Payee's email.
+                  example: "johndoe@example.com"
+                document:
+                  type: string
+                  description: Payee's document number (CPF for Brazil).
+                  example: "11133355566"
+                document_type:
+                  type: string
+                  description: Type of document.
+                  example: "CPF"
+                terms_accepted_at:
+                  type: string
+                  description: Timestamp when terms were accepted.
+                  example: "2024-09-23T11:08:44Z"
+                bank_info:
+                  type: object
+                  description: Bank information of the payee (if applicable).
+                  nullable: true
+                address:
+                  type: object
+                  description: Payee's address (optional).
+                  nullable: true
+              required:
+              - name
+              - email
+              - document
+              - bank_info
+      required:
+      - integration_key
+      - country
+      - amount
+      - currency_code
+      - payee
+    PayoutResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of response.
+          example: "success"
+        payout:
+          type: object
+          description: Details of the payout request.
+          properties:
+            uid:
+              type: string
+              description: Unique identifier of the payout.
+              example: "ee975f619d676e3f6148b15280faa0f43c2930f8"
+            external_reference:
+              type: string
+              description: External reference for the payout.
+              example: "AQYAAHMQT99O0Aky4rKfYJDiZafwK"
+            status:
+              type: string
+              description: Status of the payout request.
+              example: "OP"
+            request_date:
+              type: string
+              description: Date and time the payout request was made.
+              example: "2024-09-23 11:08:44"
+            status_date:
+              type: string
+              description: Date and time the payout status was updated.
+              nullable: true
+            paid_date:
+              type: string
+              description: Date and time the payout was paid.
+              nullable: true
+            cancel_date:
+              type: string
+              description: Date and time the payout was canceled.
+              nullable: true
+            payee:
+              type: object
+              description: Information about the payee.
+              properties:
+                name:
+                  type: string
+                  description: Name of the payee.
+                  example: "John Doe"
+                email:
+                  type: string
+                  description: Payee's email.
+                  example: "johndoe@example.com"
+                phone:
+                  type: string
+                  description: Payee's phone number.
+                  nullable: true
+                document:
+                  type: string
+                  description: Payee's document number (CPF for Brazil).
+                  example: "11133355566"
+                document_type:
+                  type: string
+                  description: Type of document.
+                  example: "CPF"
+                bank_info:
+                  type: object
+                  description: Bank information of the payee.
+                  properties:
+                    target_account:
+                      type: string
+                      description: Target account of the payee.
+                      example: "1233333"
+                    target_account_type:
+                      type: string
+                      description: Type of the target account (e.g., CPF).
+                      example: "cpf"
+            request_amount:
+              type: string
+              description: Requested amount.
+              example: "5.00"
+            request_currency:
+              type: string
+              description: Requested currency.
+              example: "BRL"
+            request_exchange_rate:
+              type: string
+              description: Exchange rate applied.
+              example: "5.4572"
+            debit_amount:
+              type: string
+              description: Amount debited.
+              example: "0.92"
+            debit_fee:
+              type: string
+              description: Fee debited.
+              example: "0.04"
+            debit_amount_total:
+              type: string
+              description: Total amount debited.
+              example: "0.96"
+            debit_currency:
+              type: string
+              description: Currency in which the amount is debited.
+              example: "USD"
+            local_tax_amount:
+              type: string
+              description: Local tax amount.
+              example: "0.02"
+            local_amount_total:
+              type: string
+              description: Total local amount.
+              example: "5.00"
+            local_currency:
+              type: string
+              description: Local currency.
+              example: "BRL"
+            local_exchange_rate:
+              type: string
+              description: Local exchange rate applied.
+              example: "1.0000"
+            target:
+              type: string
+              description: Payment target method (e.g., pix_key).
+              example: "pix_key"
+            target_account:
+              type: string
+              description: Target account.
+              example: "16038418652"
+            order_number:
+              type: string
+              description: Order number.
+              example: "04829BRymGXkyxmugr"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: string
+              example: 'ERROR'
+              description: ERROR
+            status_code:
+              type: string
+              example: 'BP-DR-23'
+              description: Code of error.
+            status_message:
+              type: string
+              example: 'Field payment.document must be a valid CPF'
+              description: Message about error.
+          required:
+            - status
+            - status_code
+            - status_message
