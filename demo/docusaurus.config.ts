@@ -127,6 +127,11 @@ const config: Config = {
               label: "Query",
               to: "/pay/utils/payment-query",
             },
+            {
+              label: "Payout create",
+              to: "/pay/payout/create-a-payout-request",
+            },
+           
 
           ],
         },
