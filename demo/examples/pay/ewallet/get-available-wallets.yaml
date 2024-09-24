@@ -47,7 +47,7 @@ paths:
                 summary: Example Request
                 value:
                   country: "br"
-                  integration_key: "************************K2Q9dA"
+                  integration_key: "************************K2Q9dB"
       responses:
         '200':
           description: Successful Response
