@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Get e-wallets
+  title: Get E-wallets
   description: | 
     This is a server-to-server HTTP POST used by the merchants to get the e-wallet codes, available in their countries, in order to use it with payment_type_code = ewallet in our Direct API.
   version: 1.0.0
@@ -12,7 +12,7 @@ servers:
 paths:
   /ws/ewallet-availableEWallets:
     post:
-      summary: Get Available E-Wallets
+      summary: Get E-Wallets
       description: Retrieve a list of available e-wallets based on the provided country and integration key. This is a server-to-server HTTP POST used by merchants to get the e-wallet codes available in their countries for use with payment_type_code = ewallet in the Direct API.
       requestBody:
         required: true
