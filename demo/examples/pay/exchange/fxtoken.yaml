@@ -124,9 +124,9 @@ paths:
                     minLength: 25
                     maxLength: 25
                 example:
-                  fx_token: "66e77536521b31b59678d8bcb48c0d0bde18d4490ad52ac656"
-                  currency_rate: "3.7833"
+                  fx_token: "66e77536521b31b59678d8bcb48c0d0bde18d4490ad52acaa"
+                  currency_rate: "4165.6295"
                   currency_from: "USD"
-                  currency_to: "PEN"
+                  currency_to: "COP"
                   expire_date: "2024-09-16T13:59:59+00:00"
                   new_currency_rate_available_at: "2024-09-16T13:44:59+00:00"
