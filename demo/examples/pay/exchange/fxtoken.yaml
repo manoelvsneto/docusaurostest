@@ -8,8 +8,6 @@ info:
 
         The integration team should be contacted to enable it upon request to
         use this feature.
-   security:
-        - integration_key: []
 servers:  
   - url: 'https://sandbox.ebanxpay.com/'
     description: Sandbox API Server
