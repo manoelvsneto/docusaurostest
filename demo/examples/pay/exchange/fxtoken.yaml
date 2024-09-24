@@ -28,16 +28,54 @@ paths:
                 country:
                   type: string
                   nullable: true
-                  description: Optional country code for regional settings.
+                  maxLength: 2
+                  minLength: 2
+                  description: | 
+                    Optional country code for regional settings.
+                    string 2 characters
+                    Enum: "br" "pe" "mx" "co" "cl" "ar" "bo"
+                    The two-letter code for the country where the operation is being processed. The available codes are:
+
+                    br: Brazil.
+                    pe: Peru.
+                    mx: Mexico.
+                    co: Colombia.
+                    cl: Chile.
+                    ar: Argentina.
+                    bo: Bolivia.
+
                 integration_key:
                   type: string
-                  description: Integration key for authentication.
+                  description: Integration key for authentication. Your unique and secret integration key.
+                  maxLength: 100
                 currency_from:
                   type: string
-                  description: Currency code to convert from (e.g., USD).
+                  maxLength: 3
+                  minLength: 3
+                  description: | 
+                      Currency code to convert from (e.g., USD).
+                      Enum: "EUR" "USD"
+                      The three-letter currency code from which the amount will be converted. Supported currencies:
+
+                      EUR
+                      USD
                 currency_to:
                   type: string
-                  description: Currency code to convert to (e.g., PEN).
+                  maxLength: 3
+                  minLength: 3
+                  description: | 
+                      Currency code to convert to (e.g., PEN).
+                      Enum: "BRL" "MXN" "PEN" "CLP" "COP" "ARS" "BOB"
+                      The three-letter currency code to which the amount will be converted. Supported currencies:
+
+                      BRL
+                      MXN
+                      PEN
+                      CLP
+                      COP
+                      ARS
+                      BOB
+
               required:
                 - integration_key
                 - currency_from
@@ -58,24 +96,33 @@ paths:
                 properties:
                   fx_token:
                     type: string
-                    description: Token for foreign exchange request.
+                    description: Token for foreign exchange request. The token identifier that must be used in operations with the fixed exchange rate.
+                    maxLength: 100
                   currency_rate:
                     type: string
-                    description: Exchange rate between the provided currencies.
+                    description: Exchange rate between the provided currencies.The fixed exchange rate that will be used in operations where this token is provided.
                   currency_from:
                     type: string
-                    description: Currency code from which the conversion is made.
+                    description: Currency code from which the conversion is made. The fixed exchange rate that will be used in operations where this token is provided.
+                    minLength: 3
+                    maxLength: 3
                   currency_to:
                     type: string
-                    description: Currency code to which the conversion is made.
+                    description: Currency code to which the conversion is made. The same three-letter code provided in the request. Format ISO 4217 three letter code.
+                    minLength: 3
+                    maxLength: 3
                   expire_date:
                     type: string
                     format: date-time
-                    description: The date and time when the FX token expires.
+                    description: The date and time when the FX token expires. The date in which the token will become invalid. UTC Date.
+                    minLength: 25
+                    maxLength: 25
                   new_currency_rate_available_at:
                     type: string
                     format: date-time
-                    description: The date and time when a new currency rate will be available.
+                    description: The date and time when a new currency rate will be available. The date on which the next token will become available. A new token will always be available at least one hour before the expire_date of the previous token. During this period both new and old tokens will be valid. UTC Date.
+                    minLength: 25
+                    maxLength: 25
                 example:
                   fx_token: "66e77536521b31b59678d8bcb48c0d0bde18d4490ad52ac656"
                   currency_rate: "3.7833"
