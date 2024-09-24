@@ -1,12 +1,13 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
-  title: E-Wallets API
-  description: API for retrieving available e-wallets per country.
+  title: Get available e-wallets
+  description: | 
+    This is a server-to-server HTTP POST used by the merchants to get the e-wallet codes, available in their countries, in order to use it with payment_type_code = ewallet in our Direct API.
   version: 1.0.0
 servers:
-  - url: https://sandbox.empresa.com
+  - url: https://sandbox.ebanxpay.com/
     description: Sandbox API Server
-  - url: https://prod.empresa.com
+  - url: https://api.ebanxpay.com/
     description: Production API Server
 paths:
   /ws/ewallet-availableEWallets:
@@ -22,6 +23,8 @@ paths:
               properties:
                 country:
                   type: string
+                  maxLength: 2
+                  minLength: 2
                   description: The two-letter country code for the customer's country.
                   enum:
                     - bo
@@ -47,28 +50,60 @@ paths:
                   integration_key: "************************K2Q9dA"
       responses:
         '200':
-          description: Successful response with a list of available e-wallets.
+          description: Successful Response
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    code:
-                      type: string
-                      description: The code representing the e-wallet.
-                    name:
-                      type: string
-                      description: The name of the e-wallet.
-                    icon_url:
-                      type: string
-                      description: URL to the e-wallet's icon image.
-                    promotional_text:
-                      type: string
-                      description: Promotional text associated with the e-wallet.
-                  example:
-                    code: "nequi"
-                    name: "Nequi"
-                    icon_url: "https://s3-sa-east-1.amazonaws.com/assets.empresa.com/gateway/nequi/icon.png"
-                    promotional_text: "¡Texto promocional de prueba!"
+                oneOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
+
+componentes:
+  schemas:
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The code representing the e-wallet.
+            name:
+              type: string
+              description: The name of the e-wallet.
+            icon_url:
+              type: string
+              description: URL to the e-wallet's icon image.
+            promotional_text:
+              type: string
+              description: Promotional text associated with the e-wallet.
+          example:
+            code: "nequi"
+            name: "Nequi"
+            icon_url: "https://s3-sa-east-1.amazonaws.com/assets.empresa.com/gateway/nequi/icon.png"
+            promotional_text: "¡Texto promocional de prueba!"                    
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: string
+              example: 'ERROR'
+              description: ERROR
+            status_code:
+              type: string
+              example: 'BP-DR-23'
+              description: Code of error.
+            status_message:
+              type: string
+              example: 'Field payment.document must be a valid CPF'
+              description: Message about error.
+          required:
+            - status
+            - status_code
+            - status_message
