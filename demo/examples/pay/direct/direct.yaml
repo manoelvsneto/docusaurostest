@@ -1,12 +1,12 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: Payment Processing API
   description: This API handles various types of payment requests and responses including Pix, PSE, and OXXO payment methods.
   version: 1.0.0
 servers:
-  - url: https://sandbox.empresa.com
+  - url: 'https://sandbox.ebanxpay.com/'
     description: Sandbox API Server
-  - url: https://prod.empresa.com
+  - url: 'https://api.ebanxpay.com/'
     description: Production API Server
 paths:
   /ws/direct:
@@ -35,7 +35,9 @@ paths:
                   - $ref: '#/components/schemas/ErrorResponse'
 
 components:
+  
   schemas:
+  
     PixBRRequest:
       type: object
       title: Pix Payment Request
