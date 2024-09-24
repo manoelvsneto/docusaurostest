@@ -58,9 +58,8 @@ paths:
                   - $ref: '#/components/schemas/SuccessResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 
-componentes:
+components:
   schemas:
-
     SuccessResponse:
       type: object
       properties:
