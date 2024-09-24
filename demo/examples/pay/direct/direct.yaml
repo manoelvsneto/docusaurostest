@@ -37,7 +37,7 @@ paths:
 components:
   
   schemas:
-  
+
     PixBRRequest:
       type: object
       title: Pix Payment Request

@@ -2,11 +2,18 @@ openapi: 3.0.3
 info:
   title: FX Token API
   version: 1.0.0
-  description: API to retrieve a foreign exchange (FX) token and currency rates.
-servers:
-  - url: https://sandbox.empresa.com
+  description: |
+        This is a server-to-server operation that retrieves a token to be used
+        in fixed exchange rate operations.
+
+        The integration team should be contacted to enable it upon request to
+        use this feature.
+   security:
+        - integration_key: []
+servers:  
+  - url: 'https://sandbox.ebanxpay.com/'
     description: Sandbox API Server
-  - url: https://prod.empresa.com
+  - url: 'https://api.ebanxpay.com/'
     description: Production API Server
 paths:
   /ws/fxtoken/get:
