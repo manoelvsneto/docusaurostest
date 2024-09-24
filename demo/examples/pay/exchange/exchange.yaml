@@ -15,8 +15,6 @@ paths:
       description: The exchange operation is a server-to-server HTTP POST used by the
         merchant website to query EBANX for the current exchange rate for a
         given currency.
-       security:
-        - integration_key: []
       requestBody:
         description: Data required for the currency exchange conversion.
         content:
