@@ -18,9 +18,9 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/PixRequest'
-                - $ref: '#/components/schemas/PSERequest'
-                - $ref: '#/components/schemas/OXXORequest'
+                - $ref: '#/components/schemas/PixBRRequest'
+                - $ref: '#/components/schemas/PSECORequest'
+                - $ref: '#/components/schemas/OXXOMXRequest'
         required: true
       responses:
         '200':
@@ -29,14 +29,14 @@ paths:
             application/json:
               schema:
                 oneOf:
-                  - $ref: '#/components/schemas/PixResponse'
-                  - $ref: '#/components/schemas/PSEResponse'
-                  - $ref: '#/components/schemas/OXXOResponse'
+                  - $ref: '#/components/schemas/PixBRResponse'
+                  - $ref: '#/components/schemas/PSECOResponse'
+                  - $ref: '#/components/schemas/OXXOMXResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 
 components:
   schemas:
-    PixRequest:
+    PixBRRequest:
       type: object
       title: Pix Payment Request
       description: Request payload to initiate a Pix payment.
@@ -162,7 +162,7 @@ components:
                   description: "Indicates if the payer is a loyal customer."
                   example: true
 
-    PixResponse:
+    PixBRResponse:
       type: object
       title: Pix Payment Response
       description: Response payload for a Pix payment request.
@@ -297,7 +297,7 @@ components:
           description: "URL to redirect the user after successful payment."
           example: "https://example.com/redirect?hash=dummy_hash_123456"
 
-    PSERequest:
+    PSECORequest:
       type: object
       title: PSE Payment Request
       description: Request payload to initiate a PSE payment.
@@ -405,7 +405,7 @@ components:
               description: "ZIP code of the payer's address."
               example: "110111"
 
-    PSEResponse:
+    PSECOResponse:
       type: object
       title: PSE Payment Response
       description: Response payload for a PSE payment request.
@@ -508,7 +508,7 @@ components:
           description: "URL to redirect the user after successful payment."
           example: "https://example.com/redirect?hash=dummy_hash_789012"
 
-    OXXORequest:
+    OXXOMXRequest:
       type: object
       title: OXXO Payment Request
       description: Request payload to initiate an OXXO payment.
@@ -603,7 +603,7 @@ components:
               description: "Token for fraud prevention."
               example: "dummy_fx_token"
 
-    OXXOResponse:
+    OXXOMXResponse:
       type: object
       title: OXXO Payment Response
       description: Response payload for an OXXO payment request.
