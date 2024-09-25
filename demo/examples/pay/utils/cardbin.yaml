@@ -1,18 +1,22 @@
 openapi: 3.0.3
 info:
   title: Empresa BIN List API
-  description: The API provides a list of valid card BINs accepted by Empresa, allowing merchants to update their BIN tables.
+  description: |
+    The BinList API returns a list of valid card BINs that would be accepted by EBANX. Merchants will then be able to make correct routing decisions depending on the customer's card BIN.
+
+    This API is designed to be called once in a while (server-to-server HTTP POST), so that Merchants can have their BIN table updated.
+
   version: 1.0.0
 servers:
-  - url: https://sandbox.empresa.com
+  - url: 'https://sandbox.ebanxpay.com/'
     description: Sandbox API Server
-  - url: https://prod.empresa.com
-    description: Production API Server  
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server 
 paths:
   /ws/cardbin:
     get:
       summary: Returns a list of valid card BINs.
-      description: This endpoint returns a list of card BINs accepted by Empresa, allowing merchants to update their BIN tables.
+      description: This endpoint returns a list of card BINs accepted by EBANX, allowing merchants to update their BIN tables.
       parameters:
         - name: integration_key
           in: query
@@ -24,7 +28,7 @@ paths:
           example: your_test_integration_key
         - name: country
           in: query
-          description: If provided, returns only the BINs for the specified country.
+          description: If provided, returns only the BINs for the specified country. If sent, returns only the BINs of the requested country.
           required: false
           schema:
             type: string
@@ -35,6 +39,13 @@ paths:
         - name: bank_info
           in: query
           description: If set to true, returns the issuer bank or financial institution. This information will be returned only when available.
+          required: false
+          schema:
+            type: boolean
+          example: true
+        - name: blocked
+          in: query
+          description: verify_param.
           required: false
           schema:
             type: boolean
