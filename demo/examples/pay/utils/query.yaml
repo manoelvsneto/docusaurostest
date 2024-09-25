@@ -13,17 +13,18 @@ paths:
   /ws/query:
     post:
       summary: Payment Query
-      description: Queries information about a specific payment using either query string parameters or request body. The query operation is a server-to-server HTTP POST used by the merchant website to query EBANX for information about a specific payment.
+      description: Queries information about a specific payment using either query string parameters or request body.
       requestBody:
         content:
           application/json:
             schema:
               oneOf:
                 - $ref: '#/components/schemas/QueryBodyHashRequest'
+                - $ref: '#/components/schemas/QueryBodyMerchantPaymentCodeRequest'
             examples:
               example-1:
                 value:
-                  hash: "55e2f1dd61f85171e67376719896b1559d01c43ab62b1f97"
+                  hash: "5552f1dd61f85171e67376719896b1559d01c43ab62b1f97"
                   merchant_payment_code: "111122220924400593471283000056"
                   integration_key: "************************P8ZlBQ"
       responses:
