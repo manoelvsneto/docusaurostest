@@ -107,7 +107,7 @@ components:
   schemas:
     QueryBodyHashRequest:
       type: object
-      title: Pix Payment Request
+      title: Hash Request
       description: Request payload to initiate a Pix payment.
       properties:
         integration_key:
@@ -129,7 +129,7 @@ components:
         - integration_key
     QueryBodyMerchantPaymentCodeRequest:
       type: object
-      title: Pix Payment Request
+      title: Merchant Payment Code Request
       description: Request payload to initiate a Pix payment.
       properties:
         integration_key:
