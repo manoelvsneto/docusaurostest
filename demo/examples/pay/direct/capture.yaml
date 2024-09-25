@@ -29,7 +29,7 @@ paths:
                   example: 'your_integration_key'
                 hash:
                   type: string
-                  description: The payment hash (Empresa unique identifier). Required if merchant_payment_code is not provided.
+                  description: The payment hash (EBANX unique identifier). Required if merchant_payment_code is not provided.
                   maxLength: 48
                   example: 'payment_hash_48_chars_long'
                 merchant_payment_code:
