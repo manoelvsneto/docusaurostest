@@ -4,9 +4,9 @@ info:
   description: API for capturing credit card payments and pre-auth transactions.
   version: 1.0.0
 servers:
-  - url: https://sandbox.empresa.com
+  - url: 'https://sandbox.ebanxpay.com/'
     description: Sandbox API Server
-  - url: https://prod.empresa.com
+  - url: 'https://api.ebanxpay.com/'
     description: Production API Server
 paths:
   /ws/capture:
