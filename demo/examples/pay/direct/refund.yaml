@@ -92,14 +92,14 @@ components:
       type: string
       description: |
         A JWT (JSON Web Token) containing the details for the refund operation. The JWT encapsulates data such as amount, refund description, merchant refund code, and operation type. Details JWT: 
-            ```{
+            {
               "amount": 11.11,
               "integration_key_encrypted_jwe": "abcdefghijklment",
               "description": "Order needs to be refunded",
               "operation": "request",
               "merchant_refund_code": "a1b2c3d4",
               "hash": "11235813213455A"
-            }```
+            }
       example: >
         eyJhbGciOiJIUzI1NiJ9.eyJhbW91bnQiOjExLjExLCJpbnRlZ3JhdGlvbl9rZXlfZW5jcnlwdGVkX2p3ZSI6ImFiY2RlZmdoaWprbG1lbnQiLCJkZXNjcmlwdGlvbiI6Ik9yZGVyIG5lZWRzIHRvIGJlIHJlZnVuZGVkIiwib3BlcmF0aW9uIjoicmVxdWVzdCIsIm1lcmNoYW50X3JlZnVuZF9jb2RlIjoiYTFiMmMzZDQiLCJoYXNoIjoiMTEyMzU4MTMyMTM0NTVBIn0.dJrcPN_6vPf6eCUNIt11kXCtIg3RhiJ31jS6dsRtFdc
 
