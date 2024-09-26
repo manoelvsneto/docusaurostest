@@ -35,6 +35,7 @@ paths:
               schema:
                 oneOf:
                   - $ref: '#/components/schemas/QueryBodyHashResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
               examples:
                 example-1:
                   value:
@@ -281,3 +282,22 @@ components:
             capture_available:
               type: boolean
               description: Indicates if the payment is ready to be captured.
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the response.
+          example: ERROR
+        status_code:
+          type: string
+          description: Error code.
+          example: BP-SA-3
+        status_message:
+          type: string
+          description: Detailed message about the error.
+          example: Merchant account is not active
+      required:
+        - status
+        - status_code
+        - status_message

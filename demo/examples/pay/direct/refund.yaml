@@ -4,10 +4,10 @@ info:
   description: This API handles payment refunds through various operations such as refund requests and cancellations.
   version: 1.0.0
 servers:
-  - url: https://sandbox.empresa.com
+  - url: 'https://sandbox.ebanxpay.com/'
     description: Sandbox API Server
-  - url: https://prod.empresa.com
-    description: Production API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server 
 paths:
   /ws/refund:
     post:
@@ -508,10 +508,17 @@ components:
       properties:
         status:
           type: string
+          description: Status of the response.
           example: ERROR
         status_code:
           type: string
-          example: BP-SA-1
+          description: Error code.
+          example: BP-SA-3
         status_message:
           type: string
-          example: Parameter integration_key not informed
+          description: Detailed message about the error.
+          example: Merchant account is not active
+      required:
+        - status
+        - status_code
+        - status_message

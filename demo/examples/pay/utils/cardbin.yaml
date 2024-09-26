@@ -66,13 +66,20 @@ components:
       properties:
         status:
           type: string
+          description: Status of the response.
           example: ERROR
         status_code:
           type: string
-          example: BP-SA-1
+          description: Error code.
+          example: BP-SA-3
         status_message:
           type: string
-          example: Parameter integration_key not informed
+          description: Detailed message about the error.
+          example: Merchant account is not active
+      required:
+        - status
+        - status_code
+        - status_message
     SuccessResponse:
       type: object
       properties:
