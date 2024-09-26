@@ -37,7 +37,7 @@ paths:
 components:
   schemas:
     
-    RequestRefundWithSplitRequest:
+    RefundWithSplitRequest:
       type: object
       properties:
         integration_key:
@@ -47,7 +47,7 @@ components:
           example: "************************a23222"
         operation:
           type: string
-          maxLength: 6
+          minLength: 6
           maxLength: 7
           enum: [request, cancel]
           description: The operation to be performed.
@@ -87,6 +87,7 @@ components:
         - integration_key
         - operation
         - hash
+  
     RefundRequestPixJWT:
       type: string
       description: |
