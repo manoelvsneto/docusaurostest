@@ -20,7 +20,7 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/RefundRequestJWT'
+                - $ref: '#/components/schemas/RefundRequestPixJWT'
                 - $ref: '#/components/schemas/RefundRequest'
               
       responses:
@@ -31,10 +31,11 @@ paths:
               schema:
                 oneOf:
                   - $ref: '#/components/schemas/RefundResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
 
 components:
   schemas:
-    RefundRequestJWT:
+    RefundRequestPixJWT:
       type: string
       description: |
         A JWT (JSON Web Token) containing the details for the refund operation. The JWT encapsulates data such as amount, refund description, merchant refund code, and operation type. Details JWT: {
@@ -448,3 +449,16 @@ components:
               type: number
               description: The refunded amount in the original currency.
               example: 28.12
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ERROR
+        status_code:
+          type: string
+          example: BP-SA-1
+        status_message:
+          type: string
+          example: Parameter integration_key not informed
