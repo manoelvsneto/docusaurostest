@@ -112,7 +112,6 @@ components:
                           CO: the payment is confirmed (paid).
                           CA: the payment is cancelled.
                         example: "CA"
-                        enum: ["OP","PE","CO","CA"]
                       status_date:
                         type: string
                         minLength: 19
@@ -285,5 +284,4 @@ components:
       required:
         - status
         - status_code
-        - status_message
         - status_message
