@@ -10,7 +10,7 @@ servers:
     description: Production API Server 
 paths:
   /ws/getBankList:
-    get:
+    post:
       summary: Get the list of banks available for processing payments
       description: |
         The `getBankList` operation is a server-to-server HTTP GET request used to query the server for the list of banks available for processing payments.
