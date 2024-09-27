@@ -105,7 +105,8 @@ components:
 
     RefundRequest:
       type: object
-      description: Request schema for refund including bank information.
+      description: |
+        Request schema for refund including bank information.
       properties:
         integration_key:
           type: string
@@ -450,7 +451,8 @@ components:
   
     RefundResponse:
       type: object
-      description: Unified response schema for a successful refund operation, including payment and refund details.
+      description: |
+        Unified response schema for a successful refund operation, including payment and refund details.
       properties:
         status:
           type: string
