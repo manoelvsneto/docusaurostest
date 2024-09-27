@@ -452,7 +452,7 @@ components:
     RefundResponse:
       type: object
       description: |
-        Unified response schema for a successful refund operation, including payment and refund details.
+          Unified response schema for a successful refund operation, including payment and refund details.
       properties:
         status:
           type: string
@@ -507,6 +507,8 @@ components:
 
     ErrorResponse:
       type: object
+      description: |
+        Response Error
       properties:
         status:
           type: string
