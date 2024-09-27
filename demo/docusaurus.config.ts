@@ -100,6 +100,10 @@ const config: Config = {
               to: "/pay/direct/refund-orcancel",
             },
             {
+              label: "Resend Bank Info",
+              to: "/pay/direct/resend-bank-info",
+            },
+            {
               label: "Get FX rate",
               to: "/pay/exchange/currency-exchange-conversion",
             },
