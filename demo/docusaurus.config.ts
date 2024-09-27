@@ -367,6 +367,18 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          updatecustomerbankinfo: {
+            specPath: "examples/pay/direct/updatecustomerbankinfo.yaml",
+            outputDir: "docs/pay/direct",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+
+          
+
           /*petstore: {
             specPath: "https://redocly.github.io/redoc/openapi.yaml",
             outputDir: "docs/petstore",
