@@ -1,0 +1,354 @@
+openapi: 3.0.0
+info:
+  title: Resend Bank Info
+  description: API to update customer bank information. The resend refund bank info is a server-to-server operation to update the bank info data in a existing refund.
+  version: 1.0.0
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server   
+paths:
+  /ws/updatecustomerbankinfo:
+    post:
+      summary: Resend Bank Info
+      requestBody:
+        description: The resend refund bank info is a server-to-server operation to update the bank info data in a existing refund.
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/RequestBrazilBankTransfer'
+                - $ref: '#/components/schemas/RequestBrazilPix'
+      responses:
+        '200':
+          description: Response Body
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'  
+components:
+  schemas:
+  
+    RequestBrazilPix:
+              description: Payment body object
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+                hash:
+                  type: string
+                  description: The payment hash (EBANX unique identifier).
+                  maxLength: 48
+                merchant_refund_code:
+                  type: integer
+                  description: The ID of the refund on the merchant system. Unique Required for request
+                  minLength: 1
+                  maxLength: 40
+                refund_id:
+                  type: integer
+                  description: The ID of the refund to be updated. Required for resending.
+                  maxLength: 20
+                bank_info:
+                  type: object
+                  properties:
+                    pix_key:
+                      type: string
+                      maxLength: 36
+                      description: |
+                        Pix key information - This field accepts one of:
+
+                        EMAIL: Email address for Pix transactions. Example: "josesilva@email.com"
+                        CPF: CPF number for Pix transactions. Example: "123.456.789-01"
+                        CNPJ: CNPJ number for Pix transactions. Example: "12.345.678/0001-90"
+                        PHONE: Phone number for Pix transactions. Example: "+554191457164"
+                        RANDOM: Random Pix key for transactions. Example: "5b5432e5-aa6d-40b0-9ff7-0226f5a0186f"
+                    bank_account_holder_document:
+                      type: string
+                      maxLength: 14
+                      description: Bank account holder document CPF or CNPJ
+                    bank_account_holder_name:
+                      type: string
+                      maxLength: 100
+                      description: Bank account holder name
+              example:
+                integration_key: "*******************on_key"
+                hash: "5ad9028b30eb8de099f9fe72b9763283c7cf4d35b6430221"
+                merchant_refund_code: 787653
+                refund_id: 3784756
+                bank_info:
+                  pix_key: test@test.com
+                  bank_account_holder_document: "85351346893"
+                  bank_account_holder_name: "José Silva"
+    
+    RequestBrazilBankTransfer:
+              description: Payment body object
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+                hash:
+                  type: string
+                  description: The payment hash (EBANX unique identifier).
+                  maxLength: 48
+                merchant_refund_code:
+                  type: integer
+                  description: The ID of the refund on the merchant system. Unique Required for request
+                  minLength: 1
+                  maxLength: 40
+                refund_id:
+                  type: integer
+                  description: The ID of the refund to be updated. Required for resending.
+                  maxLength: 20
+                bank_info:
+                  type: object
+                  properties:
+                    bank_name:
+                      type: string
+                      description: |
+                          Name of the banking institution. See the complete list below:
+
+                          Available for Savings Accounts:
+                          
+                          001 Banco do Brasil
+                          237 Bradesco
+                          341 Itaú
+                          104 Caixa Econômica
+                          033 Santander
+                          Available for Checking Accounts:
+                          
+                          104 Caixa Econômica
+                          001 Banco do Brasil
+                          341 Itaú
+                          237 Bradesco
+                          033 Santander
+                          212 Banco Original S.A.
+                          290 PagSeguro Internet S/A
+                          318 Banco BMG S.A.
+                          336 Banco C6 S.A.
+                          655 Neon / Banco Votorantim S.A.
+                          756 Bancoob
+                          021 Banestes
+                          077 Inter
+                          041 Banrisul
+                          748 Banco Cooperativo Sicredi S.A.
+                          745 Banco Citibank S.A.
+                          260 Nu Pagamentos S.A.
+                          422 Banco Safra S.A.
+                          082 Topazio S.A.
+                          003 Banco da Amazônia S.A.
+                          004 Banco do Nordeste
+                          010 Credicoamo Crédito Rural Cooperativa
+                          012 Banco Inbursa S.A.
+                          024 Bandepe S.A.
+                          025 Banco Alfa S.A.
+                          037 Banpara
+                          040 Banco Cargill S.A.
+                          047 Banese
+                          063 Banco Bradescard S.A.
+                          064 Goldman Sachs do Brasil Banco Múltiplo S. A.
+                          065 Banco AndBank (Brasil) S.A.
+                          066 Banco Morgan Stanley S. A.
+                          069 Banco Crefisa S.A.
+                          070 BRB - Banco de Brasília S.A.
+                          074 Banco J. Safra S.A.
+                          084 Unicred Norte do Paraná
+                          085 Cooperativa Central de Crédito Urbano (CECRED)
+                          089 Cooperativa de Crédito Rural da Região da Mogiana
+                          091 Unicred Central do Rio Grande do Sul
+                          093 Pólocred Sociedade de Crédito ao Microempreendedor e à Empresa de Pequeno Porte
+                          094 Banco Finaxis S.A.
+                          096 Banco B3 S.A.
+                          097 Credisis - Central de Cooperativas de Crédito Ltda.
+                          098 Credialiança Cooperativa de Crédito Rural
+                          099 Uniprime Central – Central Interestadual de Cooperativas de Crédito Ltda.
+                          107 Banco Bocom BBM S.A.
+                          108 PortoCred S.A. Crédito, Financiamento e Investimento
+                          120 Banco Rodobens SA
+                          121 Banco Agibank S.A.
+                          124 Banco Woori Bank do Brasil S.A.
+                          125 Plural S.A. Banco Múltiplo
+                          130 Caruana S.A. Sociedade de Crédito Financiamento e Investimento
+                          132 ICBC do Brasil Banco Múltiplo S.A.
+                          133 Cresol
+                          136 Confederação Nacional das Cooperativas Centrais Unicred Ltda – Unicred do Brasil
+                          139 Intesa Sanpaolo Brasil S.A. - Banco Múltiplo
+                          163 Commerzbank Brasil S.A. - Banco Múltiplo
+                          174 Pernambucanas Financiadora S.A. Crédito Financiamento e Investimento
+                          197 Stone Pagamentos S.A.
+                          208 Banco BTG Pactual S.A.
+                          218 Banco BS2 S.A.
+                          224 Banco Fibra S.A.
+                          233 Banco Cifra S.A.
+                          241 Banco Clássico S.A.
+                          243 Banco Máxima S.A.
+                          246 Banco ABC Brasil S.A.
+                          249 Banco Investcred Unibanco S.A.
+                          250 BCV - Banco de Crédito e Varejo S/A
+                          254 Parana Banco S. A.
+                          265 Banco Fator S.A.
+                          266 Banco Cédula S.A.
+                          279 Cooperativa de Crédito Rural de Primavera do Leste
+                          280 Avista S.A. Crédito Financiamento e Investimento
+                          281 Cooperativa de Crédito Rural Coopavel
+                          299 Sorocred - Crédito Financiamento e Investimento S/A
+                          301 BPP Instituição de Pagamento S.A.
+                          320 Banco Industrial e Comercial S.A. (BICBANCO)
+                          322 Cooperativa de Crédito Rural de Abelardo Luz - Sulcredi/Crediluz
+                          323 MercadoPago.com Representações Ltda.
+                          340 Super Pagamentos e Administração de Meios Eletrônicos S.A.
+                          366 Banco Société Générale Brasil S.A.
+                          370 Banco Mizuho do Brasil S.A.
+                          376 Banco J. P. Morgan S. A.
+                          389 Banco Mercantil do Brasil S.A.
+                          399 Kirton Bank S.A. - Banco Múltiplo
+                          477 Citibank N.A.
+                          487 Deutsche Bank S.A. - Banco Alemão
+                          488 JPMorgan Chase Bank National Associatio
+                          623 Banco Pan S.A.
+                          633 Banco Rendimento S.A
+                          634 Banco Triângulo S.A.
+                          637 Banco Sofisa S. A.
+                          654 Banco A.J. Renner S.A
+                          707 Banco Daycoval S.A.
+                          739 Banco Cetelem S.A.
+                          743 Banco Semear S.A.
+                          746 Banco Modal S.A.
+                          751 Scotiabank Brasil S.A. Banco Múltiplo
+                          753 Novo Banco Continental S.A. - Banco Múltiplo
+                          754 Banco Sistema S.A.
+                    bank_branch:
+                      type: string
+                      description: Bank branch. The branch can have a digit. If have so, the digit should be separated with a hyphen.
+                      maxLength: 7
+                    bank_account:
+                      type: string
+                      description: Account number, if have digit should be separated with a hyphen
+                      maxLength: 15
+                    account_type:
+                      type: string
+                      description: Account type C - for checking account S - for savings account
+                      maxLength: 1
+                    bank_details:
+                      type: integer
+                      description: |
+                        Only necessary when the bank is 104 Caixa Econômica Valid values are '001', '002', '003', '006', '007', '013', '022', '023', '028', '043', '131', '1288'
+                      maxLength: 4
+                    bank_account_holder_document:
+                      type: string
+                      description: Bank account holder document CPF or CNPJ
+                      maxLength: 14
+                    bank_account_holder_name:
+                      type: string
+                      description: Bank account holder name
+                      maxLength: 100
+                  required:
+                  - bank_name
+                  - bank_branch
+                  - bank_account
+                  - account_type
+                  - bank_account_holder_document
+                  - bank_account_holder_name
+              example:
+                integration_key: "*******************on_key"
+                hash: "5ad9028b30eb8de099f9fe72b9763283c7cf4d35b6430221"
+                merchant_refund_code: 787653
+                refund_id: 3784756
+                bank_info:
+                  bank_name: "104  Caixa Econômica"
+                  bank_branch: "00001-2"
+                  bank_account: "08251777-6"
+                  account_type: "C"
+                  bank_details: 1
+                  bank_account_holder_document: "85351346893"
+                  bank_account_holder_name: "José Silva"
+  
+    SuccessResponse:
+        type: object
+        properties:
+          payment:
+                        type: object
+                        properties:
+                          hash:
+                            type: string
+                          country:
+                            type: string
+                          merchant_payment_code:
+                            type: string
+                          order_number:
+                            type: string
+                            nullable: true
+                          status:
+                            type: string
+                          status_date:
+                            type: string
+                            format: date-time
+                          open_date:
+                            type: string
+                            format: date-time
+                          confirm_date:
+                            type: string
+                            format: date-time
+                          transfer_date:
+                            type: string
+                            nullable: true
+                            format: date-time
+                          amount_br:
+                            type: string
+                          amount_ext:
+                            type: string
+                          amount_iof:
+                            type: string
+                          currency_rate:
+                            type: string
+                          currency_ext:
+                            type: string
+                          due_date:
+                            type: string
+                            format: date
+                          instalments:
+                            type: string
+                          payment_type_code:
+                            type: string
+                          pre_approved:
+                            type: boolean
+                          capture_available:
+                            type: boolean
+                            nullable: true
+                          refunds:
+                            type: array
+                            items:
+                              type: object
+          operation:
+            type: string
+            example: updatecustomerbankinfo
+          status:
+            type: string
+            example: SUCCESS           
+    
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the response.
+          example: ERROR
+        status_code:
+          type: string
+          description: Error code.
+          example: BP-SA-3
+        status_message:
+          type: string
+          description: Detailed message about the error.
+          example: Merchant account is not active
+      required:
+        - status
+        - status_code
+        - status_message
