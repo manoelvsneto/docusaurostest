@@ -1,13 +1,13 @@
 openapi: 3.0.3
 info:
-  title: Bank List API
-  description: API to retrieve a list of banks available for processing payments.
+  title: Get bank list
+  description: The “getBankList operation” is a server-to-server HTTP POST used by the merchant website to query EBANX for the list of banks that are available to process with EBANX.
   version: 1.0.0
 servers:
-  - url: https://sandbox.empresa.com
+  - url: 'https://sandbox.ebanxpay.com/'
     description: Sandbox API Server
-  - url: https://prod.empresa.com
-    description: Production API Server  
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server 
 paths:
   /ws/getBankList:
     get:
