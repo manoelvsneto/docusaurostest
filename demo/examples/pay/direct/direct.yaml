@@ -18,6 +18,7 @@ paths:
           application/json:
             schema:
               oneOf:
+                - $ref: '#/components/schemas/DefaultRequest'
                 - $ref: '#/components/schemas/PixBRRequest'
                 - $ref: '#/components/schemas/PSECORequest'
                 - $ref: '#/components/schemas/OXXOMXRequest'
@@ -37,6 +38,387 @@ paths:
 components:
   
   schemas:
+    DefaultRequest:
+      type: object
+      title: Default Request
+      description: Request payload to initiate a Pix payment.
+      required:
+                  - integration_key
+                  - operation
+                  - mode
+                  - payment
+      properties:
+                
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  minLength: 1
+                  maxLength: 100
+                operation:
+                  type: string
+                  description: Must be request
+                  enum: ["request"]
+                  minLength: 1
+                  maxLength: 7
+                mode:
+                  type: string
+                  description: Currently only full mode is available.
+                  enum: ["full"]
+                  minLength: 1
+                  maxLength: 4
+                payment:
+                  type: object
+                  required:
+                    - name
+                    - email
+                    - document
+                    - address
+                    - street_number
+                    - city
+                    - state
+                    - zipcode
+                    - country
+                    - phone_number
+                    - payment_type_code
+                    - merchant_payment_code
+                    - currency_code
+                    - instalments
+                    - amount_total
+                    - creditcard
+                  properties:
+                    name:
+                      type: string
+                      description: Customer name.
+                      minLength: 1
+                      maxLength: 100
+                    email:
+                      type: string
+                      description: Customer email address.
+                      minLength: 5
+                      maxLength: 100
+                    document:
+                      type: string
+                      description:  |
+                        Customers document.
+
+                        Brazil: requires a valid CPF (natural person taxpayer ID) or CNPJ (business taxpayer ID).
+                        Chile: requires a valid RUT (Registro Único Tributario).
+                        Colombia: requires a valid NIT / CC (Número de Identificación Tributaria).
+                        Argentina: requires a valid CUIT / CUIL / CDI (Clave Única de Identificación Tríbutaria).
+                      maxLength: 32
+                    customer_ip:
+                      type: string
+                      description: Customer’s IP address. It may be used by an anti-fraud tool.
+                    address:
+                      type: string
+                      description: |
+                        Customer address (street name).
+                        Brazil: required.
+                        Argentina: required for Credit Card payments.
+                        Chile: required for Webpay payments.
+                        Colombia: required for Credit Card payments.
+                        Mexico: required for Credit Card payments.
+                        Peru: required for Credit Card payments.
+                      minLength: 1
+                      maxLength: 100
+                    street_number:
+                      type: string
+                      description: |
+                        Customer street number.
+
+                        Brazil: required.
+                        Argentina: required for Credit Card payments.
+                        Chile: required for Webpay payments.
+                        Colombia: required for Credit Card payments.
+                        Mexico: required for Credit Card payments.
+                        Peru: required for Credit Card payments.
+                        
+                      minLength: 1
+                      maxLength: 30
+                    street_complement:
+                      type: string
+                      description: Extra address field for complimentary data.
+                      minLength: 1
+                      maxLength: 100
+                    city:
+                      type: string
+                      description: |
+                        Customer city.
+
+                        Brazil: required.
+                        Argentina: required for Credit Card payments.
+                        Chile: required for Webpay payments.
+                        Colombia: required for Credit Card payments.
+                        Mexico: required for Credit Card payments.
+                        Peru: required for Credit Card payments.
+                        
+                      minLength: 1
+                      maxLength: 80
+                    state:
+                      type: string
+                      description: |
+                        Customer state/region/province.
+
+                        Brazil: required.
+                        Argentina: required for Credit Card payments.
+                        Chile: required for Webpay payments.
+                        Colombia: required for Credit Card payments.
+                        Mexico: required for Credit Card payments.
+                        Peru: required for Credit Card payments.
+                        
+                    zipcode:
+                      type: string
+                      description: |
+                        Customer’s zipcode.
+
+                        Brazil: required.
+                        Argentina: required for Credit Card payments.
+                        Chile: required for Webpay payments.
+                        Colombia: required for Credit Card payments.
+                        Mexico: required for Credit Card payments.
+                        Peru: required for Credit Card payments.
+                      maxLength: 8
+                    country:
+                      type: string
+                      description: |
+                        The two-letter country code for the customer country. The available codes/countries are:
+
+                        BR: Brazil.
+                        PE: Peru.
+                        MX: Mexico.
+                        CO: Colombia.
+                        CL: Chile.
+                        AR: Argentina.
+                        EC: Ecuador.
+                        BO: Bolivia.
+                        UY: Uruguay
+                        PY: Paraguay
+                        CR: Costa Rica
+                        SV: El Salvador
+                        GT: Guatemala
+                        PN: Panama
+                      enum: ["BR", "PE", "MX", "CO", "CL", "AR", "EC", "BO", "UY", "PY", "CR", "SV", "GT", "PN"]
+                    phone_number:
+                      type: string
+                      description: Customer phone number. It is required for all countries.
+                      minLength: 10
+                      maxLength: 15
+                    payment_type_code:
+                      type: string
+                      description: | 
+                        The code of the payment method. The supported codes are:
+
+                        baloto: Baloto (Colombia).
+                        banktransfer: Bank transfer (Brazil).
+                        bancodobrasil: Banco do Brasil online debit (Brazil).
+                        banrisul: Banrisul online debit (Brazil).
+                        boleto: Boleto bancário (Brazil).
+                        bradesco: Bradesco online debit (Brazil).
+                        creditcard: Credit Card (Brazil, Argentina, Mexico, Peru, Colombia).
+                        cupon: Cupon de Pagos (Argentina).
+                        debitcard: Debit Card
+                        ebanxaccount: EBANX Account (Brazil).
+                        efecty: Efecty (Colombia)
+                        eft: Bank Transfer (Colombia).
+                        itau: Itaú online debit (Brazil).
+                        multicaja: Multicaja (Chile).
+                        nequi: Nequi (Colombia).
+                        oxxo: OXXO (Mexico).
+                        oxxopay: OXXO Pay (Mexico).
+                        pagoefectivo: PagoEfectivo (Peru).
+                        pagofacil: PagoFacil (Argentina).
+                        pagosnet: PagosNet (Bolivia).
+                        rapipago: RapiPago (Argentina).
+                        safetypay: SafetyPay (Peru, Ecuador, Checkout only).
+                        safetypay-cash: SafetyPay Cash (Peru, Ecuador).
+                        safetypay-online: SafetyPay Online (Peru, Ecuador).
+                        sencillito: Sencillito (Chile).
+                        servipag: Servipag (Chile).
+                        spei: SPEI bank transfer method (Mexico).
+                        webpay: Webpay (Chile).
+                      enum: ["baloto", "banktransfer", "bancodobrasil", "banrisul", "boleto", "bradesco", "creditcard", "cupon", "debitcard", "ebanxaccount", "efecty", "eft", "itau", "multicaja", "oxxo", "pagoefectivo", "pagofacil", "pagosnet", "rapipago", "safetypay", "safetypay-cash", "safetypay-online", "sencillito", "servipag", "spei", "webpay"]
+                    merchant_payment_code:
+                      type: string
+                      description: The payment hash Merchant Payment Code (unique merchant ID).
+                    user_value_1:
+                      type: string
+                      description: Optional parameters that can be used by the merchant associate additional info to the payment. These parameters will be appended to the “response_url“ when the transaction is finished.
+                      maxLength: 20
+                    user_value_2:
+                      type: string
+                      description: Optional parameters that can be used by the merchant associate additional info to the payment. These parameters will be appended to the “response_url“ when the transaction is finished.
+                      maxLength: 20
+                    user_value_3:
+                      type: string
+                      description: Optional parameters that can be used by the merchant associate additional info to the payment. These parameters will be appended to the “response_url“ when the transaction is finished.
+                      maxLength: 20
+                    user_value_4:
+                      type: string
+                      description: Optional parameters that can be used by the merchant associate additional info to the payment. These parameters will be appended to the “response_url“ when the transaction is finished.
+                      maxLength: 20
+                    user_value_5:
+                      type: string
+                      description: Optional parameters that can be used by the merchant associate additional info to the payment. These parameters will be appended to the “response_url“ when the transaction is finished.
+                      maxLength: 20
+                    due_date:
+                      type: string
+                      maxLength: 10
+                      description: The due date of payments slips. Boletos issued in USD can have a maximum expiry period of three days; boletos issued in BRL can have an extended expiry date. The due date is based on local time of the country that the payment is generated.
+                    create_token:
+                      type: boolean
+                      description: Generates a token for recurring billing. This is only available for merchants that have requested recurring billing on their contracts.
+                    token:
+                      type: string
+                      description: | 
+                          Choose the token you want to use for recurring billing. This is only available for merchants that have requested recurring billing on their contracts. Use this parameter only if create_token is true. NOTE: TOKENS EXPIRE AFTER 14 MONTHS OF ITS LAST USE.
+                      minLength: 32
+                      maxLength: 128
+                    currency_code:
+                      type: string
+                      description: |
+                        Three-letter code of the payment currency. Supported currencies:
+
+                        BRL
+                        EUR
+                        MXN
+                        PEN
+                        USD
+                        CLP
+                        COP
+                        ARS
+                        BOB
+                        UYU
+                        
+                      enum: ["BRL", "EUR", "MXN", "PEN", "USD", "CLP", "COP", "ARS", "BOB", "UYU"]
+                    instalments:
+                      type: integer
+                      description: |
+                        The number of instalments of the payment (from 1 to 12, depending on your contract and the country).
+
+                        Brazil: 1 to 12 (depending on your contract).
+                        Mexico: 1, 3, 6, 9 or 12 (depending on your contract).
+                        Colombia: 1 to 36 (depending on your contract).
+                        Argentina: 1 to 12 (depending on your contract).
+                        Peru: 1 to 48 (depending on your contract).
+                        
+                    amount_total:
+                      type: number
+                      description: The amount in the specified currency (currency_code).
+                    creditcard:
+                      type: object
+                      required:
+                        - card_number
+                        - card_name
+                        - card_due_date
+                        - card_cvv
+                      properties:
+                        card_number:
+                          type: string
+                          description: Customer's credit card number.
+                          minLength: 14
+                          maxLength: 19
+                        card_name:
+                          type: string
+                          description: Credit card cardholder name.
+                          minLength: 1
+                          maxLength: 50
+                        card_due_date:
+                          type: string
+                          description: Credit card due date (“valid thru”) in the format mm/yyyy.
+                          minLength: 7
+                          maxLength: 7
+                        card_cvv:
+                          type: string
+                          description: Credit card security code.
+                          minLength: 3
+                          maxLength: 4
+                        auto_capture:
+                          type: boolean
+                          description: | 
+                            If true, the payment will be captured automatically by EBANX; if false, the payment will have to be captured by the merchant using the API method capture.
+                        token:
+                          type: string
+                          minLength: 1
+                          maxLength: 200
+                          description: | 
+                            If a previously created token is informed, no credit card information is needed. EBANX will identify the credit card associated with the token and perform the transaction. Only available if you do recurring billing.
+                    note:
+                      type: string
+                      description: A note about the payment. The value of this parameter will be shown along with payment details.
+                      minLength: 1
+                      maxLength: 200
+                    sub_account:
+                      type: object
+                      description: The object containing the sub account’s name. Required for payments where the sub account feature is being used.
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the sub account.
+                          maxLength: 32
+                        image_url:
+                          type: string
+                          description: URL of the logo of the sub-account. It MUST be an HTTPS URL. Otherwise, you will receive an error message.
+                    items:
+                      type: object
+                      description: Object containing the items of the order
+                      properties:
+                        sku:
+                          type: string
+                          description: SKU of the item
+                          maxLength: 20
+                        name:
+                          type: string
+                          description: Name of the item.
+                          maxLength: 100
+                        description:
+                          type: string
+                          description: Description of the item.
+                          maxLength: 200
+                        unit_price:
+                          type: number
+                          description: Price of the item.
+                        quantity:
+                          type: number
+                          description: Quantity of each item.
+                        type:
+                          type: string
+                          description: Type of the item.
+                          maxLength: 50
+                    device_id:
+                      type: string
+                      description: Unique ID to identify the customer’s device. Used for anti-fraud checking purposes.
+                      maxLength: 200
+                    eft_code:
+                      type: string
+                      description: Code for the customer’s bank. Only required for Colombia payments.
+                      maxLength: 32
+                    notification_url:
+                      type: string
+                      description: The URL to send notifications for this payment.
+                      maxLength: 2000
+                    redirect_url:
+                      type: string
+                      description: The URL to redirect the customer after the payment.
+                      maxLength: 2000
+                    person_type:
+                      type: string
+                      description: |
+                        Optional parameter that can be used to identify the type of customer:
+
+                        business: Corporation, legal entity.
+                        personal: Natural person.
+                      enum: ["business", "personal"]
+                    responsible:
+                      type: object
+                      description: A JSON object that represents the responsible party.
+                      required:
+                        - name
+                      properties:
+                        name:
+                          type: string
+                          description: Responsible name. Required if person_type = business.
+                          maxLength: 100
+
 
     PixBRRequest:
       type: object
