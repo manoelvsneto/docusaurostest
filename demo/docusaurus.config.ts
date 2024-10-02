@@ -333,6 +333,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          token: {
+            specPath: "examples/pay/exchange/token.yaml",
+            outputDir: "docs/pay/token",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
           getavailablewallets: {
             specPath: "examples/pay/ewallet/get-available-wallets.yaml",
             outputDir: "docs/pay/ewallet",
