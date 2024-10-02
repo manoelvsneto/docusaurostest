@@ -140,7 +140,7 @@ const config: Config = {
               to: "/pay/payout/retrieve-payout-information",
             },
             {
-              label: "Payout retrieve",
+              label: "Payout commit",
               to: "/pay/payout/commit-a-payout-request",
             },
            
