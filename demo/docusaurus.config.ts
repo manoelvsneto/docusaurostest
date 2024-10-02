@@ -112,6 +112,11 @@ const config: Config = {
               to: "/pay/fxtoken/get-fx-token",
             },
             {
+              label: "Create a card Token",
+              to: "/pay/token/create-a-card-token",
+            },
+            
+            {
               label: "Get available e-wallets",
               to: "/pay/ewallet/get-e-wallets",
             },

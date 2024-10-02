@@ -62,9 +62,14 @@ paths:
                   value:
                     status: 'SUCCESS'
                     payment_type_code: 'mastercard'
-                    token: '11111111111326645455abbbbbbbbbbc21360d92b8e254924a5cac6eb9c24322a0d35c7ef6e69ba7dba27132657f9aa2d2caa13a0f1783c03bd5ed40a12e560c5ca6421f4400e3ae0f2de6'
+                    token: '46f51ef88eb66621944b1309ae317e8fca6b544699cdd07bba3584ab9cc9c52c123aa4868e7c530f2bd6bca612459142b8fc5c9cb178e4b93387ed6019851204'
                     masked_card_number: '111122xxxxxx4444'
-                    network_token_status: 'ACTIVE'
+                    network_token_status: 'FAILED_REQUEST'
+                    card_verification:
+                      transaction_status:
+                        code: 'OK'
+                        description: 'Accepted'
+                      transaction_type: 'ZERO DOLLAR'
 
 components:
   schemas:
@@ -218,12 +223,25 @@ components:
         network_token_status:
           type: string
           description: Network token status.
-        status_code:
-          type: string
-          description: Error code in case of an error.
-        status_message:
-          type: string
-          description: Error message in case of an error.
+        card_verification:
+          type: object
+          properties:
+            transaction_status:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: Status code for the transaction.
+                description:
+                  type: string
+                  description: Status description for the transaction.
+            transaction_type:
+              type: string
+              description: Type of transaction (e.g., ZERO DOLLAR).
+   
+
+      
+   
     ErrorResponse:
       type: object
       properties:
