@@ -1,0 +1,259 @@
+openapi: 3.0.3
+info:
+  title: Retrieve a Payout request
+  description: API to retrieve payout information. This method allows you to retrieve a payout information.
+  version: 1.0.0
+paths:
+  /ws/payout/retrieve:
+    post:
+      summary: Retrieve Payout Information
+      description: This method allows you to retrieve a payout information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/RetrieveByExternalReferenceRequest'
+                - $ref: '#/components/schemas/RetrieveByIDRequest'
+
+      responses:
+        200:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/RetrieveResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    RetrieveByExternalReferenceRequest:
+              type: object
+              required:
+                - integration_key
+                - external_reference
+              properties:
+                integration_key:
+                  type: string
+                  description: "Your unique and secret integration key."
+                  maxLength: 100
+                  example: "your_test_integration_key"
+                external_reference:
+                  type: string
+                  description: "The unique payout ID provided by you."
+                  minLength: 4
+                  maxLength: 60
+                  example: "PAYOUT_EBANX_01"
+                uid:
+                  type: string
+                  description: "The payout UID (EBANX unique identifier)."
+                  maxLength: 50
+                  example: "0f28f5b2bf60536d78b2dbf003c13886dd452d926"
+    RetrieveByIDRequest:
+              type: object
+              required:
+                - integration_key
+                - uid
+              properties:
+                integration_key:
+                  type: string
+                  description: "Your unique and secret integration key."
+                  maxLength: 100
+                  example: "your_test_integration_key"
+                external_reference:
+                  type: string
+                  description: "The unique payout ID provided by you."
+                  minLength: 4
+                  maxLength: 60
+                  example: "PAYOUT_EBANX_01"
+                uid:
+                  type: string
+                  description: "The payout UID (EBANX unique identifier)."
+                  maxLength: 50
+                  example: "0f28f5b2bf60536d78b2dbf003c13886dd452d926"
+    RetrieveResponse:    
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: "The type of the response (success, api_error, authentication_error, invalid_request_error, or request_error)."
+                    example: "success"
+                  payout:
+                    type: object
+                    properties:
+                      uid:
+                        type: string
+                        description: "The payout UID (EBANX unique identifier)."
+                        maxLength: 50
+                        example: "2ddf8d42bd675fb295f9b360a8b92a5bdd38001c"
+                      external_reference:
+                        type: string
+                        description: "The external transfer reference."
+                        minLength: 6
+                        maxLength: 40
+                        example: "AQYAALlJ8B5Tw06IqqAvkX31h7cK"
+                      status:
+                        type: string
+                        description: |
+                          The payout status. The following statuses are available:
+
+                          OP: the payout is waiting to start the payment process. It can change either to CA or to PE.
+                          PE: the payout is in payment process.
+                          PA: the payout is paid.
+                          CA: the payout is canceled.
+                        example: "CA"
+                      request_date:
+                        type: string
+                        description: "The date and time when the payout was requested. Format: YYYY-MM-DD HH:MM:SS."
+                        example: "2024-10-02 11:37:06"
+                      status_date:
+                        type: string
+                        description: "The date and time of the last status change. Format: YYYY-MM-DD HH:MM:SS."
+                        example: "2024-10-02 11:37:17"
+                      paid_date:
+                        type: string
+                        description: "The date and time when the payout was paid. Format: YYYY-MM-DD HH:MM:SS."
+                        nullable: true
+                        example: null
+                      cancel_date:
+                        type: string
+                        description: "The date and time when the payout was canceled. Format: YYYY-MM-DD HH:MM:SS."
+                        nullable: true
+                        example: "2024-10-02 11:37:17"
+                      payee:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: "Payee full name."
+                            minLength: 3
+                            maxLength: 100
+                            example: "Foo Name SurName"
+                          email:
+                            type: string
+                            description: "Payee email address."
+                            minLength: 10
+                            maxLength: 100
+                            format: email
+                            example: "fooo@email.com"
+                          document:
+                            type: string
+                            description: "Payee national identification number."
+                            maxLength: 32
+                            example: "11133355560"
+                          document_type:
+                            type: string
+                            description: "Payee national identification number type."
+                            maxLength: 5
+                            example: "CPF"
+                          bank_info:
+                            type: object
+                            properties:
+                              target_account:
+                                type: string
+                                description: "Bank account or document associated with the payee."
+                                example: "11133355560"
+                              target_account_type:
+                                type: string
+                                description: "The type of the target account."
+                                example: "cpf"
+                      request_amount:
+                        type: number
+                        description: "The amount in the original request currency."
+                        example: 1.50
+                      request_currency:
+                        type: string
+                        description: "Three-letter code of the original request currency. ISO 4217 format."
+                        maxLength: 3
+                        example: "BRL"
+                      request_exchange_rate:
+                        type: number
+                        description: "The exchange rate used in the payout to calculate the debited amount."
+                        example: 5.3844
+                      debit_amount:
+                        type: number
+                        description: "The total amount debited to your account for this payout."
+                        example: 0.28
+                      debit_fee:
+                        type: number
+                        description: "The fee amount of the payout."
+                        example: 0.04
+                      debit_amount_total:
+                        type: number
+                        description: "The total amount debited including fees."
+                        example: 0.32
+                      debit_currency:
+                        type: string
+                        description: "The currency of the debited amount. ISO 4217 format."
+                        maxLength: 3
+                        example: "USD"
+                      local_tax_amount:
+                        type: number
+                        description: "The local tax amount."
+                        example: 0.01
+                      local_amount_total:
+                        type: number
+                        description: "The total amount in the local currency."
+                        example: 1.50
+                      local_currency:
+                        type: string
+                        description: "The local currency code. ISO 4217 format."
+                        maxLength: 3
+                        example: "BRL"
+                      local_exchange_rate:
+                        type: number
+                        description: "The exchange rate used for local currency."
+                        example: 1.0000
+                      reason:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                            description: "The code of the payout reason."
+                            example: "INCORRECT_CUSTOMER_DATA"
+                          message:
+                            type: string
+                            description: "The message related to the payout reason."
+                            example: "Incorrect customer data"
+                          gateway_details:
+                            type: string
+                            description: "Additional details provided by the payment gateway."
+                            example: "The pix key doesn’t exist"
+                      target:
+                        type: string
+                        description: "The target account type for the payout."
+                        example: "pix_key"
+                      target_account:
+                        type: string
+                        description: "The account or identifier of the target."
+                        example: "123456789"
+                      order_number:
+                        type: string
+                        description: "A unique order number generated by the merchant."
+                        minLength: 6
+                        maxLength: 32
+                        example: "04829BRymGXkyxaaaa"
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: string
+              example: 'ERROR'
+              description: ERROR
+            status_code:
+              type: string
+              example: 'BP-DR-23'
+              description: Code of error.
+            status_message:
+              type: string
+              example: 'Field payment.document must be a valid CPF'
+              description: Message about error.
+          required:
+            - status
+            - status_code
+            - status_message
