@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: Commit a Payout request
+  description: This method allows you to commit a payout, starting the payment process, without having to wait the cancellation time. The payout has to be in a status equal to OP and within the cancellation time. You have to send either the external_reference or the uid.
+  version: 1.0.0
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server
+paths:
+  /ws/payout/commit:
+    post:
+      summary: Commit a Payout request
+      description: This method allows you to commit a payout, starting the payment process, without having to wait the cancellation time. The payout has to be in a status equal to OP and within the cancellation time. You have to send either the external_reference or the uid.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/CommitByExternalReferenceRequest'
+                - $ref: '#/components/schemas/CommitByIDRequest'
+
+      responses:
+        200:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+        500:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'                  
+components:
+  schemas:
+    ResponseSuccess:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: "The type of the response (success, api_error, authentication_error, invalid_request_error, or request_error)."
+                    example: "success"
+                  message:
+                    type: string
+                    description: "The response message."
+                    example: "You've successfully started the Payout payment process!"
+    CommitByExternalReferenceRequest:
+              type: object
+              required:
+                - integration_key
+                - external_reference
+              properties:
+                integration_key:
+                  type: string
+                  description: "Your unique and secret integration key."
+                  maxLength: 100
+                  example: "your_test_integration_key"
+                external_reference:
+                  type: string
+                  description: "The unique payout ID provided by you."
+                  minLength: 4
+                  maxLength: 60
+                  example: "PAYOUT_EBANX_01"
+                uid:
+                  type: string
+                  description: "The payout UID (EBANX unique identifier)."
+                  maxLength: 50
+                  example: "0f28f5b2bf60536d78b2dbf003c13886dd452d926"
+    CommitByIDRequest:
+              type: object
+              required:
+                - integration_key
+                - uid
+              properties:
+                integration_key:
+                  type: string
+                  description: "Your unique and secret integration key."
+                  maxLength: 100
+                  example: "your_test_integration_key"
+                external_reference:
+                  type: string
+                  description: "The unique payout ID provided by you."
+                  minLength: 4
+                  maxLength: 60
+                  example: "PAYOUT_EBANX_01"
+                uid:
+                  type: string
+                  description: "The payout UID (EBANX unique identifier)."
+                  maxLength: 50
+                  example: "0f28f5b2bf60536d78b2dbf003c13886dd452d926"
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Category of error
+              example: authentication_error
+            status:
+              type: string
+              example: 'ERROR'
+              description: ERROR
+            status_code:
+              type: string
+              example: 'HP-DF-04'
+              description: Code of error.
+            status_message:
+              type: string
+              example: 'Parameter integration_key is invalid'
+              description: Message about error.
+          required:
+            - status
+            - status_code
+            - status_message
