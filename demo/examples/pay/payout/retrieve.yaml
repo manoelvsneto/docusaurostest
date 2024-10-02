@@ -241,17 +241,21 @@ components:
         error:
           type: object
           properties:
+            type:
+              type: string
+              description: Category of error
+              example: authentication_error
             status:
               type: string
               example: 'ERROR'
               description: ERROR
             status_code:
               type: string
-              example: 'BP-DR-23'
+              example: 'HP-DF-04'
               description: Code of error.
             status_message:
               type: string
-              example: 'Field payment.document must be a valid CPF'
+              example: 'Parameter integration_key is invalid'
               description: Message about error.
           required:
             - status
