@@ -1,0 +1,252 @@
+openapi: 3.0.3
+info:
+  title: Create a Card Token
+  version: '1.0.0'
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server
+paths:
+  /ws/token:
+    post:
+      summary: Create a Card Token
+      description: >
+        The token operation is used to create a token for a given credit card to be used for recurrent payments.
+        For this method, you will need to wrap the request parameters in a JSON object and send them as the value of a parameter called request_body.
+
+        **Note:** To generate the token and check the credit card authenticity, EBANX creates a temporary transaction that will not be captured. It’s important to know that the tokens expire after 14 months of its last use.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/TokenRequest'
+                - $ref: '#/components/schemas/IntegrationKeyRequest'
+            examples:
+              ExampleWithPublicKey:
+                summary: Example with public_integration_key
+                value:
+                  card:
+                    card_cvv: '111'
+                    card_name: 'Foo Test Surname'
+                    card_number: '1111222233334444'
+                    card_due_date: '11/2022'
+                  country: 'br'
+                  public_integration_key: 'abcdefghijklmnopqrstuvx0123456789'
+                  payment_type_code: 'mastercard'
+              ExampleWithSecretKey:
+                summary: Example with integration_key
+                value:
+                  integration_key: 'abcdefghijklmnopqrstuvx0123456789'
+                  card:
+                    card_cvv: '111'
+                    card_name: 'Foo Test Surname'
+                    card_number: '1111222233334444'
+                    card_due_date: '11/2022'
+                  country: 'br'
+                  payment_type_code: 'mastercard'
+      responses:
+        '200':
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                SuccessExample:
+                  summary: Successful response
+                  value:
+                    status: 'SUCCESS'
+                    payment_type_code: 'mastercard'
+                    token: '11111111111326645455abbbbbbbbbbc21360d92b8e254924a5cac6eb9c24322a0d35c7ef6e69ba7dba27132657f9aa2d2caa13a0f1783c03bd5ed40a12e560c5ca6421f4400e3ae0f2de6'
+                    masked_card_number: '111122xxxxxx4444'
+                    network_token_status: 'ACTIVE'
+
+components:
+  schemas:
+    TokenRequest:
+      type: object
+      required:
+        - public_integration_key
+        - country
+        - card
+        - payment_type_code
+      properties:
+        public_integration_key:
+          type: string
+          maxLength: 100
+          description: Your unique and public integration key.
+        country:
+          type: string
+          enum: [br, co, mx, pe]
+          description: >
+            The two-letter country code for the customer country. The available codes are:
+
+            - **br**: Brazil.
+            - **co**: Colombia.
+            - **mx**: Mexico.
+            - **pe**: Peru.
+        payment_type_code:
+          type: string
+          enum: [amex, aura, diners, discover, elo, hipercard, mastercard, visa]
+          description: >
+            The credit card scheme. Available options are:
+
+            - **amex**
+            - **aura**
+            - **diners**
+            - **discover**
+            - **elo**
+            - **hipercard**
+            - **mastercard**
+            - **visa**
+        card:
+          type: object
+          required:
+            - card_number
+            - card_name
+            - card_due_date
+            - card_cvv
+          description: The credit card JSON Object.
+          properties:
+            card_number:
+              type: string
+              minLength: 14
+              maxLength: 19
+              description: The credit card number (14-19 digits, must pass the Luhn algorithm).
+            card_name:
+              type: string
+              maxLength: 64
+              description: The cardholder name, as written on the credit card.
+            card_due_date:
+              type: string
+              pattern: '^\\d{1,2}/\\d{4}$'
+              description: The credit card valid thru date (formatted as mm/yyyy).
+            card_cvv:
+              type: string
+              minLength: 3
+              maxLength: 4
+              description: The Card Verification Value (CVV) (3-4 digits).
+    IntegrationKeyRequest:
+      type: object
+      required:
+        - integration_key
+        - country
+        - card
+        - payment_type_code
+      properties:
+        integration_key:
+          type: string
+          maxLength: 100
+          description: Your unique and secret integration key.
+        country:
+          type: string
+          enum: [br, co, mx, pe]
+          description: >
+            The two-letter country code for the customer country. The available codes are:
+
+            - **br**: Brazil.
+            - **co**: Colombia.
+            - **mx**: Mexico.
+            - **pe**: Peru.
+        payment_type_code:
+          type: string
+          enum: [amex, aura, diners, discover, elo, hipercard, mastercard, visa]
+          description: >
+            The credit card scheme. Available options are:
+
+            - **amex**
+            - **aura**
+            - **diners**
+            - **discover**
+            - **elo**
+            - **hipercard**
+            - **mastercard**
+            - **visa**
+        card:
+          type: object
+          required:
+            - card_number
+            - card_name
+            - card_due_date
+            - card_cvv
+          description: The credit card JSON Object.
+          properties:
+            card_number:
+              type: string
+              minLength: 14
+              maxLength: 19
+              description: The credit card number (14-19 digits, must pass the Luhn algorithm).
+            card_name:
+              type: string
+              maxLength: 64
+              description: The cardholder name, as written on the credit card.
+            card_due_date:
+              type: string
+              pattern: '^\\d{1,2}/\\d{4}$'
+              description: The credit card valid thru date (formatted as mm/yyyy).
+            card_cvv:
+              type: string
+              minLength: 3
+              maxLength: 4
+              description: The Card Verification Value (CVV) (3-4 digits).
+    ResponseSuccess:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          description: The status of the request (SUCCESS or ERROR).
+        payment_type_code:
+          type: string
+          description: The credit card scheme.
+        token:
+          type: string
+          minLength: 32
+          maxLength: 128
+          description: The generated token or the same one that was informed in the request.
+        masked_card_number:
+          type: string
+          minLength: 14
+          maxLength: 19
+          description: The masked credit card number. This can be stored and shown to the customer.
+        network_token_status:
+          type: string
+          description: Network token status.
+        status_code:
+          type: string
+          description: Error code in case of an error.
+        status_message:
+          type: string
+          description: Error message in case of an error.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          required:
+            - status
+            - status_code
+            - status_message
+          properties:
+            type:
+              type: string
+              description: Category of error
+              example: authentication_error
+            status:
+              type: string
+              example: 'ERROR'
+              description: ERROR
+            status_code:
+              type: string
+              example: 'HP-DF-04'
+              description: Code of error.
+            status_message:
+              type: string
+              example: 'Parameter integration_key is invalid'
+              description: Message about error.
