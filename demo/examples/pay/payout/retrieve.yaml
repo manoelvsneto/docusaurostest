@@ -3,6 +3,11 @@ info:
   title: Retrieve a Payout request
   description: API to retrieve payout information. This method allows you to retrieve a payout information.
   version: 1.0.0
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server
 paths:
   /ws/payout/retrieve:
     post:
