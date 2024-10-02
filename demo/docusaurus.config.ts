@@ -135,8 +135,10 @@ const config: Config = {
               label: "Payout create",
               to: "/pay/payout/create-a-payout-request",
             },
-           
-
+            {
+              label: "Payout retrieve",
+              to: "/pay/payout/retrieve-payout-information",
+            },
           ],
         },
       ],
