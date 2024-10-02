@@ -9,9 +9,9 @@ info:
     This API indicates the success or failure of a request using the conventional HTTP response codes. The 200 code indicates success, the 4xx range indicates an error with the parameters of the request, and the 500 code indicates an error with Empresa’s servers.
   version: 1.0.0
 servers:
-  - url: https://sandbox.empresa.com
+  - url: 'https://sandbox.ebanxpay.com/'
     description: Sandbox API Server
-  - url: https://prod.empresa.com
+  - url: 'https://api.ebanxpay.com/'
     description: Production API Server
 paths:
   /ws/payout/create:
