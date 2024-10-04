@@ -117,9 +117,12 @@ const config: Config = {
             },
             {
               label: "Create a card Token",
-              to: "/pay/token/create-a-card-token",
+              to: "/pay/tokenization/create-a-card-token",
             },
-            
+            {
+              label: "Set a token CVV",
+              to: "/pay/tokenization/set-a-token-cvv",
+            },  
             {
               label: "Get available e-wallets",
               to: "/pay/ewallet/get-e-wallets",
