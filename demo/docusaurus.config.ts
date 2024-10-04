@@ -343,8 +343,17 @@ const config: Config = {
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
           token: {
-            specPath: "examples/pay/exchange/token.yaml",
-            outputDir: "docs/pay/token",
+            specPath: "examples/pay/tokenization/token.yaml",
+            outputDir: "docs/pay/tokenization",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+          setcvv: {
+            specPath: "examples/pay/tokenization/tokensetcvv.yaml",
+            outputDir: "docs/pay/tokenization",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",
