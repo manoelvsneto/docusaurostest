@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: Token CVV API
+  description: The `setCVV` operation is used to temporarily associate a CVV with an existing token. This CVV will be used by the next request made with the associated token and then discarded. It's useful for one-click payments where the server does not store the CVV.
+  version: 1.0.0
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server   
+paths:
+  /ws/token/setCVV:
+    post:
+      summary: Set a token CVV
+      description: |
+        The `setCVV` operation is used to temporarily associate a CVV with an existing token. This CVV will be used by the next request made with the associated token and then discarded. It's useful for one-click payments where the server does not store the CVV.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/DefaultRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/DefaultResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    DefaultRequest:
+              type: object
+              required:
+                - required
+                - card_cvv
+                - integration_key
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+                  example: "your_test_integration_key"
+                token:
+                  type: string
+                  description: The token that you want to associate the CVV with.
+                  minLength: 32
+                  maxLength: 128
+                  example: "805c49a8c606b4f2d53fad5aa688ec6c3aa247b83ac2146ee148e328244670b16f5cb719766b3a82e902387670958e71c323413c62df5ce975c1abf99d2049c6"
+                card_cvv:
+                  type: string
+                  description: Credit card security code.
+                  minLength: 3
+                  maxLength: 4
+                  example: "123"
+     
+    DefaultResponse:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        description: The status of the request.
+                        example: "SUCCESS"
+                      token:
+                        type: string
+                        description: The token specified in the request.
+                        example: "805c49a8c606b4f2d53fad5aa688ec6c3aa247b83ac2146ee148e328244670b16f5cb719766b3a82e902387670958e71c323413c62df5ce975c1abf99d2049c6"
+                      masked_card_number:
+                        type: string
+                        description: The masked credit card number.
+                        example: "411111xxxxxx1111"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: string
+              example: 'ERROR'
+              description: ERROR
+            status_code:
+              type: string
+              example: 'BP-DR-23'
+              description: Code of error.
+            status_message:
+              type: string
+              example: 'Field payment.document must be a valid CPF'
+              description: Message about error.
+          required:
+            - status
+            - status_code
+            - status_message
