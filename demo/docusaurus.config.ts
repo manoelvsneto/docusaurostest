@@ -100,6 +100,10 @@ const config: Config = {
               to: "/pay/direct/refund-orcancel",
             },
             {
+              label: "Payment Page API",
+              to: "/pay/direct/create-a-payment-request",
+            },
+            {
               label: "Resend Bank Info",
               to: "/pay/direct/resend-bank-info",
             },
