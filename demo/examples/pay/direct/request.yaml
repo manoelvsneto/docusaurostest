@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  title: Payment Page API
+  description: This method allows you to create a payment using EBANX Payment Page, where the customer is redirected to EBANX’s website to enter his data.
+  version: 1.0.0
+servers:  
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server  
+paths:
+  /ws/request:
+    post:
+      summary: Create a payment request
+      description: Creates a payment request based on the input fields and returns payment details.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/DefaultRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/DefaultResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    
+    DefaultRequest:
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  maxLength: 100
+                  description: Your unique and secret integration key.
+                  example: "your_test_integration_key"
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                  description: Customer name.
+                  example: "José Silva"
+                email:
+                  type: string
+                  minLength: 5
+                  maxLength: 100
+                  description: Customer email address.
+                  example: "josesilva@example.com"
+                currency_code:
+                  type: string
+                  minLength: 3
+                  maxLength: 3
+                  description: |
+                        Three-letter code of the payment currency. Supported currencies:
+
+                        EUR
+                        BRL
+                        MXN
+                        PEN
+                        USD
+                        CLP
+                        COP
+                        ARS
+                        BOB
+
+                  enum: ["EUR", "BRL", "MXN", "PEN", "USD", "CLP", "COP", "ARS", "BOB"]
+                  example: "BRL"
+                amount:
+                  type: number
+                  description: The amount in the specified currency.
+                  example: 54.90
+                merchant_payment_code:
+                  type: string
+                  description: The payment hash Merchant Payment Code (unique merchant ID).
+                  example: "d59cb7166e7"
+                order_number:
+                  type: string
+                  maxLength: 40
+                  description: Optional identifier set by the merchant.
+                  example: "string"
+                payment_type_code:
+                  type: string
+                  description: | 
+                    Enum: "_all" "amex" "bancodobrasil" "banrisul" "banktransfer" "boleto" "bradesco" "carnet" "diners" "discover" "ebanxaccount" "eft" "elo" "hipercard" "itau" "mastercard" "multicaja" "oxxo" "pagoefectivo" "pagosnet" "safetypay" "safetypay-cash" "safetypay-online" "sencillito" "servipag" "spei" "visa" "webpay"
+                    The code of the payment method. The supported codes are:
+
+                    _all: all available payment methods for the merchant account in this country.
+                    amex: American Express credit card (Brazil, Mexico, Colombia, Peru).
+                    bancodobrasil: Banco do Brasil online debit (Brazil).
+                    banrisul: Banrisul online debit (Brazil).
+                    banktransfer: Bank transfer (Brazil).
+                    boleto: Boleto bancário (Brazil).
+                    bradesco: Bradesco online debit (Brazil).
+                    carnet: CARNET credit card (Mexico).
+                    diners: Diners credit card (Brazil, Colombia, Peru).
+                    discover: Discover credit card (Brazil).
+                    ebanxaccount: EBANX Account (Brazil).
+                    eft: Bank Transfer (Colombia).
+                    elo: Elo credit card (Brazil).
+                    hipercard: Hipercard credit card (Brazil).
+                    itau: Itaú online debit (Brazil).
+                    mastercard: MasterCard credit card (Brazil, Mexico, Colombia, Peru).
+                    multicaja: Multicaja (Chile).
+                    oxxo: OXXO (Mexico).
+                    pagoefectivo: PagoEfectivo (Peru).
+                    pagosnet: PagosNet (Bolivia).
+                    safetypay: SafetyPay (Peru, Ecuador, Checkout only).
+                    safetypay-cash: SafetyPay Cash (Peru, Ecuador).
+                    safetypay-online: SafetyPay Online (Peru, Ecuador).
+                    sencillito: Sencillito (Chile).
+                    servipag: Servipag (Chile).
+                    spei: SPEI bank transfer method (Mexico).
+                    visa: Visa credit card (Brazil, Mexico, Colombia, Peru).
+                    webpay: Webpay (Chile).
+                                      
+                  enum: ["_all", "pix", "amex", "visa", "mastercard", "spei"]
+                  example: "pix"
+                notification_url:
+                  type: string
+                  description: The URL to send notifications for this payment.
+                  maxLength: 2000
+                  example: "https://www.exampledns.com/payments/api/v1/callbacks/ebanx/d59cb7166e7"
+                redirect_url:
+                  type: string
+                  description: URL for redirect after payment.
+                  example: "https://www.example2dns.com/d59cb7166e7"
+                bypass_boleto_screen:
+                  type: boolean
+                  description: Skip boleto screen and redirect directly to the response URL.
+                  example: false
+                street_number:
+                  type: string
+                  description: Customer street number.
+                  example: "1040"
+                country:
+                  type: string
+                  enum: ["bo", "br", "cl", "co", "mx", "pe", "ar", "ec"]
+                  description: Customer country.
+                  example: "BR"
+              required:
+                - integration_key
+                - name
+                - email
+                - currency_code
+                - amount
+                - payment_type_code
+                - country
+  
+    DefaultResponse:
+                properties:
+                  status:
+                    type: string
+                    description: Status of the request (SUCCESS or ERROR).
+                    example: "SUCCESS"
+                  payment:
+                    type: object
+                    properties:
+                      hash:
+                        type: string
+                        description: Payment hash (EBANX unique identifier).
+                        example: "5ae0b5d4f1883ed4b214c0277af29f1981443f59a26eef87"
+                      country:
+                        type: string
+                        description: Country of the payment.
+                        example: "br"
+                      merchant_payment_code:
+                        type: string
+                        description: Merchant payment code.
+                        example: "d59cb7166e7"
+                      status:
+                        type: string
+                        description: Payment status.
+                        example: "OP"
+                      amount_br:
+                        type: number
+                        description: Amount in local currency.
+                        example: 55.11
+                      amount_ext:
+                        type: number
+                        description: Amount in the original currency.
+                        example: 54.90
+                      currency_ext:
+                        type: string
+                        description: ISO 4217 three-letter currency code.
+                        example: "BRL"
+                      due_date:
+                        type: string
+                        description: Due date for the payment.
+                        example: "2024-10-03"
+                  redirect_url:
+                    type: string
+                    description: Redirect URL for completing the payment.
+                    example: "https://sandbox.ebanxpay.com/checkout/?hash=5ae0b5d4f1883ed4b214c0277af29f1981443f59a26eef87"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: string
+              example: 'ERROR'
+              description: ERROR
+            status_code:
+              type: string
+              example: 'BP-DR-23'
+              description: Code of error.
+            status_message:
+              type: string
+              example: 'Field payment.document must be a valid CPF'
+              description: Message about error.
+          required:
+            - status
+            - status_code
+            - status_message
