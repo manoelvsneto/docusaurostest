@@ -419,7 +419,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
-
+          direct_request: {
+            specPath: "examples/pay/direct/request.yaml",
+            outputDir: "docs/pay/direct",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
           
 
           /*petstore: {
