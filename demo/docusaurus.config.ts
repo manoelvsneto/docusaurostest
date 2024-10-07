@@ -471,7 +471,7 @@ const config: Config = {
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
           payout_bankdetails: {
-            specPath: "examples/pay/payout/bankdetails.yaml",
+            specPath: "examples/pay/payout/bankDetails.yaml",
             outputDir: "docs/pay/payout",
             sidebarOptions: {
               groupPathsBy: "tag",
