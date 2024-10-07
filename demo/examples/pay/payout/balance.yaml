@@ -3,6 +3,11 @@ info:
   title: Get Available Balance
   description: This method allows you to get your available balance.
   version: 1.0.0
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server  
 paths:
   /ws/payout/balance:
     post:

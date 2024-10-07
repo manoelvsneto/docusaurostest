@@ -3,6 +3,11 @@ info:
   title: Cancel a Payout request
   description: Within this end-point you will be able to cancel a payout using payouts's external_reference or its uid The payout has to be in a status equal to OP and within the cancellation time.
   version: 1.0.0
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server  
 paths:
   /ws/payout/cancel:
     post:
