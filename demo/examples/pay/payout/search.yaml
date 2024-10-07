@@ -3,6 +3,11 @@ info:
   title: Search Payout requests
   description: This method allows you to retrieve multiple payouts information.
   version: 1.0.0
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server  
 paths:
   /ws/payout/search:
     post:
