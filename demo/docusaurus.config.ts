@@ -168,8 +168,8 @@ const config: Config = {
               to: "/pay/payout/search-payout-requests",
             },
             {
-              label: "Payout Get Banks Details",
-              to: "/pay/payout/get-banks-details",
+              label: "Payout Get Bank Details",
+              to: "/pay/payout/get-bank-details",
             },
             
            
