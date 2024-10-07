@@ -76,9 +76,9 @@ paths:
                       - "BANCO AMAZONAS S.A."
                       - "BANCO DINERS CLUB DEL ECUADOR"
                   mexico:
-                    type: object
+                    type: array
                     description: Available banks in Mexico.
-                    additionalProperties:
+                    items:
                       type: string
                     example:
                       - 168 "HIFED - HIPOTECARIA FEDERAL"
