@@ -164,8 +164,12 @@ const config: Config = {
               to: "/pay/payout/search-payout-requests",
             },
             {
+              label: "Search Payout requests",
+              to: "/pay/payout/search-payout-requests",
+            },
+            {
               label: "Payout Get Available Balance",
-              to: "/pay/payout/get-available-balance",
+              to: "/pay/payout/get-banks-details",
             },
             
            
@@ -459,6 +463,15 @@ const config: Config = {
           } satisfies OpenApiPlugin.Options,
           payout_search: {
             specPath: "examples/pay/payout/search.yaml",
+            outputDir: "docs/pay/payout",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+          payout_bankdetails: {
+            specPath: "examples/pay/payout/bankdetails.yaml",
             outputDir: "docs/pay/payout",
             sidebarOptions: {
               groupPathsBy: "tag",

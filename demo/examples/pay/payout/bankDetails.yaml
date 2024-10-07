@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: Get Bank Details
+  version: 1.0.0
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server  
+paths:
+  /ws/payout/bankdetails:
+    get:
+      summary: Get Bank Details
+      description: >
+       This method call will return a JSON object with all the available bank details information per country.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankDetailsResponse'
+              example:
+                type: success
+                brazil:
+                  '104  Caixa Econômica':
+                    description: A description of the bank detail information
+                    values:
+                      - "001"
+                      - "002"
+                      - "003"
+                      - "006"
+                      - "007"
+                      - "013"
+                      - "022"
+                      - "023"
+                      - "028"
+                      - "043"
+                      - "131"
+                      - "1288"
+                colombia:
+                  _all:
+                    description: A description of the bank detail information
+                    values:
+                      - "APARTADO"
+                      - "ARMENIA"
+                      - "BARRANQUILLA"
+                      - "BARRANCABERMEJA"
+                      - "BELLO"
+                      - "BOGOTA"
+                      - "BUCARAMANGA"
+                      - "BUENAVENTURA"
+                      - "CARTAGO"
+                      - "CALI"
+                      - "CUCUTA"
+                      - "ENVIGADO"
+                      - "FLORENCIA"
+                      - "GIRARDOT"
+                      - "GIRON"
+                      - "IBAGUE"
+                      - "LOS PATIOS"
+                      - "MANIZALES"
+                      - "MEDELLIN"
+                      - "MONTERIA"
+                      - "NEIVA"
+                      - "SOACHA"
+                      - "PALMIRA"
+                      - "PASTO"
+                      - "PEREIRA"
+                      - "PIEDECUESTA"
+                      - "SABANALARGA"
+                      - "SANTA MARTA"
+                      - "SINCELEJO"
+                      - "SOGAMOSO"
+                      - "SOLEDAD"
+                      - "TUMACO"
+                      - "TUNJA"
+                      - "TURBO"
+                      - "URIBIA"
+                      - "VALLEDUPAR"
+                      - "VILLAVICENCIO"
+components:
+  schemas:
+    BankDetailsResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: >
+            The type of the response (success, api_error, authentication_error, invalid_request_error, or request_error).
+      additionalProperties:
+        $ref: '#/components/schemas/CountryDetails'
+    CountryDetails:
+      type: object
+      description: >
+        A JSON object with all the available options for bank details in this country. [country_name] can be one of the following values: brazil, chile, colombia, mexico, peru.
+      additionalProperties:
+        $ref: '#/components/schemas/BankDetails'
+    BankDetails:
+      type: object
+      description: >
+        A JSON object with all the available options for bank details in this bank. [bank_name] can be one of the values returned by banks operation or _all for all banks in this country.
+      properties:
+        description:
+          type: string
+          description: A description of the bank detail information.
+        values:
+          type: array
+          items:
+            type: string
+          description: An array with the available values for bank detail information.
