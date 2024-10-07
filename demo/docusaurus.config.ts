@@ -426,6 +426,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          payout_balance: {
+            specPath: "examples/pay/payout/balance.yaml",
+            outputDir: "docs/pay/payout",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
           updatecustomerbankinfo: {
             specPath: "examples/pay/direct/updatecustomerbankinfo.yaml",
             outputDir: "docs/pay/direct",

@@ -1,0 +1,76 @@
+openapi: 3.0.3
+info:
+  title: Get Available Balance
+  description: This method allows you to get your available balance.
+  version: 1.0.0
+paths:
+  /ws/payout/balance:
+    post:
+      summary: Get Available Balance
+      description: This method allows you to get your available balance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+              required:
+                - integration_key
+      responses:
+        '200':
+          description: Success response with the available balance.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: success
+                    description: The type of the response.
+                  balance:
+                    type: number
+                    description: The amount available for payouts.
+                  currency_code:
+                    type: string
+                    example: USD
+                    description: The currency code.
+        '401':
+          description: error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: authentication_error
+                    description: | 
+                      The type of the response (success, api_error, authentication_error, invalid_request_error, or request_error).
+                  message:
+                    type: string
+                    example: Account is not enabled.
+                    description: The error message.
+                  status_code:
+                    type: string
+                    example: HP-DF-05
+                    description: Internal status code.
+                  code:
+                    type: string
+                    example: HP-DF-05
+                    description: Internal error code.
+components:
+  schemas:
+    ResponseType:
+      type: string
+      enum:
+        - success
+        - api_error
+        - authentication_error
+        - invalid_request_error
+        - request_error
