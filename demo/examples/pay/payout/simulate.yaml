@@ -1,0 +1,186 @@
+openapi: 3.0.3
+info:
+  title: Simulate a Payout request
+  description: This method allows you to simulate a payout.
+  version: 1.0.0
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server  
+paths:
+  /ws/payout/simulate:
+    post:
+      summary: Simulate a Payout request
+      description: This method allows you to simulate a payout.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/SimulateRequest'
+
+      responses:
+        200:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+        400:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'        
+        401:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/AuthenticationResponse'                  
+
+components:
+  schemas:
+    SimulateRequest:
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  example: "************************aBcDeF"
+                  maxLength: 100
+                external_reference:
+                  type: string
+                  description: External reference for the payout.
+                  example: "ABCDEF2024-10"
+                amount:
+                  type: number
+                  description: The amount in the specified currency.
+                  example: 4500
+                country:
+                  type: string
+                  description: |
+                    The two-letter country code for the customer country. The available codes are:
+
+                    br: Brazil.
+                    cl: Chile.
+                    co: Colombia.
+                    mx: Mexico
+                    
+                  example: "br"
+                  enum: 
+                    - br
+                    - cl
+                    - co
+                    - mx
+                currency_code:
+                  type: string
+                  description: Three-letter code of the payout currency.
+                  example: "BRL"
+                  enum:
+                    - BRL
+                    - USD
+                    - CLP
+                    - COP
+                    - MXN
+              required:
+                - integration_key
+                - country
+                - amount
+                - currency_code
+                
+    ResponseSuccess:             
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of response (e.g., success).
+                    example: success
+                  payout:
+                    type: object
+                    properties:
+                      request_amount:
+                        type: number
+                        description: The amount in the original request currency.
+                        example: 4500
+                      request_currency:
+                        type: string
+                        description: Three-letter code of the original request currency.
+                        example: "BRL"
+                      request_exchange_rate:
+                        type: number
+                        description: The exchange rate used in the payout.
+                        example: 5.2938
+                      local_tax_amount:
+                        type: number
+                        description: The amount of local taxes applied.
+                        example: 17.1
+                      local_amount_total:
+                        type: number
+                        description: The total amount in the local currency.
+                        example: 4500
+                      local_currency:
+                        type: string
+                        description: The three-letter local currency code.
+                        example: "BRL"
+                      debit_amount:
+                        type: number
+                        description: The total amount debited from your account.
+                        example: 850.05
+                      debit_fee:
+                        type: number
+                        description: The fee amount for the payout.
+                        example: 28.73
+                      debit_amount_total:
+                        type: number
+                        description: Total amount debited including fees.
+                        example: 878.78
+                      debit_currency:
+                        type: string
+                        description: The three-letter code for the debit currency.
+                        example: "USD"
+      
+    ErrorResponse:  
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Error type.
+                    example: invalid_request_error
+                  message:
+                    type: string
+                    description: Error message.
+                    example: "You already have a payout with this external_reference"
+                  status_code:
+                    type: string
+                    description: Error status code.
+                    example: "HP-CM-03"
+                  code:
+                    type: string
+                    description: Error code.
+                    example: "HP-CM-03"
+  
+    AuthenticationResponse:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Error type.
+                    example: authentication_error
+                  message:
+                    type: string
+                    description: Error message.
+                    example: "Empty integration_key value"
+                  status_code:
+                    type: string
+                    description: Error status code.
+                    example: "HP-DF-03"
+                  code:
+                    type: string
+                    description: Error code.
+                    example: "HP-DF-03"

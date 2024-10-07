@@ -171,7 +171,10 @@ const config: Config = {
               label: "Payout Get Bank Details",
               to: "/pay/payout/get-bank-details",
             },
-            
+            {
+              label: "Simulate a Payout request",
+              to: "/pay/payout/simulate-a-payout-request  ",
+            },
            
           ],
         },
@@ -479,6 +482,17 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          payout_simulate: {
+            specPath: "examples/pay/payout/simulate.yaml",
+            outputDir: "docs/pay/payout",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,  
+
+
           updatecustomerbankinfo: {
             specPath: "examples/pay/direct/updatecustomerbankinfo.yaml",
             outputDir: "docs/pay/direct",
