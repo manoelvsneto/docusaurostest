@@ -155,6 +155,11 @@ const config: Config = {
               label: "Payout commit",
               to: "/pay/payout/commit-a-payout-request",
             },
+            {
+              label: "Payout Get Available Balance",
+              to: "/pay/payout/get-available-balance",
+            },
+            
            
           ],
         },
