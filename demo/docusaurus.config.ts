@@ -436,8 +436,8 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
-          payout_balance: {
-            specPath: "examples/pay/payout/balance.yaml",
+          payout_cancel: {
+            specPath: "examples/pay/payout/cancel.yaml",
             outputDir: "docs/pay/payout",
             sidebarOptions: {
               groupPathsBy: "tag",
@@ -445,8 +445,8 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
-          payout_cancel: {
-            specPath: "examples/pay/payout/cancel.yaml",
+          payout_balance: {
+            specPath: "examples/pay/payout/balance.yaml",
             outputDir: "docs/pay/payout",
             sidebarOptions: {
               groupPathsBy: "tag",
