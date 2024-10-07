@@ -156,6 +156,11 @@ const config: Config = {
               to: "/pay/payout/commit-a-payout-request",
             },
             {
+              label: "Cancel a Payout request",
+              to: "/pay/payout/cancel-a-payout-request",
+            },
+          
+            {
               label: "Payout Get Available Balance",
               to: "/pay/payout/get-available-balance",
             },
