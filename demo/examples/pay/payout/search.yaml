@@ -1,0 +1,227 @@
+openapi: 3.0.3
+info:
+  title: Search Payout requests
+  description: This method allows you to retrieve multiple payouts information.
+  version: 1.0.0
+paths:
+  /ws/payout/search:
+    post:
+      summary: Search Payout requests
+      description: This method allows you to retrieve multiple payouts information.
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/RequestSucccess'
+
+      responses:
+        200:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+        400:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'   
+        401:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorAuthenticationResponse'   
+
+components:
+  schemas:
+    RequestSucccess:
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+                  example: "************************aKPewPew"
+                date_from:
+                  type: string
+                  description: Initial date in the format yyyy-mm-dd.
+                  example: "2024-09-01"
+                date_to:
+                  type: string
+                  description: End date in the format yyyy-mm-dd.
+                  example: "2024-09-10"
+                page:
+                  type: integer
+                  description: Page number of the current search.
+                  example: 1
+                status:
+                  type: string
+                  description: |
+                    The payout status. The following statuses are available:
+
+                    OP: the payout is waiting to start the payment process.
+                    PE: the payout is in payment process.
+                    PA: the payout is paid.
+                    CA: the payout is cancelled.
+                  enum: ["CA", "OP", "PA", "PE"]
+                  example: "OP"
+                per_page:
+                  type: integer
+                  description: Number of records per page (maximum 50).
+                  example: 20
+     
+     
+    ResponseSuccess:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: success
+                  records:
+                    type: integer
+                    example: 5
+                  total_pages:
+                    type: integer
+                    example: 1
+                  per_page:
+                    type: integer
+                    example: 50
+                  page:
+                    type: integer
+                    example: 1
+                  payouts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        uid:
+                          type: string
+                          example: "0f28f5b2bf60536d78b2dbf003c13886dd452d926"
+                        external_reference:
+                          type: string
+                          example: "PAYOUT_EBANX_01"
+                        status:
+                          type: string
+                          enum: ["OP", "PE", "PA", "CA"]
+                          example: "PA"
+                        request_date:
+                          type: string
+                          format: date-time
+                          example: "2017-02-07 17:01:59"
+                        status_date:
+                          type: string
+                          format: date-time
+                          example: "2017-02-07 17:03:15"
+                        paid_date:
+                          type: string
+                          format: date-time
+                          nullable: true
+                          example: "2017-02-07 17:03:15"
+                        cancel_date:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        payee:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: "Han Solo"
+                            email:
+                              type: string
+                              example: "chew@bac.ca"
+                            phone:
+                              type: string
+                              example: "554112345678"
+                            document:
+                              type: string
+                              example: "85351346893"
+                            document_type:
+                              type: string
+                              example: "CPF"
+                            birthdate:
+                              type: string
+                              format: date
+                              example: "1977-05-25"
+                            bank_info:
+                              type: object
+                              nullable: true
+                              properties:
+                                bank_name:
+                                  type: string
+                                  example: "341 Itaú"
+                                bank_branch:
+                                  type: string
+                                  example: "3707"
+                                bank_account:
+                                  type: string
+                                  example: "01854-9"
+                                account_type:
+                                  type: string
+                                  example: "C"
+                                bank_details:
+                                  type: string
+                                  nullable: true
+                        request_amount:
+                          type: string
+                          example: "10.00"
+                        request_currency:
+                          type: string
+                          example: "USD"
+                        request_exchange_rate:
+                          type: string
+                          example: "1.0000"
+                        debit_amount:
+                          type: string
+                          example: "10.00"
+                        debit_fee:
+                          type: string
+                          example: "0.15"
+                        debit_amount_total:
+                          type: string
+                          example: "10.15"
+                        debit_currency:
+                          type: string
+                          example: "USD"
+                        target:
+                          type: string
+                          example: "ebanx_wallet"
+ 
+    ErrorResponse: 
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: invalid_request_error
+                  message:
+                    type: string
+                    example: Invalid Expression
+                  status_code:
+                    type: string
+                    example: HP-DF-02
+                  code:
+                    type: string
+                    example: HP-DF-02
+    ErrorAuthenticationResponse:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: authentication_error
+                  message:
+                    type: string
+                    example: Parameter integration_key is invalid
+                  status_code:
+                    type: string
+                    example: HP-DF-04
+                  code:
+                    type: string
+                    example: HP-DF-04

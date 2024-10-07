@@ -159,7 +159,10 @@ const config: Config = {
               label: "Cancel a Payout request",
               to: "/pay/payout/cancel-a-payout-request",
             },
-          
+            {
+              label: "Search Payout requests",
+              to: "/pay/payout/search-payout-request",
+            },
             {
               label: "Payout Get Available Balance",
               to: "/pay/payout/get-available-balance",
@@ -447,6 +450,15 @@ const config: Config = {
           } satisfies OpenApiPlugin.Options,
           payout_balance: {
             specPath: "examples/pay/payout/balance.yaml",
+            outputDir: "docs/pay/payout",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+          payout_search: {
+            specPath: "examples/pay/payout/search.yaml",
             outputDir: "docs/pay/payout",
             sidebarOptions: {
               groupPathsBy: "tag",
