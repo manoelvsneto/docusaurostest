@@ -16,8 +16,30 @@ paths:
       requestBody:
         required: true
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
+              oneOf:
+                - $ref: '#/components/schemas/RequestSucccess'
+
+      responses:
+        200:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+        400:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'   
+      
+components:
+  schemas:
+    RequestSucccess:
               type: object
               required:
                 - integration_key
@@ -40,12 +62,8 @@ paths:
                     - uid
                 - required:
                     - external_reference
-      responses:
-        '200':
-          description: "Successfully cancelled the Payout."
-          content:
-            application/json:
-              schema:
+
+    ResponseSuccess:
                 type: object
                 properties:
                   type:
@@ -54,11 +72,8 @@ paths:
                   message:
                     type: string
                     example: "You've successfully cancelled your Payout!"
-        '400':
-          description: "Error in the cancellation request."
-          content:
-            application/json:
-              schema:
+
+    ErrorResponse:
                 type: object
                 properties:
                   type:
