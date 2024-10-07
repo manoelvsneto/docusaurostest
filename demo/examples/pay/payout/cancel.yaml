@@ -57,11 +57,7 @@ components:
                   type: string
                   description: "The payout uid (EBANX unique identifier)."
                   maxLength: 50
-              oneOf:
-                - required:
-                    - uid
-                - required:
-                    - external_reference
+             
 
     ResponseSuccess:
                 type: object
