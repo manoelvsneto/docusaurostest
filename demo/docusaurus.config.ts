@@ -164,10 +164,6 @@ const config: Config = {
               to: "/pay/payout/search-payout-requests",
             },
             {
-              label: "Search Payout requests",
-              to: "/pay/payout/search-payout-requests",
-            },
-            {
               label: "Payout Get Bank Details",
               to: "/pay/payout/get-bank-details",
             },
@@ -177,7 +173,7 @@ const config: Config = {
             },
             {
               label: "Get Available Banks",
-              to: "/pay/payout/get-available-nanks  ",
+              to: "/pay/payout/get-available-banks  ",
             },
           ],
         },
