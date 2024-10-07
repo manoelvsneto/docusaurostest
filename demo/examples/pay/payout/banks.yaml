@@ -1,0 +1,93 @@
+openapi: 3.0.3
+info:
+  title: Get Available Banks
+  description:  The bank operation method call will return a JSON object with the all the available banks per country.
+  version: '1.0.0'
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server  
+paths:
+  /ws/payout/banks:
+    post:
+      summary: Get Available Banks
+      description: The bank operation method call will return a JSON object with the all the available banks per country.
+      tags:
+        - Payout
+      responses:
+        '200':
+          description: A JSON object containing available banks by country.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of the response.
+                    example: success
+                  argentina:
+                    type: array
+                    description: Available banks in Argentina.
+                    items:
+                      type: string
+                    example: 
+                      - 389 "BANCO COLUMBIA S.A."
+                      - 005 "AMBN AMRO BANK N.V."
+                  bolivia:
+                    type: array
+                    description: Available banks in Bolivia.
+                    items:
+                      type: string
+                    example:
+                      - "10001 Banco de Desarrollo Productivo S.A.M."
+                      - "74003 Banco PYME de la Comunidad S.A."
+                  brazil:
+                    type: array
+                    description: Available banks in Brazil.
+                    items:
+                      type: string
+                    example:
+                      - "104  Caixa Econômica"
+                      - "001  Banco do Brasil"
+                  chile:
+                    type: array
+                    description: Available banks in Chile.
+                    items:
+                      type: string
+                    example:
+                      - "001  BANCO DE CHILE"
+                      - "504  SCOTIABANK AZUL (BBVA)"
+                  colombia:
+                    type: array
+                    description: Available banks in Colombia.
+                    items:
+                      type: string
+                    example:
+                      - "1040  Banco Agrario"
+                      - "1014  Helm Bank S.A"
+                  ecuador:
+                    type: array
+                    description: Available banks in Ecuador.
+                    items:
+                      type: string
+                    example:
+                      - "BANCO AMAZONAS S.A."
+                      - "BANCO DINERS CLUB DEL ECUADOR"
+                  mexico:
+                    type: object
+                    description: Available banks in Mexico.
+                    additionalProperties:
+                      type: string
+                    example:
+                      - 168 "HIFED - HIPOTECARIA FEDERAL"
+                      - 001 "BANCO - BANXICO"
+                  peru:
+                    type: array
+                    description: Available banks in Peru.
+                    items:
+                      type: string
+                    example:
+                      - "BCP - BANCO DE CREDITO DO PERU"
+                      - "INTERBANK"

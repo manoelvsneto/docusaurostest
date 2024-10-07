@@ -175,7 +175,10 @@ const config: Config = {
               label: "Simulate a Payout request",
               to: "/pay/payout/simulate-a-payout-request  ",
             },
-           
+            {
+              label: "Get Available Banks",
+              to: "/pay/payout/get-available-nanks  ",
+            },
           ],
         },
       ],
@@ -484,6 +487,15 @@ const config: Config = {
           } satisfies OpenApiPlugin.Options,
           payout_simulate: {
             specPath: "examples/pay/payout/simulate.yaml",
+            outputDir: "docs/pay/payout",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,  
+          payout_banks: {
+            specPath: "examples/pay/payout/banks.yaml",
             outputDir: "docs/pay/payout",
             sidebarOptions: {
               groupPathsBy: "tag",
