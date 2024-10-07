@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+  title: Cancel a Payout request
+  description: Within this end-point you will be able to cancel a payout using payouts's external_reference or its uid The payout has to be in a status equal to OP and within the cancellation time.
+  version: 1.0.0
+paths:
+  /ws/payout/cancel:
+    post:
+      summary: Cancel a Payout request
+      description: Within this end-point you will be able to cancel a payout using payouts's external_reference or its uid. The payout has to be in a status equal to OP and within the cancellation time.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - integration_key
+              properties:
+                integration_key:
+                  type: string
+                  description: "Your unique and secret integration key."
+                  maxLength: 100
+                external_reference:
+                  type: string
+                  description: "The unique payout ID provided by you."
+                  minLength: 4
+                  maxLength: 60
+                uid:
+                  type: string
+                  description: "The payout uid (EBANX unique identifier)."
+                  maxLength: 50
+              oneOf:
+                - required:
+                    - uid
+                - required:
+                    - external_reference
+      responses:
+        '200':
+          description: "Successfully cancelled the Payout."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: "You've successfully cancelled your Payout!"
+        '400':
+          description: "Error in the cancellation request."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: request_error
+                  message:
+                    type: string
+                    example: "Payout status different than OP"
+                  status_code:
+                    type: string
+                    example: HP-CM-55
+                  code:
+                    type: string
+                    example: HP-CM-55
