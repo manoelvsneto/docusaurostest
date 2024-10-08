@@ -132,6 +132,10 @@ const config: Config = {
               to: "/pay/direct/capture-a-payment",
             },
             {
+              label: "Installments Plan",
+              to: "/pay/direct/Installments-plan",
+            },
+            {
               label: "Empresa BIN List",
               to: "/pay/utils/returns-a-list-of-valid-card-bi-ns",
             },
@@ -531,7 +535,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
-          
+          instalmentsplan_request: {
+            specPath: "examples/pay/direct/InstallmentsPlan.yaml",
+            outputDir: "docs/pay/direct",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
 
           /*petstore: {
             specPath: "https://redocly.github.io/redoc/openapi.yaml",

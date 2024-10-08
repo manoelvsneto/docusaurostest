@@ -12,7 +12,7 @@ servers:
   - url: 'https://api.ebanxpay.com/'
     description: Production API Server
 paths:
-  /instalmentsPlan:
+  /installmentsPlan:
     get:
       summary: Installments Plan
       description: |
