@@ -183,6 +183,11 @@ const config: Config = {
               label: "Verify Account",
               to: "/pay/payout/verify-account",
             },
+            {
+              label: "Create a Transfer Request",
+              to: "/pay/transfer/create-a-transfer-request",
+            },
+
           ],
         },
       ],
@@ -538,6 +543,15 @@ const config: Config = {
           instalmentsplan_request: {
             specPath: "examples/pay/direct/InstallmentsPlan.yaml",
             outputDir: "docs/pay/direct",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+          transfer_create: {
+            specPath: "examples/pay/transfer/create.yaml",
+            outputDir: "docs/pay/transfer",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",

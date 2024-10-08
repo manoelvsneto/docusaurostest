@@ -1,0 +1,194 @@
+openapi: 3.0.3
+info:
+  title: Create a Transfer Request
+  version: '1.0'
+  description: This method allows you to create a transfer request.
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server    
+paths:
+  /ws/transfer/create:
+    post:
+      summary: Create a Transfer Request
+      description: This method allows you to create a transfer request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+            examples:
+              example1:
+                summary: Example Request 1
+                value:
+                  integration_key: "********************************EBTest"
+                  external_reference: "test_transfer_lc111111"
+                  amount: "100"
+                  source: "wire_transfer"
+                  currency_code: "MXN"
+
+      responses:
+        '200':
+          description: Successful transfer creation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferResponseSuccess'
+              examples:
+                successExample:
+                  summary: Successful Transfer Creation
+                  value:
+                    type: "success"
+                    transfer:
+                      uid: "449dbb27007fddf2a127bf2d9c6c16c9dc009871faa018"
+                      external_reference: "test_transfer_lcy_1726756021"
+                      status: "OP"
+                      request_date: "2024-09-19 14:27:01"
+                      confirm_date: null
+                      cancel_date: null
+                      requested_amount: "100.00"
+                      amount: "100.00"
+                      currency_code: "MXN"
+                      transfer_code: null
+                      source: "wire_transfer"
+        '400':
+          description: Bad Request - The request could not be understood or was missing required parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                insufficientBalance:
+                  summary: Insufficient Payment Balance
+                  value:
+                    type: "request_error"
+                    message: "Insufficient payment balance, -5094.26 USD available"
+                    status_code: "BP-HI-0007"
+                    code: "BP-HI-0007"
+        '401':
+          description: Unauthorized - Authentication failed or user does not have permissions for the requested operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalidIntegrationKey:
+                  summary: Invalid Integration Key
+                  value:
+                    type: "authentication_error"
+                    message: "Parameter integration_key is invalid"
+                    status_code: "HP-DF-04"
+                    code: "HP-DF-04"
+
+components:
+  schemas:
+    TransferRequest:
+      type: object
+      required:
+        - integration_key
+        - amount
+        - currency_code
+      properties:
+        integration_key:
+          type: string
+          maxLength: 100
+          description: 'Your unique and secret integration key used for authentication.'
+        external_reference:
+          type: string
+          minLength: 6
+          maxLength: 40
+          description: 'A unique reference identifier for the transfer provided by you. It must be between 6 and 40 characters.'
+        amount:
+          type: number
+          format: double
+          description: 'The amount to be transferred, specified in the currency defined by currency_code. For example, 100.50.'
+        source:
+          type: string
+          enum:
+            - payment_balance
+            - wire_transfer
+          default: payment_balance
+          description: 'The source of the transfer. Supported sources are:
+            - **payment_balance**: transfer using your payment balance.
+            - **wire_transfer**: transfer with wire transfer to EBANX bank account.
+            If not specified, the default value is **payment_balance**.'
+        currency_code:
+          type: string
+          description: 'The currency code for the transfer amount. For example, **MXN** for Mexican Peso.'
+
+    TransferResponseSuccess:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'The type of the response, indicating success or type of error. Possible values are **success**, **api_error**, **authentication_error**, **invalid_request_error**, or **request_error**.'
+        transfer:
+          type: object
+          properties:
+            uid:
+              type: string
+              maxLength: 50
+              description: 'A unique identifier for the transfer assigned by EBANX.'
+            external_reference:
+              type: string
+              minLength: 6
+              maxLength: 40
+              description: 'The unique transfer ID provided by you in the request.'
+            status:
+              type: string
+              description: 'The current status of the transfer. Possible statuses are:
+                - **OP**: the payout is waiting to start the payment process.
+                - **PA**: the payout is paid.
+                - **CA**: the payout is canceled.'
+            request_date:
+              type: string
+              format: date-time
+              description: 'The date and time when the transfer was requested, in UTC.'
+            confirm_date:
+              type: string
+              format: date-time
+              nullable: true
+              description: 'The date and time when the transfer was confirmed, in UTC. Null if not yet confirmed.'
+            cancel_date:
+              type: string
+              format: date-time
+              nullable: true
+              description: 'The date and time when the transfer was canceled, in UTC. Null if not canceled.'
+            requested_amount:
+              type: string
+              description: 'The amount that was requested to be transferred, as a string to preserve decimal precision.'
+            amount:
+              type: string
+              description: 'The amount that will be transferred, as a string to preserve decimal precision.'
+            currency_code:
+              type: string
+              description: 'The currency code for the transfer amount.'
+            transfer_code:
+              type: string
+              nullable: true
+              description: 'A unique code to be used during the bank transfer. This is applicable only for wire transfers.'
+            settlement_code:
+              type: string
+              nullable: true
+              description: 'The settlement code when the transfer was debited. Applicable only for transfers using payment balance.'
+            source:
+              type: string
+              description: 'The source of the transfer, indicating how the transfer was initiated. Possible values are **payment_balance** and **wire_transfer**.'
+
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'The type of the error that occurred. Possible values include **authentication_error**, **request_error**, etc.'
+        message:
+          type: string
+          description: 'A descriptive message providing details about the error.'
+        status_code:
+          type: string
+          description: 'A code representing the HTTP status of the error.'
+        code:
+          type: string
+          description: 'A specific error code that identifies the type of error.'
