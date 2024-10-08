@@ -184,6 +184,10 @@ const config: Config = {
               to: "/pay/payout/verify-account",
             },
             {
+              label: "Attach an Invoice to a Payout",
+              to: "/pay/payout/attach-an-invoice-to-a-payout",
+            },
+            {
               label: "Create a Transfer Request",
               to: "/pay/transfer/create-a-transfer-request",
             },
