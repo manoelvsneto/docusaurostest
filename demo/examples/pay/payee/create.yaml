@@ -1,0 +1,218 @@
+openapi: 3.0.3
+info:
+  title: Create a Payee
+  version: 1.0.0
+  description: This method allows you to create a pyee record.
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server    
+paths:
+  /ws/payee/create:
+    post:
+      summary: Create a Payee
+      description: This method allows you to create a pyee record.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payee'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/PayeeResponse'
+                  - $ref: '#/components/schemas/PayeeErrorResponse'
+
+components:
+  schemas:
+    Payee:
+      type: object
+      required:
+        - integration_key
+        - name
+        - email
+        - document
+        - document_type
+        - birth_date
+        - address
+        - country
+      properties:
+        integration_key:
+          type: string
+          maxLength: 100
+          description: Your unique and secret integration key.
+        name:
+          type: string
+          description: Payee full name.
+        email:
+          type: string
+          format: email
+          description: Payee email address.
+        document:
+          type: string
+          maxLength: 32
+          description: |
+            Payee national identification number.
+
+            - **Brazil**: CPF or CNPJ.
+            - **Chile**: RUN for individual users and RUT for companies.
+            - **Colombia**: For individual users CC (Cédula de ciudadanía), CE (Cédula de Extranjería), TI (Tarjeta de Identidad); for companies NIT.
+            - **Mexico**: RFC and CURP (individual users), RFC (legal entities/companies).
+        document_type:
+          type: string
+          maxLength: 5
+          enum:
+            - CPF
+            - CNPJ
+            - RUN
+            - RUT
+            - CC
+            - CE
+            - TI
+            - NIT
+            - RFC
+            - CURP
+          description: |
+            Payee national identification number type.
+
+            - **Brazil**: CPF or CNPJ.
+            - **Chile**: RUN for individual users and RUT for companies.
+            - **Colombia**: CC, CE, TI for individuals; NIT for companies.
+            - **Mexico**: RFC and CURP for individuals; RFC for companies.
+        birth_date:
+          type: string
+          format: date
+          description: Payee birthdate in the format yyyy-mm-dd.
+        terms_accepted_at:
+          type: string
+          format: date-time
+          description: Date and time when the payee accepted your terms and conditions (yyyy-mm-dd hh:mm:ss).
+        bank_name:
+          type: string
+          description: Bank name.
+        bank_branch:
+          type: string
+          description: Bank branch number (required when there is a branch number).
+        bank_account:
+          type: string
+          description: Bank account number.
+        account_type:
+          type: string
+          maxLength: 1
+          enum:
+            - C
+            - S
+          description: |
+            Bank account type.
+
+            - **C**: Checking account.
+            - **S**: Savings account (available only for Santander in Brazil).
+        bank_details:
+          type: string
+          description: |
+            Additional bank account information.
+
+            - **Brazil**: 3-digit operation code if bank is 104 (Caixa Econômica).
+            - **Mexico**: CLABE (Mexican standardized banking cipher).
+        zipcode:
+          type: string
+          description: Payee's zip code.
+        state:
+          type: string
+          description: Payee's state.
+        city:
+          type: string
+          description: Payee's city.
+        address:
+          type: string
+          description: Payee's street address.
+        street_complement:
+          type: string
+          description: Complement of the payee's address.
+        country:
+          type: string
+          maxLength: 2
+          enum:
+            - br
+            - cl
+            - co
+            - mx
+          description: |
+            Two-letter country code.
+
+            - **br**: Brazil.
+            - **cl**: Chile.
+            - **co**: Colombia.
+            - **mx**: Mexico.
+        shareholder:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shareholder'
+          description: |
+            List of shareholders.
+
+            - Required when `document_type` is **CNPJ**.
+            - All shareholders with at least 25% ownership must be included.
+    Shareholder:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Shareholder's full name.
+        email:
+          type: string
+          format: email
+          description: Shareholder's email address.
+        document:
+          type: string
+          maxLength: 32
+          description: |
+            Shareholder's national identification number.
+
+            - **Brazil**: CPF or CNPJ.
+            - **Chile**: RUT.
+            - **Mexico**: Optional for Mexico.
+        birth_date:
+          type: string
+          format: date
+          description: Shareholder's birthdate in the format yyyy-mm-dd.
+        zipcode:
+          type: string
+          description: Shareholder's zip code.
+        state:
+          type: string
+          description: Shareholder's state.
+        city:
+          type: string
+          description: Shareholder's city.
+        address:
+          type: string
+          description: Shareholder's street address.
+        complement:
+          type: string
+          description: Complement of the shareholder's address.
+        ownership_percent:
+          type: number
+          format: float
+          description: Percentage of ownership in the payout.
+    PayeeResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ID of the newly created Payee.
+    PayeeErrorResponse: 
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: "error"
+                  error:
+                    type: string
+                    example: "A server side error occurred"

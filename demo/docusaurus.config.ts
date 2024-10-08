@@ -203,6 +203,10 @@ const config: Config = {
               label: "Retrieve a Transfer Request",
               to: "/pay/transfer/retrieve-a-transfer-request",
             },
+            {
+              label: "Create a Payee",
+              to: "/pay/payee/create-a-payee",
+            },
             
           ],
         },
@@ -610,7 +614,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
-
+          payee_create: {
+            specPath: "examples/pay/payee/create.yaml",
+            outputDir: "docs/pay/payee",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
           
 
           /*petstore: {
