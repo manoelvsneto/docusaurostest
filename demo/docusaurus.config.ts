@@ -191,6 +191,10 @@ const config: Config = {
               label: "Cancel a Transfer Request",
               to: "/pay/transfer/cancel-a-transfer-request",
             },
+            {
+              label: "Search Transfer Requests",
+              to: "/pay/transfer/search-transfer-requests",
+            },
           ],
         },
       ],
@@ -570,7 +574,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
-
+          transfer_search: {
+            specPath: "examples/pay/transfer/search.yaml",
+            outputDir: "docs/pay/transfer",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
 
           /*petstore: {
             specPath: "https://redocly.github.io/redoc/openapi.yaml",
