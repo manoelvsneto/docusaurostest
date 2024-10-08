@@ -68,7 +68,7 @@ components:
                 target_account:
                   type: string
                   description: Destination account of the payment method to query.
-                  example: "+5511969203683"
+                  example: "+5511999999999"
                 country:
                   type: string
                   maxLength: 2
@@ -132,19 +132,19 @@ components:
                         properties:
                           name:
                             type: string
-                            example: "MAYARA SOLEDADE DUTRA"
+                            example: "Foo da silva"
                           document:
                             type: string
-                            example: "49783838890"
+                            example: "11133355560"
                           bank_branch:
                             type: string
                             example: "104"
                           bank_account:
                             type: string
-                            example: "12880000008518489588"
+                            example: "121313121313213"
                           bank_agency:
                             type: string
-                            example: "4138"
+                            example: "111"
                           account_type:
                             type: string
                             enum: [SAVINGS, CHECKING]
