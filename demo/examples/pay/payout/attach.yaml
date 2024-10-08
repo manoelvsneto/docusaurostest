@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: EAttach an Invoice to a Payout.
+  title: Attach an Invoice to a Payout.
   version: '1.0.0'
   description: Attach an Invoice to a Payout.
 servers:
