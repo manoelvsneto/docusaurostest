@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: EAttach an Invoice to a Payout.
+  version: '1.0.0'
+  description: Attach an Invoice to a Payout.
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server  
+paths:
+  /ws/payout/attach:
+    post:
+      summary: Attach an Invoice to a Payout
+      description: >
+        This method allows you to attach a PDF file to a payout. In order to attach the file,
+        a payout must be previously created with the method Create. This is only required for model payout analysis.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - integration_key
+                - uid
+                - invoice
+              properties:
+                integration_key:
+                  type: string
+                  maxLength: 100
+                  description: Your unique and secret integration key.
+                  example: your_test_integration_key
+                uid:
+                  type: string
+                  maxLength: 50
+                  description: The payout UID (EBANX unique identifier).
+                  example: 0f28f5b2bf60536d78b2dbf003c13886dd452d666
+                invoice:
+                  type: string
+                  format: binary
+                  description: PDF file to be attached to the payout. This must be a file.
+            encoding:
+              invoice:
+                contentType: application/pdf
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    minLength: 5
+                    maxLength: 7
+                    description: The status of the request (`success` or `error`).
+                    example: success
+                  message:
+                    type: string
+                    description: Message detailing the result of the attach operation.
+                    example: File Uploaded
