@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Transfer API
+  description: Cancel a Transfer Request.
+  version: "1.0.0"
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server      
+paths:
+  /ws/transfer/cancel:
+    post:
+      summary: Cancel a Transfer Request
+      description: |
+        This method allows you to cancel a transfer request.
+
+        You must send either the `transfer_code`, `uid`, `settlement_code`, or `external_reference`.
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/Request'
+
+      responses:
+        200:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+        400:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/AuthenticationErrorResponse'
+
+components:
+  schemas:
+    Request:
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+                  example: "your_test_integration_key"
+                external_reference:
+                  type: string
+                  description: The external transfer reference.
+                  minLength: 6
+                  maxLength: 40
+                  example: "PAYOUT_TRANSFER_11"
+                transfer_code:
+                  type: string
+                  description: The unique transfer reference code.
+                  minLength: 6
+                  maxLength: 40
+                  example: "11-1111"
+                settlement_code:
+                  type: string
+                  description: The transfer settlement code.
+                  minLength: 6
+                  maxLength: 40
+                  example: "14-2000"
+                uid:
+                  type: string
+                  description: The transfer UID (EBANX unique identifier).
+                  maxLength: 50
+                  example: "aaaaabbbbccccddddeeee1111222233334444"
+
+    SuccessResponse:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of the response.
+                    example: success
+                  message:
+                    type: string
+                    description: The response message.
+                    example: "You've successfully cancelled your Transfer!"
+      
+      
+    ErrorResponse:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of the response.
+                    example: invalid_request_error
+                  message:
+                    type: string
+                    description: The error message.
+                    example: "Invalid Expression"
+                  status_code:
+                    type: string
+                    description: Internal status code.
+                    example: HP-DF-02
+                  code:
+                    type: string
+                    description: Specific error code.
+                    example: HP-DF-02
+  
+    AuthenticationErrorResponse:
+        
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of the response.
+                    example: authentication_error
+                  message:
+                    type: string
+                    description: The error message.
+                    example: "Parameter integration_key is invalid"
+                  status_code:
+                    type: string
+                    description: Internal status code.
+                    example: HP-DF-04
+                  code:
+                    type: string
+                    description: Specific error code.
+                    example: HP-DF-04

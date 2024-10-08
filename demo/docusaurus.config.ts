@@ -187,7 +187,10 @@ const config: Config = {
               label: "Create a Transfer Request",
               to: "/pay/transfer/create-a-transfer-request",
             },
-
+            {
+              label: "Cancel a Transfer Request",
+              to: "/pay/transfer/cancel-a-transfer-request",
+            },
           ],
         },
       ],
@@ -558,6 +561,16 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          transfer_cancel: {
+            specPath: "examples/pay/transfer/cancel.yaml",
+            outputDir: "docs/pay/transfer",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+
 
           /*petstore: {
             specPath: "https://redocly.github.io/redoc/openapi.yaml",
