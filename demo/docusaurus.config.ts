@@ -195,6 +195,11 @@ const config: Config = {
               label: "Search Transfer Requests",
               to: "/pay/transfer/search-transfer-requests",
             },
+            {
+              label: "Retrieve a Transfer Request",
+              to: "/pay/transfer/retrieve-a-transfer-request",
+            },
+            
           ],
         },
       ],
@@ -583,6 +588,17 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
+          transfer_retrieve: {
+            specPath: "examples/pay/transfer/retrieve.yaml",
+            outputDir: "docs/pay/transfer",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,
+
+          
 
           /*petstore: {
             specPath: "https://redocly.github.io/redoc/openapi.yaml",

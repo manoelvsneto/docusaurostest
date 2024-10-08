@@ -1,0 +1,213 @@
+openapi: 3.0.3
+info:
+  title: Retrieve a Transfer Request
+  version: '1.0'
+  description: This method allows you to retrieve a transfer information.
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server   
+paths:
+  /ws/transfer/retrieve:
+    post:
+      summary: Retrieve a Transfer Request
+      description: |
+        This method allows you to retrieve transfer information.
+
+        **Note:** You must provide at least one of the following parameters: `transfer_code`, `uid`, `settlement_code`, or `external_reference`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrieveTransferRequest'
+            examples:
+              ExampleRequest:
+                summary: Example Request
+                value:
+                  integration_key: "your_test_integration_key"
+                  external_reference: "PAYOUT_TRANSFER_01"
+                  transfer_code: "14-2000"
+                  settlement_code: "14-2000"
+                  uid: "11ce3097af9ccf601b11038767962d3feded348ed"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveTransferResponse'
+              examples:
+                SuccessfulResponse:
+                  summary: Successful Response
+                  value:
+                    type: "success"
+                    transfer:
+                      uid: "11ce3097af9ccf601b11038123962d3feded348aa"
+                      external_reference: "PAYOUT_TRANSFER_02"
+                      status: "OP"
+                      request_date: "2017-02-08 17:33:56"
+                      confirm_date: null
+                      cancel_date: null
+                      amount: "150.00"
+                      settlement_code: "14-2001"
+                      source: "payment_balance"
+        '400':
+          description: Invalid Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                InvalidRequestError:
+                  summary: Invalid Request Error
+                  value:
+                    type: "invalid_request_error"
+                    message: "Invalid Expression"
+                    status_code: "HP-DF-02"
+                    code: "HP-DF-02"
+        '401':
+          description: Authentication Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                AuthenticationError:
+                  summary: Authentication Error
+                  value:
+                    type: "authentication_error"
+                    message: "Empty integration_key value"
+                    status_code: "HP-DF-03"
+                    code: "HP-DF-03"
+
+components:
+  schemas:
+    RetrieveTransferRequest:
+      type: object
+      description: |
+        You must provide your integration key and at least one of the following parameters: `transfer_code`, `uid`, `settlement_code`, or `external_reference`.
+      required:
+        - integration_key
+        - external_reference
+      properties:
+        integration_key:
+          type: string
+          description: Your unique and secret integration key.
+          maxLength: 100
+          example: "your_test_integration_key"
+        external_reference:
+          type: string
+          description: The external transfer reference.
+          minLength: 6
+          maxLength: 40
+          example: "PAYOUT_TRANSFER_01"
+        transfer_code:
+          type: string
+          description: The unique transfer reference code.
+          minLength: 6
+          maxLength: 40
+          example: "14-2000"
+        settlement_code:
+          type: string
+          description: The transfer settlement code.
+          minLength: 6
+          maxLength: 40
+          example: "14-2000"
+        uid:
+          type: string
+          description: The transfer UID (EBANX unique identifier).
+          maxLength: 50
+          example: "11ce3097af9ccf601b11038767962d3feded348ed"
+    RetrieveTransferResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the response.
+          example: "success"
+        transfer:
+          $ref: '#/components/schemas/Transfer'
+    Transfer:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The transfer UID (EBANX unique identifier).
+          maxLength: 50
+          example: "11ce3097af9ccf601b11038123962d3feded348ed"
+        external_reference:
+          type: string
+          description: The unique transfer ID provided by you.
+          minLength: 6
+          maxLength: 40
+          example: "PAYOUT_TRANSFER_02"
+        status:
+          type: string
+          description: |
+            The transfer status.
+
+            **Available statuses:**
+
+            - **OP**: The payout is waiting to start the payment process. It can change to either CA or PE.
+            - **PA**: The payout is paid.
+            - **CA**: The payout is canceled.
+          maxLength: 2
+          example: "OP"
+        request_date:
+          type: string
+          format: date-time
+          description: The date and time when the transfer was requested (UTC).
+          example: "2017-02-08 17:33:56"
+        confirm_date:
+          type: string
+          format: date-time
+          description: The date and time when the transfer was confirmed (UTC).
+          example: null
+        cancel_date:
+          type: string
+          format: date-time
+          description: The date and time when the transfer was canceled (UTC).
+          example: null
+        amount:
+          type: string
+          description: The transfer amount.
+          example: "150.00"
+        transfer_code:
+          type: string
+          description: The unique identifier used during the bank transfer (only for wire transfers).
+          example: "14-2000"
+        settlement_code:
+          type: string
+          description: The settlement code when the transfer was debited (only for transfers using payment balance).
+          example: "14-2001"
+        source:
+          type: string
+          description: |
+            The transfer source.
+
+            **Available sources:**
+
+            - **payment_balance**: Transfer using your payment balance.
+            - **wire_transfer**: Transfer with wire transfer to EBANX bank account.
+          example: "payment_balance"
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of error.
+          example: "invalid_request_error"
+        message:
+          type: string
+          description: Error message.
+          example: "Invalid Expression"
+        status_code:
+          type: string
+          description: Error status code.
+          example: "HP-DF-02"
+        code:
+          type: string
+          description: Error code.
+          example: "HP-DF-02"
