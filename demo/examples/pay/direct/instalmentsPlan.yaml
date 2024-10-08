@@ -1,0 +1,119 @@
+openapi: 3.0.3
+info:
+  title: Installments Plan
+  version: 1.0.0
+  description: |
+   The main purpose of this end-point is to deliver the installments plan using a given amount and currency. The installments values are based on the negotiated fee that merchants have with EBANX.
+
+    ⚠️ This endpoint is temporarily available only to Brazil. Other EBANX countries are coming soon.
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server
+paths:
+  /instalmentsPlan:
+    get:
+      summary: Installments Plan
+      description: |
+           The main purpose of this end-point is to deliver the installments plan using a given amount and currency. The installments
+           values are based on the negotiated fee that merchants have with EBANX.
+            ⚠️ This endpoint is temporarily available only to Brazil. Other EBANX countries are coming soon.
+      parameters:
+        - in: query
+          name: integration_key
+          required: true
+          schema:
+            type: string
+            maxLength: 100
+          description: Your unique and secret integration key.
+          example: your_test_integration_key
+        - in: query
+          name: country_abbreviation
+          required: true
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 2
+          description: Two-letter ISO-3166 country code.
+          example: BR
+        - in: query
+          name: currency_code
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 3
+          description: Three-letter code of the payment currency. Supported currencies BRL.
+          example: BRL
+        - in: query
+          name: amount
+          required: true
+          schema:
+            type: number
+          description: The total amount in the specified currency (`currency_code`).
+          example: 1599.99
+        - in: query
+          name: bin
+          required: false
+          schema:
+            type: string
+            minLength: 6
+            maxLength: 6
+          description: Bank Identification Number (first 6 digits of the card number).
+          example: 411111
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstalmentsPlanResponse'
+components:
+  schemas:
+    Instalment:
+      type: object
+      properties:
+        totalAmount:
+          type: number
+          format: float
+          description: Total amount considering the indicated number of installments and installment amount.
+          example: 1606.07
+        quantity:
+          type: integer
+          description: Number of installments.
+          example: 1
+        instalmentAmount:
+          type: number
+          format: float
+          description: Installment amount.
+          example: 1606.07
+        appliedFee:
+          type: number
+          format: float
+          description: Fee related to that number of installments.
+          example: 0
+    BinInfo:
+      type: object
+      properties:
+        bin:
+          type: string
+          description: Bank Identification Number.
+          example: 411111
+        brand:
+          type: string
+          description: Card brand.
+          example: VISA
+        country:
+          type: string
+          description: Two-letter ISO-3166 country code.
+          example: BR
+    InstalmentsPlanResponse:
+      type: object
+      properties:
+        instalmentsPlan:
+          type: array
+          items:
+            $ref: '#/components/schemas/Instalment'
+        bin:
+          $ref: '#/components/schemas/BinInfo'
