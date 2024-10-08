@@ -1,0 +1,187 @@
+openapi: 3.0.3
+info:
+  title: Verify Account
+  description: This method allows you to validate an account.
+  version: 1.0.0
+servers:
+  - url: 'https://sandbox.ebanxpay.com/'
+    description: Sandbox API Server
+  - url: 'https://api.ebanxpay.com/'
+    description: Production API Server    
+paths:
+  /ws/payout/verify_account:
+    post:
+      summary: Verify Account
+      description: This method allows you to validate an account.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/VerifyAccountRequest'
+
+      responses:
+        200:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/VerifyAccountSuccess1Response'
+                  - $ref: '#/components/schemas/VerifyAccountSuccess2Response'
+        404:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorValidationResponse'
+        500:
+          description: Response Payout
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:  
+    VerifyAccountRequest:
+              type: object
+              required:
+              - integration_key
+              - required
+              - target
+              - target_account
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  example: "your_test_integration_key"
+                  maxLength: 100
+                target:
+                  type: string
+                  description: Payment method to process the payout.
+                  enum: [pix_key, bank_account_pix, mercadopago, bank_account]
+                  example: "pix_key"
+                target_account:
+                  type: string
+                  description: Destination account of the payment method to query.
+                  example: "+5511969203683"
+                country:
+                  type: string
+                  maxLength: 2
+                  description: |
+                    ***mercadopago***
+                    
+                    The two-letter country code for the customer country. The available codes are:
+                    
+                    br: Brazil.
+                    cl: Chile.
+                    co: Colombia.
+                    mx: Mexico.
+                    
+                    ***pix_key***
+                    
+                    The two-letter country code for the customer country. The available codes are:
+                    
+                    br: Brazil.
+                    
+                    ***bank_account_pix***
+                    
+                    The two-letter country code for the customer country. The available codes are:
+
+                    br: Brazil.
+                    
+                    ***bank_account***
+                    
+                    The two-letter country code for the customer country. The available codes are:
+
+                    mx: Mexico.
+
+                  enum: [BR, CL, CO, MX]
+                  example: "BR"
+                bank_info:
+                  type: object
+                  description: | 
+                      Bank details for bank account verification. Destination account details of payment method to query. Required just to bank_account_pix.
+                  properties:
+                    bank_name:
+                      type: string
+                      example: "111 Bank Name S.A."
+                    bank_branch:
+                      type: string
+                      example: "1111"
+                    account_type:
+                      type: string
+                      enum: [CHECKING, SAVINGS]
+                      example: "C"
+                    bank_account:
+                      type: string
+                      example: "111222333444"
+                    bank_document:
+                      type: string
+                      example: "111222"
+   
+    VerifyAccountSuccess1Response:
+                    type: object
+                    properties:
+                      recipient:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: "MAYARA SOLEDADE DUTRA"
+                          document:
+                            type: string
+                            example: "49783838890"
+                          bank_branch:
+                            type: string
+                            example: "104"
+                          bank_account:
+                            type: string
+                            example: "12880000008518489588"
+                          bank_agency:
+                            type: string
+                            example: "4138"
+                          account_type:
+                            type: string
+                            enum: [SAVINGS, CHECKING]
+                            example: "SAVINGS"
+                      status:
+                        type: string
+                        example: "valid"
+                      message:
+                        type: string
+                        example: "Account is valid"
+                        
+    VerifyAccountSuccess2Response:              
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: "valid"
+                      message:
+                        type: string
+                        example: "Account does not have KYC complete in provider"
+       
+    ErrorValidationResponse:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: "error"
+                  error:
+                    type: string
+                    example: "The user canceled his account"
+    
+    ErrorResponse: 
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: "error"
+                  error:
+                    type: string
+                    example: "A server side error occurred"

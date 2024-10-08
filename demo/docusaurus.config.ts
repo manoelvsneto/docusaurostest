@@ -169,11 +169,15 @@ const config: Config = {
             },
             {
               label: "Simulate a Payout request",
-              to: "/pay/payout/simulate-a-payout-request  ",
+              to: "/pay/payout/simulate-a-payout-request",
             },
             {
               label: "Get Available Banks",
-              to: "/pay/payout/get-available-banks  ",
+              to: "/pay/payout/get-available-banks",
+            },
+            {
+              label: "Verify Account",
+              to: "/pay/payout/verify-account",
             },
           ],
         },
@@ -499,7 +503,15 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,  
-
+          payout_verifyaccount: {
+            specPath: "examples/pay/payout/verify_account.yaml",
+            outputDir: "docs/pay/payout",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+            showSchemas: true,
+          } satisfies OpenApiPlugin.Options,  
 
           updatecustomerbankinfo: {
             specPath: "examples/pay/direct/updatecustomerbankinfo.yaml",
