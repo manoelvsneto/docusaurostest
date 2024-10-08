@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: Resend Bank Info
   description: API to update customer bank information. The resend refund bank info is a server-to-server operation to update the bank info data in a existing refund.
@@ -21,6 +21,9 @@ paths:
               oneOf:
                 - $ref: '#/components/schemas/RequestBrazilBankTransfer'
                 - $ref: '#/components/schemas/RequestBrazilPix'
+                - $ref: '#/components/schemas/RequestChile'
+                - $ref: '#/components/schemas/RequestMexico'
+                - $ref: '#/components/schemas/RequestColombia'
       responses:
         '200':
           description: Response Body
@@ -36,6 +39,12 @@ components:
     RequestBrazilPix:
               description: Payment body object
               type: object
+              required:
+                - integration_key
+                - hash
+                - merchant_refund_code
+                - refund_id
+                - bank_info
               properties:
                 integration_key:
                   type: string
@@ -56,6 +65,11 @@ components:
                   maxLength: 20
                 bank_info:
                   type: object
+                  description: Object that holds bank information for the refund. Although this object is not mandatory, if you choose to use it, all its elements are required to be provided
+                  required:
+                    - bank_account_holder_name
+                    - bank_account_holder_document
+                    - pix_key
                   properties:
                     pix_key:
                       type: string
@@ -89,6 +103,12 @@ components:
     RequestBrazilBankTransfer:
               description: Payment body object
               type: object
+              required:
+                - integration_key
+                - hash
+                - merchant_refund_code
+                - refund_id
+                - bank_info
               properties:
                 integration_key:
                   type: string
@@ -109,9 +129,24 @@ components:
                   maxLength: 20
                 bank_info:
                   type: object
+                  description: Object that holds bank information for the refund. Although this object is not mandatory, if you choose to use it, all its elements are required to be provided
+                  required:
+                    - bank_name
+                    - bank_branch
+                    - bank_account
+                    - account_type
+                    - bank_account_holder_document
+                    - bank_account_holder_name
                   properties:
                     bank_name:
                       type: string
+                      required:
+                      - bank_name
+                      - bank_branch
+                      - bank_account
+                      - account_type
+                      - bank_account_holder_document
+                      - bank_account_holder_name
                       description: |
                           Name of the banking institution. See the complete list below:
 
@@ -249,13 +284,7 @@ components:
                       type: string
                       description: Bank account holder name
                       maxLength: 100
-                  required:
-                  - bank_name
-                  - bank_branch
-                  - bank_account
-                  - account_type
-                  - bank_account_holder_document
-                  - bank_account_holder_name
+                 
               example:
                 integration_key: "*******************on_key"
                 hash: "5ad9028b30eb8de099f9fe72b9763283c7cf4d35b6430221"
@@ -270,6 +299,311 @@ components:
                   bank_account_holder_document: "85351346893"
                   bank_account_holder_name: "José Silva"
   
+    RequestChile:
+              description: Payment body object
+              type: object
+              required:
+                - integration_key
+                - hash
+                - merchant_refund_code
+                - refund_id
+                - bank_info
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+                hash:
+                  type: string
+                  description: The payment hash (EBANX unique identifier).
+                  maxLength: 48
+                merchant_refund_code:
+                  type: integer
+                  description: The ID of the refund on the merchant system. Unique Required for request
+                  minLength: 1
+                  maxLength: 40
+                refund_id:
+                  type: integer
+                  description: The ID of the refund to be updated. Required for resending.
+                  maxLength: 20
+                bank_info:
+                  type: object
+                  description: Object that holds bank information for the refund. Although this object is not mandatory, if you choose to use it, all its elements are required to be provided
+                  properties:
+                    bank_name:
+                      type: string
+                      required:
+                        - bank_name
+                        - bank_account
+                        - bank_account_holder_document
+                        - bank_account_holder_name
+                      description: |
+                          Name of the banking institution. See the complete list below:
+
+                          001 BANCO DE CHILE
+                          001 BANCO EDWARDS | CITI
+                          001 BANCO ATLAS S.A.
+                          001 BANCO CREDICHILE
+                          009 BANCO INTERNACIONAL
+                          012 BANCO DEL ESTADO DE CHILE
+                          014 SCOTIABANK CHILE
+                          016 BANCO DE CREDITO E INVERSIONES
+                          017 BANCO DO BRASIL S.A
+                          028 BANCO BICE
+                          031 HSBC BANK (CHILE)
+                          037 BANCO SANTANDER-CHILE
+                          039 ITAÚ CORPBANCA
+                          041 JP MORGAN CHASE BANK N. A.
+                          043 BANCO DE LA NACION ARGENTINA
+                          045 MUFG Bank Ltd.
+                          049 BANCO SECURITY
+                          051 BANCO FALABELLA
+                          053 BANCO RIPLEY
+                          055 BANCO CONSORCIO
+                          059 BANCO BTG PACTUAL CHILE
+                          060 CHINA CONSTRUCTION BANK AGENCIA EN CHILE
+                          061 BANK OF CHINA AGENCIA EN CHILE
+                          504 SCOTIABANK AZUL (BBVA)
+                          730 Tenpo
+                    bank_branch:
+                      type: string
+                      description: Bank branch. The branch can have a digit. If have so, the digit should be separated with a hyphen.
+                      maxLength: 7
+                    bank_account:
+                      type: string
+                      description: Account number, if have digit should be separated with a hyphen
+                      maxLength: 15
+                    account_type:
+                      type: string
+                      description: Account type C - for checking account S - for savings account
+                      maxLength: 1
+                    bank_details:
+                      type: integer
+                      description: |
+                        Only necessary when the bank is 104 Caixa Econômica Valid values are '001', '002', '003', '006', '007', '013', '022', '023', '028', '043', '131', '1288'
+                      maxLength: 4
+                    bank_account_holder_document:
+                      type: string
+                      description: Bank account holder document CPF or CNPJ
+                      maxLength: 14
+                    bank_account_holder_name:
+                      type: string
+                      description: Bank account holder name
+                      maxLength: 100
+                  required:
+                  - bank_name
+                  - bank_branch
+                  - bank_account
+                  - account_type
+                  - bank_account_holder_document
+                  - bank_account_holder_name
+             
+    RequestColombia:
+              description: Payment body object
+              type: object
+              required:
+                - integration_key
+                - hash
+                - merchant_refund_code
+                - refund_id
+                - bank_info
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+                hash:
+                  type: string
+                  description: The payment hash (EBANX unique identifier).
+                  maxLength: 48
+                merchant_refund_code:
+                  type: integer
+                  description: The ID of the refund on the merchant system. Unique Required for request
+                  minLength: 1
+                  maxLength: 40
+                refund_id:
+                  type: integer
+                  description: The ID of the refund to be updated. Required for resending.
+                  maxLength: 20
+                bank_info:
+                  type: object
+                  description: Object that holds bank information for the refund. Although this object is not mandatory, if you choose to use it, all its elements are required to be provided
+                  required:
+                    - bank_name
+                    - bank_account
+                    - bank_account_holder_document
+                    - bank_account_holder_name
+                  properties:
+                    bank_name:
+                      type: string
+                      description: |
+                          Name of the banking institution. See the complete list below:
+
+                          1040 Banco Agrario
+                          1052 Banco AV Villas
+                          1032 Banco Caja Social BCSC SA
+                          1019 Banco Colpatria
+                          1066 Banco Cooperativo Coopcentral
+                          1006 Banco Corpbanca Colombia S.A
+                          1051 Banco Davivienda SA
+                          1001 Banco de Bogotá
+                          1023 Banco de Occidente
+                          1062 Banco Falabella S.A
+                          1063 Banco Finandina S.A
+                          1012 Banco GNB Sudameris
+                          1064 Banco Multibank S.A
+                          1060 Banco Pichincha
+                          1002 Banco Popular
+                          1058 Banco Procredit Colombia
+                          1065 Banco Santander de Negocios Colombia S.A.
+                          1007 Bancolombia
+                          1061 Bancoomeva
+                          1013 BBVA Colombia
+                          1009 Citibank
+                          1370 Coltefinanciera S.A
+                          1292 Confiar Cooperativa Financiera
+                          1283 Cooperativa Financiera de Antioquia
+                          1289 Cootrafa Cooperativa Financiera
+                          1121 Financiera Juriscoop Compañía de Financiamiento
+                          1014 Helm Bank S.A
+                          1059 Bancamia S.A.
+                          1558 Banco Credifinanciera S.A.
+                          1071 Banco J.P. Morgan Colombia S.A.
+                          1047 Banco Mundo Mujer
+                          1069 Banco Serfinanza S.A.
+                          1053 Banco W S.A.
+                          1031 Bancoldex S.A.
+                          1291 Coofinep Cooperativa Financier
+                          1551 Daviplata
+                          1303 Giros y Finanzas CF
+                          1637 Iris
+                          1070 Lulo Bank S.A.
+                          1067 Mibanco S.A.
+                          1801 Movii
+                          1507 Nequi
+                          1811 Rappipay
+                    bank_branch:
+                      type: string
+                      description: Bank branch. The branch can have a digit. If have so, the digit should be separated with a hyphen.
+                      maxLength: 7
+                    bank_account:
+                      type: string
+                      description: Account number, if have digit should be separated with a hyphen
+                      maxLength: 15
+                    account_type:
+                      type: string
+                      description: Account type C - for checking account S - for savings account
+                      maxLength: 1
+                    bank_details:
+                      type: integer
+                      description: |
+                        Only necessary when the bank is 104 Caixa Econômica Valid values are '001', '002', '003', '006', '007', '013', '022', '023', '028', '043', '131', '1288'
+                      maxLength: 4
+                    bank_account_holder_document:
+                      type: string
+                      description: Bank account holder document CPF or CNPJ
+                      maxLength: 14
+                    bank_account_holder_name:
+                      type: string
+                      description: Bank account holder name
+                      maxLength: 100
+
+   
+    RequestMexico:
+              description: Payment body object
+              type: object
+              required:
+                - integration_key
+                - hash
+                - merchant_refund_code
+                - refund_id
+                - bank_info
+              properties:
+                integration_key:
+                  type: string
+                  description: Your unique and secret integration key.
+                  maxLength: 100
+                hash:
+                  type: string
+                  description: The payment hash (EBANX unique identifier).
+                  maxLength: 48
+                merchant_refund_code:
+                  type: integer
+                  description: The ID of the refund on the merchant system. Unique Required for request
+                  minLength: 1
+                  maxLength: 40
+                refund_id:
+                  type: integer
+                  description: The ID of the refund to be updated. Required for resending.
+                  maxLength: 20
+                bank_info:
+                  type: object
+                  description: Object that holds bank information for the refund. Although this object is not mandatory, if you choose to use it, all its elements are required to be provided
+                  properties:
+                    clabe:
+                      type: string
+                      description: |
+                          Clabe. The first 3 digits must represent a valid bank code. See the complete list below:
+
+                          001 => BANCO - BANXICO
+                          002 => BANAM - BANAMEX
+                          006 => BCEXT - BANCOMEXT
+                          009 => BOBRA - BANOBRAS
+                          012 => BACOM - BBVA BANCOMER
+                          014 => BANME - BANCO SANTANDER
+                          019 => BEJER - BANJERCITO
+                          021 => BITAL - HSBC
+                          030 => BAJIO - BAJIO
+                          032 => BAIXE - IXE
+                          036 => BINBU - INBURSA
+                          037 => BINTE - INTERACCIONES
+                          042 => MIFEL - MIFEL
+                          044 => COMER - SCOTIA BANK INVERLAT
+                          058 => BANRE - BANREGIO
+                          059 => BINVE - INVEX
+                          060 => BANSI - BANSI
+                          062 => BAFIR - AFIRME
+                          072 => BBANO - BANORTE / IXE
+                          102 => ABNBA - ROYAL BANK OF SCOTLAND
+                          103 => AMEX - AMERICAN EXPRESS
+                          106 => BAMSA - BANK OF AMERICA
+                          108 => TOKYO - TOKYO
+                          110 => CHASE - JP MORGAN
+                          112 => CMCA - BANCO MONEX
+                          113 => DRESD - VE POR MAS
+                          116 => INGBA - ING
+                          124 => DEUTB - DEUTSCHE
+                          126 => CRESU - CREDIT SUISSE
+                          127 => BAZTE - AZTECA
+                          128 => BAUTO - BANCO AUTOFIN
+                          129 => BARCL - BARCLAYS BANK
+                          130 => BCOMP - BANCO COMPARTAMOS
+                          131 => FAMSA - BANCO DE AHORRO FAMSA
+                          132 => MULTI - BANCO MULTIVA
+                          133 => PRUDE - ACTINVER BANK
+                          134 => BWALL - BANCO WAL MART
+                          135 => NAFIN - NACIONAL FINANCIERA
+                          136 => REGIO - BANCO REGIONAL SA
+                          137 => COPEL - BANCOPPEL
+                          138 => AMIGO - BANCO AMIGO
+                          139 => UBSBA - UBS BANK MEXICO
+                          140 => FACIL - BANCO FACIL
+                          141 => VOLKS - VOLKSWAGEN BANK
+                          143 => CONSU - BANCO CONSULTORIA
+                          145 => BBASE - BANCO BASE
+                          147 => AGROF - BANKAOOL
+                          166 => BANSE - BANSEFI
+                          168 => HIFED - HIPOTECARIA FEDERAL
+                          646 => 90646 - STP
+                    bank_account_holder_name:
+                      type: string
+                      description: Bank account holder name
+                      maxLength: 100
+                  required:
+                  - clabe
+                  - bank_account_holder_name
+              
+   
     SuccessResponse:
         type: object
         properties:
