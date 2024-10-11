@@ -32,6 +32,7 @@ paths:
             application/json:
               schema:
                 oneOf:
+                  - $ref: '#/components/schemas/DefaultResponse'
                   - $ref: '#/components/schemas/PixBRResponse'
                   - $ref: '#/components/schemas/PSECOResponse'
                   - $ref: '#/components/schemas/OXXOMXResponse'
@@ -435,7 +436,7 @@ components:
 
     DefaultResponse:
       type: object
-      title: Default Payment Response
+      title: Default Response
       description: Response payload for a generic payment request.
       properties:
         payment:
