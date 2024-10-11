@@ -100,10 +100,9 @@ components:
                       type: string
                       description:  |
                         Customers document.
-
-                        Brazil: requires a valid CPF (natural person taxpayer ID) or CNPJ (business taxpayer ID).
                        
                         Argentina: Customer CUIT / CUIL / DNI (ID and taxpayer identification numbers). It must be a valid one.
+                        Brazil: requires a valid CPF (natural person taxpayer ID) or CNPJ (business taxpayer ID).
                         Chile: requires a valid RUT (Registro Único Tributario).
                         Colombia: Customer Cedula de Ciudadania, Cédula de Extrangeria or NIT (taxpayer identification number). It must be a valid one.
                         Uruguay: Customer CI (Cédula de Identidad). It must be a valid one.
@@ -167,8 +166,7 @@ components:
                         Chile: required for Webpay payments.
                         Colombia: required for Credit Card payments.
                         Mexico: required for Credit Card payments.
-                        Peru: required for Credit Card payments.
-                        
+                        Peru: required for Credit Card payments.                 
                     zipcode:
                       type: string
                       description: |
@@ -220,30 +218,28 @@ components:
                       description: | 
                         The code of the payment method. The supported codes are:
 
-                        * **AR**: 
-                        * **BO**: 
-                        * **BR**: 
-                        * **CL**: 
-                        * **CO**: 
-                        * **CR**: 
-                        * **DO**: 
-                        * **EC**: 
-                        * **EG**: 
-                        * **GH**: 
-                        * **GT**: 
-                        * **IN**: 
-                        * **JM**: 
-                        * **KE**: 
-                        * **MX**: 
-                        * **NG**: 
-                        * **PA**: 
-                        * **PE**: 
-                        * **PY**: 
-                        * **UY**: 
-                        * **ZA**: 
-
-                       
-                      enum: ["baloto", "banktransfer", "bancodobrasil", "banrisul", "boleto", "bradesco", "creditcard", "cupon", "debitcard", "ebanxaccount", "efecty", "eft", "itau", "multicaja", "oxxo", "pagoefectivo", "pagofacil", "pagosnet", "rapipago", "safetypay", "safetypay-cash", "safetypay-online", "sencillito", "servipag", "spei", "webpay"]
+                        * **AR**: mercadopago,visa,debitcard,mastercard,rapipago,pagofacil,amex,naranja,cabal,debin
+                        * **BO**: pagosnet
+                        * **BR**: mastercard,pix,visa,debitcard,elo,boleto,mercadopago,amex,picpay,hipercard,nupay,mpconnect,paypal,discover,banescard,diners,aura,mpcredito,itau
+                        * **CL**: debitcard,visa,mastercard,webpay-rest,machpay,servipag,amex,sencillito,multicaja,mpconnect,mercadopago,diners
+                        * **CO**: debitcard,eft,nequi,mastercard,visa,achpse,efecty,amex,bancolombia-button,diners,codensa
+                        * **CR**: visa,mastercard,amex,debitcard
+                        * **DO**: visa,mastercard,debitcard,amex
+                        * **EC**: safetypay-cash,safetypay-online,visa,mastercard
+                        * **EG**: mastercard,fawry,debitcard,safetypay,baloto,pagoefectivo,boleto,oxxo
+                        * **GH**: vodacom, debitcard
+                        * **GT**: visa,debitcard,mastercard,amex
+                        * **IN**: upi-qrcode,visa,debitcard,upi-collect-autopay,rupay,mastercard,upi-intent
+                        * **JM**: mastercard
+                        * **KE**: debitcard,visa,mastercard,mpesa
+                        * **MX**: oxxopay,debitcard,mercadopago,mastercard,visa,oxxo,spei,amex,carnet,mpconnect,paynet
+                        * **NG**: debitcard,visa,ussd,mastercard,banktransfer,amex,banktransfer
+                        * **PA**: debitcard,visa,mastercard,amex
+                        * **PE**: visa,debitcard,pagoefectivo,mastercard,amex,diners,safetypay-online,safetypay-cash
+                        * **PY**: visa,debitcard,mastercard,,amex
+                        * **UY**: mastercard,debitcard,visa,lider,mpconnect,amex
+                        * **ZA**: debitcard,visa,mastercard,ozow,amex,diners,capitec-pay,discover
+                      enum: ["achpse","amex","aura","baloto","bancolombia-button","banescard","banktransfer","boleto","cabal","capitec-pay","carnet","codensa","debin","debitcard","diners","discover","efecty","eft","elo","fawry","hipercard","itau","lider","machpay","mastercard","mercadopago","mpconnect","mpcredito","mpesa","multicaja","naranja","nequi","nupay","oxxo","oxxopay","ozow","pagoefectivo","pagofacil","pagosnet","paynet","paypal","picpay","pix","rapipago","rupay","safetypay","safetypay-cash","safetypay-cash",safetypay-online","sencillito","servipag","spei","upi-collect-autopay","upi-intent""upi-qrcode","ussd","visa","vodacom","webpay-rest"]
                     merchant_payment_code:
                       type: string
                       description: The payment hash Merchant Payment Code (unique merchant ID).
@@ -305,9 +301,7 @@ components:
                         **PE**: PEN, USD
                         **PY**: 
                         **UY**: UYU, USD
-                        **ZA**: 
-
-                        
+                        **ZA**:                     
                       enum: ["ARS","BRL", "EUR", "MXN", "PEN", "USD", "CLP", "COP", "ARS", "BOB", "UYU"]
                     instalments:
                       type: integer
@@ -318,8 +312,7 @@ components:
                         Brazil: 1 to 12 (depending on your contract).
                         Colombia: 1 to 36 (depending on your contract).
                         Mexico: 1, 3, 6, 9 or 12 (depending on your contract).
-                        Peru: 1 to 48 (depending on your contract).
-                        
+                        Peru: 1 to 48 (depending on your contract).                     
                     amount_total:
                       type: number
                       description: The amount in the specified currency (currency_code).
