@@ -208,34 +208,29 @@ components:
                       description: | 
                         The code of the payment method. The supported codes are:
 
-                        baloto: Baloto (Colombia).
-                        banktransfer: Bank transfer (Brazil).
-                        bancodobrasil: Banco do Brasil online debit (Brazil).
-                        banrisul: Banrisul online debit (Brazil).
-                        boleto: Boleto bancário (Brazil).
-                        bradesco: Bradesco online debit (Brazil).
-                        creditcard: Credit Card (Brazil, Argentina, Mexico, Peru, Colombia).
-                        cupon: Cupon de Pagos (Argentina).
-                        debitcard: Debit Card
-                        ebanxaccount: EBANX Account (Brazil).
-                        efecty: Efecty (Colombia)
-                        eft: Bank Transfer (Colombia).
-                        itau: Itaú online debit (Brazil).
-                        multicaja: Multicaja (Chile).
-                        nequi: Nequi (Colombia).
-                        oxxo: OXXO (Mexico).
-                        oxxopay: OXXO Pay (Mexico).
-                        pagoefectivo: PagoEfectivo (Peru).
-                        pagofacil: PagoFacil (Argentina).
-                        pagosnet: PagosNet (Bolivia).
-                        rapipago: RapiPago (Argentina).
-                        safetypay: SafetyPay (Peru, Ecuador, Checkout only).
-                        safetypay-cash: SafetyPay Cash (Peru, Ecuador).
-                        safetypay-online: SafetyPay Online (Peru, Ecuador).
-                        sencillito: Sencillito (Chile).
-                        servipag: Servipag (Chile).
-                        spei: SPEI bank transfer method (Mexico).
-                        webpay: Webpay (Chile).
+                        * **AR**: mercadopago, visa, debitcard, mastercard, mastercard, machpay, diners, codensa, ussd, discover
+                        * **BO**: debitcard
+                        * **BR**: mastercard, pix, visa, debitcard, elo, boleto, mercadopago, efecty, pagosnet, pagofacil, amex, sencillito, mercadopago, mpconnect, diners, rupay, mpesa, baloto
+                        * **CL**: debitcard, visa, mastercard, webpay-rest, debitcard, amex, amex, multicaja, mpconnect, paypal, mastercard, fawry
+                        * **CO**: debitcard, eft, nequi, mastercard, visa, achpse, visa, amex, mastercard, carnet, ozow
+                        * **CR**: mastercard, amex, mastercard, visa
+                        * **DO**: visa, mastercard, debitcard, mastercard
+                        * **EC**: safetypay-online, mastercard, mastercard, banescard
+                        * **EG**: debitcard, mastercard, mpcredito, pagoefectivo, boleto, oxxo, debitcard, itau
+                        * **GH**: debin
+                        * **GT**: visa, visa, debitcard, mpconnect
+                        * **IN**: bancolombia-button, debitcard, mastercard, diners, capitec-pay, vodacom, aura
+                        * **JM**: upi-collect-autopay
+                        * **KE**: discover, debitcard, mastercard, banktransfer
+                        * **MX**: oxxopay, debitcard, mercadopago, mastercard, visa, oxxo, spei, amex, amex, cabal, amex
+                        * **NG**: debitcard, visa, safetypay-cash, safetypay-online, debitcard, banktransfer, safetypay
+                        * **PA**: mastercard, nupay, naranja, lider
+                        * **PE**: visa, debitcard, pagoefectivo, mastercard, picpay, servipag, safetypay-cash, paynet
+                        * **PY**: hipercard, upi-qrcode, visa, amex
+                        * **UY**: debitcard, amex, diners, diners, visa, visa
+                        * **ZA**: debitcard, visa, rapipago, visa, amex, mpconnect, amex, upi-intent, amex
+
+                       
                       enum: ["baloto", "banktransfer", "bancodobrasil", "banrisul", "boleto", "bradesco", "creditcard", "cupon", "debitcard", "ebanxaccount", "efecty", "eft", "itau", "multicaja", "oxxo", "pagoefectivo", "pagofacil", "pagosnet", "rapipago", "safetypay", "safetypay-cash", "safetypay-online", "sencillito", "servipag", "spei", "webpay"]
                     merchant_payment_code:
                       type: string
