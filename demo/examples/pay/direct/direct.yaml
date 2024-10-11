@@ -102,9 +102,12 @@ components:
                         Customers document.
 
                         Brazil: requires a valid CPF (natural person taxpayer ID) or CNPJ (business taxpayer ID).
+                       
+                        Argentina: Customer CUIT / CUIL / DNI (ID and taxpayer identification numbers). It must be a valid one.
                         Chile: requires a valid RUT (Registro Único Tributario).
-                        Colombia: requires a valid NIT / CC (Número de Identificación Tributaria).
-                        Argentina: requires a valid CUIT / CUIL / CDI (Clave Única de Identificación Tríbutaria).
+                        Colombia: Customer Cedula de Ciudadania, Cédula de Extrangeria or NIT (taxpayer identification number). It must be a valid one.
+                        Uruguay: Customer CI (Cédula de Identidad). It must be a valid one.
+
                       maxLength: 32
                     customer_ip:
                       type: string
@@ -159,7 +162,7 @@ components:
                       description: |
                         Customer state/region/province.
 
-                        Brazil: required.
+                        Brazil: required; "AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO".
                         Argentina: required for Credit Card payments.
                         Chile: required for Webpay payments.
                         Colombia: required for Credit Card payments.
@@ -217,27 +220,27 @@ components:
                       description: | 
                         The code of the payment method. The supported codes are:
 
-                        * **AR**: mercadopago, visa, debitcard, mastercard, mastercard, machpay, diners, codensa, ussd, discover
-                        * **BO**: debitcard
-                        * **BR**: mastercard, pix, visa, debitcard, elo, boleto, mercadopago, efecty, pagosnet, pagofacil, amex, sencillito, mercadopago, mpconnect, diners, rupay, mpesa, baloto
-                        * **CL**: debitcard, visa, mastercard, webpay-rest, debitcard, amex, amex, multicaja, mpconnect, paypal, mastercard, fawry
-                        * **CO**: debitcard, eft, nequi, mastercard, visa, achpse, visa, amex, mastercard, carnet, ozow
-                        * **CR**: mastercard, amex, mastercard, visa
-                        * **DO**: visa, mastercard, debitcard, mastercard
-                        * **EC**: safetypay-online, mastercard, mastercard, banescard
-                        * **EG**: debitcard, mastercard, mpcredito, pagoefectivo, boleto, oxxo, debitcard, itau
-                        * **GH**: debin
-                        * **GT**: visa, visa, debitcard, mpconnect
-                        * **IN**: bancolombia-button, debitcard, mastercard, diners, capitec-pay, vodacom, aura
-                        * **JM**: upi-collect-autopay
-                        * **KE**: discover, debitcard, mastercard, banktransfer
-                        * **MX**: oxxopay, debitcard, mercadopago, mastercard, visa, oxxo, spei, amex, amex, cabal, amex
-                        * **NG**: debitcard, visa, safetypay-cash, safetypay-online, debitcard, banktransfer, safetypay
-                        * **PA**: mastercard, nupay, naranja, lider
-                        * **PE**: visa, debitcard, pagoefectivo, mastercard, picpay, servipag, safetypay-cash, paynet
-                        * **PY**: hipercard, upi-qrcode, visa, amex
-                        * **UY**: debitcard, amex, diners, diners, visa, visa
-                        * **ZA**: debitcard, visa, rapipago, visa, amex, mpconnect, amex, upi-intent, amex
+                        * **AR**: 
+                        * **BO**: 
+                        * **BR**: 
+                        * **CL**: 
+                        * **CO**: 
+                        * **CR**: 
+                        * **DO**: 
+                        * **EC**: 
+                        * **EG**: 
+                        * **GH**: 
+                        * **GT**: 
+                        * **IN**: 
+                        * **JM**: 
+                        * **KE**: 
+                        * **MX**: 
+                        * **NG**: 
+                        * **PA**: 
+                        * **PE**: 
+                        * **PY**: 
+                        * **UY**: 
+                        * **ZA**: 
 
                        
                       enum: ["baloto", "banktransfer", "bancodobrasil", "banrisul", "boleto", "bradesco", "creditcard", "cupon", "debitcard", "ebanxaccount", "efecty", "eft", "itau", "multicaja", "oxxo", "pagoefectivo", "pagofacil", "pagosnet", "rapipago", "safetypay", "safetypay-cash", "safetypay-online", "sencillito", "servipag", "spei", "webpay"]
@@ -280,29 +283,41 @@ components:
                     currency_code:
                       type: string
                       description: |
-                        Three-letter code of the payment currency. Supported currencies:
+                        Three-letter code of the payment currency for each country. Supported currencies:
 
-                        BRL
-                        EUR
-                        MXN
-                        PEN
-                        USD
-                        CLP
-                        COP
-                        ARS
-                        BOB
-                        UYU
+                        **AR**: ARS, USD
+                        **BO**: BOB, USD
+                        **BR**: BRL, EUR, USD
+                        **CL**: CLP, EUR, USD
+                        **CO**: COP, EUR, USD
+                        **CR**: 
+                        **DO**: 
+                        **EC**: USD
+                        **EG**: 
+                        **GH**: 
+                        **GT**: 
+                        **IN**: 
+                        **JM**: 
+                        **KE**: 
+                        **MX**: MXN, USD
+                        **NG**: 
+                        **PA**: 
+                        **PE**: PEN, USD
+                        **PY**: 
+                        **UY**: UYU, USD
+                        **ZA**: 
+
                         
-                      enum: ["BRL", "EUR", "MXN", "PEN", "USD", "CLP", "COP", "ARS", "BOB", "UYU"]
+                      enum: ["ARS","BRL", "EUR", "MXN", "PEN", "USD", "CLP", "COP", "ARS", "BOB", "UYU"]
                     instalments:
                       type: integer
                       description: |
                         The number of instalments of the payment (from 1 to 12, depending on your contract and the country).
 
-                        Brazil: 1 to 12 (depending on your contract).
-                        Mexico: 1, 3, 6, 9 or 12 (depending on your contract).
-                        Colombia: 1 to 36 (depending on your contract).
                         Argentina: 1 to 12 (depending on your contract).
+                        Brazil: 1 to 12 (depending on your contract).
+                        Colombia: 1 to 36 (depending on your contract).
+                        Mexico: 1, 3, 6, 9 or 12 (depending on your contract).
                         Peru: 1 to 48 (depending on your contract).
                         
                     amount_total:
