@@ -200,11 +200,11 @@ components:
                         * **JM**: Jamaica
                         * **KE**: Kenya
                         * **MX**: Mexico
-                        **NG**: Nigeria
-                        **PA**: Panama
-                        **PE**: Peru
-                        **PY**: Paraguay
-                        **UY**: Uruguay
+                        * **NG**: Nigeria
+                        * **PA**: Panama
+                        * **PE**: Peru
+                        * **PY**: Paraguay
+                        * **UY**: Uruguay
                         * **ZA**: South Africa
 
                       enum: ["AR","BO","BR","CL","CO","CR","DO","EC","EG","GH","GT","IN","JM","KE","MX","NG","PA","PE","PY","UY","ZA"]
