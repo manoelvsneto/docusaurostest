@@ -1,7 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Payment Processing API
-  description: This API handles various types of payment requests and responses including Pix, PSE, and OXXO payment methods.
+  title: Direct Payments
+  description: | 
+      This method allows you to create a payment using EBANX Direct, our Transparent Checkout solution, where the customer checkouts without being redirected to EBANX’s website. For this method, you will need to wrap the request paratemers in a JSON object and send them as the value of a parameter called request_body.
   version: 1.0.0
 servers:
   - url: 'https://sandbox.ebanxpay.com/'
@@ -12,7 +13,8 @@ paths:
   /ws/direct:
     post:
       summary: Process a payment
-      description: Processes payment requests and returns the corresponding responses for Pix, PSE, and OXXO payment methods.
+      description: | 
+       This method allows you to create a payment using EBANX Direct, our Transparent Checkout solution, where the customer checkouts without being redirected to EBANX’s website. For this method, you will need to wrap the request paratemers in a JSON object and send them as the value of a parameter called request_body.
       requestBody:
         content:
           application/json:
@@ -239,7 +241,7 @@ components:
                         * **PY**: visa,debitcard,mastercard,,amex
                         * **UY**: mastercard,debitcard,visa,lider,mpconnect,amex
                         * **ZA**: debitcard,visa,mastercard,ozow,amex,diners,capitec-pay,discover
-                      enum: ["achpse","amex","aura","baloto","bancolombia-button","banescard","banktransfer","boleto","cabal","capitec-pay","carnet","codensa","debin","debitcard","diners","discover","efecty","eft","elo","fawry","hipercard","itau","lider","machpay","mastercard","mercadopago","mpconnect","mpcredito","mpesa","multicaja","naranja","nequi","nupay","oxxo","oxxopay","ozow","pagoefectivo","pagofacil","pagosnet","paynet","paypal","picpay","pix","rapipago","rupay","safetypay","safetypay-cash","safetypay-cash",safetypay-online","sencillito","servipag","spei","upi-collect-autopay","upi-intent""upi-qrcode","ussd","visa","vodacom","webpay-rest"]
+                      enum: ["achpse","amex","aura","baloto","bancolombia-button","banescard","banktransfer","boleto","cabal","capitec-pay","carnet","codensa","debin","debitcard","diners","discover","efecty","eft","elo","fawry","hipercard","itau","lider","machpay","mastercard","mercadopago","mpconnect","mpcredito","mpesa","multicaja","naranja","nequi","nupay","oxxo","oxxopay","ozow","pagoefectivo","pagofacil","pagosnet","paynet","paypal","picpay","pix","rapipago","rupay","safetypay","safetypay-cash","safetypay-online","sencillito","servipag","spei","upi-collect-autopay","upi-intent","upi-qrcode","ussd","visa","vodacom","webpay-rest"]
                     merchant_payment_code:
                       type: string
                       description: The payment hash Merchant Payment Code (unique merchant ID).
