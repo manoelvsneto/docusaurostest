@@ -206,7 +206,7 @@ components:
                         **UY**: Uruguay
                         **ZA**: South Africa
 
-                      enum: ["AR","BO","BR","CL","CO`,"CR","DO","EC","EG","GH","GT","IN","JM","KE","MX","NG","PA","PE","PY","UY","ZA"]
+                      enum: ["AR","BO","BR","CL","CO","CR","DO","EC","EG","GH","GT","IN","JM","KE","MX","NG","PA","PE","PY","UY","ZA"]
                     phone_number:
                       type: string
                       description: Customer phone number. It is required for all countries.
