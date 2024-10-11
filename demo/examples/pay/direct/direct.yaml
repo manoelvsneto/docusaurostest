@@ -183,21 +183,30 @@ components:
                       description: |
                         The two-letter country code for the customer country. The available codes/countries are:
 
-                        BR: Brazil.
-                        PE: Peru.
-                        MX: Mexico.
-                        CO: Colombia.
-                        CL: Chile.
-                        AR: Argentina.
-                        EC: Ecuador.
-                        BO: Bolivia.
-                        UY: Uruguay
-                        PY: Paraguay
-                        CR: Costa Rica
-                        SV: El Salvador
-                        GT: Guatemala
-                        PN: Panama
-                      enum: ["BR", "PE", "MX", "CO", "CL", "AR", "EC", "BO", "UY", "PY", "CR", "SV", "GT", "PN"]
+
+                        **AR**: Argentina
+                        **BO**: Bolivia
+                        **BR**: Brazil
+                        **CL**: Chile
+                        **CO**: Colombia
+                        **CR**: Costa Rica
+                        **DO**: Dominican Republic
+                        **EC**: Ecuador
+                        **EG**: Egypt
+                        **GH**: Ghana
+                        **GT**: Guatemala
+                        **IN**: India
+                        **JM**: Jamaica
+                        **KE**: Kenya
+                        **MX**: Mexico
+                        **NG**: Nigeria
+                        **PA**: Panama
+                        **PE**: Peru
+                        **PY**: Paraguay
+                        **UY**: Uruguay
+                        **ZA**: South Africa
+
+                      enum: ["AR","BO","BR","CL","CO`,"CR","DO","EC","EG","GH","GT","IN","JM","KE","MX","NG","PA","PE","PY","UY","ZA"]
                     phone_number:
                       type: string
                       description: Customer phone number. It is required for all countries.
