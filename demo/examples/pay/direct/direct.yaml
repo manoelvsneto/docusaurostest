@@ -33,6 +33,7 @@ paths:
               schema:
                 oneOf:
                   - $ref: '#/components/schemas/DefaultResponse'
+                  - $ref: '#/components/schemas/DefaultJWTResponse'
                   - $ref: '#/components/schemas/PixBRResponse'
                   - $ref: '#/components/schemas/PSECOResponse'
                   - $ref: '#/components/schemas/OXXOMXResponse'
@@ -41,6 +42,41 @@ paths:
 components:
   
   schemas:
+
+    DefaultJWTResponse:
+      type: string
+      description: |
+          A JWT (JSON Web Token) containing the details for the direct payment operation. The JWT encapsulates data such as amount, direct payment description, merchant refund code, and operation type. Details JWT: 
+           {
+              "integration_key": "_my_integration_key",
+              "operation": "request",
+              "payment": {
+                "name": "JOAO DA SILVA ",
+                "email": "foo@foo.com",
+                "document": "11133355560",
+                "address": "Rua Street 1",
+                "state": "RJ",
+                "zipcode": "00000000",
+                "country": "BR",
+                "payment_type_code": "creditcard",
+                "merchant_payment_code": "12345678901234",
+                "user_value_1": "BR",
+                "phone_number": "11999999999",
+                "currency_code": "BRL",
+                "instalments": 1,
+                "amount_total": 1.5,
+                "creditcard": {
+                  "card_number": "1234123412341234",
+                  "card_name": "JOAO DA SILVA",
+                  "card_due_date": "11/2023",
+                  "card_cvv": "000",
+                  "auto_capture": false
+                }
+              }
+            }
+      example: > 
+        eyJ0eXAiOiJQUzM4NCIsImFsZyI6Im5vbmUifQ.eyJpbnRlZ3JhdGlvbl9rZXkiOiJfbXlfaW50ZWdyYXRpb25fa2V5Iiwib3BlcmF0aW9uIjoicmVxdWVzdCIsInBheW1lbnQiOnsibmFtZSI6IkpPQU8gREEgU0lMVkEgIiwiZW1haWwiOiJmb29AZm9vLmNvbSIsImRvY3VtZW50IjoiMTExMzMzNTU1NjAiLCJhZGRyZXNzIjoiUnVhIFN0cmVldCAxIiwic3RhdGUiOiJSSiIsInppcGNvZGUiOiIwMDAwMDAwMCIsImNvdW50cnkiOiJCUiIsInBheW1lbnRfdHlwZV9jb2RlIjoiY3JlZGl0Y2FyZCIsIm1lcmNoYW50X3BheW1lbnRfY29kZSI6IjEyMzQ1Njc4OTAxMjM0IiwidXNlcl92YWx1ZV8xIjoiQlIiLCJwaG9uZV9udW1iZXIiOiIxMTk5OTk5OTk5OSIsImN1cnJlbmN5X2NvZGUiOiJCUkwiLCJpbnN0YWxtZW50cyI6MSwiYW1vdW50X3RvdGFsIjoxLjUsImNyZWRpdGNhcmQiOnsiY2FyZF9udW1iZXIiOiIxMjM0MTIzNDEyMzQxMjM0IiwiY2FyZF9uYW1lIjoiSk9BTyBEQSBTSUxWQSIsImNhcmRfZHVlX2RhdGUiOiIxMS8yMDIzIiwiY2FyZF9jdnYiOiIwMDAiLCJhdXRvX2NhcHR1cmUiOmZhbHNlfX19
+
     DefaultRequest:
       type: object
       title: Default Request
