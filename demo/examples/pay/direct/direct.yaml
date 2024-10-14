@@ -21,6 +21,7 @@ paths:
             schema:
               oneOf:
                 - $ref: '#/components/schemas/DefaultRequest'
+                - $ref: '#/components/schemas/DefaultJWTRequest'
                 - $ref: '#/components/schemas/PixBRRequest'
                 - $ref: '#/components/schemas/PSECORequest'
                 - $ref: '#/components/schemas/OXXOMXRequest'
@@ -33,7 +34,6 @@ paths:
               schema:
                 oneOf:
                   - $ref: '#/components/schemas/DefaultResponse'
-                  - $ref: '#/components/schemas/DefaultJWTResponse'
                   - $ref: '#/components/schemas/PixBRResponse'
                   - $ref: '#/components/schemas/PSECOResponse'
                   - $ref: '#/components/schemas/OXXOMXResponse'
@@ -43,7 +43,7 @@ components:
   
   schemas:
 
-    DefaultJWTResponse:
+    DefaultJWTRequest:
       type: string
       description: |
           A JWT (JSON Web Token) containing the details for the direct payment operation. The JWT encapsulates data such as amount, direct payment description, merchant refund code, and operation type. Details JWT: 
