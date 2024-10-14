@@ -48,10 +48,14 @@ components:
       description: >
           A JWT (JSON Web Token) containing the details for the direct payment operation. The JWT encapsulates data such as amount, direct payment description, merchant refund code, and operation type. 
           
-          Example JWT:
+          **Example JWT**:
+          ```json
           eyJ0eXAiOiJQUzM4NCIsImFsZyI6Im5vbmUifQ.eyJpbnRlZ3JhdGlvbl9rZXkiOiJfbXlfaW50ZWdyYXRpb25fa2V5Iiwib3BlcmF0aW9uIjoicmVxdWVzdCIsInBheW1lbnQiOnsibmFtZSI6IkpPQU8gREEgU0lMVkEgIiwiZW1haWwiOiJmb29AZm9vLmNvbSIsImRvY3VtZW50IjoiMTExMzMzNTU1NjAiLCJhZGRyZXNzIjoiUnVhIFN0cmVldCAxIiwic3RhdGUiOiJSSiIsInppcGNvZGUiOiIwMDAwMDAwMCIsImNvdW50cnkiOiJCUiIsInBheW1lbnRfdHlwZV9jb2RlIjoiY3JlZGl0Y2FyZCIsIm1lcmNoYW50X3BheW1lbnRfY29kZSI6IjEyMzQ1Njc4OTAxMjM0IiwidXNlcl92YWx1ZV8xIjoiQlIiLCJwaG9uZV9udW1iZXIiOiIxMTk5OTk5OTk5OSIsImN1cnJlbmN5X2NvZGUiOiJCUkwiLCJpbnN0YWxtZW50cyI6MSwiYW1vdW50X3RvdGFsIjoxLjUsImNyZWRpdGNhcmQiOnsiY2FyZF9udW1iZXIiOiIxMjM0MTIzNDEyMzQxMjM0IiwiY2FyZF9uYW1lIjoiSk9BTyBEQSBTSUxWQSIsImNhcmRfZHVlX2RhdGUiOiIxMS8yMDIzIiwiY2FyZF9jdnYiOiIwMDAiLCJhdXRvX2NhcHR1cmUiOmZhbHNlfX19
+          ```
 
-          Example Details JWT: 
+
+          **Example Details JWT**: 
+           ```json
            {
               "integration_key": "_my_integration_key",
               "operation": "request",
@@ -79,6 +83,7 @@ components:
                 }
               }
             }
+            ```
       example: > 
         eyJ0eXAiOiJQUzM4NCIsImFsZyI6Im5vbmUifQ.eyJpbnRlZ3JhdGlvbl9rZXkiOiJfbXlfaW50ZWdyYXRpb25fa2V5Iiwib3BlcmF0aW9uIjoicmVxdWVzdCIsInBheW1lbnQiOnsibmFtZSI6IkpPQU8gREEgU0lMVkEgIiwiZW1haWwiOiJmb29AZm9vLmNvbSIsImRvY3VtZW50IjoiMTExMzMzNTU1NjAiLCJhZGRyZXNzIjoiUnVhIFN0cmVldCAxIiwic3RhdGUiOiJSSiIsInppcGNvZGUiOiIwMDAwMDAwMCIsImNvdW50cnkiOiJCUiIsInBheW1lbnRfdHlwZV9jb2RlIjoiY3JlZGl0Y2FyZCIsIm1lcmNoYW50X3BheW1lbnRfY29kZSI6IjEyMzQ1Njc4OTAxMjM0IiwidXNlcl92YWx1ZV8xIjoiQlIiLCJwaG9uZV9udW1iZXIiOiIxMTk5OTk5OTk5OSIsImN1cnJlbmN5X2NvZGUiOiJCUkwiLCJpbnN0YWxtZW50cyI6MSwiYW1vdW50X3RvdGFsIjoxLjUsImNyZWRpdGNhcmQiOnsiY2FyZF9udW1iZXIiOiIxMjM0MTIzNDEyMzQxMjM0IiwiY2FyZF9uYW1lIjoiSk9BTyBEQSBTSUxWQSIsImNhcmRfZHVlX2RhdGUiOiIxMS8yMDIzIiwiY2FyZF9jdnYiOiIwMDAiLCJhdXRvX2NhcHR1cmUiOmZhbHNlfX19
 
