@@ -31,11 +31,17 @@ paths:
                 - hash
                 - integration_key
       responses:
-        '200':
-          description: Cancellation executed successfully
+        200:
+          description: Response Payout
           content:
             application/json:
               schema:
+                oneOf:
+                  - $ref: '#/components/schemas/SuccessResponse'
+                  - $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    SuccessResponse:
                 type: object
                 properties:
                   payment:
@@ -138,3 +144,23 @@ paths:
                     type: string
                     description: The status of the cancellation request.
                     example: "SUCCESS"
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the response.
+          example: ERROR
+        status_code:
+          type: string
+          description: Error code.
+          example: BP-SA-3
+        status_message:
+          type: string
+          description: Detailed message about the error.
+          example: Merchant account is not active
+      required:
+        - status
+        - status_code
+        - status_message
