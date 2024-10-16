@@ -21,7 +21,7 @@ paths:
             schema:
               oneOf:
                 - $ref: '#/components/schemas/RefundRequestPixJWT'
-                - $ref: '#/components/schemas/RefundRequest'
+                - $ref: '#/components/schemas/RefundRequestDefault'
                 - $ref: '#/components/schemas/RefundWithSplitRequest'
               
       responses:
@@ -103,7 +103,7 @@ components:
       example: >
         eyJhbGciOiJIUzI1NiJ9.eyJhbW91bnQiOjExLjExLCJpbnRlZ3JhdGlvbl9rZXlfZW5jcnlwdGVkX2p3ZSI6ImFiY2RlZmdoaWprbG1lbnQiLCJkZXNjcmlwdGlvbiI6Ik9yZGVyIG5lZWRzIHRvIGJlIHJlZnVuZGVkIiwib3BlcmF0aW9uIjoicmVxdWVzdCIsIm1lcmNoYW50X3JlZnVuZF9jb2RlIjoiYTFiMmMzZDQiLCJoYXNoIjoiMTEyMzU4MTMyMTM0NTVBIn0.dJrcPN_6vPf6eCUNIt11kXCtIg3RhiJ31jS6dsRtFdc
 
-    RefundRequest:
+    RefundRequestDefault:
       type: object
       description: |
         Request schema for refund including bank information.
