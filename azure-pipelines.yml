@@ -10,7 +10,7 @@ steps:
 
 - task: NodeTool@0
   inputs:
-    versionSpec: '20.16.0'  # Versão do Node.js especificada no seu package.json
+    versionSpec: '20.14.0'  # Versão do Node.js especificada no seu package.json
   displayName: 'Install Node.js'
 
 - script: |
