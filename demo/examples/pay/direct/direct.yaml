@@ -25,6 +25,7 @@ paths:
                 - $ref: '#/components/schemas/PixBRRequest'
                 - $ref: '#/components/schemas/PSECORequest'
                 - $ref: '#/components/schemas/OXXOMXRequest'
+                - $ref: '#/components/schemas/GooglePayRequest'
         required: true
       responses:
         '200':
