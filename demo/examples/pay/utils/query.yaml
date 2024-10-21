@@ -1,77 +1,57 @@
 openapi: 3.0.3
 info:
-  title: Refund or Cancel payment API
-  description: This API allows refund or cancel payments.
+  title: Query
+  description: The query operation is a server-to-server HTTP POST used by the merchant website to query EBANX for information about a specific payment.
   version: 1.0.0
 servers:
   - url: 'https://sandbox.ebanxpay.com/'
     description: Sandbox API Server
   - url: 'https://api.ebanxpay.com/'
-    description: Production API Server 
+    description: Production API Server       
 paths:
-  /ws/refundOrCancel:
+  /ws/query:
     post:
-      summary: Refund or Cancel Payment
-      description: |
-        The refund or cancel operation is a server-to-server operation to cancel payments or create payments refunds.
-
-        When the refundOrCancel operation is requested, the following will occur according to the payment status:
-        
-        Open (OP) or Pending (PE) -- the payment will be cancelled (status changes to CA), and no refund will be made.
-        Confirmed (CO) -- it will be made a full refund of the payment to the customer.
-        
-      operationId: refundOrcancel
+      summary: Query
       requestBody:
-        description: Request payload for refund operations.
         required: true
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/Request'
+              type: object
+              properties:
+                integration_key:
+                  type: string
+                  maxLength: 100
+                  description: Your unique and secret integration key.
+                  example: "your_test_integration_key"
+                hash:
+                  type: string
+                  minLength: 48
+                  maxLength: 48
+                  description: The payment hash (EBANX unique identifier). Required if merchant_payment_code not provided.
+                  example: "5478ba283ef8674415082844ee14817376e49bb76aa9d4c7"
+                merchant_payment_code:
+                  type: string
+                  minLength: 1
+                  maxLength: 40
+                  description: The payment hash Merchant Payment Code (unique merchant ID). Required if hash not provided.
+                  example: "1416854121"
+              required:
+                - integration_key
       responses:
         '200':
-          description: Successful refund operation
+          description: Successful response with payment details
           content:
             application/json:
               schema:
-                oneOf:
-                  - $ref: '#/components/schemas/SuccessResponse'
-                  - $ref: '#/components/schemas/ErrorResponse'
-                  
-components:
-  schemas:
-    Request:
-        description: refund or cancel payment request object
-        type: object
-        properties:
-                integration_key:
-                  type: string
-                  description: Your unique and secret integration key..
-                  example: "8b68cabcdea"
-                  maxLength: 100
-                hash:
-                  type: string
-                  description: The payment hash unique identifier. Required if merchant_payment_code not provided.
-                  example: "66e985c80721dd6fbc0583418ac65573a5c1c9ca2820987455"
-                  maxLength: 48
-                description:
-                  type: string
-                  description: ADescription of the refund reason. Required for request.
-                  example: "Cancel payment"
-                  minLength: 1
-                  maxLength: 1500
-                merchant_refund_code:
-                  type: string
-                  minLength: 1
-                  maxLength: 20
-                  example: "ref_aabbccdd-38e4-4168-a237-694738545a04"
-        required:
-                - integration_key
-    SuccessResponse:
-          description: Successful payment cancellation
-          type: object
-          properties:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    minLength: 5
+                    maxLength: 7
+                    description: The status of the request (SUCCESS or ERROR).
+                    example: "SUCCESS"
                   payment:
                     type: object
                     properties:
@@ -79,209 +59,184 @@ components:
                         type: string
                         minLength: 48
                         maxLength: 48
-                        description: The payment hash unique identifier).
-                        example: "66e985c80721dd6fbc0583418ac65573a5c1c9ca2820987455"
-                      country:
-                        type: string
-                        minLength: 2
-                        maxLength: 2
-                        description: The country of the payment.
-                        example: "br"
+                        description: The payment hash (EBANX unique identifier).
+                        example: "54737a76ffc1e5a520b0ed9062213a810ef41dae990184c7"
                       merchant_payment_code:
                         type: string
                         minLength: 1
                         maxLength: 40
                         description: The payment hash Merchant Payment Code (unique merchant ID).
-                        example: "17560661"
+                        example: "1416854121"
                       order_number:
                         type: string
                         minLength: 1
                         maxLength: 40
-                        description: The order number, optional identifier set by the merchant. You can have multiple payments with the same order number.
-                        example: "1497560661"
+                        description: Optional identifier set by the merchant.
+                        example: null
                       status:
                         type: string
                         minLength: 2
                         maxLength: 2
-                        description: |	
-                          string 2 characters
-                          The payment status. The following statuses are available:
-                          
-                          OP: the customer has not yet filled the payment details on the EBANX Checkout. It can change either to CA (time out) or PE.
-                          PE: the payment is pending confirmation. It can change either to CA or CO.
-                          CO: the payment is confirmed (paid).
-                          CA: the payment is cancelled.
-                        example: "CA"
+                        description: The payment status.
+                        example: "CO"
                       status_date:
                         type: string
-                        minLength: 19
-                        maxLength: 19
+                        format: date-time
                         description: The date and hour of the last status change.
-                        example: "2024-09-17 13:36:15"
+                        example: "2014-11-24 16:35:43"
                       open_date:
                         type: string
-                        minLength: 19
-                        maxLength: 19
-                        description: The date and hour of when the payment was created.
-                        example: "2024-09-17 13:36:08"
+                        format: date-time
+                        description: The date and hour when the payment was created.
+                        example: "2014-11-24 16:35:34"
                       confirm_date:
                         type: string
-                        minLength: 19
-                        maxLength: 19
-                        description: The date and hour of when the payment was confirmed.
-                        nullable: true
-                        example: null
+                        format: date-time
+                        description: The date and hour when the payment was confirmed.
+                        example: "2014-11-24 16:35:43"
                       transfer_date:
                         type: string
-                        minLength: 19
-                        maxLength: 19
-                        description: The date and hour of when the payment was settled.
-                        nullable: true
+                        format: date-time
+                        description: The date and hour when the payment was settled.
                         example: null
                       amount_br:
-                        type: string
+                        type: number
                         description: The amount in local currency.
-                        example: "2.93"
+                        example: 352.50
                       amount_ext:
-                        type: string
-                        description: Amount in external currency.
-                        example: "2.92"
+                        type: number
+                        description: The amount in the original currency.
+                        example: 150.00
                       amount_iof:
-                        type: string
+                        type: number
                         description: The tax amount in local currency (varies between countries).
-                        example: "0.01"
+                        example: 0.00
                       currency_rate:
-                        type: string
-                        description: The amount in the original currency
-                        example: "1.0000"
-                        minLength: 3
-                        maxLength: 3
+                        type: number
+                        description: The exchange rate used in the payment.
+                        example: 2.3500
                       currency_ext:
                         type: string
-                        description: ISO 4217 three letter code of the original currency.
-                        example: "BRL"
                         minLength: 3
                         maxLength: 3
+                        description: ISO 4217 three-letter code of the original currency.
+                        example: "USD"
                       due_date:
                         type: string
-                        description: | 
-                              Expiry date of the payment (not applicable to all payment methods). Format: dd/mm/yyyy
-                        example: "2024-09-20"
-                        minLength: 10
-                        maxLength: 10
+                        format: date
+                        description: Expiry date of the payment. Format: dd/mm/yyyy
+                        example: "2014-12-01"
                       instalments:
-                        type: string
-                        description: Number of instalments for the payment, default value is 1.
-                        example: "1"
+                        type: integer
+                        description: Number of instalments for the payment.
+                        example: 1
                       payment_type_code:
                         type: string
-                        description: |
-                              Enum: "amex" "bancodobrasil" "banrisul" "banktransfer" "boleto" "bradesco" "carnet" "credimas" "cupon" "diners" "discover" "ebanxaccount" "eft" "elo" "hipercard" "itau" "mastercard" "multicaja" "naranja" "oxxo" "pagoefectivo" "pagofacil" "pagosnet" "rapipago" "safetypay" "safetypay-cash" "safetypay-online" "sencillito" "servipag" "spei" "visa" "webpay"
-                              The code of the payment method. The supported codes are:
-                              
-                              amex: American Express credit card (Brazil, Mexico, Colombia).
-                              bancodobrasil: Banco do Brasil bank transfer (Brazil).
-                              banrisul: Banrisul bank transfer (Brazil).
-                              banktransfer: Bank transfer (Brazil).
-                              boleto: Boleto bancário (Brazil).
-                              bradesco: Bradesco bank transfer (Brazil).
-                              carnet: CARNET credit card (Mexico).
-                              diners: Diners credit card (Brazil, Colombia).
-                              discover: Discover credit card (Brazil).
-                              ebanxaccount: EBANX Account (Brazil).
-                              eft: Bank Transfer (Colombia).
-                              elo: Elo credit card (Brazil).
-                              hipercard: Hipercard credit card (Brazil).
-                              itau: Itaú bank transfer (Brazil).
-                              mastercard: MasterCard credit card (Brazil, Mexico, Colombia).
-                              multicaja: Multicaja (Chile).
-                              oxxo: OXXO (Mexico).
-                              pagoefectivo: PagoEfectivo (Peru).
-                              pagosnet: PagosNet (Bolivia).
-                              paynet: Paynet (Mexico).
-                              safetypay: SafetyPay (Peru, Ecuador, Checkout only).
-                              safetypay-cash: SafetyPay Cash (Peru, Ecuador).
-                              safetypay-online: SafetyPay Online (Peru, Ecuador).
-                              sencillito: Sencillito (Chile).
-                              servipag: Servipag (Chile).
-                              spei: SPEI bank transfer method (Mexico).
-                              visa: Visa credit card (Brazil, Mexico, Colombia).
-                              webpay: Webpay (Chile).
-                        example: "visa"
-                      details:
-                        type: object
-                        properties:
-                          billing_descriptor:
-                            type: string
-                            description: A JSON object that represents the payment details.
-                            example: "AAAA*ASOLLA"
-                      transaction_status:
-                        type: object
-                        properties:
-                          acquirer:
-                            type: string
-                            description: The acquirer that processed the transaction.
-                            example: "EMPRESA"
-                            minLength: 32
-                            maxLength: 32
-                          code:
-                            type: string
-                            minLength: 2
-                            maxLength: 7
-                            description: |
-                              The transaction status code:
-
-                              OK: The transaction amount was approved. NOK: The acquirer did not approved the transaction. The customer must contact the issuer to check for any issue with his credit card. RETRY: Something went wrong with the process. You can retry with the same data. We recommend you to try more 3 times on different periods of time (first try, then second try after 2 hours after the first, etc).
-                            example: "OK"
-                          description:
-                            type: string
-                            minLength: 1
-                            maxLength: 500
-                            description: The description for the status code, which is returned from the acquirer.
-                            example: "Accepted"
-                          authcode:
-                            type: string
-                            maxLength: 40
-                            description: Transaction authentication code in the acquirer.
-                            example: "361479"
+                        maxLength: 32
+                        description: The code of the payment method.
+                        example: "bradesco"
                       pre_approved:
                         type: boolean
-                        description: Indicates if the payment was pre-approved.
+                        description: Indicates if the payment is pre-approved.
                         example: false
                       capture_available:
                         type: boolean
-                        description: |
-                          Flag that shows if a payment is ready to be captured. Applies only to credit cards when auto_capture is set to false. Some remarks on this attribute:
-
-                          A payment can only be captured if pre_approved value is true, which means that the payment has been pre approved by the credit card acquirer. Before capture, an authorized payment has status as PE (pending). After the capture, the status changes to CO (confirmed). A payment can only be captured if the status is PE (pending). *Payments must be captured in 4 (four) days, otherwise they are automatically cancelled. NOTE: It can be changed up to 5 (five) days.
-                        example: false
-                  operation:
-                    type: string
-                    description: The operation type.
-                    example: "cancel"
-                  status:
-                    type: string
-                    minLength: 5
-                    maxLength: 7
-                    description: The status of the the request (SUCCESS or ERROR).
-                    example: "SUCCESS"
-
-    ErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status of the response.
-          example: ERROR
-        status_code:
-          type: string
-          description: Error code.
-          example: BP-SA-3
-        status_message:
-          type: string
-          description: Detailed message about the error.
-          example: Merchant account is not active
-      required:
-        - status
-        - status_code
-        - status_message
+                        description: Flag that shows if a payment is ready to be captured. Applies only to credit cards when auto_capture is set to false.
+                        example: null
+                      refunds:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: Refund identifier.
+                              example: "9283"
+                            merchant_refund_code:
+                              type: string
+                              description: Optional identifier set by the merchant for the refund.
+                              example: null
+                            status:
+                              type: string
+                              description: The status of the refund (e.g., RE).
+                              example: "RE"
+                            request_date:
+                              type: string
+                              format: date-time
+                              description: The date and time when the refund was requested.
+                              example: "2014-11-26 17:56:52"
+                            amount_ext:
+                              type: number
+                              description: The amount of the refund in the original currency.
+                              example: 100.00
+                            description:
+                              type: string
+                              description: Reason for the refund.
+                              example: "Order did not arrive"
+                            settlement:
+                              type: object
+                              properties:
+                                transfer_date:
+                                  type: string
+                                  format: date
+                                  description: Date when the settlement was transferred.
+                                  example: "2014-12-01"
+                                amount:
+                                  type: number
+                                  description: Settlement amount.
+                                  example: 100
+                            refund_status_details:
+                              type: object
+                              properties:
+                                cancellation_reason:
+                                  type: string
+                                  description: Reason for cancellation.
+                                  example: "Not Paid: refund payment period has been exceeded"
+                                cancellation_reason_code:
+                                  type: string
+                                  description: Code indicating the reason for cancellation.
+                                  example: "RSD-01"
+                                can_have_settlement:
+                                  type: boolean
+                                  description: Indicates if the refund can have a settlement.
+                                  example: true
+                                can_be_cancelled:
+                                  type: boolean
+                                  description: Indicates if the refund can be cancelled.
+                                  example: false
+                      improper_payment_refunds:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            paid_date:
+                              type: string
+                              format: date-time
+                              description: Date when the refund was paid.
+                              example: "2024-09-08 16:15:12"
+                            email_send_date:
+                              type: string
+                              format: date-time
+                              description: Date when the refund email was sent to the customer.
+                              example: "2024-09-05 19:40:27"
+                            create_date:
+                              type: string
+                              format: date-time
+                              description: Date when the improper refund was created.
+                              example: "2024-09-05 19:32:38"
+                            amount_local:
+                              type: number
+                              description: The refund amount in local currency.
+                              example: 0.01
+                            description:
+                              type: string
+                              description: Reason for the refund, such as unconfirmed or duplicated.
+                              example: "unconfirmed"
+                            refund_form_link:
+                              type: string
+                              description: URL to the refund form, that allows the customer to initiate the refund process.
+                              example: "http://example.com"
+              example:
+                integration_key: "your_test_integration_key"
+                hash: "5478ba283ef8674415082844ee14817376e49bb76aa9d4c7"
+                merchant_payment_code: "1416854121"

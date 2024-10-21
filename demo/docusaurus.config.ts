@@ -145,7 +145,7 @@ const config: Config = {
             },
             {
               label: "Query",
-              to: "/pay/utils/payment-query",
+              to: "/pay/utils/query",
             },
             {
               label: "Payout create",
@@ -541,7 +541,7 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,  
-          ayout_attach: {
+          payout_attach: {
             specPath: "examples/pay/payout/attach.yaml",
             outputDir: "docs/pay/payout",
             sidebarOptions: {
