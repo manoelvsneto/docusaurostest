@@ -741,7 +741,8 @@ components:
                 google_pay:
                   type: string
                   description: "Google Pay payment token (JSON string format)."
-                  example: ! "{\"signature\":\"MEUCIFU/vJavw2HKB4bHbVxZp1JqaIdUa5R1ENbk59MGfHFAiEA1UBu7ZS1YC1aaGo6ScIbelXyBKVt29Qr1mSdObWIigu003d ","protocolVersion":"ECv1","signedMessage :"{"encryptedMessage": "ZkxOdAiV2EJXbNRkU1izADoLPyQtidbSvAC4HxnAGJPkFcnFbwwMVKHeXYjmkGbIjAg3uzIqsds1G5NrDMzwwztdwmPQ0BjE3lIhVASIg1iljIiNQzcTkhHqTMc01Rs9yn3w2T9Wgws2UGJ42YEnkeiVPjQfM3NvIAmxwCA8CAWrYZFmQfQCUGHK6H0dZolvjGGI8YtNwaImo4aC6YMCo4t9Ff+pITZdS9BfIMmjx2iXzjZF1Iyc53lwzVVFEljGF5mh6cHEzZdKCVjF5U11tKt6MybAkEU6yxEqOfdjp41FwjcJ3SknlzrDBrFXqL 6cqxtfCGTPfRvzs7SnFEh5MKtzg14VmAQ0TyoQpZuBvrhRnmWxkQU4yzj4q6wCX2VSDO4M4KVvSpVUVTCWVydPmdnhFKzL84uVU2YKV8dxjGz7VJNOlF4sJHG158Ruwu003d","ephemeralPublicKey":"BF1s3ATPQMJkfCvLmOAgG9oTcF+P9Wdh5WNJyGeMjcywjEtBhfFdGHOkZTZRpoT2LQjBrRADtWkD5yFuEEV7wu003d","tag"\:"SP4tH1HxhSTbcNEhmFfEgSRHW7G46B1J3mEl6mPzg003d"}"}"
+                  example: | 
+                    "{"signature":"MEUCIFU/vJavw2HKB4bHbVxZp1JqaIdUa5R1ENbk59MGfHFAiEA1UBu7ZS1YC1aaGo6ScIbelXyBKVt29Qr1mSdObWIigu003d ","protocolVersion":"ECv1","signedMessage :"{"encryptedMessage": "ZkxOdAiV2EJXbNRkU1izADoLPyQtidbSvAC4HxnAGJPkFcnFbwwMVKHeXYjmkGbIjAg3uzIqsds1G5NrDMzwwztdwmPQ0BjE3lIhVASIg1iljIiNQzcTkhHqTMc01Rs9yn3w2T9Wgws2UGJ42YEnkeiVPjQfM3NvIAmxwCA8CAWrYZFmQfQCUGHK6H0dZolvjGGI8YtNwaImo4aC6YMCo4t9Ff+pITZdS9BfIMmjx2iXzjZF1Iyc53lwzVVFEljGF5mh6cHEzZdKCVjF5U11tKt6MybAkEU6yxEqOfdjp41FwjcJ3SknlzrDBrFXqL 6cqxtfCGTPfRvzs7SnFEh5MKtzg14VmAQ0TyoQpZuBvrhRnmWxkQU4yzj4q6wCX2VSDO4M4KVvSpVUVTCWVydPmdnhFKzL84uVU2YKV8dxjGz7VJNOlF4sJHG158Ruwu003d","ephemeralPublicKey":"BF1s3ATPQMJkfCvLmOAgG9oTcF+P9Wdh5WNJyGeMjcywjEtBhfFdGHOkZTZRpoT2LQjBrRADtWkD5yFuEEV7wu003d","tag":"SP4tH1HxhSTbcNEhmFfEgSRHW7G46B1J3mEl6mPzg003d"}"}"
                   maxLength: 2000
         metadata:
           type: object
