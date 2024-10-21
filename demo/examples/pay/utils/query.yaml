@@ -124,7 +124,7 @@ paths:
                       due_date:
                         type: string
                         format: date
-                        description: Expiry date of the payment. Format: dd/mm/yyyy
+                        description: Expiry date of the payment. Format dd/mm/yyyy
                         example: "2014-12-01"
                       instalments:
                         type: integer
