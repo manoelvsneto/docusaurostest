@@ -612,6 +612,161 @@ components:
           description: "Overall status of the payment request."
           example: "SUCCESS"
 
+    GooglePayRequest:
+      type: object
+      title: Google Pay Payment Request
+      description: Request payload to initiate a Google Pay payment.
+      properties:
+        integration_key:
+          type: string
+          description: "Your unique and secret integration key."
+          example: "59acc5f00945fa382ab051651440826da7701533249b3abbb"
+          minLength: 1
+          maxLength: 100
+        operation:
+          type: string
+          description: "Type of operation, e.g., 'request'."
+          example: "request"
+          enum: ["request"]
+        payment:
+          type: object
+          description: "Payment details for Google Pay."
+          properties:
+            v1:
+              type: string
+              description: "Custom value or identifier associated with the payment."
+              example: "7264687"
+              maxLength: 20
+            customer_ip:
+              type: string
+              description: "Customer's IP address. Used for anti-fraud purposes."
+              example: "192.0.2.0"
+              format: ipv4
+              maxLength: 15
+            name:
+              type: string
+              description: "Full name of the payer."
+              example: "JOHN DOE"
+              minLength: 1
+              maxLength: 100
+            document:
+              type: string
+              description: "Customer's document number. E.g., CPF in Brazil."
+              example: "00000000000"
+              maxLength: 14
+            address:
+              type: string
+              description: "Street address of the payer."
+              example: "123 Main St"
+              minLength: 1
+              maxLength: 100
+            street_number:
+              type: string
+              description: "Street number of the payer's address."
+              example: "123"
+              minLength: 1
+              maxLength: 30
+            city:
+              type: string
+              description: "City of the payer's address."
+              example: "Los Angeles"
+              minLength: 1
+              maxLength: 80
+            state:
+              type: string
+              description: "State/region of the payer's address."
+              example: "CA"
+              minLength: 2
+              maxLength: 2
+            zipcode:
+              type: string
+              description: "ZIP code of the payer's address."
+              example: "90001"
+              maxLength: 10
+            country:
+              type: string
+              description: "The two-letter country code for the payer's address."
+              example: "BR"
+              enum: ["US", "BR", "CA", "MX"]
+            phone_number:
+              type: string
+              description: "Customer's phone number. Must include country code."
+              example: "+11234567890"
+              minLength: 10
+              maxLength: 15
+            email:
+              type: string
+              description: "Email address of the payer."
+              example: "john.doe@example.com"
+              minLength: 5
+              maxLength: 100
+            payment_type_code:
+              type: string
+              description: "Code of the payment method, e.g., 'visa', 'googlepay'."
+              example: "creditcard"
+            merchant_payment_code:
+              type: string
+              description: "Unique payment code from the merchant."
+              example: "1520256023"
+              maxLength: 25
+            currency_code:
+              type: string
+              description: "Currency code for the payment."
+              example: "USD"
+              enum: ["USD", "BRL", "EUR"]
+            amount_total:
+              type: number
+              description: "Total payment amount in the specified currency."
+              example: 14.9
+            notification_url:
+              type: string
+              description: "URL for receiving payment notifications."
+              example: "https://example.com/notification"
+              maxLength: 2000
+            user_value_1:
+              type: string
+              description: "Custom value for tracking payment context (e.g., 'paywithgoogle')."
+              example: "paywithgoogle"
+              maxLength: 20
+            card:
+              type: object
+              description: "Details of the card used in the transaction, especially for Google Pay."
+              properties:
+                card_name:
+                  type: string
+                  description: "Name of the cardholder."
+                  example: "JOHN DOE"
+                  minLength: 1
+                  maxLength: 100
+                google_pay:
+                  type: string
+                  description: "Google Pay payment token (JSON string format)."
+                  example: "{\"signature\":\"MEUCIFU/vJavw2HKB4bHbVxZp1JqaIdUa5R1ENbk59MG +
+        fHFAiEA1UBu7ZS1YC1v + Go6ScIbel / XyBKVt29Qr1mSdObWIig\\ u003d\ ",\"protoc
+        olVersion\ ":\"ECv1\",\"signedMessage\":\"{\\\"encryptedMessage\\\":\\\
+        "ZkxOdAiV2EJXbNRkU1izADoLPyQtidbSvAC4HxnAGJPkFcnFbwwMVKHeXYjmkGbIjAg
+        3 uzIqsds1G5NrDMzwwztdwmPQ0BjE3lIhVASIg1iljIiNQzcTkhHqTMc01Rs9yn3w2T9W
+        gws2UGJ42YEnkeiVPjQfM3NvIAmxwCA8CAWrYZFmQfQCUGHK6H0dZolvjGGI8YtNwaImo
+        4 aC6YMCo4t9FfwT + pITZdS9BfIMmjx2iXzjZF1Iy + c53lwzVVFEljGF5mh6cHEzZdKCVj
+        F5U11tKt6MybAkEU6yxEqOfdjp41FwjcJ3SknlzrDBrFXqL66cq + xtfCGTPfRvzs7SnFE
+        h5MKtzg14VmAQ0TyoQpZuBvrhRnmWxkQU4yzj4q6wCX2VSDO4M4KVvSpVUVTCWVydPmdn
+        hFKzL84uVU2YKV8dxjGz7VJNOlF4sJH + G158Ru + w\\\\ u003d\\\ ",\\\"ephemeralPu
+        blicKey\\\ ":\\\"BF1s3ATPQMJkfCvLmOAgG9oTcF+P9Wdh5WNJyGeMjcywjEtBhfFdG
+        HOkZTZR + poT2LQjBrRADtWkD5yFuEEV7w\\\\ u003d\\\ ",\\\"tag\\\":\\\"SP4tH1
+        HxhSTbcNEhmFfEgSRHW7G46B1J3m / FEl6mPzg\\\\ u003d\\\ "}\"}"
+                  maxLength: 2000
+        metadata:
+          type: object
+          description: "Additional metadata for the payment."
+          properties:
+            risk:
+              type: object
+              description: "Risk assessment data."
+              properties:
+                profile_id:
+                  type: integer
+                  description: "Unique identifier for the risk profile."
+                  example: 176631
 
     PixBRRequest:
       type: object
