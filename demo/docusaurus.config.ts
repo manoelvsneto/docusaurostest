@@ -224,7 +224,7 @@ const config: Config = {
             },
           ],
         },
-        {
+    /*    {
           title: "Community",
           items: [
             {
@@ -240,8 +240,8 @@ const config: Config = {
               href: "https://twitter.com/docusaurus",
             },
           ],
-        },
-        {
+        },*/
+      /*  {
           title: "More",
           items: [
             {
@@ -253,7 +253,7 @@ const config: Config = {
               href: "https://github.com/PaloAltoNetworks/docusaurus-openapi-docs",
             },
           ],
-        },
+        },*/
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Palo Alto Networks, Inc. Built with Docusaurus ${DOCUSAURUS_VERSION}.`,
     },
@@ -634,9 +634,6 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,*/
-
-
-
 
         } satisfies Plugin.PluginOptions,
         
