@@ -14,6 +14,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    yarn clean
     yarn install
     yarn build  # Executa o build conforme definido no seu script package.json
   displayName: 'Install dependencies and build'
