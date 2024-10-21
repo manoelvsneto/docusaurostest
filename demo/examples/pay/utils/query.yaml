@@ -11,7 +11,7 @@ servers:
 paths:
   /ws/query:
     post:
-      summary: Query
+      summary: Payment Query
       requestBody:
         required: true
         content:

@@ -144,8 +144,8 @@ const config: Config = {
               to: "/pay/utils/get-the-list-of-banks-available-for-processing-payments",
             },
             {
-              label: "Query",
-              to: "/pay/utils/query",
+              label: "Payment Query",
+              to: "/pay/utils/payment-query",
             },
             {
               label: "Payout create",
@@ -442,7 +442,7 @@ const config: Config = {
             },
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
-          query: {
+          utils_query: {
             specPath: "examples/pay/utils/query.yaml",
             outputDir: "docs/pay/utils",
             sidebarOptions: {
