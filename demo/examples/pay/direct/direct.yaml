@@ -33,6 +33,7 @@ paths:
                 - $ref: '#/components/schemas/ChileBankTransferRequest'
                 - $ref: '#/components/schemas/BrazilBankTransferBRRequest'
                 - $ref: '#/components/schemas/OnlineDebitBRRequest'
+                - $ref: '#/components/schemas/MobileMoneyKERequest'
                 
         required: true
       responses:
@@ -55,10 +56,10 @@ paths:
                   - $ref: '#/components/schemas/ChileBankTransferResponse'
                   - $ref: '#/components/schemas/BrazilBankTransferBRResponse'
                   - $ref: '#/components/schemas/OnlineDebitBRResponse'
+                  - $ref: '#/components/schemas/MobileMoneyKEResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 
 components:
-  
   schemas:
 
     DefaultJWTRequest:
@@ -3592,3 +3593,194 @@ components:
       required:
         - payment
         - status
+
+    MobileMoneyKERequest:
+      type: object
+      title: Mobile Money Payment Request (Kenya)
+      description: Request payload to initiate a Mobile Money payment in Kenya.
+      properties:
+        operation:
+          type: string
+          description: "Type of operation, set to 'request'."
+          example: "request"
+          enum: ["request"]
+        integration_key:
+          type: string
+          description: "Your EBANX integration key."
+          example: "your_integration_key"
+          minLength: 1
+          maxLength: 100
+        payment:
+          type: object
+          description: "Payment details."
+          properties:
+            name:
+              type: string
+              description: "Customer name."
+              example: "John Doe"
+              minLength: 1
+              maxLength: 100
+            email:
+              type: string
+              description: "Customer email address."
+              example: "email@example.com"
+              minLength: 5
+              maxLength: 100
+            phone_number:
+              type: string
+              description: "Customer phone number (required)."
+              example: "254000000000"
+              minLength: 10
+              maxLength: 15
+            account_number:
+              type: string
+              description: "Customer bank account number (max 16 characters)."
+              example: "1234567890123456"
+              maxLength: 16
+            country:
+              type: string
+              description: "Country code, set to 'ke' for Kenya."
+              example: "ke"
+              enum: ["ke"]
+              minLength: 2
+              maxLength: 2
+            payment_type_code:
+              type: string
+              description: "Mobile network operator, choose from 'mpesa', 'airtel', 'equitel'."
+              example: "mpesa"
+              enum: ["mpesa", "airtel", "equitel"]
+              maxLength: 20
+            merchant_payment_code:
+              type: string
+              description: "Unique merchant payment code."
+              example: "63c9377be268e"
+              maxLength: 40
+            currency_code:
+              type: string
+              description: "Currency code, supported value: 'KES'."
+              example: "KES"
+              enum: ["KES"]
+              maxLength: 3
+            amount_total:
+              type: number
+              description: "Total amount to be charged."
+              example: 100.00
+      required:
+        - operation
+        - integration_key
+        - payment
+
+    MobileMoneyKEResponse:
+      type: object
+      title: Mobile Money Payment Response (Kenya)
+      description: Response payload for a Mobile Money payment request in Kenya.
+      properties:
+        payment:
+          type: object
+          description: "Details of the processed payment."
+          properties:
+            hash:
+              type: string
+              description: "Unique identifier for the payment."
+              example: "63c9377bf0e9252be9fd2f8424bcaffd61cb587a4dbdde6c"
+              maxLength: 64
+            country:
+              type: string
+              description: "Country code of the payment."
+              example: "ke"
+              minLength: 2
+              maxLength: 2
+            merchant_payment_code:
+              type: string
+              description: "Merchant's unique payment code."
+              example: "63c9377be268e"
+              maxLength: 40
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: "1234567"
+              maxLength: 30
+            status:
+              type: string
+              description: "Payment status, e.g., 'PE' (Pending), 'CO' (Confirmed), 'CA' (Canceled)."
+              example: "PE"
+              enum: ["PE", "CO", "CA"]
+              maxLength: 2
+            status_date:
+              type: string
+              format: date-time
+              description: "Date and time of the payment status."
+              example: null
+            open_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was opened."
+              example: "2023-01-01T01:01:01Z"
+            confirm_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was confirmed."
+              example: null
+            transfer_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was transferred."
+              example: null
+            amount_br:
+              type: string
+              description: "Amount in the local currency (KES)."
+              example: "100.00"
+              maxLength: 20
+            amount_ext:
+              type: string
+              description: "Amount in the external currency."
+              example: "100.00"
+              maxLength: 20
+            amount_iof:
+              type: string
+              description: "Amount of IOF (tax) applied to the payment."
+              example: "0.00"
+              maxLength: 10
+            currency_rate:
+              type: string
+              description: "Currency exchange rate used."
+              example: "1.0000"
+              maxLength: 10
+            currency_ext:
+              type: string
+              description: "External currency code."
+              example: "KES"
+              maxLength: 3
+            due_date:
+              type: string
+              format: date-time
+              description: "Due date for the payment."
+              example: "2023-01-01T01:06:01Z"
+            instalments:
+              type: string
+              description: "Number of payment instalments."
+              example: "1"
+              maxLength: 2
+            payment_type_code:
+              type: string
+              description: "Mobile network operator, e.g., 'mpesa', 'airtel', 'equitel'."
+              example: "mpesa"
+              enum: ["mpesa", "airtel", "equitel"]
+              maxLength: 20
+            pre_approved:
+              type: boolean
+              description: "Indicates if the payment is pre-approved."
+              example: false
+            capture_available:
+              type: boolean
+              description: "Indicates if the payment can be captured."
+              example: null
+        status:
+          type: string
+          description: "Overall status of the payment request."
+          example: "SUCCESS"
+          enum: ["SUCCESS", "FAILURE"]
+      required:
+        - payment
+        - status
+        
