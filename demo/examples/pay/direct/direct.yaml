@@ -28,6 +28,7 @@ paths:
                 - $ref: '#/components/schemas/PISPRequest'
                 - $ref: '#/components/schemas/MealVoucherRequest'
                 - $ref: '#/components/schemas/MultiBenefitsVoucherRequest'
+                - $ref: '#/components/schemas/MulticajaRequest'
                 - $ref: '#/components/schemas/GooglePayRequest'
         required: true
       responses:
@@ -46,6 +47,7 @@ paths:
                   - $ref: '#/components/schemas/PISPResponse'
                   - $ref: '#/components/schemas/MealVoucherResponse'
                   - $ref: '#/components/schemas/MultiBenefitsVoucherResponse'
+                  - $ref: '#/components/schemas/MulticajaResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 
 components:
@@ -2577,3 +2579,241 @@ components:
           description: "Overall status of the payment request."
           example: "SUCCESS"
           enum: ["SUCCESS", "ERROR"]
+
+    MulticajaRequest:
+      type: object
+      title: Multicaja Payment Request
+      description: Request payload to initiate a Multicaja payment.
+      properties:
+        operation:
+          type: string
+          description: "Type of operation, set to 'request'."
+          example: "request"
+          enum: ["request"]
+        integration_key:
+          type: string
+          description: "Your EBANX integration key."
+          example: "your_integration_key"
+          minLength: 1
+          maxLength: 100
+        payment:
+          type: object
+          description: "Payment details."
+          properties:
+            country:
+              type: string
+              description: "Country code, set to 'cl' for Chile."
+              example: "cl"
+              enum: ["cl"]
+              minLength: 2
+              maxLength: 2
+            name:
+              type: string
+              description: "Customer name."
+              example: "John Doe"
+              minLength: 1
+              maxLength: 100
+            email:
+              type: string
+              description: "Customer email address."
+              example: "john.doe@example.com"
+              minLength: 5
+              maxLength: 100
+            payment_type_code:
+              type: string
+              description: "Payment method code, set to 'multicaja'."
+              example: "multicaja"
+              enum: ["multicaja"]
+              maxLength: 20
+            currency_code:
+              type: string
+              description: "Currency code, supported values: CLP and USD."
+              example: "CLP"
+              enum: ["CLP", "USD"]
+              maxLength: 3
+            amount_total:
+              type: string
+              description: "Total amount to be charged."
+              example: "2000.00"
+              maxLength: 20
+            merchant_payment_code:
+              type: string
+              description: "Unique merchant payment code."
+              example: "MERCHANT123456789"
+              maxLength: 40
+            notification_url:
+              type: string
+              description: "URL for payment notifications."
+              example: "https://example.com/notify"
+              maxLength: 2000
+            redirect_url:
+              type: string
+              description: "URL to redirect the user after payment."
+              example: "https://example.com/redirect"
+              maxLength: 2000
+            document:
+              type: string
+              description: "Customer document number."
+              example: "12345678-9"
+              maxLength: 15
+            document_type:
+              type: string
+              description: "Document type in Chile, set to 'RUT'."
+              example: "RUT"
+              enum: ["RUT"]
+              maxLength: 3
+            address:
+              type: string
+              description: "Customer address."
+              example: "123 Main Street"
+              minLength: 1
+              maxLength: 100
+            street_number:
+              type: string
+              description: "Customer street number."
+              example: "123"
+              minLength: 1
+              maxLength: 30
+            city:
+              type: string
+              description: "Customer city."
+              example: "Santiago"
+              minLength: 1
+              maxLength: 80
+            state:
+              type: string
+              description: "Customer state."
+              example: "Santiago Metropolitan Region"
+              maxLength: 30
+            zipcode:
+              type: string
+              description: "Customer ZIP code."
+              example: "8320000"
+              maxLength: 10
+            phone_number:
+              type: string
+              description: "Customer phone number."
+              example: "+56 9 1234 5678"
+              minLength: 10
+              maxLength: 15
+
+    MulticajaResponse:
+      type: object
+      title: Multicaja Payment Response
+      description: Response payload for a Multicaja payment request.
+      properties:
+        payment:
+          type: object
+          description: "Details of the processed payment."
+          properties:
+            hash:
+              type: string
+              description: "Unique identifier for the payment."
+              example: "abcd1234efgh5678ijkl91011mnopqrstuv"
+              maxLength: 64
+            country:
+              type: string
+              description: "Country code of the payment."
+              example: "cl"
+              minLength: 2
+              maxLength: 2
+            merchant_payment_code:
+              type: string
+              description: "Merchant's unique payment code."
+              example: "MERCHANT123456789"
+              maxLength: 40
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: null
+              maxLength: 30
+            status:
+              type: string
+              description: "Payment status, e.g., 'PE' (Pending), 'CO' (Confirmed), 'CA' (Cancelled)."
+              example: "PE"
+              enum: ["PE", "CO", "CA"]
+              maxLength: 2
+            status_date:
+              type: string
+              format: date-time
+              description: "Date and time of the payment status."
+              example: null
+            open_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was opened."
+              example: "2024-10-22T12:07:02Z"
+            confirm_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was confirmed."
+              example: null
+            transfer_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was transferred."
+              example: null
+            amount_br:
+              type: string
+              description: "Amount in the local currency (CLP)."
+              example: "2000.00"
+              maxLength: 20
+            amount_ext:
+              type: string
+              description: "Amount in the external currency."
+              example: "2000.00"
+              maxLength: 20
+            amount_iof:
+              type: string
+              description: "Amount of IOF (tax) applied to the payment."
+              example: "0.00"
+              maxLength: 10
+            currency_rate:
+              type: string
+              description: "Currency exchange rate used."
+              example: "1.0000"
+              maxLength: 10
+            currency_ext:
+              type: string
+              description: "External currency code."
+              example: "CLP"
+              maxLength: 3
+            due_date:
+              type: string
+              format: date
+              description: "Due date for the payment."
+              example: "2024-10-25"
+            instalments:
+              type: string
+              description: "Number of payment instalments."
+              example: "1"
+              maxLength: 2
+            payment_type_code:
+              type: string
+              description: "Payment method code, set to 'multicaja'."
+              example: "multicaja"
+              enum: ["multicaja"]
+              maxLength: 20
+            redirect_url:
+              type: string
+              description: "URL to redirect the user after payment."
+              example: "https://api.ebanx.com/ws/redirect/execute?hash=abcd1234efgh5678ijkl91011mnopqrstuv"
+              maxLength: 2000
+            pre_approved:
+              type: boolean
+              description: "Indicates if the payment is pre-approved."
+              example: false
+            capture_available:
+              type: boolean
+              description: "Indicates if the payment can be captured."
+              example: null
+        status:
+          type: string
+          description: "Overall status of the payment request."
+          example: "SUCCESS"
+          enum: ["SUCCESS", "FAILURE"]
+        redirect_url:
+          type: string
+          description: "URL to redirect the user after payment."
+          example: "https://api.ebanx.com/ws/redirect/execute?hash=abcd1234efgh5678ijkl91011mnopqrstuv"
+          maxLength: 2000
