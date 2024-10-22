@@ -26,6 +26,7 @@ paths:
                 - $ref: '#/components/schemas/PSECORequest'
                 - $ref: '#/components/schemas/OXXOMXRequest'
                 - $ref: '#/components/schemas/PISPRequest'
+                - $ref: '#/components/schemas/MealVoucherRequest'
                 - $ref: '#/components/schemas/GooglePayRequest'
         required: true
       responses:
@@ -42,6 +43,7 @@ paths:
                   - $ref: '#/components/schemas/GooglePayResponse'
                   - $ref: '#/components/schemas/BoletoBRResponse'
                   - $ref: '#/components/schemas/PISPResponse'
+                  - $ref: '#/components/schemas/MealVoucherResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 
 components:
@@ -1948,3 +1950,337 @@ components:
           description: "URL to redirect the user after payment."
           example: "https://api.ebanx.com/ws/redirect/execute?hash=abcd1234efgh5678ijkl91011mnopqrstuv"
           maxLength: 2000
+
+    MealVoucherRequest:
+      type: object
+      title: Meal Voucher Payment Request
+      description: Request payload to initiate a Meal Voucher payment.
+      properties:
+        integration_key:
+          type: string
+          description: "Your EBANX integration key."
+          example: "your_integration_key"
+          minLength: 1
+          maxLength: 100
+        operation:
+          type: string
+          description: "Type of operation, set to 'request'."
+          example: "request"
+          enum: ["request"]
+        payment:
+          type: object
+          description: "Payment details."
+          properties:
+            name:
+              type: string
+              description: "Customer name."
+              example: "John Doe"
+              minLength: 1
+              maxLength: 100
+            email:
+              type: string
+              description: "Customer email address."
+              example: "john.doe@example.com"
+              minLength: 5
+              maxLength: 100
+            birth_date:
+              type: string
+              description: "Customer's birth date in the format 'dd/mm/yyyy'."
+              example: "07/09/1999"
+              pattern: "^\\d{2}/\\d{2}/\\d{4}$"
+            document:
+              type: string
+              description: "Customer document number (e.g., CPF in Brazil)."
+              example: "12345678900"
+              maxLength: 14
+            country:
+              type: string
+              description: "Country code, set to 'br' for Brazil."
+              example: "br"
+              enum: ["br"]
+              minLength: 2
+              maxLength: 2
+            zipcode:
+              type: string
+              description: "Customer ZIP code."
+              example: "96206096"
+              maxLength: 8
+            address:
+              type: string
+              description: "Customer address."
+              example: "123 Main Street"
+              minLength: 1
+              maxLength: 100
+            city:
+              type: string
+              description: "Customer city."
+              example: "Rio Grande"
+              minLength: 1
+              maxLength: 80
+            state:
+              type: string
+              description: "Customer state."
+              example: "Rio Grande do Sul"
+              maxLength: 30
+            street_number:
+              type: string
+              description: "Customer street number."
+              example: "71"
+              minLength: 1
+              maxLength: 30
+            phone_number:
+              type: string
+              description: "Customer phone number."
+              example: "55999863371"
+              minLength: 10
+              maxLength: 15
+            merchant_payment_code:
+              type: string
+              description: "Merchant's unique payment code."
+              example: "MERCHANT123456789"
+              maxLength: 40
+            currency_code:
+              type: string
+              description: "Currency code, set to 'BRL'."
+              example: "BRL"
+              enum: ["BRL"]
+              maxLength: 3
+            amount_total:
+              type: number
+              description: "Total amount for the payment."
+              example: 3.00
+            payment_type_code:
+              type: string
+              description: "Payment method code, set to 'vr' for Meal Voucher."
+              example: "vr"
+              enum: ["vr"]
+              maxLength: 20
+            metadata:
+              type: object
+              description: "Additional metadata for the payment."
+              properties:
+                vr:
+                  type: object
+                  description: "Meal Voucher-specific metadata."
+                  properties:
+                    affiliation_id:
+                      type: string
+                      description: "Your merchant VR affiliation ID."
+                      example: "33289299000103"
+                      maxLength: 14
+            card:
+              type: object
+              description: "Meal Voucher card details."
+              properties:
+                card_number:
+                  type: string
+                  description: "Meal Voucher card number."
+                  example: "1234567890123456"
+                  minLength: 14
+                  maxLength: 19
+                card_name:
+                  type: string
+                  description: "Cardholder's name."
+                  example: "John Doe"
+                  minLength: 1
+                  maxLength: 50
+                card_due_date:
+                  type: string
+                  description: "Meal Voucher due date ('valid thru') in the format 'mm/yyyy'."
+                  example: "10/2028"
+                  pattern: "^\\d{2}/\\d{4}$"
+                card_cvv:
+                  type: string
+                  description: "Meal Voucher security code."
+                  example: "123"
+                  minLength: 3
+                  maxLength: 4
+
+    MealVoucherResponse:
+      type: object
+      title: Meal Voucher Payment Response
+      description: Response payload for a Meal Voucher payment request.
+      properties:
+        payment:
+          type: object
+          description: "Details of the processed payment."
+          properties:
+            hash:
+              type: string
+              description: "Unique identifier for the payment."
+              example: "abcd1234efgh5678ijkl91011mnopqrstuv"
+              maxLength: 64
+            country:
+              type: string
+              description: "Country code of the payment."
+              example: "br"
+              minLength: 2
+              maxLength: 2
+            merchant_payment_code:
+              type: string
+              description: "Merchant's unique payment code."
+              example: "1729099558"
+              maxLength: 40
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: null
+              maxLength: 30
+            status:
+              type: string
+              description: "Payment status, e.g., 'CA' (Canceled), 'CO' (Confirmed), 'PE' (Pending)."
+              example: "CA"
+              enum: ["CA", "CO", "PE"]
+              maxLength: 2
+            status_date:
+              type: string
+              format: date-time
+              description: "Date and time of the payment status."
+              example: "2024-10-16T17:26:02Z"
+            open_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was opened."
+              example: "2024-10-16T17:25:58Z"
+            confirm_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was confirmed."
+              example: null
+            transfer_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was transferred."
+              example: null
+            amount_br:
+              type: string
+              description: "Amount in the local currency (BRL)."
+              example: "3.00"
+              maxLength: 20
+            amount_ext:
+              type: string
+              description: "Amount in the external currency."
+              example: "3.00"
+              maxLength: 20
+            amount_iof:
+              type: string
+              description: "Amount of IOF (tax) applied to the payment."
+              example: "0.00"
+              maxLength: 10
+            currency_rate:
+              type: string
+              description: "Currency exchange rate used."
+              example: "1.0000"
+              maxLength: 10
+            currency_ext:
+              type: string
+              description: "External currency code."
+              example: "BRL"
+              maxLength: 3
+            due_date:
+              type: string
+              format: date
+              description: "Due date for the payment."
+              example: "2024-10-19"
+            instalments:
+              type: string
+              description: "Number of payment instalments."
+              example: "1"
+              maxLength: 2
+            payment_type_code:
+              type: string
+              description: "Payment method code, set to 'vr' for Meal Voucher."
+              example: "vr"
+              enum: ["vr"]
+              maxLength: 20
+            details:
+              type: object
+              description: "Additional details about the payment."
+              properties:
+                billing_descriptor:
+                  type: string
+                  description: "Billing description shown on the customer's statement."
+                  example: "EBANX*DEMOMERCHANT"
+                  maxLength: 50
+            transaction_status:
+              type: object
+              description: "Details of the transaction status."
+              properties:
+                acquirer:
+                  type: string
+                  description: "Payment acquirer."
+                  example: "EBANX"
+                  maxLength: 20
+                code:
+                  type: string
+                  description: "Transaction status code."
+                  example: "NOK"
+                  maxLength: 5
+                description:
+                  type: string
+                  description: "Transaction status description."
+                  example: "Not accepted"
+                  maxLength: 50
+            pre_approved:
+              type: boolean
+              description: "Indicates if the payment is pre-approved."
+              example: false
+            capture_available:
+              type: boolean
+              description: "Indicates if the payment can be captured."
+              example: false
+            customer:
+              type: object
+              description: "Customer data."
+              properties:
+                document:
+                  type: string
+                  description: "Customer document number."
+                  example: "12345678900"
+                  maxLength: 14
+                email:
+                  type: string
+                  description: "Customer email address."
+                  example: "john.doe@example.com"
+                  minLength: 5
+                  maxLength: 100
+                name:
+                  type: string
+                  description: "Customer name."
+                  example: "JOHN DOE"
+                  minLength: 1
+                  maxLength: 100
+                birth_date:
+                  type: string
+                  format: date
+                  description: "Customer's birth date in the format 'yyyy-mm-dd'."
+                  example: "1999-09-07"
+            single_transaction:
+              type: object
+              description: "Information about the transaction amounts."
+              properties:
+                amount_local:
+                  type: string
+                  description: "Amount in local currency."
+                  example: "3.00"
+                  maxLength: 20
+                amount_crossborder:
+                  type: string
+                  description: "Amount in cross-border currency."
+                  example: "0.00"
+                  maxLength: 20
+            currency_ext_base:
+              type: string
+              description: "Base external currency code."
+              example: "BRL"
+              maxLength: 3
+            card_issuer_country:
+              type: string
+              description: "Country code of the card issuer."
+              example: "BR"
+              maxLength: 2
+        status:
+          type: string
+          description: "Overall status of the payment request."
+          example: "SUCCESS"
+          enum: ["SUCCESS", "ERROR"]
