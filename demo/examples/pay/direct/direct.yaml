@@ -1579,144 +1579,144 @@ components:
           enum: ["SUCCESS", "FAILURE"]
 
     BoletoBRResponse:
-    type: object
-    title: Boleto Payment Response
-    description: Response payload for a Boleto payment request.
-    properties:
-      payment:
-        type: object
-        description: "Details of the processed Boleto payment."
-        properties:
-          hash:
-            type: string
-            description: "Unique identifier for the payment."
-            example: "abcd1234efgh5678ijkl91011mnopqrstuv"
-            maxLength: 64
-          country:
-            type: string
-            description: "Country code of the payment."
-            example: "br"
-            minLength: 2
-            maxLength: 2
-          merchant_payment_code:
-            type: string
-            description: "Merchant's unique payment code."
-            example: "MERCHANT123456"
-            maxLength: 40
-          order_number:
-            type: string
-            description: "Order number associated with the payment."
-            example: "ORDER123456"
-            maxLength: 30
-          status:
-            type: string
-            description: "Payment status, e.g., 'PE' (Pending), 'CO' (Confirmed), 'CA' (Cancelled)."
-            example: "PE"
-            enum: ["PE", "CO", "CA"]
-            maxLength: 2
-          status_date:
-            type: string
-            format: date-time
-            description: "Date and time of the payment status."
-            example: null
-          open_date:
-            type: string
-            format: date-time
-            description: "Date and time when the payment was opened."
-            example: "2024-10-22T10:11:06Z"
-          confirm_date:
-            type: string
-            format: date-time
-            description: "Date and time when the payment was confirmed."
-            example: null
-          transfer_date:
-            type: string
-            format: date-time
-            description: "Date and time when the payment was transferred."
-            example: null
-          amount_br:
-            type: string
-            description: "Amount in the local currency (BRL)."
-            example: "151.10"
-            maxLength: 20
-          amount_ext:
-            type: string
-            description: "Amount in the external currency."
-            example: "150.53"
-            maxLength: 20
-          amount_iof:
-            type: string
-            description: "Amount of IOF (tax) applied to the payment."
-            example: "0.57"
-            maxLength: 10
-          currency_rate:
-            type: string
-            description: "Currency exchange rate used."
-            example: "1.0000"
-            maxLength: 10
-          currency_ext:
-            type: string
-            description: "External currency code."
-            example: "BRL"
-            maxLength: 3
-          due_date:
-            type: string
-            format: date
-            description: "Due date for the payment."
-            example: "2024-10-25"
-          instalments:
-            type: string
-            description: "Number of payment instalments."
-            example: "1"
-            maxLength: 2
-          payment_type_code:
-            type: string
-            description: "Payment method code, e.g., 'boleto'."
-            example: "boleto"
-            enum: ["boleto"]
-            maxLength: 20
-          boleto_url:
-            type: string
-            description: "URL to print the Boleto payment slip."
-            example: "https://example.com/print?hash=abcd1234efgh5678ijkl91011mnopqrstuv"
-            maxLength: 2000
-          boleto_barcode:
-            type: string
-            description: "Barcode number for the Boleto payment."
-            example: "34191096447832282054589356830003298800000015110"
-            maxLength: 100
-          boleto_barcode_raw:
-            type: string
-            description: "Raw barcode data for the Boleto payment."
-            example: "34192988000000151101096478322820548935683000"
-            maxLength: 100
-          pre_approved:
-            type: boolean
-            description: "Indicates if the payment is pre-approved."
-            example: false
-          capture_available:
-            type: boolean
-            description: "Indicates if the payment can be captured."
-            example: null
-          single_transaction:
-            type: object
-            description: "Information about the transaction amounts."
-            properties:
-              amount_local:
-                type: string
-                description: "Amount in local currency."
-                example: "0.00"
-                maxLength: 20
-              amount_crossborder:
-                type: string
-                description: "Amount in cross-border currency."
-                example: "151.10"
-                maxLength: 20
-      status:
-        type: string
-        description: "Overall status of the payment request."
-        example: "SUCCESS"
-        enum: ["SUCCESS", "ERROR"]
+      type: object
+      title: Boleto Payment Response
+      description: Response payload for a Boleto payment request.
+      properties:
+        payment:
+          type: object
+          description: "Details of the processed Boleto payment."
+          properties:
+            hash:
+              type: string
+              description: "Unique identifier for the payment."
+              example: "abcd1234efgh5678ijkl91011mnopqrstuv"
+              maxLength: 64
+            country:
+              type: string
+              description: "Country code of the payment."
+              example: "br"
+              minLength: 2
+              maxLength: 2
+            merchant_payment_code:
+              type: string
+              description: "Merchant's unique payment code."
+              example: "MERCHANT123456"
+              maxLength: 40
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: "ORDER123456"
+              maxLength: 30
+            status:
+              type: string
+              description: "Payment status, e.g., 'PE' (Pending), 'CO' (Confirmed), 'CA' (Cancelled)."
+              example: "PE"
+              enum: ["PE", "CO", "CA"]
+              maxLength: 2
+            status_date:
+              type: string
+              format: date-time
+              description: "Date and time of the payment status."
+              example: null
+            open_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was opened."
+              example: "2024-10-22T10:11:06Z"
+            confirm_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was confirmed."
+              example: null
+            transfer_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was transferred."
+              example: null
+            amount_br:
+              type: string
+              description: "Amount in the local currency (BRL)."
+              example: "151.10"
+              maxLength: 20
+            amount_ext:
+              type: string
+              description: "Amount in the external currency."
+              example: "150.53"
+              maxLength: 20
+            amount_iof:
+              type: string
+              description: "Amount of IOF (tax) applied to the payment."
+              example: "0.57"
+              maxLength: 10
+            currency_rate:
+              type: string
+              description: "Currency exchange rate used."
+              example: "1.0000"
+              maxLength: 10
+            currency_ext:
+              type: string
+              description: "External currency code."
+              example: "BRL"
+              maxLength: 3
+            due_date:
+              type: string
+              format: date
+              description: "Due date for the payment."
+              example: "2024-10-25"
+            instalments:
+              type: string
+              description: "Number of payment instalments."
+              example: "1"
+              maxLength: 2
+            payment_type_code:
+              type: string
+              description: "Payment method code, e.g., 'boleto'."
+              example: "boleto"
+              enum: ["boleto"]
+              maxLength: 20
+            boleto_url:
+              type: string
+              description: "URL to print the Boleto payment slip."
+              example: "https://example.com/print?hash=abcd1234efgh5678ijkl91011mnopqrstuv"
+              maxLength: 2000
+            boleto_barcode:
+              type: string
+              description: "Barcode number for the Boleto payment."
+              example: "34191096447832282054589356830003298800000015110"
+              maxLength: 100
+            boleto_barcode_raw:
+              type: string
+              description: "Raw barcode data for the Boleto payment."
+              example: "34192988000000151101096478322820548935683000"
+              maxLength: 100
+            pre_approved:
+              type: boolean
+              description: "Indicates if the payment is pre-approved."
+              example: false
+            capture_available:
+              type: boolean
+              description: "Indicates if the payment can be captured."
+              example: null
+            single_transaction:
+              type: object
+              description: "Information about the transaction amounts."
+              properties:
+                amount_local:
+                  type: string
+                  description: "Amount in local currency."
+                  example: "0.00"
+                  maxLength: 20
+                amount_crossborder:
+                  type: string
+                  description: "Amount in cross-border currency."
+                  example: "151.10"
+                  maxLength: 20
+        status:
+          type: string
+          description: "Overall status of the payment request."
+          example: "SUCCESS"
+          enum: ["SUCCESS", "ERROR"]
  
 
     ErrorResponse:
