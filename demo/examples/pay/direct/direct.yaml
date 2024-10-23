@@ -44,6 +44,8 @@ paths:
                 - $ref: '#/components/schemas/NigeriaUSSDRequest'
                 - $ref: '#/components/schemas/EcuadorSafetyPayRequest'
                 - $ref: '#/components/schemas/MexicoSPEIRequest'
+                - $ref: '#/components/schemas/ChileSencillitoRequest'
+                - $ref: '#/components/schemas/ChileServipagRequest'
         required: true
       responses:
         '200':
@@ -76,6 +78,8 @@ paths:
                   - $ref: '#/components/schemas/NigeriaUSSDResponse'
                   - $ref: '#/components/schemas/EcuadorSafetyPayResponse'
                   - $ref: '#/components/schemas/MexicoSPEIResponse'
+                  - $ref: '#/components/schemas/ChileSencillitoResponse'
+                  - $ref: '#/components/schemas/ChileServipagResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 
 components:
@@ -5557,6 +5561,185 @@ components:
               type: string
               description: "Payment method code, e.g., 'sencillito'."
               example: "sencillito"
+            redirect_url:
+              type: string
+              description: "URL to redirect the user for payment completion."
+              example: "https://sandbox.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"
+            pre_approved:
+              type: boolean
+              description: "Indicates if the payment is pre-approved."
+              example: false
+            capture_available:
+              type: boolean
+              description: "Indicates if capture is available for the payment."
+              example: null
+              nullable: true
+        status:
+          type: string
+          description: "Indicates whether the request was successful."
+          example: "SUCCESS"
+        redirect_url:
+          type: string
+          description: "URL to redirect for completing the payment."
+          example: "https://sandbox.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"
+    
+    ChileServipagRequest:
+      title: "Chile Servipag Payment Request"
+      description: "Schema for initiating a Servipag payment request using EBANX in Chile."
+      type: object
+      properties:
+        integration_key:
+          type: string
+          description: "Your EBANX integration key."
+          example: "your-integration-key"
+          maxLength: 255
+        operation:
+          type: string
+          description: "Set to 'request'."
+          example: "request"
+          maxLength: 20
+        payment:
+          type: object
+          properties:
+            name:
+              type: string
+              description: "Customer name."
+              example: "José Silva"
+              maxLength: 100
+            email:
+              type: string
+              description: "Customer email."
+              example: "josechile@example.com"
+              maxLength: 255
+            phone_number:
+              type: string
+              description: "Customer phone number."
+              example: "0405777687"
+              maxLength: 15
+            country:
+              type: string
+              description: "Country code. Set to 'cl' for Chile."
+              example: "cl"
+              maxLength: 2
+            document:
+              type: string
+              description: "Customer's valid document number."
+              example: "9882884-2"
+              maxLength: 20
+            payment_type_code:
+              type: string
+              description: "Type of payment. Set to 'servipag'."
+              example: "servipag"
+              maxLength: 20
+            merchant_payment_code:
+              type: string
+              description: "Unique merchant payment code."
+              example: "unique-merchant-code-1234"
+              maxLength: 100
+            currency_code:
+              type: string
+              description: "Currency code. Supported values: CLP, USD."
+              example: "CLP"
+              maxLength: 3
+            amount_total:
+              type: string
+              description: "Total amount to be charged."
+              example: "100.00"
+              maxLength: 10
+      required:
+        - integration_key
+        - operation
+        - payment
+
+    ChileSencillitoResponse:
+      title: "Chile Servipag Payment Response"
+      description: "Schema for the response received after initiating a Servipag payment request using EBANX in Chile."
+      type: object
+      properties:
+        payment:
+          type: object
+          properties:
+            hash:
+              type: string
+              description: "Unique hash identifying the payment."
+              example: "payment-hash-abcdef123456"
+            pin:
+              type: string
+              description: "Unique pin for the transaction."
+              example: "639250529"
+            country:
+              type: string
+              description: "Country where the payment is initiated."
+              example: "cl"
+            merchant_payment_code:
+              type: string
+              description: "Unique code for the merchant's payment."
+              example: "unique-merchant-code-1234"
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: "1234567"
+              nullable: true
+            status:
+              type: string
+              description: "Current status of the payment."
+              example: "PE"
+            status_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment status was updated."
+              example: null
+              nullable: true
+            open_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was initiated."
+              example: "2020-07-02 13:32:24"
+            confirm_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was confirmed."
+              example: null
+              nullable: true
+            transfer_date:
+              type: string
+              format: date-time
+              description: "Date and time when the funds were transferred."
+              example: null
+              nullable: true
+            amount_br:
+              type: string
+              description: "Amount in the local currency (BRL or other relevant currency)."
+              example: "100.00"
+            amount_ext:
+              type: string
+              description: "Total amount of the payment in the external currency."
+              example: "100.00"
+            amount_iof:
+              type: string
+              description: "Amount of IOF (tax) applied to the payment."
+              example: "0.00"  
+            amount_ext_requested:
+              type: string
+              description: "Requested amount in the external currency."
+              example: "100.00"
+              maxLength: 20
+            currency_rate:
+              type: string
+              description: "Currency exchange rate used."
+              example: "1.0000"
+            currency_ext:
+              type: string
+              description: "External currency code."
+              example: "CLP"
+            instalments:
+              type: string
+              description: "Number of payment instalments."
+              example: "1"
+            payment_type_code:
+              type: string
+              description: "Payment method code, e.g., 'servipag'."
+              example: "servipag"
             redirect_url:
               type: string
               description: "URL to redirect the user for payment completion."
