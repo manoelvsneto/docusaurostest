@@ -22,28 +22,28 @@ paths:
               oneOf:
                 - $ref: '#/components/schemas/DefaultRequest'
                 - $ref: '#/components/schemas/DefaultJWTRequest'
-                - $ref: '#/components/schemas/PixBRRequest'
-                - $ref: '#/components/schemas/PSECORequest'
-                - $ref: '#/components/schemas/MexicoOXXOPayPaymentRequest'
-                - $ref: '#/components/schemas/MexicoOXXOPaymentRequest'
-                - $ref: '#/components/schemas/PISPRequest'
-                - $ref: '#/components/schemas/MealVoucherRequest'
-                - $ref: '#/components/schemas/MultiBenefitsVoucherRequest'
-                - $ref: '#/components/schemas/MulticajaRequest'
+                - $ref: '#/components/schemas/BrazilPixRequest'
+                - $ref: '#/components/schemas/ColombiaPSERequest'
+                - $ref: '#/components/schemas/MexicoOXXOPayRequest'
+                - $ref: '#/components/schemas/MexicoOXXORequest'
+                - $ref: '#/components/schemas/BrazilPISPRequest'
+                - $ref: '#/components/schemas/BrazilMealVoucherRequest'
+                - $ref: '#/components/schemas/BrazilMultiBenefitsVoucherRequest'
+                - $ref: '#/components/schemas/ChileMulticajaRequest'
                 - $ref: '#/components/schemas/GooglePayRequest'
                 - $ref: '#/components/schemas/ChileBankTransferRequest'
-                - $ref: '#/components/schemas/BrazilBankTransferBRRequest'
-                - $ref: '#/components/schemas/OnlineDebitBRRequest'
-                - $ref: '#/components/schemas/MobileMoneyKERequest'
+                - $ref: '#/components/schemas/BrazilBankTransferRequest'
+                - $ref: '#/components/schemas/BrazilOnlineDebitRequest'
+                - $ref: '#/components/schemas/KeniaMobileMoneyRequest'
                 - $ref: '#/components/schemas/ZambiaMobileMoneyRequest'
-                - $ref: '#/components/schemas/MobileMoneyUGRequest'
+                - $ref: '#/components/schemas/UgandaMobileMoneyRequest'
                 - $ref: '#/components/schemas/PeruSafetyPayRequest'
                 - $ref: '#/components/schemas/PeruPagoEfectivoRequest'
-                - $ref: '#/components/schemas/OzowPaymentRequest'
+                - $ref: '#/components/schemas/SouthAfricaOzowRequest'
                 - $ref: '#/components/schemas/NigeriaBankTransferRequest'
-                - $ref: '#/components/schemas/NigeriaUSSDPaymentRequest'
-                - $ref: '#/components/schemas/EcuadorSafetyPayPaymentRequest'
-                - $ref: '#/components/schemas/MexicoSPEIPaymentRequest'
+                - $ref: '#/components/schemas/NigeriaUSSDRequest'
+                - $ref: '#/components/schemas/EcuadorSafetyPayRequest'
+                - $ref: '#/components/schemas/MexicoSPEIRequest'
         required: true
       responses:
         '200':
@@ -53,29 +53,29 @@ paths:
               schema:
                 oneOf:
                   - $ref: '#/components/schemas/DefaultResponse'
-                  - $ref: '#/components/schemas/PixBRResponse'
-                  - $ref: '#/components/schemas/PSECOResponse'
-                  - $ref: '#/components/schemas/MexicoOXXOPayPaymentResponse'
-                  - $ref: '#/components/schemas/MexicoOXXOPaymentResponse'
-                  - $ref: '#/components/schemas/BoletoBRResponse'
-                  - $ref: '#/components/schemas/PISPResponse'
-                  - $ref: '#/components/schemas/MealVoucherResponse'
-                  - $ref: '#/components/schemas/MultiBenefitsVoucherResponse'
-                  - $ref: '#/components/schemas/MulticajaResponse'
+                  - $ref: '#/components/schemas/BrazilPixResponse'
+                  - $ref: '#/components/schemas/ColombiaPSEResponse'
+                  - $ref: '#/components/schemas/MexicoOXXOPayResponse'
+                  - $ref: '#/components/schemas/MexicoOXXOResponse'
+                  - $ref: '#/components/schemas/BrazilBoletoResponse'
+                  - $ref: '#/components/schemas/BrazilPISPResponse'
+                  - $ref: '#/components/schemas/BrazilMealVoucherResponse'
+                  - $ref: '#/components/schemas/BrazilMultiBenefitsVoucherResponse'
+                  - $ref: '#/components/schemas/ChileMulticajaResponse'
                   - $ref: '#/components/schemas/GooglePayResponse'
                   - $ref: '#/components/schemas/ChileBankTransferResponse'
-                  - $ref: '#/components/schemas/BrazilBankTransferBRResponse'
-                  - $ref: '#/components/schemas/OnlineDebitBRResponse'
-                  - $ref: '#/components/schemas/MobileMoneyKEResponse'
+                  - $ref: '#/components/schemas/BrazilBankTransferResponse'
+                  - $ref: '#/components/schemas/BrazilOnlineDebitResponse'
+                  - $ref: '#/components/schemas/KeniaMobileMoneyResponse'
                   - $ref: '#/components/schemas/ZambiaMobileMoneyResponse'
-                  - $ref: '#/components/schemas/MobileMoneyUGResponse'
+                  - $ref: '#/components/schemas/UgandaMobileMoneyResponse'
                   - $ref: '#/components/schemas/PeruSafetyPayResponse'
                   - $ref: '#/components/schemas/PeruPagoEfectivoResponse'
-                  - $ref: '#/components/schemas/OzowPaymentResponse'
+                  - $ref: '#/components/schemas/SouthAfricaOzowResponse'
                   - $ref: '#/components/schemas/NigeriaBankTransferResponse'
-                  - $ref: '#/components/schemas/NigeriaUSSDPaymentResponse'
-                  - $ref: '#/components/schemas/EcuadorSafetyPayPaymentResponse'
-                  - $ref: '#/components/schemas/MexicoSPEIPaymentResponse'
+                  - $ref: '#/components/schemas/NigeriaUSSDResponse'
+                  - $ref: '#/components/schemas/EcuadorSafetyPayResponse'
+                  - $ref: '#/components/schemas/MexicoSPEIResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 
 components:
@@ -795,9 +795,9 @@ components:
                   description: "Unique identifier for the risk profile."
                   example: 176631
 
-    PixBRRequest:
+    BrazilPixRequest:
       type: object
-      title: Pix Payment Request
+      title: Brazil Pix Payment Request
       description: Request payload to initiate a Pix payment.
       properties:
         integration_key:
@@ -921,9 +921,9 @@ components:
                   description: "Indicates if the payer is a loyal customer."
                   example: true
 
-    PixBRResponse:
+    BrazilPixResponse:
       type: object
-      title: Pix Payment Response
+      title: Brazil Pix Payment Response
       description: Response payload for a Pix payment request.
       properties:
         payment:
@@ -1056,9 +1056,9 @@ components:
           description: "URL to redirect the user after successful payment."
           example: "https://example.com/redirect?hash=dummy_hash_123456"
 
-    PSECORequest:
+    ColombiaPSERequest:
       type: object
-      title: PSE Payment Request
+      title: Colombia PSE Payment Request
       description: Request payload to initiate a PSE payment.
       properties:
         integration_key:
@@ -1164,9 +1164,9 @@ components:
               description: "ZIP code of the payer's address."
               example: "110111"
 
-    PSECOResponse:
+    ColombiaPSEResponse:
       type: object
-      title: PSE Payment Response
+      title: Colombia PSE Payment Response
       description: Response payload for a PSE payment request.
       properties:
         payment:
@@ -1414,9 +1414,9 @@ components:
           example: "SUCCESS"
           enum: ["SUCCESS", "FAILURE"]
 
-    BoletoBRResponse:
+    BrazilBoletoResponse:
       type: object
-      title: Boleto Payment Response
+      title: Brazil Boleto Payment Response
       description: Response payload for a Boleto payment request.
       properties:
         payment:
@@ -1577,9 +1577,9 @@ components:
             - status_code
             - status_message
 
-    PISPRequest:
+    BrazilPISPRequest:
       type: object
-      title: PISP Payment Request
+      title: Brazil PISP Payment Request
       description: Request payload to initiate a PISP payment.
       properties:
         integration_key:
@@ -1663,9 +1663,9 @@ components:
               example: "pay://app/result"
               maxLength: 2000
 
-    PISPResponse:
+    BrazilPISPResponse:
       type: object
-      title: PISP Payment Response
+      title: Brazil PISP Payment Response
       description: Response payload for a PISP payment request.
       properties:
         payment:
@@ -1784,9 +1784,9 @@ components:
           example: "https://api.ebanx.com/ws/redirect/execute?hash=abcd1234efgh5678ijkl91011mnopqrstuv"
           maxLength: 2000
 
-    MealVoucherRequest:
+    BrazilMealVoucherRequest:
       type: object
-      title: Meal Voucher Payment Request
+      title: Brazil Meal Voucher Payment Request
       description: Request payload to initiate a Meal Voucher payment.
       properties:
         integration_key:
@@ -1929,9 +1929,9 @@ components:
                   minLength: 3
                   maxLength: 4
 
-    MealVoucherResponse:
+    BrazilMealVoucherResponse:
       type: object
-      title: Meal Voucher Payment Response
+      title: Brazil Meal Voucher Payment Response
       description: Response payload for a Meal Voucher payment request.
       properties:
         payment:
@@ -2118,9 +2118,9 @@ components:
           example: "SUCCESS"
           enum: ["SUCCESS", "ERROR"]
 
-    MultiBenefitsVoucherRequest:
+    BrazilMultiBenefitsVoucherRequest:
       type: object
-      title: Multi Benefits Voucher Payment Request
+      title: Brazil Multi Benefits Voucher Payment Request
       description: Request payload to initiate a Multi Benefits Voucher payment.
       properties:
         integration_key:
@@ -2260,9 +2260,9 @@ components:
                   description: "Multi Benefits Voucher security code."
                   example: true
 
-    MultiBenefitsVoucherResponse:
+    BrazilMultiBenefitsVoucherResponse:
       type: object
-      title: Multi Benefits  Voucher Payment Response
+      title: Brazil Multi Benefits  Voucher Payment Response
       description: Response payload for a Multi Benefits  Voucher payment request.
       properties:
         payment:
@@ -2409,9 +2409,9 @@ components:
           example: "SUCCESS"
           enum: ["SUCCESS", "ERROR"]
 
-    MulticajaRequest:
+    ChileMulticajaRequest:
       type: object
-      title: Multicaja Payment Request
+      title: Chile Multicaja Payment Request
       description: Request payload to initiate a Multicaja payment.
       properties:
         operation:
@@ -2526,9 +2526,9 @@ components:
               minLength: 10
               maxLength: 15
 
-    MulticajaResponse:
+    ChileMulticajaResponse:
       type: object
-      title: Multicaja Payment Response
+      title: Chile Multicaja Payment Response
       description: Response payload for a Multicaja payment request.
       properties:
         payment:
@@ -2902,7 +2902,7 @@ components:
         - payment
         - status
 
-    BrazilBankTransferBRRequest:
+    BrazilBankTransferRequest:
       type: object
       title: Bank Transfer Payment Request (Brazil)
       description: Request payload to initiate a Bank Transfer payment in Brazil.
@@ -3011,7 +3011,7 @@ components:
         - integration_key
         - payment
 
-    BrazilBankTransferBRResponse:
+    BrazilBankTransferResponse:
       type: object
       title: Bank Transfer Payment Response (Brazil)
       description: Response payload for a Bank Transfer payment request in Brazil.
@@ -3156,7 +3156,7 @@ components:
         - payment
         - status
 
-    OnlineDebitBRRequest:
+    BrazilOnlineDebitRequest:
       type: object
       title: Online Debit Payment Request (Brazil)
       description: Request payload to initiate an Online Debit payment in Brazil.
@@ -3265,7 +3265,7 @@ components:
         - integration_key
         - payment
 
-    OnlineDebitBRResponse:
+    BrazilOnlineDebitResponse:
       type: object
       title: Online Debit Payment Response (Brazil)
       description: Response payload for an Online Debit payment request in Brazil.
@@ -3415,7 +3415,7 @@ components:
         - payment
         - status
 
-    MobileMoneyKERequest:
+    KeniaMobileMoneyRequest:
       type: object
       title: Mobile Money Payment Request (Kenya)
       description: Request payload to initiate a Mobile Money payment in Kenya.
@@ -3491,7 +3491,7 @@ components:
         - integration_key
         - payment
 
-    MobileMoneyKEResponse:
+    KeniaMobileMoneyResponse:
       type: object
       title: Mobile Money Payment Response (Kenya)
       description: Response payload for a Mobile Money payment request in Kenya.
@@ -3790,7 +3790,7 @@ components:
         - payment
         - status
       
-    MobileMoneyUGRequest:
+    UgandaMobileMoneyRequest:
       type: object
       title: Mobile Money Payment Request (Uganda)
       description: Request payload to initiate a Mobile Money payment in Uganda.
@@ -3861,7 +3861,7 @@ components:
         - integration_key
         - payment
 
-    MobileMoneyUGResponse:
+    UgandaMobileMoneyResponse:
       type: object
       title: Mobile Money Payment Response (Uganda)
       description: Response payload for a Mobile Money payment request in Uganda.
@@ -4404,7 +4404,7 @@ components:
           example: "SUCCESS"
           enum: ["SUCCESS", "ERROR"]
 
-    OzowPaymentRequest:
+    SouthAfricaOzowRequest:
           type: object
           title: South Africa Ozow Payment Request
           description: Request payload for a South Africa Ozow payment.
@@ -4482,7 +4482,7 @@ components:
             - integration_key
             - payment
 
-    OzowPaymentResponse:
+    SouthAfricaOzowResponse:
           type: object
           title: South Africa Ozow Payment Response
           description: Response payload for a South Africa Ozow payment.
@@ -4679,7 +4679,7 @@ components:
               description: "Indicates whether the request was successful."
               example: "SUCCESS"
 
-    NigeriaUSSDPaymentRequest:
+    NigeriaUSSDRequest:
       title: "Nigeria USSD Payment Request"
       description: "Schema for initiating a USSD payment request using EBANX in Nigeria."
       type: object
@@ -4756,7 +4756,7 @@ components:
         - operation
         - payment
 
-    NigeriaUSSDPaymentResponse:
+    NigeriaUSSDResponse:
       title: "Nigeria USSD Payment Response"
       description: "Schema for the response received after initiating a USSD payment request using EBANX in Nigeria."
       type: object
@@ -4814,7 +4814,7 @@ components:
           description: "Indicates whether the request was successful."
           example: "SUCCESS"              
 
-    EcuadorSafetyPayPaymentRequest:
+    EcuadorSafetyPayRequest:
       title: "Ecuador SafetyPay Payment Request"
       description: "Schema for initiating a SafetyPay payment request using EBANX in Ecuador."
       type: object
@@ -4892,7 +4892,7 @@ components:
         - operation
         - payment
 
-    EcuadorSafetyPayPaymentResponse:
+    EcuadorSafetyPayResponse:
       title: "Ecuador SafetyPay Payment Response"
       description: "Schema for the response received after initiating a SafetyPay payment request using EBANX in Ecuador."
       type: object
@@ -4958,8 +4958,7 @@ components:
           description: "URL to redirect for completing the payment."
           example: "https://sandbox.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"         
 
-
-    MexicoOXXOPayPaymentRequest:
+    MexicoOXXOPayRequest:
       title: "Mexico OXXO Pay Payment Request"
       description: "Schema for initiating an OXXO Pay payment request using EBANX in Mexico."
       type: object
@@ -5022,7 +5021,7 @@ components:
         - operation
         - payment
 
-    MexicoOXXOPayPaymentResponse:
+    MexicoOXXOPayResponse:
       title: "Mexico OXXO Pay Payment Response"
       description: "Schema for the response received after initiating an OXXO Pay payment request using EBANX in Mexico."
       type: object
@@ -5080,7 +5079,7 @@ components:
           description: "Indicates whether the request was successful."
           example: "SUCCESS"
 
-    MexicoOXXOPaymentRequest:
+    MexicoOXXORequest:
       title: "Mexico OXXO Payment Request"
       description: "Schema for initiating an OXXO payment request using EBANX in Mexico."
       type: object
@@ -5143,7 +5142,7 @@ components:
         - operation
         - payment
 
-    MexicoOXXOPaymentResponse:
+    MexicoOXXOResponse:
       title: "Mexico OXXO Payment Response"
       description: "Schema for the response received after initiating an OXXO payment request using EBANX in Mexico."
       type: object
@@ -5222,8 +5221,7 @@ components:
           description: "Indicates whether the request was successful."
           example: "SUCCESS"
 
-
-    MexicoSPEIPaymentRequest:
+    MexicoSPEIRequest:
       title: "Mexico SPEI Payment Request"
       description: "Schema for initiating a SPEI payment request using EBANX in Mexico."
       type: object
@@ -5286,7 +5284,7 @@ components:
         - operation
         - payment
 
-    MexicoSPEIPaymentResponse:
+    MexicoSPEIResponse:
       title: "Mexico SPEI Payment Response"
       description: "Schema for the response received after initiating a SPEI payment request using EBANX in Mexico."
       type: object
