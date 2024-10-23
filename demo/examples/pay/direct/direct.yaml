@@ -24,7 +24,7 @@ paths:
                 - $ref: '#/components/schemas/DefaultJWTRequest'
                 - $ref: '#/components/schemas/PixBRRequest'
                 - $ref: '#/components/schemas/PSECORequest'
-                - $ref: '#/components/schemas/OXXOMXRequest'
+                - $ref: '#/components/schemas/MexicoOXXOPayPaymentRequest'
                 - $ref: '#/components/schemas/PISPRequest'
                 - $ref: '#/components/schemas/MealVoucherRequest'
                 - $ref: '#/components/schemas/MultiBenefitsVoucherRequest'
@@ -53,7 +53,7 @@ paths:
                   - $ref: '#/components/schemas/DefaultResponse'
                   - $ref: '#/components/schemas/PixBRResponse'
                   - $ref: '#/components/schemas/PSECOResponse'
-                  - $ref: '#/components/schemas/OXXOMXResponse'
+                  - $ref: '#/components/schemas/MexicoOXXOPayPaymentResponse'
                   - $ref: '#/components/schemas/BoletoBRResponse'
                   - $ref: '#/components/schemas/PISPResponse'
                   - $ref: '#/components/schemas/MealVoucherResponse'
@@ -1262,204 +1262,6 @@ components:
           type: string
           description: "URL to redirect the user after successful payment."
           example: "https://example.com/redirect?hash=dummy_hash_789012"
-
-    OXXOMXRequest:
-      type: object
-      title: OXXO Payment Request
-      description: Request payload to initiate an OXXO payment.
-      properties:
-        integration_key:
-          type: string
-          description: "Unique key for integration with the payment provider."
-          example: "dummy_integration_key_54321"
-        operation:
-          type: string
-          description: "Type of operation, e.g., 'request'."
-          example: "request"
-        mode:
-          type: string
-          description: "Mode of the request, e.g., 'full'."
-          example: "full"
-        payment:
-          type: object
-          description: "Payment details."
-          properties:
-            sub_account:
-              type: object
-              description: "Details of the sub-account associated with the payment."
-              properties:
-                name:
-                  type: string
-                  description: "Name of the sub-account."
-                  example: "Sub Account Name"
-                image_url:
-                  type: string
-                  description: "Image URL for the sub-account."
-                  example: "https://example.com/image.jpg"
-            name:
-              type: string
-              description: "Full name of the payer."
-              example: "Alex Smith"
-            email:
-              type: string
-              description: "Email address of the payer."
-              example: "alex.smith@example.com"
-            currency_code:
-              type: string
-              description: "Currency code, e.g., 'MXN'."
-              example: "MXN"
-            amount_total:
-              type: number
-              description: "Total amount for the payment."
-              example: 5000.00
-            merchant_payment_code:
-              type: string
-              description: "Merchant's unique payment code."
-              example: "MERCHANT123456"
-            payment_type_code:
-              type: string
-              description: "Payment method code, e.g., 'oxxo'."
-              example: "oxxo"
-            customer_ip:
-              type: string
-              description: "IP address of the payer."
-              example: "192.168.1.1"
-            country:
-              type: string
-              description: "Country code of the payer's address."
-              example: "MX"
-            phone_number:
-              type: string
-              description: "Phone number of the payer."
-              example: "5551234567"
-            due_date:
-              type: string
-              format: date
-              description: "Due date for the payment."
-              example: "2024-09-19"
-            create_token:
-              type: boolean
-              description: "Indicates if a payment token should be created."
-              example: false
-            instalments:
-              type: integer
-              description: "Number of payment instalments."
-              example: 1
-            device_id:
-              type: string
-              description: "Device ID used for the payment."
-              example: "device12345"
-            bypass_boleto_screen:
-              type: boolean
-              description: "Indicates if the boleto screen should be bypassed."
-              example: false
-            fx_token:
-              type: string
-              description: "Token for fraud prevention."
-              example: "dummy_fx_token"
-
-    OXXOMXResponse:
-      type: object
-      title: OXXO Payment Response
-      description: Response payload for an OXXO payment request.
-      properties:
-        payment:
-          type: object
-          description: "Details of the processed payment."
-          properties:
-            hash:
-              type: string
-              description: "Unique identifier for the payment."
-              example: "dummy_hash_654321"
-            country:
-              type: string
-              description: "Country code of the payment."
-              example: "mx"
-            merchant_payment_code:
-              type: string
-              description: "Merchant's unique payment code."
-              example: "MERCHANT123456"
-            order_number:
-              type: string
-              description: "Order number associated with the payment."
-              example: "ORDER654321"
-            status:
-              type: string
-              description: "Payment status, e.g., 'PE' (Pending)."
-              example: "PE"
-            status_date:
-              type: string
-              format: date-time
-              description: "Date and time of the payment status."
-              example: "2024-09-16T10:19:16Z"
-            open_date:
-              type: string
-              format: date-time
-              description: "Date and time when the payment was opened."
-              example: "2024-09-16T10:19:16Z"
-            confirm_date:
-              type: string
-              format: date-time
-              description: "Date and time when the payment was confirmed."
-              example: null
-            transfer_date:
-              type: string
-              format: date-time
-              description: "Date and time when the payment was transferred."
-              example: null
-            amount_br:
-              type: string
-              description: "Amount in the local currency (MXN)."
-              example: "5000.00"
-            amount_ext:
-              type: string
-              description: "Amount in the external currency."
-              example: "5000.00"
-            amount_iof:
-              type: string
-              description: "Amount of IOF (tax) applied to the payment."
-              example: "0.00"
-            currency_rate:
-              type: string
-              description: "Currency exchange rate used."
-              example: "1.0000"
-            currency_ext:
-              type: string
-              description: "External currency code."
-              example: "MXN"
-            due_date:
-              type: string
-              format: date
-              description: "Due date for the payment."
-              example: "2024-09-19"
-            instalments:
-              type: string
-              description: "Number of payment instalments."
-              example: "1"
-            payment_type_code:
-              type: string
-              description: "Payment method code, e.g., 'oxxo'."
-              example: "oxxo"
-            oxxo_url:
-              type: string
-              description: "URL to print the OXXO payment slip."
-              example: "https://example.com/oxxo/print?hash=dummy_hash_654321"
-            oxxo_barcode:
-              type: string
-              description: "Barcode for the OXXO payment slip."
-              example: "29000000000123456789012345678901"
-            pre_approved:
-              type: boolean
-              description: "Indicates if the payment is pre-approved."
-              example: false
-            capture_available:
-              type: string
-              description: "Indicates if the payment can be captured."
-              example: null
-        status:
-          type: string
-          description: "Overall status of the payment request."
-          example: "SUCCESS"
 
     GooglePayResponse:
       type: object
@@ -4678,7 +4480,7 @@ components:
 
     OzowPaymentResponse:
           type: object
-          itle: South Africa Ozow Payment Response
+          title: South Africa Ozow Payment Response
           description: Response payload for a South Africa Ozow payment.
           properties:
             payment:
@@ -4724,7 +4526,7 @@ components:
             redirect_url:
               type: string
               description: "URL to redirect for completing the payment."
-              example: "https://api.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"
+              example: "https://api.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"   
 
     NigeriaBankTransferRequest:
           title: "Nigeria Bank Transfer Payment Request"
@@ -5151,3 +4953,125 @@ components:
           type: string
           description: "URL to redirect for completing the payment."
           example: "https://sandbox.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"         
+
+
+    MexicoOXXOPayPaymentRequest:
+      title: "OXXO Pay Payment Request"
+      description: "Schema for initiating an OXXO Pay payment request using EBANX in Mexico."
+      type: object
+      properties:
+        integration_key:
+          type: string
+          description: "Your EBANX integration key."
+          example: "your-integration-key"
+          maxLength: 255
+        operation:
+          type: string
+          description: "Set to 'request'."
+          example: "request"
+          maxLength: 20
+        payment:
+          type: object
+          properties:
+            name:
+              type: string
+              description: "Customer name."
+              example: "Juan Garcia"
+              maxLength: 100
+            email:
+              type: string
+              description: "Customer email."
+              example: "juangarcia@example.com"
+              maxLength: 255
+            phone_number:
+              type: string
+              description: "Customer phone number."
+              example: "0405777687"
+              maxLength: 15
+            country:
+              type: string
+              description: "Country code. Set to 'mx' for Mexico."
+              example: "mx"
+              maxLength: 2
+            payment_type_code:
+              type: string
+              description: "Type of payment. Set to 'oxxopay'."
+              example: "oxxopay"
+              maxLength: 20
+            merchant_payment_code:
+              type: string
+              description: "Unique merchant payment code."
+              example: "unique-merchant-code-1234"
+              maxLength: 100
+            currency_code:
+              type: string
+              description: "Currency code. Supported values: MXN, USD."
+              example: "MXN"
+              maxLength: 3
+            amount_total:
+              type: string
+              description: "Total amount to be charged."
+              example: "6000.00"
+              maxLength: 10
+      required:
+        - integration_key
+        - operation
+        - payment
+
+    MexicoOXXOPayPaymentResponse:
+      title: "OXXO Pay Payment Response"
+      description: "Schema for the response received after initiating an OXXO Pay payment request using EBANX in Mexico."
+      type: object
+      properties:
+        payment:
+          type: object
+          properties:
+            hash:
+              type: string
+              description: "Unique hash identifying the payment."
+              example: "payment-hash-abcdef123456"
+            pin:
+              type: string
+              description: "Unique pin for the transaction."
+              example: "409084527"
+            country:
+              type: string
+              description: "Country where the payment is initiated."
+              example: "mx"
+            merchant_payment_code:
+              type: string
+              description: "Unique code for the merchant's payment."
+              example: "unique-merchant-code-1234"
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: "1234567"
+            status:
+              type: string
+              description: "Current status of the payment."
+              example: "PE"
+            open_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was initiated."
+              example: "2023-09-21 14:59:22"
+            amount_ext:
+              type: string
+              description: "Total amount of the payment in the external currency."
+              example: "6000.00"
+            currency_ext:
+              type: string
+              description: "External currency code."
+              example: "MXN"
+            voucher_url:
+              type: string
+              description: "URL to view and print the payment voucher."
+              example: "https://sandbox.ebanxpay.com/print/voucher/execute?hash=payment-hash-abcdef123456"
+            pre_approved:
+              type: boolean
+              description: "Indicates if the payment is pre-approved."
+              example: false
+        status:
+          type: string
+          description: "Indicates whether the request was successful."
+          example: "SUCCESS"
