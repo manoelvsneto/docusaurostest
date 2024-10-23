@@ -38,6 +38,7 @@ paths:
                 - $ref: '#/components/schemas/MobileMoneyUGRequest'
                 - $ref: '#/components/schemas/PeruSafetyPayRequest'
                 - $ref: '#/components/schemas/PeruPagoEfectivoRequest'
+                - $ref: '#/components/schemas/OzowPaymentRequest'
         required: true
       responses:
         '200':
@@ -64,6 +65,7 @@ paths:
                   - $ref: '#/components/schemas/MobileMoneyUGResponse'
                   - $ref: '#/components/schemas/PeruSafetyPayResponse'
                   - $ref: '#/components/schemas/PeruPagoEfectivoResponse'
+                  - $ref: '#/components/schemas/OzowPaymentResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 
 components:
@@ -4589,3 +4591,127 @@ components:
           description: "Overall status of the payment request."
           example: "SUCCESS"
           enum: ["SUCCESS", "ERROR"]
+
+    OzowPaymentRequest:
+          type: object
+          properties:
+            integration_key:
+              type: string
+              description: "Your EBANX integration key."
+              example: "your-integration-key"
+              maxLength: 255
+            payment:
+              type: object
+              properties:
+                country:
+                  type: string
+                  description: "Country code. Set to 'ZA' for South Africa."
+                  example: "ZA"
+                  maxLength: 2
+                currency_code:
+                  type: string
+                  description: "Currency code. Supported value: ZAR."
+                  example: "ZAR"
+                  maxLength: 3
+                amount_total:
+                  type: string
+                  description: "Total amount to be charged."
+                  example: "150.00"
+                  maxLength: 10
+                payment_type_code:
+                  type: string
+                  description: "Type of payment. Set to 'ozow'."
+                  example: "ozow"
+                  maxLength: 20
+                merchant_payment_code:
+                  type: string
+                  description: "Unique merchant payment code."
+                  example: "unique-merchant-code-1234"
+                  maxLength: 100
+                notification_url:
+                  type: string
+                  description: "URL to notify merchants when a transaction status changes."
+                  example: "https://your-notification-url.com/webhook"
+                  maxLength: 255
+                redirect_url:
+                  type: string
+                  description: "URL to redirect the customer after payment completion."
+                  example: "https://your-callback-url.com/callback"
+                  maxLength: 255
+                name:
+                  type: string
+                  description: "Customer name."
+                  example: "John Doe"
+                  maxLength: 100
+                email:
+                  type: string
+                  description: "Customer email."
+                  example: "john.doe@example.com"
+                  maxLength: 255
+                phone_number:
+                  type: string
+                  description: "Customer phone number."
+                  example: "+27123456789"
+                  maxLength: 15
+                metadata:
+                  type: object
+                  properties:
+                    bank_details:
+                      type: object
+                      properties:
+                        bank_code:
+                          type: string
+                          description: "Bank code for the customer's bank."
+                          example: "BANKCODE123"
+                          maxLength: 10
+          required:
+            - integration_key
+            - payment
+
+    OzowPaymentResponse:
+          type: object
+          properties:
+            payment:
+              type: object
+              properties:
+                hash:
+                  type: string
+                  description: "Unique hash identifying the payment."
+                  example: "payment-hash-abcdef123456"
+                country:
+                  type: string
+                  description: "Country where the payment is initiated."
+                  example: "za"
+                merchant_payment_code:
+                  type: string
+                  description: "Unique code for the merchant's payment."
+                  example: "unique-merchant-code-1234"
+                status:
+                  type: string
+                  description: "Current status of the payment."
+                  example: "PE"
+                open_date:
+                  type: string
+                  format: date-time
+                  description: "Date and time when the payment was initiated."
+                  example: "2024-10-23 09:55:44"
+                amount_ext:
+                  type: string
+                  description: "Total amount of the payment in the external currency."
+                  example: "150.00"
+                currency_ext:
+                  type: string
+                  description: "External currency code."
+                  example: "ZAR"
+                redirect_url:
+                  type: string
+                  description: "URL to redirect the user for payment completion."
+                  example: "https://api.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"
+            status:
+              type: string
+              description: "Indicates whether the request was successful."
+              example: "SUCCESS"
+            redirect_url:
+              type: string
+              description: "URL to redirect for completing the payment."
+              example: "https://api.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"
