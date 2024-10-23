@@ -41,6 +41,7 @@ paths:
                 - $ref: '#/components/schemas/OzowPaymentRequest'
                 - $ref: '#/components/schemas/NigeriaBankTransferRequest'
                 - $ref: '#/components/schemas/NigeriaUSSDPaymentRequest'
+                - $ref: '#/components/schemas/EcuadorSafetyPayPaymentRequest'
         required: true
       responses:
         '200':
@@ -70,6 +71,7 @@ paths:
                   - $ref: '#/components/schemas/OzowPaymentResponse'
                   - $ref: '#/components/schemas/NigeriaBankTransferResponse'
                   - $ref: '#/components/schemas/NigeriaUSSDPaymentResponse'
+                  - $ref: '#/components/schemas/EcuadorSafetyPayPaymentResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 
 components:
@@ -5005,3 +5007,147 @@ components:
           type: string
           description: "Indicates whether the request was successful."
           example: "SUCCESS"              
+
+    EcuadorSafetyPayPaymentRequest:
+      title: "Ecuador SafetyPay Payment Request"
+      description: "Schema for initiating a SafetyPay payment request using EBANX in Ecuador."
+      type: object
+      properties:
+        integration_key:
+          type: string
+          description: "Your EBANX integration key."
+          example: "your-integration-key"
+          maxLength: 255
+        operation:
+          type: string
+          description: "Set to 'request'."
+          example: "request"
+          maxLength: 20
+        payment:
+          type: object
+          properties:
+            name:
+              type: string
+              description: "Customer name."
+              example: "John Doe"
+              maxLength: 100
+            email:
+              type: string
+              description: "Customer email."
+              example: "johndoe@example.com"
+              maxLength: 255
+            phone_number:
+              type: string
+              description: "Customer phone number."
+              example: "09987654321"
+              maxLength: 15
+            country:
+              type: string
+              description: "Country code. Set to 'ec' for Ecuador."
+              example: "ec"
+              maxLength: 2
+            payment_type_code:
+              type: string
+              description: "Type of payment. Set to 'safetypay-cash' or 'safetypay-online'."
+              example: "safetypay-cash"
+              maxLength: 20
+            merchant_payment_code:
+              type: string
+              description: "Unique merchant payment code."
+              example: "unique-merchant-code-1234"
+              maxLength: 100
+            currency_code:
+              type: string
+              description: "Currency code. Supported value: USD."
+              example: "USD"
+              maxLength: 3
+            amount_total:
+              type: string
+              description: "Total amount to be charged."
+              example: "100.00"
+              maxLength: 10
+            notification_url:
+              type: string
+              description: "URL to notify merchants when a transaction status changes."
+              example: "https://your-notification-url.com/webhook"
+              maxLength: 255
+            redirect_url:
+              type: string
+              description: "URL to redirect the customer after payment completion."
+              example: "https://your-callback-url.com/callback"
+              maxLength: 255
+            note:
+              type: string
+              description: "Additional notes or information for the payment."
+              example: "Order Note XYZ"
+              maxLength: 255
+      required:
+        - integration_key
+        - operation
+        - payment
+
+    EcuadorSafetyPayPaymentResponse:
+      title: "Ecuador SafetyPay Payment Response"
+      description: "Schema for the response received after initiating a SafetyPay payment request using EBANX in Ecuador."
+      type: object
+      properties:
+        payment:
+          type: object
+          properties:
+            hash:
+              type: string
+              description: "Unique hash identifying the payment."
+              example: "payment-hash-abcdef123456"
+            pin:
+              type: string
+              description: "Unique pin for the transaction."
+              example: "407710453"
+            country:
+              type: string
+              description: "Country where the payment is initiated."
+              example: "ec"
+            merchant_payment_code:
+              type: string
+              description: "Unique code for the merchant's payment."
+              example: "unique-merchant-code-1234"
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: "1234567"
+            status:
+              type: string
+              description: "Current status of the payment."
+              example: "PE"
+            open_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was initiated."
+              example: "2024-10-21 23:10:15"
+            amount_ext:
+              type: string
+              description: "Total amount of the payment in the external currency."
+              example: "100.00"
+            currency_ext:
+              type: string
+              description: "External currency code."
+              example: "USD"
+            redirect_url:
+              type: string
+              description: "URL to redirect the user for payment completion."
+              example: "https://sandbox.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"
+            pre_approved:
+              type: boolean
+              description: "Indicates if the payment is pre-approved."
+              example: false
+            note:
+              type: string
+              description: "Additional notes or information associated with the payment."
+              example: "Order Note XYZ"
+        status:
+          type: string
+          description: "Indicates whether the request was successful."
+          example: "SUCCESS"
+        redirect_url:
+          type: string
+          description: "URL to redirect for completing the payment."
+          example: "https://sandbox.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"         
