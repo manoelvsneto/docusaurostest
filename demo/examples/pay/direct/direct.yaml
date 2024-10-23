@@ -39,6 +39,7 @@ paths:
                 - $ref: '#/components/schemas/PeruSafetyPayRequest'
                 - $ref: '#/components/schemas/PeruPagoEfectivoRequest'
                 - $ref: '#/components/schemas/OzowPaymentRequest'
+                - $ref: '#/components/schemas/NigeriaBankTransferRequest'
         required: true
       responses:
         '200':
@@ -66,6 +67,7 @@ paths:
                   - $ref: '#/components/schemas/PeruSafetyPayResponse'
                   - $ref: '#/components/schemas/PeruPagoEfectivoResponse'
                   - $ref: '#/components/schemas/OzowPaymentResponse'
+                  - $ref: '#/components/schemas/NigeriaBankTransferResponse'
                   - $ref: '#/components/schemas/ErrorResponse'
 
 components:
@@ -4719,3 +4721,150 @@ components:
               type: string
               description: "URL to redirect for completing the payment."
               example: "https://api.ebanx.com/ws/redirect/execute?hash=payment-hash-abcdef123456"
+
+    NigeriaBankTransferRequest:
+          title: "Nigeria Bank Transfer Payment Request"
+          description: "Schema for initiating a bank transfer payment request using EBANX in Nigeria."
+          type: object
+          properties:
+            integration_key:
+              type: string
+              description: "Your EBANX integration key."
+              example: "your-integration-key"
+              maxLength: 255
+            operation:
+              type: string
+              description: "Set to 'request'."
+              example: "request"
+              maxLength: 20
+            payment:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "Customer name."
+                  example: "John Doe"
+                  maxLength: 100
+                email:
+                  type: string
+                  description: "Customer email."
+                  example: "john.doe@example.com"
+                  maxLength: 255
+                document:
+                  type: string
+                  description: "Customer document identifier."
+                  example: "A12345678"
+                  maxLength: 20
+                address:
+                  type: string
+                  description: "Customer address."
+                  example: "123 Example Street"
+                  maxLength: 150
+                street_number:
+                  type: string
+                  description: "Customer street number."
+                  example: "456"
+                  maxLength: 10
+                city:
+                  type: string
+                  description: "Customer city."
+                  example: "Lagos"
+                  maxLength: 50
+                state:
+                  type: string
+                  description: "Customer state."
+                  example: "Lagos State"
+                  maxLength: 50
+                zipcode:
+                  type: string
+                  description: "Customer zip code."
+                  example: "100001"
+                  maxLength: 10
+                phone_number:
+                  type: string
+                  description: "Customer phone number."
+                  example: "+2347012345678"
+                  maxLength: 15
+                country:
+                  type: string
+                  description: "Country code. Set to 'ng' for Nigeria."
+                  example: "ng"
+                  maxLength: 2
+                payment_type_code:
+                  type: string
+                  description: "Type of payment. Set to 'banktransfer'."
+                  example: "banktransfer"
+                  maxLength: 20
+                merchant_payment_code:
+                  type: string
+                  description: "Unique merchant payment code."
+                  example: "unique-merchant-code-1234"
+                  maxLength: 100
+                currency_code:
+                  type: string
+                  description: "Currency code. Supported value: NGN."
+                  example: "NGN"
+                  maxLength: 3
+                amount_total:
+                  type: string
+                  description: "Total amount to be charged."
+                  example: "500.00"
+                  maxLength: 10
+          required:
+            - integration_key
+            - operation
+            - payment
+
+    NigeriaBankTransferResponse:
+          title: "Nigeria Bank Transfer Payment Response"
+          description: "Schema for the response received after initiating a bank transfer payment request using EBANX in Nigeria."
+          type: object
+          properties:
+            payment:
+              type: object
+              properties:
+                hash:
+                  type: string
+                  description: "Unique hash identifying the payment."
+                  example: "payment-hash-abcdef123456"
+                country:
+                  type: string
+                  description: "Country where the payment is initiated."
+                  example: "ng"
+                merchant_payment_code:
+                  type: string
+                  description: "Unique code for the merchant's payment."
+                  example: "unique-merchant-code-1234"
+                order_number:
+                  type: string
+                  description: "Order number associated with the payment."
+                  example: "1234567"
+                status:
+                  type: string
+                  description: "Current status of the payment."
+                  example: "PE"
+                open_date:
+                  type: string
+                  format: date-time
+                  description: "Date and time when the payment was initiated."
+                  example: "2023-01-01 01:01:01"
+                amount_ext:
+                  type: string
+                  description: "Total amount of the payment in the external currency."
+                  example: "500.00"
+                currency_ext:
+                  type: string
+                  description: "External currency code."
+                  example: "NGN"
+                voucher_url:
+                  type: string
+                  description: "URL to view and print the payment voucher."
+                  example: "https://sandbox.ebanx.com/print/voucher/execute?hash=payment-hash-abcdef123456"
+                pre_approved:
+                  type: boolean
+                  description: "Indicates if the payment is pre-approved."
+                  example: false
+            status:
+              type: string
+              description: "Indicates whether the request was successful."
+              example: "SUCCESS"
