@@ -4956,7 +4956,7 @@ components:
 
 
     MexicoOXXOPayPaymentRequest:
-      title: "OXXO Pay Payment Request"
+      title: "Mexico OXXO Pay Payment Request"
       description: "Schema for initiating an OXXO Pay payment request using EBANX in Mexico."
       type: object
       properties:
@@ -5019,7 +5019,7 @@ components:
         - payment
 
     MexicoOXXOPayPaymentResponse:
-      title: "OXXO Pay Payment Response"
+      title: "Mexico OXXO Pay Payment Response"
       description: "Schema for the response received after initiating an OXXO Pay payment request using EBANX in Mexico."
       type: object
       properties:
