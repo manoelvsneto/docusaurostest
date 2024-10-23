@@ -5403,7 +5403,6 @@ components:
           description: "Indicates whether the request was successful."
           example: "SUCCESS"
 
-
     ChileSencillitoRequest:
       title: "Chile Sencillito Payment Request"
       description: "Schema for initiating a Sencillito payment request using EBANX in Chile."
