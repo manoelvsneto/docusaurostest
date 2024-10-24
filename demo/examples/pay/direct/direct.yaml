@@ -49,6 +49,7 @@ paths:
                 - $ref: '#/components/schemas/ColombiaBancolombiaButtonRequest'
                 - $ref: '#/components/schemas/GhanaMobileMoneytRequest'
                 - $ref: '#/components/schemas/ColombiaEfectyRequest'
+                - $ref: '#/components/schemas/IndiaUPIRequest'
         required: true
       responses:
         '200':
@@ -86,6 +87,7 @@ paths:
                   - $ref: '#/components/schemas/ColombiaBancolombiaButtonResponse'
                   - $ref: '#/components/schemas/GhanaMobileMoneyResponse'
                   - $ref: '#/components/schemas/ColombiaEfectyResponse'
+                  - $ref: '#/components/schemas/IndiaUPIResponse'
                   - $ref: '#/components/schemas/ErrorResponse'   
 components:
   schemas:
@@ -6348,3 +6350,201 @@ components:
           type: string
           description: "Indicates whether the request was successful."
           example: "SUCCESS"
+
+    IndiaUPIRequest:
+      title: "India UPI Payment Request"
+      description: "Schema for initiating a UPI payment request using EBANX in India."
+      type: object
+      properties:
+        integration_key:
+          type: string
+          description: "Your EBANX integration key."
+          example: "your-integration-key"
+          maxLength: 255
+        operation:
+          type: string
+          description: "Set to 'request'."
+          example: "request"
+          maxLength: 20
+        payment:
+          type: object
+          properties:
+            name:
+              type: string
+              description: "Payer's name, which will be validated against the UPI ID account holder’s registered name."
+              example: "John Doe"
+              maxLength: 100
+            email:
+              type: string
+              description: "Customer email."
+              example: "email@example.com"
+              maxLength: 255
+            phone_number:
+              type: string
+              description: "Customer phone number."
+              example: "7000000000"
+              maxLength: 15
+            country:
+              type: string
+              description: "Country code. Set to 'in' for India."
+              example: "in"
+              maxLength: 2
+            payment_type_code:
+              type: string
+              description: "Set to 'upi-qrcode' for UPI QR Code or 'upi-intent' for UPI Intent."
+              example: "upi-qrcode"
+              maxLength: 50
+            merchant_payment_code:
+              type: string
+              description: "Unique merchant payment code."
+              example: "unique-merchant-code-1234"
+              maxLength: 100
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: "1234567"
+              maxLength: 20
+            currency_code:
+              type: string
+              description: "Currency code. Supported value: INR."
+              example: "INR"
+              maxLength: 3
+            amount_total:
+              type: string
+              description: "Total amount to be charged."
+              example: "100.00"
+              maxLength: 10
+      required:
+        - integration_key
+        - operation
+        - payment
+
+    IndiaUPIResponse:
+      title: "India UPI Payment Response"
+      description: "Schema for the response received after initiating a UPI payment request using EBANX in India."
+      type: object
+      properties:
+        payment:
+          type: object
+          properties:
+            hash:
+              type: string
+              description: "Unique hash identifying the payment."
+              example: "656de0b6c82a3416e2ad70ef1234a774d405114b7c03b1fd"
+            country:
+              type: string
+              description: "Country where the payment is initiated."
+              example: "in"
+            merchant_payment_code:
+              type: string
+              description: "Unique code for the merchant's payment."
+              example: "unique-merchant-code-1234"
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: "1234567"
+              nullable: true
+            status:
+              type: string
+              description: "Current status of the payment."
+              example: "PE"
+            status_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment status was last updated."
+              example: null
+              nullable: true
+            open_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was initiated."
+              example: "2024-01-01 01:01:01"
+            confirm_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was confirmed."
+              example: null
+              nullable: true
+            transfer_date:
+              type: string
+              format: date-time
+              description: "Date and time when the funds were transferred."
+              example: null
+              nullable: true
+            amount_br:
+              type: string
+              description: "Total amount of the payment in Brazilian Real (BRL)."
+              example: "100.00"
+            amount_ext:
+              type: string
+              description: "Total amount of the payment in the external currency."
+              example: "100.00"
+            amount_iof:
+              type: string
+              description: "Amount of IOF (Tax on Financial Operations) charged on the transaction."
+              example: "0.00"
+            currency_rate:
+              type: string
+              description: "Exchange rate used for converting the transaction currency."
+              example: "1.0000"
+            currency_ext:
+              type: string
+              description: "External currency code."
+              example: "INR"
+            due_date:
+              type: string
+              format: date-time
+              description: "Due date for the payment."
+              example: "2024-01-01 01:06:01"
+            instalments:
+              type: string
+              description: "Number of instalments for the payment."
+              example: "1"
+            payment_type_code:
+              type: string
+              description: "Type of payment used. Set to 'upi-qrcode' or 'upi-intent'."
+              example: "upi-qrcode"
+            pre_approved:
+              type: boolean
+              description: "Indicates if the payment is pre-approved."
+              example: false
+            capture_available:
+              type: boolean
+              description: "Indicates if capture is available for the payment."
+              example: null
+              nullable: true
+        requested_currency:
+          type: string
+          description: "Requested currency for the transaction."
+          example: "INR"
+        upi:
+          type: object
+          description: "UPI-specific details depending on the payment type."
+          properties:
+            qr_code_value:
+              type: string
+              description: "Base64 encoded QR code value for UPI QR Code payments."
+              example: "data:image/png;base64,iVBOaaRw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAABlBMVEX///8AAABVwtN+AAA..."
+            app_links:
+              type: array
+              description: "Array of deep links for different UPI apps in the UPI Intent flow."
+              items:
+                type: string
+                example: "upi://pay?pa=pay.merch0000000@bankltd&pn=Merchant&am=1.00&tr=000000000000&mc=0000"
+            expiration_date:
+              type: string
+              format: date-time
+              description: "Expiration date for the QR code or UPI Intent."
+              example: "2024-01-01 09:36:01"
+        currency_ext_base:
+          type: string
+          description: "Base external currency code."
+          example: "INR"
+        status:
+          type: string
+          description: "Indicates whether the request was successful."
+          example: "SUCCESS"
+        redirect_url:
+          type: string
+          description: "URL to redirect for completing the payment."
+          example: "https://sandbox.ebanx.com/ws/redirect/execute?hash=656de0b6c82a3416e2ad70ef1234a774d405114b7c03b1fd"
