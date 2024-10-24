@@ -47,7 +47,7 @@ paths:
                 - $ref: '#/components/schemas/ChileSencillitoRequest'
                 - $ref: '#/components/schemas/ChileServipagRequest'
                 - $ref: '#/components/schemas/ColombiaBancolombiaButtonRequest'
-                - $ref: '#/components/schemas/GhanaMobileMoneyRequest'
+                - $ref: '#/components/schemas/GhanaMobileMoneytRequest'
         required: true
       responses:
         '200':
@@ -83,7 +83,7 @@ paths:
                   - $ref: '#/components/schemas/ChileSencillitoResponse'
                   - $ref: '#/components/schemas/ChileServipagResponse'
                   - $ref: '#/components/schemas/ColombiaBancolombiaButtonResponse'
-                  - $ref: '#/components/schemas/GhanaMobileMoneyResponse'
+                  - $ref: '#/components/schemas/GhanaMobileMoneytResponse'
                   - $ref: '#/components/schemas/ErrorResponse'   
 components:
   schemas:
