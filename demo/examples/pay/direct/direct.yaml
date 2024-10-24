@@ -1061,217 +1061,6 @@ components:
           description: "URL to redirect the user after successful payment."
           example: "https://example.com/redirect?hash=dummy_hash_123456"
 
-    ColombiaPSERequest:
-      type: object
-      title: Colombia PSE Payment Request
-      description: Request payload to initiate a PSE payment.
-      properties:
-        integration_key:
-          type: string
-          description: "Unique key for integration with the payment provider."
-          example: "dummy_integration_key_67890"
-        operation:
-          type: string
-          description: "Type of operation, e.g., 'request'."
-          example: "request"
-        payment:
-          type: object
-          description: "Payment details."
-          properties:
-            address:
-              type: string
-              description: "Street address of the payer."
-              example: "456 Maple Avenue"
-            amount_total:
-              type: number
-              description: "Total amount for the payment."
-              example: 150000.00
-            city:
-              type: string
-              description: "City of the payer's address."
-              example: "Bogotá"
-            country:
-              type: string
-              description: "Country code of the payer's address."
-              example: "CO"
-            currency_code:
-              type: string
-              description: "Currency code, e.g., 'COP'."
-              example: "COP"
-            eft_code:
-              type: string
-              description: "EFT payment method code, e.g., 'nequi'."
-              example: "nequi"
-            email:
-              type: string
-              description: "Email address of the payer."
-              example: "jane.doe@example.com"
-            items:
-              type: array
-              description: "List of items for the payment."
-              items:
-                type: object
-                properties:
-                  description:
-                    type: string
-                    description: "Description of the item."
-                    example: "Product Description"
-                  name:
-                    type: string
-                    description: "Name of the item."
-                    example: "Product Name"
-                  quantity:
-                    type: integer
-                    description: "Quantity of the item."
-                    example: 1
-                  sku:
-                    type: string
-                    description: "Stock Keeping Unit (SKU) for the item."
-                    example: "SKU123456"
-                  unit_price:
-                    type: number
-                    description: "Unit price of the item."
-                    example: 150000.00
-            merchant_payment_code:
-              type: string
-              description: "Merchant's unique payment code."
-              example: "PAYMENT123456"
-            name:
-              type: string
-              description: "Full name of the payer."
-              example: "Jane Doe"
-            order_number:
-              type: string
-              description: "Order number associated with the payment."
-              example: "ORDER123456"
-            payment_type_code:
-              type: string
-              description: "Payment method code, e.g., 'eft'."
-              example: "eft"
-            phone_number:
-              type: string
-              description: "Phone number of the payer."
-              example: "3001234567"
-            redirect_url:
-              type: string
-              description: "URL to redirect the user after payment."
-              example: "https://example.com/redirect"
-            state:
-              type: string
-              description: "State of the payer's address."
-              example: "Cundinamarca"
-            street_number:
-              type: string
-              description: "Street number of the payer's address."
-              example: "456"
-            zipcode:
-              type: string
-              description: "ZIP code of the payer's address."
-              example: "110111"
-
-    ColombiaPSEResponse:
-      type: object
-      title: Colombia PSE Payment Response
-      description: Response payload for a PSE payment request.
-      properties:
-        payment:
-          type: object
-          description: "Details of the processed payment."
-          properties:
-            hash:
-              type: string
-              description: "Unique identifier for the payment."
-              example: "dummy_hash_789012"
-            country:
-              type: string
-              description: "Country code of the payment."
-              example: "co"
-            merchant_payment_code:
-              type: string
-              description: "Merchant's unique payment code."
-              example: "PAYMENT123456"
-            order_number:
-              type: string
-              description: "Order number associated with the payment."
-              example: "ORDER123456"
-            status:
-              type: string
-              description: "Payment status, e.g., 'PE' (Pending)."
-              example: "PE"
-            status_date:
-              type: string
-              format: date-time
-              description: "Date and time of the payment status."
-              example: "2024-09-16T10:23:48Z"
-            open_date:
-              type: string
-              format: date-time
-              description: "Date and time when the payment was opened."
-              example: "2024-09-16T10:23:48Z"
-            confirm_date:
-              type: string
-              format: date-time
-              description: "Date and time when the payment was confirmed."
-              example: null
-            transfer_date:
-              type: string
-              format: date-time
-              description: "Date and time when the payment was transferred."
-              example: null
-            amount_br:
-              type: string
-              description: "Amount in the local currency (COP)."
-              example: "150000.00"
-            amount_ext:
-              type: string
-              description: "Amount in the external currency."
-              example: "150000.00"
-            amount_iof:
-              type: string
-              description: "Amount of IOF (tax) applied to the payment."
-              example: "0.00"
-            currency_rate:
-              type: string
-              description: "Currency exchange rate used."
-              example: "1.0000"
-            currency_ext:
-              type: string
-              description: "External currency code."
-              example: "COP"
-            due_date:
-              type: string
-              format: date
-              description: "Due date for the payment."
-              example: "2024-09-17"
-            instalments:
-              type: string
-              description: "Number of payment instalments."
-              example: "1"
-            payment_type_code:
-              type: string
-              description: "Payment method code, e.g., 'eft'."
-              example: "eft"
-            redirect_url:
-              type: string
-              description: "URL to redirect the user after successful payment."
-              example: "https://example.com/redirect?hash=dummy_hash_789012"
-            pre_approved:
-              type: boolean
-              description: "Indicates if the payment is pre-approved."
-              example: false
-            capture_available:
-              type: string
-              description: "Indicates if the payment can be captured."
-              example: null
-        status:
-          type: string
-          description: "Overall status of the payment request."
-          example: "SUCCESS"
-        redirect_url:
-          type: string
-          description: "URL to redirect the user after successful payment."
-          example: "https://example.com/redirect?hash=dummy_hash_789012"
-
     GooglePayResponse:
       type: object
       title: Google Pay Payment Response
@@ -5954,3 +5743,245 @@ components:
           type: string
           description: "URL to redirect for completing the payment."
           example: "https://api.ebanx.com/ws/redirect/execute?hash=12344abcd"
+
+    ColombiaPSERequest:
+      title: "Colombia PSE Payment Request"
+      description: "Schema for initiating a PSE payment request using EBANX in Colombia."
+      type: object
+      properties:
+        integration_key:
+          type: string
+          description: "Your EBANX integration key."
+          example: "your-integration-key"
+          maxLength: 255
+        operation:
+          type: string
+          description: "Set to 'request'."
+          example: "request"
+          maxLength: 20
+        payment:
+          type: object
+          properties:
+            name:
+              type: string
+              description: "Customer name."
+              example: "José Silva"
+              maxLength: 100
+            email:
+              type: string
+              description: "Customer email."
+              example: "josecolombia@example.com"
+              maxLength: 255
+            phone_number:
+              type: string
+              description: "Customer phone number."
+              example: "0405777687"
+              maxLength: 15
+            document:
+              type: string
+              description: "Customer's valid document code (Cedula de Ciudadania, Cédula de Extrangeria, or NIT)."
+              example: "4023030074"
+              maxLength: 20
+            eft_code:
+              type: string
+              description: "Code of the bank selected by the customer."
+              example: "banco_agrario"
+              maxLength: 50
+            country:
+              type: string
+              description: "Country code. Set to 'co' for Colombia."
+              example: "co"
+              maxLength: 2
+            payment_type_code:
+              type: string
+              description: "Type of payment. Set to 'eft' for PSE."
+              example: "eft"
+              maxLength: 50
+            merchant_payment_code:
+              type: string
+              description: "Unique merchant payment code."
+              example: "unique-merchant-code-1234"
+              maxLength: 100
+            currency_code:
+              type: string
+              description: "Currency code. Supported values: COP, USD, EUR."
+              example: "COP"
+              maxLength: 3
+            amount_total:
+              type: string
+              description: "Total amount to be charged."
+              example: "100.00"
+              maxLength: 10
+            redirect_url:
+              type: string
+              description: "URL to redirect the customer after payment completion."
+              example: "https://your-callback-url.com/callback"
+              maxLength: 255
+            state:
+              type: string
+              description: "Customer's state."
+              example: "Cesar"
+              maxLength: 50
+            city:
+              type: string
+              description: "Customer's city."
+              example: "Pueblo Bello"
+              maxLength: 50
+            address:
+              type: string
+              description: "Customer's address."
+              example: "Calle 9 #4-71"
+              maxLength: 150
+            street_number:
+              type: string
+              description: "Customer's street number."
+              example: "Calle 9 #4-71"
+              maxLength: 50
+            zipcode:
+              type: string
+              description: "Customer's postal code."
+              example: "200003"
+              maxLength: 20
+            items:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    description: "Description of the item."
+                    example: "5 pares de calcetines de malla multicolor"
+                    maxLength: 255
+                  name:
+                    type: string
+                    description: "Name of the item."
+                    example: "Calcetines de malla multicolor"
+                    maxLength: 255
+                  quantity:
+                    type: integer
+                    description: "Quantity of the item."
+                    example: 1
+                  sku:
+                    type: string
+                    description: "SKU identifier for the item."
+                    example: "sk2407117592380599"
+                    maxLength: 100
+                  unit_price:
+                    type: number
+                    description: "Unit price of the item."
+                    example: 20790.00
+      required:
+        - integration_key
+        - operation
+        - payment
+
+    ColombiaPSEResponse:
+      title: "Colombia PSE Payment Response"
+      description: "Schema for the response received after initiating a PSE payment request using EBANX in Colombia."
+      type: object
+      properties:
+        payment:
+          type: object
+          properties:
+            hash:
+              type: string
+              description: "Unique hash identifying the payment."
+              example: "5efc8aca4b12fbb7f069deca9a3cb61c18feb68415aeca4c"
+            pin:
+              type: string
+              description: "Unique pin for the transaction."
+              example: "489328391"
+            country:
+              type: string
+              description: "Country where the payment is initiated."
+              example: "co"
+            merchant_payment_code:
+              type: string
+              description: "Unique code for the merchant's payment."
+              example: "unique-merchant-code-1234"
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: "1234567"
+              nullable: true
+            status:
+              type: string
+              description: "Current status of the payment."
+              example: "PE"
+            status_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment status was last updated."
+              example: null
+              nullable: true
+            open_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was initiated."
+              example: "2024-10-24 10:23:59"
+            confirm_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was confirmed."
+              example: null
+              nullable: true
+            transfer_date:
+              type: string
+              format: date-time
+              description: "Date and time when the funds were transferred."
+              example: null
+              nullable: true
+            amount_br:
+              type: string
+              description: "Total amount of the payment in Brazilian Real (BRL)."
+              example: "190581.00"
+            amount_ext:
+              type: string
+              description: "Total amount of the payment in the external currency."
+              example: "190581.00"
+            amount_iof:
+              type: string
+              description: "Amount of IOF (Tax on Financial Operations) charged on the transaction."
+              example: "0.00"
+            currency_rate:
+              type: string
+              description: "Exchange rate used for converting the transaction currency."
+              example: "1.0000"
+            currency_ext:
+              type: string
+              description: "External currency code."
+              example: "COP"
+            due_date:
+              type: string
+              format: date-time
+              description: "Due date for the payment."
+              example: "2024-10-25 11:57:47"
+            instalments:
+              type: string
+              description: "Number of instalments for the payment."
+              example: "1"
+            payment_type_code:
+              type: string
+              description: "Type of payment used. Set to 'eft' for PSE."
+              example: "eft"
+            redirect_url:
+              type: string
+              description: "URL to redirect the user for completing the payment."
+              example: "https://sandbox.ebanx.com/ws/redirect/execute?hash=5efc8aca4b12fbb7f069deca9a3cb61c18feb68415aeca4c"
+            pre_approved:
+              type: boolean
+              description: "Indicates if the payment is pre-approved."
+              example: false
+            capture_available:
+              type: boolean
+              description: "Indicates if capture is available for the payment."
+              example: null
+              nullable: true
+        status:
+          type: string
+          description: "Indicates whether the request was successful."
+          example: "SUCCESS"
+        redirect_url:
+          type: string
+          description: "URL to redirect for completing the payment."
+          example: "https://sandbox.ebanx.com/ws/redirect/execute?hash=5efc8aca4b12fbb7f069deca9a3cb61c18feb68415aeca4c"
