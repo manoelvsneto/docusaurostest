@@ -83,7 +83,7 @@ paths:
                   - $ref: '#/components/schemas/ChileSencillitoResponse'
                   - $ref: '#/components/schemas/ChileServipagResponse'
                   - $ref: '#/components/schemas/ColombiaBancolombiaButtonResponse'
-                  - $ref: '#/components/schemas/GhanaMobileMoneytResponse'
+                  - $ref: '#/components/schemas/GhanaMobileMoneyResponse'
                   - $ref: '#/components/schemas/ErrorResponse'   
 components:
   schemas:
