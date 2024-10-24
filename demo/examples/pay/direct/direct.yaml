@@ -5650,7 +5650,7 @@ components:
         - operation
         - payment
 
-    ChileSencillitoResponse:
+    ChileServipagResponse:
       title: "Chile Servipag Payment Response"
       description: "Schema for the response received after initiating a Servipag payment request using EBANX in Chile."
       type: object
