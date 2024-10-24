@@ -48,6 +48,7 @@ paths:
                 - $ref: '#/components/schemas/ChileServipagRequest'
                 - $ref: '#/components/schemas/ColombiaBancolombiaButtonRequest'
                 - $ref: '#/components/schemas/GhanaMobileMoneytRequest'
+                - $ref: '#/components/schemas/ColombiaEfectyRequest'
         required: true
       responses:
         '200':
@@ -84,6 +85,7 @@ paths:
                   - $ref: '#/components/schemas/ChileServipagResponse'
                   - $ref: '#/components/schemas/ColombiaBancolombiaButtonResponse'
                   - $ref: '#/components/schemas/GhanaMobileMoneyResponse'
+                  - $ref: '#/components/schemas/ColombiaEfectyResponse'
                   - $ref: '#/components/schemas/ErrorResponse'   
 components:
   schemas:
@@ -6167,3 +6169,182 @@ components:
           type: string
           description: "URL to redirect for completing the payment."
           example: "https://sandbox.ebanx.com/ws/redirect/execute?hash=65d9025d1b3125c494bbaa5e28d591c684faa41543c7cf91"
+
+    ColombiaEfectyRequest:
+      title: "Colombia Efecty Payment Request"
+      description: "Schema for initiating an Efecty payment request using EBANX in Colombia."
+      type: object
+      properties:
+        integration_key:
+          type: string
+          description: "Your EBANX integration key."
+          example: "your-integration-key"
+          maxLength: 255
+        operation:
+          type: string
+          description: "Set to 'request'."
+          example: "request"
+          maxLength: 20
+        payment:
+          type: object
+          properties:
+            name:
+              type: string
+              description: "Customer name."
+              example: "José Silva"
+              maxLength: 100
+            email:
+              type: string
+              description: "Customer email."
+              example: "josecolombia@example.com"
+              maxLength: 255
+            phone_number:
+              type: string
+              description: "Customer phone number."
+              example: "0405777687"
+              maxLength: 15
+            document:
+              type: string
+              description: "Customer's valid document code (Cedula de Ciudadania, Cédula de Extrangeria, or NIT)."
+              example: "4023030074"
+              maxLength: 20
+            country:
+              type: string
+              description: "Country code. Set to 'co' for Colombia."
+              example: "co"
+              maxLength: 2
+            payment_type_code:
+              type: string
+              description: "Type of payment. Set to 'efecty'."
+              example: "efecty"
+              maxLength: 50
+            merchant_payment_code:
+              type: string
+              description: "Unique merchant payment code."
+              example: "unique-merchant-code-1234"
+              maxLength: 100
+            currency_code:
+              type: string
+              description: "Currency code. Supported values: COP, USD, EUR."
+              example: "COP"
+              maxLength: 3
+            amount_total:
+              type: string
+              description: "Total amount to be charged."
+              example: "10000"
+              maxLength: 10
+      required:
+        - integration_key
+        - operation
+        - payment
+
+    ColombiaEfectyResponse:
+      title: "Colombia Efecty Payment Response"
+      description: "Schema for the response received after initiating an Efecty payment request using EBANX in Colombia."
+      type: object
+      properties:
+        payment:
+          type: object
+          properties:
+            hash:
+              type: string
+              description: "Unique hash identifying the payment."
+              example: "5f36ebe4957afdfa5fb0fc193b540a512dc13f8615eba22c"
+            pin:
+              type: string
+              description: "Unique pin for the transaction."
+              example: "489706693"
+            country:
+              type: string
+              description: "Country where the payment is initiated."
+              example: "co"
+            merchant_payment_code:
+              type: string
+              description: "Unique code for the merchant's payment."
+              example: "unique-merchant-code-1234"
+            order_number:
+              type: string
+              description: "Order number associated with the payment."
+              example: null
+              nullable: true
+            status:
+              type: string
+              description: "Current status of the payment."
+              example: "PE"
+            status_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment status was last updated."
+              example: null
+              nullable: true
+            open_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was initiated."
+              example: "2020-08-14 19:54:11"
+            confirm_date:
+              type: string
+              format: date-time
+              description: "Date and time when the payment was confirmed."
+              example: null
+              nullable: true
+            transfer_date:
+              type: string
+              format: date-time
+              description: "Date and time when the funds were transferred."
+              example: null
+              nullable: true
+            amount_br:
+              type: string
+              description: "Total amount of the payment in Brazilian Real (BRL)."
+              example: "10000.00"
+            amount_ext:
+              type: string
+              description: "Total amount of the payment in the external currency."
+              example: "10000.00"
+            amount_iof:
+              type: string
+              description: "Amount of IOF (Tax on Financial Operations) charged on the transaction."
+              example: "0.00"
+            amount_ext_requested:
+              type: string
+              description: "Requested total amount in the external currency."
+              example: "10000.00"
+            currency_rate:
+              type: string
+              description: "Exchange rate used for converting the transaction currency."
+              example: "1.0000"
+            currency_ext:
+              type: string
+              description: "External currency code."
+              example: "COP"
+            due_date:
+              type: string
+              format: date
+              description: "Due date for the payment."
+              example: "2021-12-27"
+            instalments:
+              type: string
+              description: "Number of instalments for the payment."
+              example: "1"
+            payment_type_code:
+              type: string
+              description: "Type of payment used. Set to 'efecty'."
+              example: "efecty"
+            voucher_url:
+              type: string
+              description: "URL to view and print the Efecty payment voucher."
+              example: "https://sandbox.ebanxpay.com/print/voucher/execute?hash=5f36ebe4957afdfa5fb0fc193b540a512dc13f8615eba22c"
+            pre_approved:
+              type: boolean
+              description: "Indicates if the payment is pre-approved."
+              example: false
+            capture_available:
+              type: boolean
+              description: "Indicates if capture is available for the payment."
+              example: null
+              nullable: true
+        status:
+          type: string
+          description: "Indicates whether the request was successful."
+          example: "SUCCESS"
